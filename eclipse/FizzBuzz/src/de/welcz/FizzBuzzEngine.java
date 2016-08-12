@@ -13,13 +13,11 @@ public class FizzBuzzEngine {
 	}
 
 	public String calculateNext(int number) {
-		for (Rule rule : rules) {
-			if (rule.appliesTo(number)) {
-				return rule.giveResult();
-			}
-		}
-
-		return Integer.toString(number);
+		return rules.stream()
+				.filter(r -> r.appliesTo(number))
+				.map(Rule::giveResult)
+				.findFirst()
+				.orElse(Integer.toString(number));
 	}
 
 }
