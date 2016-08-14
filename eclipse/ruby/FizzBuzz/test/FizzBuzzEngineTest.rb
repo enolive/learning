@@ -1,7 +1,7 @@
 require 'test/unit'
 require_relative '../src/FizzBuzzEngine.rb'
 
-class FizzBuzzEngineShould < Test::Unit::TestCase
+class FizzBuzzEngineTest < Test::Unit::TestCase
   def setup
     @target = FizzBuzzEngine.new()
   end

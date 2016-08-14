@@ -7,6 +7,7 @@ class FizzBuzzEngine
       [3, 'Fizz'], 
       [5, 'Buzz']
     ]
+    
     rules.each do |divisor, result|
       return result if number.is_divisible_by?(divisor)
     end
