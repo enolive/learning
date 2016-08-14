@@ -1,5 +1,4 @@
 require 'test/unit'
-require 'param_test'
 require_relative '../src/FizzBuzzEngine.rb'
 
 class FizzBuzzEngineShould < Test::Unit::TestCase
