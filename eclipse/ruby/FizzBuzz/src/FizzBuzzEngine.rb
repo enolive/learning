@@ -8,9 +8,7 @@ class FizzBuzzEngine
       [5, 'Buzz']
     ]
     rules.each do |divisor, result|
-      if number.is_divisible_by?(divisor)
-        return result
-      end
+      return result if number.is_divisible_by?(divisor)
     end
       
     return number.to_s
