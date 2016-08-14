@@ -12,5 +12,10 @@ class FizzBuzzEngineShould < Test::Unit::TestCase
     assert_equal('2', @target.calculate(2))
   end
   
+  def test_that_numbers_divisibleby_3_are_returned_as_Fizz
+    assert_equal('Fizz', @target.calculate(3))
+    assert_equal('Fizz', @target.calculate(6))
+  end
+  
 end
 
