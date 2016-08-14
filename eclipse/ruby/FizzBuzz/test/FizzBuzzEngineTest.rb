@@ -16,6 +16,16 @@ class FizzBuzzEngineShould < Test::Unit::TestCase
     assert_equal('Fizz', @target.calculate(3))
     assert_equal('Fizz', @target.calculate(6))
   end
+
+  def test_that_numbers_divisibleby_5_are_returned_as_Buzz
+    assert_equal('Buzz', @target.calculate(5))
+    assert_equal('Buzz', @target.calculate(10))
+  end
+  
+  def test_that_numbers_divisibleby_3_and_5_are_returned_as_FizzBuzz
+    assert_equal('Fizz-Buzz', @target.calculate(15))
+    assert_equal('Fizz-Buzz', @target.calculate(30))
+  end
   
 end
 
