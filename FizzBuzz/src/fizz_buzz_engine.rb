@@ -9,9 +9,9 @@ class FizzBuzzEngine
     rule = rules.select { |divider, _| number.divisible_by?(divider) }
                      .values
                      .first
-    return was_rule_found?(rule) \
-      ? rule
-      : number.to_s
+    was_rule_found?(rule) \
+          ? rule
+    : number.to_s
 
   end
 

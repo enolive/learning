@@ -13,17 +13,17 @@ class FizzBuzzEngineShould < Test::Unit::TestCase
     assert_equal('2', @target.calculate_next(2))
   end
 
-  def test_that_divisible_by_3_is_returned_as_Fizz
+  def test_that_divisible_by_3_is_returned_as_fizz
     assert_equal('Fizz', @target.calculate_next(3))
     assert_equal('Fizz', @target.calculate_next(6))
   end
 
-  def test_that_divisible_by_5_is_returned_as_Buzz
+  def test_that_divisible_by_5_is_returned_as_buzz
     assert_equal('Buzz', @target.calculate_next(5))
     assert_equal('Buzz', @target.calculate_next(10))
   end
 
-  def test_that_divisible_by_3_and_5_is_returned_as_FizzBuzz
+  def test_that_divisible_by_3_and_5_is_returned_as_fizzbuzz
     assert_equal('FizzBuzz', @target.calculate_next(15))
     assert_equal('FizzBuzz', @target.calculate_next(30))
   end
