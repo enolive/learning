@@ -6,13 +6,7 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8b6e54d-cae2-40ec-98b3-ee5fd0d90036" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/FizzBuzz.iml" afterPath="$PROJECT_DIR$/.idea/FizzBuzz.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/All_tests_in_FizzBuzz__FizzBuzz.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/All_tests_in_FizzBuzz__FizzBuzz.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fizz_buzz_engine.rb" afterPath="$PROJECT_DIR$/src/fizz_buzz_engine.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/fizz_buzz_engine_test.rb" afterPath="$PROJECT_DIR$/tests/fizz_buzz_engine_test.rb" />
-    </list>
+    <list default="true" id="b8b6e54d-cae2-40ec-98b3-ee5fd0d90036" name="Default" comment="Removed all typos and inspection warnings&#10;Modified inspection rules as 30 chars in a method is a little bit too short" />
     <ignored path="FizzBuzz.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -25,7 +19,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/FizzBuzz@fizz_buzz_engine_should.coverage" NAME="fizz_buzz_engine_should Coverage Results" MODIFIED="1472036681972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="FizzBuzz" />
-    <SUITE FILE_PATH="coverage/FizzBuzz@All_tests_in_FizzBuzz__FizzBuzz.coverage" NAME="All tests in FizzBuzz: FizzBuzz Coverage Results" MODIFIED="1472067954557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="FizzBuzz" />
+    <SUITE FILE_PATH="coverage/FizzBuzz@All_tests_in_FizzBuzz__FizzBuzz.coverage" NAME="All tests in FizzBuzz: FizzBuzz Coverage Results" MODIFIED="1472068248880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="FizzBuzz" />
     <SUITE FILE_PATH="coverage/FizzBuzz@Run_test__fizz_buzz_engine_test___FizzBuzz.coverage" NAME="Run test 'fizz_buzz_engine_test': FizzBuzz Coverage Results" MODIFIED="1472037972352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="FizzBuzz" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -81,8 +75,8 @@
         <option value="$PROJECT_DIR$/fizz_buzz_engine_test.rb" />
         <option value="$PROJECT_DIR$/src/divisible_by_extension.rb" />
         <option value="$PROJECT_DIR$/tests/test_helper.rb" />
-        <option value="$PROJECT_DIR$/src/fizz_buzz_engine.rb" />
         <option value="$PROJECT_DIR$/tests/fizz_buzz_engine_test.rb" />
+        <option value="$PROJECT_DIR$/src/fizz_buzz_engine.rb" />
       </list>
     </option>
   </component>
@@ -365,14 +359,19 @@
       <workItem from="1472064547090" duration="297000" />
       <workItem from="1472064880268" duration="81000" />
       <workItem from="1472065069258" duration="400000" />
-      <workItem from="1472065484950" duration="2576000" />
+      <workItem from="1472065484950" duration="3346000" />
     </task>
+    <task id="LOCAL-00001" summary="Removed all typos and inspection warnings&#10;Modified inspection rules as 30 chars in a method is a little bit too short">
+      <created>1472068243133</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1472068243133</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_tests_in_FizzBuzz__FizzBuzz - 2016.08.24 at 21h 19m 45s.xml">
-      <configuration name="All tests in FizzBuzz: FizzBuzz" configurationId="TestUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="All_tests_in_FizzBuzz__FizzBuzz - 2016.08.24 at 21h 28m 03s.xml">
       <configuration name="All tests in FizzBuzz: FizzBuzz" configurationId="TestUnitRunConfigurationType" />
     </history-entry>
@@ -400,9 +399,12 @@
     <history-entry file="All_tests_in_FizzBuzz__FizzBuzz - 2016.08.24 at 21h 45m 54s.xml">
       <configuration name="All tests in FizzBuzz: FizzBuzz" configurationId="TestUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="All_tests_in_FizzBuzz__FizzBuzz - 2016.08.24 at 21h 50m 49s.xml">
+      <configuration name="All tests in FizzBuzz: FizzBuzz" configurationId="TestUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17570000" />
+    <option name="totallyTimeSpent" value="18340000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -449,6 +451,15 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Removed all typos and inspection warnings&#10;Modified inspection rules as 30 chars in a method is a little bit too short" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed all typos and inspection warnings&#10;Modified inspection rules as 30 chars in a method is a little bit too short" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
