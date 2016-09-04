@@ -52,6 +52,7 @@ describe Board do
     @board.set_alive_at(2, 0)
     @board.set_alive_at(2, 1)
     @board.set_alive_at(2, 2)
+    @board.set_alive_at(2, 3)
     expect(@board.living_neighbours_of(1, 1)).to be(8)
   end
 
