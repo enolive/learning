@@ -1,4 +1,3 @@
-require 'rspec'
 require_relative '../src/game_of_life_rules'
 
 RSpec::Matchers.define :be_dead do
