@@ -9,7 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jasmine-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="lodash-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="NodeJS Modules" level="project" />
     <orderEntry type="library" name="fizzbuzz.js" level="project" />
   </component>
 </module>
