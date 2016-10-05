@@ -6,13 +6,8 @@ class FizzBuzzEngine
              3 => 'Fizz',
              5 => 'Buzz'}
 
-    rule = rules.select { |divider, _| number.divisible_by?(divider) }
-                     .values
-                     .first
-    was_rule_found?(rule) \
-          ? rule
-    : number.to_s
-
+    rule = rules.select { |divider, _| number.divisible_by?(divider) }.values.first
+    was_rule_found?(rule) ? rule : number.to_s
   end
 
   def was_rule_found?(rule_found)

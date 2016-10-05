@@ -1,4 +1,3 @@
-gem 'test-unit'
 require 'test/unit'
 require_relative '../src/fizz_buzz_engine'
 
