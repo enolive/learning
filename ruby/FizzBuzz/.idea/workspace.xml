@@ -6,14 +6,8 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8b6e54d-cae2-40ec-98b3-ee5fd0d90036" name="Default" comment="Removed all typos and inspection warnings&#10;Modified inspection rules as 30 chars in a method is a little bit too short">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/runConfigurations/All_tests_in_FizzBuzz__FizzBuzz.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/FizzBuzz.iml" afterPath="$PROJECT_DIR$/.idea/FizzBuzz.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+    <list default="true" id="b8b6e54d-cae2-40ec-98b3-ee5fd0d90036" name="Default" comment="Added Bundler Gemfile&#10;Some small code cleanup">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fizz_buzz_engine.rb" afterPath="$PROJECT_DIR$/src/fizz_buzz_engine.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/fizz_buzz_engine_test.rb" afterPath="$PROJECT_DIR$/tests/fizz_buzz_engine_test.rb" />
     </list>
     <ignored path="FizzBuzz.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,8 +81,8 @@
       <file leaf-file-name="fizz_buzz_engine.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/fizz_buzz_engine.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+            <state relative-caret-position="198">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -213,20 +207,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="FizzBuzz" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FizzBuzz" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FizzBuzz" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1106,7 +1086,7 @@
       <workItem from="1472064880268" duration="81000" />
       <workItem from="1472065069258" duration="400000" />
       <workItem from="1472065484950" duration="3346000" />
-      <workItem from="1475694148564" duration="2691000" />
+      <workItem from="1475694148564" duration="3175000" />
     </task>
     <task id="LOCAL-00001" summary="Removed all typos and inspection warnings&#10;Modified inspection rules as 30 chars in a method is a little bit too short">
       <created>1472068243133</created>
@@ -1115,7 +1095,14 @@
       <option name="project" value="LOCAL" />
       <updated>1472068243133</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added Bundler Gemfile&#10;Some small code cleanup">
+      <created>1475696926828</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1475696926828</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1151,7 +1138,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21031000" />
+    <option name="totallyTimeSpent" value="21515000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1174,7 +1161,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3410596" sideWeight="0.51811826" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3410596" sideWeight="0.48188177" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3410596" sideWeight="0.48188177" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30769232" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.4876033" order="7" side_tool="false" content_ui="tabs" />
@@ -1210,7 +1197,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value="Removed all typos and inspection warnings&#10;Modified inspection rules as 30 chars in a method is a little bit too short" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed all typos and inspection warnings&#10;Modified inspection rules as 30 chars in a method is a little bit too short" />
+    <MESSAGE value="Added Bundler Gemfile&#10;Some small code cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Bundler Gemfile&#10;Some small code cleanup" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1461,8 +1449,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fizz_buzz_engine.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+        <state relative-caret-position="198">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
