@@ -3,7 +3,7 @@ import unittest
 from assertpy import assert_that
 from nose_parameterized import parameterized
 
-from impl.fizzbuzz import Engine
+from implementation.fizzbuzz import Engine
 
 
 class FizzBuzzEngineTests(unittest.TestCase):
