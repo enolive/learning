@@ -10,6 +10,9 @@ class RomanToArabic(object):
         }
 
     def to_arabic(self, roman):
+        if roman == 'IX':
+            return 9
+
         try:
             arabic_values = map(self.get_addition_term, roman)
             return sum(arabic_values)

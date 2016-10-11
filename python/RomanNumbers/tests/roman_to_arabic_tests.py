@@ -10,7 +10,7 @@ from tests.method_conversion import as_function
 
 class RomanToArabicTests(unittest.TestCase):
     def setUp(self):
-        self.converter = RomanToArabic()
+        self.target = RomanToArabic()
 
     @parameterized.expand([
         ("I", 1),
@@ -19,12 +19,12 @@ class RomanToArabicTests(unittest.TestCase):
     ])
     def test_that_I_should_be_added_to_result(self, number, expected):
         # act
-        result = self.converter.to_arabic(number)
+        result = self.target.to_arabic(number)
         # assert
         assert_that(result).is_equal_to(expected)
 
     def test_that_invalid_characters_fail(self):
-        assert_that(as_function(self.converter.to_arabic)) \
+        assert_that(as_function(self.target.to_arabic)) \
             .raises(IllegalArgumentError) \
             .when_called_with("ThisIsNotRoman") \
             .is_equal_to("'ThisIsNotRoman' contains characters that are not a roman digit.")
@@ -35,7 +35,7 @@ class RomanToArabicTests(unittest.TestCase):
     ])
     def test_that_V_should_be_added_to_result(self, number, expected):
         # act
-        result = self.converter.to_arabic(number)
+        result = self.target.to_arabic(number)
         # assert
         assert_that(result).is_equal_to(expected)
 
@@ -46,6 +46,15 @@ class RomanToArabicTests(unittest.TestCase):
     ])
     def test_that_X_should_be_added_to_result(self, number, expected):
         # act
-        result = self.converter.to_arabic(number)
+        result = self.target.to_arabic(number)
+        # assert
+        assert_that(result).is_equal_to(expected)\
+
+    @parameterized.expand([
+        ("IX", 9),
+    ])
+    def test_that_X_should_be_added_to_result(self, number, expected):
+        # act
+        result = self.target.to_arabic(number)
         # assert
         assert_that(result).is_equal_to(expected)
