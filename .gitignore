@@ -32,7 +32,7 @@
 ## Plugin-specific files:
 
 # IntelliJ
-/out/
+**/out/
 
 # Ruby scov coverage folders
 coverage/*

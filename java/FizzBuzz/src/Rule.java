@@ -1,10 +1,8 @@
-package de.welcz;
-
 class Rule {
 	private final int divisor;
 	private final String result;
 
-	public Rule(int divisor, String result) {
+	Rule(int divisor, String result) {
 		this.divisor = divisor;
 		this.result = result;
 	}
