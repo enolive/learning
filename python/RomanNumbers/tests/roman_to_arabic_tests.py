@@ -48,7 +48,7 @@ class RomanToArabicTests(unittest.TestCase):
         # act
         result = self.target.to_arabic(number)
         # assert
-        assert_that(result).is_equal_to(expected)\
+        assert_that(result).is_equal_to(expected)
 
     @parameterized.expand([
         ("IX", 9),
