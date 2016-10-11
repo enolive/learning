@@ -1,0 +1,23 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    docile (1.1.5)
+    json (2.0.2)
+    power_assert (0.2.7)
+    simplecov (0.12.0)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
+    test-unit (3.2.1)
+      power_assert
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  simplecov
+  test-unit
+
+BUNDLED WITH
+   1.13.2

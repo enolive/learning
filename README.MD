@@ -11,3 +11,9 @@ private machine and upload them to GitHub.
 # Contents
 
 Right now I will put some projects dealing with some common coding katas in several programming language here.
+I might add some more stuff later.
+
+# License
+
+Everything I put here is under a copyleft license.
+If you like my stuff, let me know ;-).
