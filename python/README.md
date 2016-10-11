@@ -14,4 +14,4 @@ This is just a simple implementation of the Fizz-Buzz Coding Kata in Python
 
 * Python refactorings in IntelliJ could be better
 * how to work with lists and filter
-* parametrized tests in Python are cool though there is a typo in the the package name ;-)
+* parametrized tests in Python are cool though there is a typo in the the package name (nose_*parameterized*) ;-)
