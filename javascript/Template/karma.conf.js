@@ -24,10 +24,11 @@ module.exports = function (config) {
         // pre-process matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
+            "tests/**/*.ts": ["karma-typescript"],
             // source files, that you wanna generate coverage for
             // do not include tests or libraries
             // (these files will be instrumented by Istanbul)
-            "src/**/*.ts": ["karma-typescript", "coverage"]
+            "src/**/*.ts": ["karma-typescript", "coverage"],
         },
 
         // test results reporter to use
@@ -50,7 +51,7 @@ module.exports = function (config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['Chromium'],
+        browsers: ['Firefox'],
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
