@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Implementation
 {
@@ -6,17 +8,23 @@ namespace Implementation
     {
         public string Calculate(int number)
         {
-            if (IsDivisibleBy(number, 3))
+            var rules = new List<Rule>
             {
-                return "Fizz";
-            }
+                new Rule(15, "Fizz-Buzz"),
+                new Rule(3, "Fizz"),
+                new Rule(5, "Buzz"),
+            };
 
-            return number.ToString(CultureInfo.InvariantCulture);
+            var matchingRule = rules
+                .Where(r => IsDivisibleBy(number, r.Denominator))
+                .Select(r => r.Result)
+                .FirstOrDefault();
+            return matchingRule ?? number.ToString(CultureInfo.InvariantCulture);
         }
 
         private static bool IsDivisibleBy(int number, int denominator)
         {
-            return number % denominator == 0;
+            return number != 0 && number % denominator == 0;
         }
     }
 }
