@@ -16,15 +16,10 @@ namespace Implementation
             };
 
             var matchingRule = rules
-                .Where(r => IsDivisibleBy(number, r.Denominator))
+                .Where(r => number.IsDivisibleBy(r.Denominator))
                 .Select(r => r.Result)
                 .FirstOrDefault();
             return matchingRule ?? number.ToString(CultureInfo.InvariantCulture);
-        }
-
-        private static bool IsDivisibleBy(int number, int denominator)
-        {
-            return number != 0 && number % denominator == 0;
         }
     }
 }
