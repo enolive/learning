@@ -15,28 +15,24 @@ class FizzFuzzEngine
         ];
     }
 
-
-    /**
-     * @param $number int
-     * @return string
-     */
-    function calculateResult($number):string
+    function calculateResult(int $number):string
     {
-        $matchingRules = array_filter(
-            $this->rules, function ($rule) use ($number) {
-            /** @noinspection PhpUndefinedMethodInspection */
+        $filteredRules = array_filter($this->rules, function (Rule $rule) use ($number) {
             return $rule->appliesTo($number);
         });
 
-        if (count($matchingRules) == 0) {
-            return strval($number);
-        }
-
-        return self::first($matchingRules)->giveResult();
+        $matchingRule = self::firstOrDefault($filteredRules);
+        return $matchingRule != null
+            ? $matchingRule->giveResult()
+            : strval($number);
     }
 
-    private static function first($matchingRule):Rule
+    private static function firstOrDefault(array $items):Rule
     {
-        return array_values($matchingRule)[0];
+        if (count($items) == 0) {
+            return null;
+        }
+
+        return array_values($items)[0];
     }
 }

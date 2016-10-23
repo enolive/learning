@@ -8,31 +8,23 @@ class Rule
     private $denominator;
     private $result;
 
-    /**
-     * Rule constructor.
-     */
-    public function __construct($denominator, $result)
+    public function __construct(int $denominator, string $result)
     {
         $this->denominator = $denominator;
         $this->result = $result;
     }
 
-    /**
-     * @param $number
-     * @param $denominator
-     * @return bool
-     */
-    private static function isDivisibleBy($number, $denominator):bool
-    {
-        return $number % $denominator == 0;
-    }
-
-    public function appliesTo($number)
+    public function appliesTo(int $number)
     {
         return self::isDivisibleBy($number, $this->denominator);
     }
 
-    public function giveResult()
+    private static function isDivisibleBy(int $number, int $denominator):bool
+    {
+        return $number % $denominator == 0;
+    }
+
+    public function giveResult():string
     {
         return $this->result;
     }

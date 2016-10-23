@@ -11,11 +11,6 @@ class FizzBuzzTest extends PHPUnit_Framework_TestCase
      */
     private $target;
 
-    protected function setUp()
-    {
-        $this->target = new FizzFuzzEngine();
-    }
-
     public function fizzBuzzProvider()
     {
         return [
@@ -29,14 +24,16 @@ class FizzBuzzTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @dataProvider fizzBuzzProvider
-     */
     public function testThatFizzBuzzEngineReturnsExpectedResults($number, $expected)
     {
         // act
         $result = $this->target->calculateResult($number);
         // assert
         $this->assertThat($result, self::equalTo($expected));
+    }
+
+    protected function setUp()
+    {
+        $this->target = new FizzFuzzEngine();
     }
 }
