@@ -34,8 +34,17 @@
 # IntelliJ
 **/out/
 
-# Ruby scov coverage folders
-coverage/*
+# Ruby and JS coverage folders
+**/coverage/*
 
 # NPM libraries:
 node_modules/
+
+# Nuget packages:
+packages/
+
+# CSharp output directories:
+**/bin/Debug/
+**/bin/Release/
+**/obj/Debug/
+**/obj/Release/
