@@ -1,0 +1,21 @@
+{
+  "name": "eno-live/fizz-buzz",
+  "description": "Just a simple Fizz Buzz with PHP",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Christoph Welcz",
+      "email": "noreply@panzerpunze.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"Core\\": "src/"}
+  },
+  "autoload-dev": {
+    "psr-4": {"Core\\Tests\\": "tests/"}
+  },
+  "require": {
+    "phpunit/phpunit": "5.6.1"
+  }
+}
