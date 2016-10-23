@@ -1,8 +1,5 @@
 package core
 
-/**
-  * Created by evil-one on 23.10.16.
-  */
 class Rule(denominator: Int, result: String) {
 
   def giveResult(): String = {
