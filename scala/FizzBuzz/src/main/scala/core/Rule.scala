@@ -3,7 +3,11 @@ package core
 /**
   * Created by evil-one on 23.10.16.
   */
-case class Rule(denominator: Int, result: String) {
+class Rule(denominator: Int, result: String) {
+
+  def giveResult(): String = {
+    result
+  }
 
   def appliesTo(number: Int): Boolean = {
     isDivisibleBy(number, denominator)
