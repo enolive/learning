@@ -4,7 +4,7 @@ import core.FizzBuzzEngine
 import org.scalatest.{FlatSpec, Matchers}
 
 class FizzBuzzSpec extends FlatSpec with Matchers {
-  val target = FizzBuzzEngine()
+  val target = new FizzBuzzEngine()
 
   behavior of "Fizz Buzz Engine"
 

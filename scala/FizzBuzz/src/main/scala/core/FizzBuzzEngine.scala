@@ -1,6 +1,6 @@
 package core
 
-case class FizzBuzzEngine() {
+class FizzBuzzEngine() {
   val rules = Array(
     new Rule(15, "Fizz-Buzz"),
     new Rule(3, "Fizz"),
