@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * Simple implementation of the fizz buzz rules
+ */
 public class FizzBuzzEngine {
 
     private final List<Rule> rules = aListOfRules(
