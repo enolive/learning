@@ -1,8 +1,10 @@
-public class Rule {
+package de.welcz;
+
+class Rule {
     private final int denominator;
     private final String result;
 
-    public Rule(int denominator, String result) {
+    Rule(int denominator, String result) {
         this.denominator = denominator;
         this.result = result;
     }
@@ -11,11 +13,11 @@ public class Rule {
         return number % denominator == 0;
     }
 
-    public String getResult() {
+    String getResult() {
         return result;
     }
 
-    public boolean appliesTo(int number) {
+    boolean appliesTo(int number) {
         return isDivisibleBy(number, denominator);
     }
 }

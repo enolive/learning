@@ -1,3 +1,6 @@
+package de.welcz.test;
+
+import de.welcz.FizzBuzzEngine;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;
@@ -54,7 +57,8 @@ public class FizzBuzzTest {
 
     @Test
     @Parameters({
-            "15"
+            "15",
+            "30",
     })
     public void numbersDivisibleByThreeAndFiveShouldReturnFizzBuzz(int number) {
         // act
