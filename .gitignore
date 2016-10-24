@@ -51,3 +51,6 @@ packages/
 
 # PHP composer vendor directory:
 **/vendor/
+
+# Maven
+**/target/
