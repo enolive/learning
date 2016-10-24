@@ -4,7 +4,7 @@ class RuleBuilder {
     private int denominator;
     private String result;
 
-    RuleBuilder denominator(int denominator) {
+    RuleBuilder forDenominator(int denominator) {
         this.denominator = denominator;
         return this;
     }

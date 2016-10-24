@@ -1,14 +1,15 @@
 package de.welcz;
 
-import java.util.Arrays;
+import com.google.common.collect.ImmutableList;
+
 import java.util.List;
 
 public class FizzBuzzEngine {
 
-    private final List<Rule> rules = Arrays.asList(
-            rule().denominator(15).givingResult("Fizz-Buzz").create(),
-            rule().denominator(3).givingResult("Fizz").create(),
-            rule().denominator(5).givingResult("Buzz").create());
+    private final List<Rule> rules = ImmutableList.of(
+            aRule().forDenominator(15).givingResult("Fizz-Buzz").create(),
+            aRule().forDenominator(3).givingResult("Fizz").create(),
+            aRule().forDenominator(5).givingResult("Buzz").create());
 
     public String calculateNext(final int number) {
         return rules.stream()
@@ -18,7 +19,7 @@ public class FizzBuzzEngine {
                 .orElse(Integer.toString(number));
     }
 
-    private RuleBuilder rule() {
+    private RuleBuilder aRule() {
         return new RuleBuilder();
     }
 }
