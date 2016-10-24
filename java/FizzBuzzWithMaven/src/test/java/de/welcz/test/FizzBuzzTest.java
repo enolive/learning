@@ -11,7 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
 public class FizzBuzzTest {
-
     private FizzBuzzEngine target;
 
     @Before
