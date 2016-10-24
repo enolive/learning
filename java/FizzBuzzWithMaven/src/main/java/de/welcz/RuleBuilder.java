@@ -1,5 +1,8 @@
 package de.welcz;
 
+/**
+ * Fluent interface builder for {@link Rule}
+ */
 class RuleBuilder {
     private int denominator;
     private String result;
