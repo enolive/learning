@@ -14,15 +14,12 @@ public class FizzBuzzTest {
     private FizzBuzzEngine target;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         target = new FizzBuzzEngine();
     }
 
     @Test
-    @Parameters({
-            "1,1",
-            "2,2",
-    })
+    @Parameters({"1,1", "2,2", "4,4"})
     public void normalNumbersShouldBeReturnedAsIs(int number, String expectedResult) {
         // act
         String result = target.calculateNext(number);
@@ -31,10 +28,7 @@ public class FizzBuzzTest {
     }
 
     @Test
-    @Parameters({
-            "3",
-            "6",
-    })
+    @Parameters({"3", "6",})
     public void numbersDivisibleByThreeShouldReturnFizz(int number) {
         // act
         String result = target.calculateNext(number);
@@ -43,10 +37,7 @@ public class FizzBuzzTest {
     }
 
     @Test
-    @Parameters({
-            "5",
-            "10",
-    })
+    @Parameters({"5", "10",})
     public void numbersDivisibleByFiveShouldReturnBuzz(int number) {
         // act
         String result = target.calculateNext(number);
@@ -55,10 +46,7 @@ public class FizzBuzzTest {
     }
 
     @Test
-    @Parameters({
-            "15",
-            "30",
-    })
+    @Parameters({"15", "30",})
     public void numbersDivisibleByThreeAndFiveShouldReturnFizzBuzz(int number) {
         // act
         String result = target.calculateNext(number);
