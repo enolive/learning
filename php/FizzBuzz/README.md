@@ -12,6 +12,7 @@ Just Fizz-Buzz in PHP. I used PHP 7
 
 * PHP class syntax is nice
 * Composer is fun ;-)
+* PHPUnit Asserts remind me of hamcrest Matchers, they work really great and are very readable
 
 ## What I hate
 
