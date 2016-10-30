@@ -26,9 +26,14 @@
             <version>14.0.1</version>
         </dependency>
         <dependency>
-            <groupId>pl.pragmatists</groupId>
-            <artifactId>JUnitParams</artifactId>
-            <version>1.0.5</version>
+            <groupId>com.mscharhag.oleaster</groupId>
+            <artifactId>oleaster-matcher</artifactId>
+            <version>0.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mscharhag.oleaster</groupId>
+            <artifactId>oleaster-runner</artifactId>
+            <version>0.1.2</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

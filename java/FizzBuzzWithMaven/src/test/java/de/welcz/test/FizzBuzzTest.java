@@ -1,56 +1,41 @@
 package de.welcz.test;
 
+import com.mscharhag.oleaster.runner.OleasterRunner;
 import de.welcz.FizzBuzzEngine;
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnitParamsRunner.class)
+@RunWith(OleasterRunner.class)
 public class FizzBuzzTest {
-    private FizzBuzzEngine target;
+    private FizzBuzzEngine engine;
 
-    @Before
-    public void setUp() {
-        target = new FizzBuzzEngine();
-    }
+    {
+        describe("Fizz Buzz Engine", () -> {
 
-    @Test
-    @Parameters({"1,1", "2,2", "4,4"})
-    public void normalNumbersShouldBeReturnedAsIs(int number, String expectedResult) {
-        // act
-        String result = target.calculateNext(number);
-        // assert
-        assertThat(result).isEqualTo(expectedResult);
-    }
+            beforeEach(() -> engine = new FizzBuzzEngine());
 
-    @Test
-    @Parameters({"3", "6",})
-    public void numbersDivisibleByThreeShouldReturnFizz(int number) {
-        // act
-        String result = target.calculateNext(number);
-        // assert
-        assertThat(result).isEqualTo("Fizz");
-    }
+            it("should return normal numbers as is", () -> {
+                assertThat(engine.calculateNext(1)).isEqualTo("1");
+                assertThat(engine.calculateNext(2)).isEqualTo("2");
+                assertThat(engine.calculateNext(4)).isEqualTo("4");
+            });
 
-    @Test
-    @Parameters({"5", "10",})
-    public void numbersDivisibleByFiveShouldReturnBuzz(int number) {
-        // act
-        String result = target.calculateNext(number);
-        // assert
-        assertThat(result).isEqualTo("Buzz");
-    }
+            it("should return numbers divisible by 3 as Fizz", () -> {
+                assertThat(engine.calculateNext(3)).isEqualTo("Fizz");
+                assertThat(engine.calculateNext(6)).isEqualTo("Fizz");
+            });
 
-    @Test
-    @Parameters({"15", "30",})
-    public void numbersDivisibleByThreeAndFiveShouldReturnFizzBuzz(int number) {
-        // act
-        String result = target.calculateNext(number);
-        // assert
-        assertThat(result).isEqualTo("Fizz-Buzz");
+            it("should return numbers divisible by 5 as Buzz", () -> {
+                assertThat(engine.calculateNext(5)).isEqualTo("Buzz");
+                assertThat(engine.calculateNext(10)).isEqualTo("Buzz");
+            });
+
+            it("should return numbers divisible by both 3 and 5 as Fizz-Buzz", () -> {
+                assertThat(engine.calculateNext(15)).isEqualTo("Fizz-Buzz");
+                assertThat(engine.calculateNext(30)).isEqualTo("Fizz-Buzz");
+            });
+        });
     }
 }
