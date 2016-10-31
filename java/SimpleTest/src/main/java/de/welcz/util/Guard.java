@@ -1,7 +1,7 @@
-package de.welcz;
+package de.welcz.util;
 
-class Guard {
-    static void stringIsNotNullOrEmpty(String argumentValue, String argumentName) {
+public class Guard {
+    public static void stringIsNotNullOrEmpty(String argumentValue, String argumentName) {
         if (argumentValue == null || argumentValue.isEmpty()) {
             throw new IllegalArgumentException(argumentName + " must not be null or empty");
         }

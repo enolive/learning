@@ -1,5 +1,7 @@
 package de.welcz;
 
+import de.welcz.util.Guard;
+
 public class Greeter {
     public String sayHello() {
         return sayHelloTo("World");
