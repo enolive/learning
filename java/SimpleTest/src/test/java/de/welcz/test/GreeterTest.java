@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @RunWith(OleasterRunner.class)
 public class GreeterTest {
@@ -32,12 +32,12 @@ public class GreeterTest {
 
             it("should fail on an empty name", () -> {
                 // act & assert
-                assertThatThrownBy(() -> target.sayHelloTo(null))
-                        .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("name must not be null or empty");
-                assertThatThrownBy(() -> target.sayHelloTo(""))
-                        .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("name must not be null or empty");
+                assertThatExceptionOfType(IllegalArgumentException.class)
+                        .isThrownBy(() -> target.sayHelloTo(null))
+                        .withMessage("name must not be null or empty");
+                assertThatExceptionOfType(IllegalArgumentException.class)
+                        .isThrownBy(() -> target.sayHelloTo(""))
+                        .withMessage("name must not be null or empty");
             });
         });
     }
