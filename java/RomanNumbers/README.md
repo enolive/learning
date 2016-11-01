@@ -10,4 +10,4 @@ simple converter for Roman Numbers into their Arabic equivalent
 
 ## What I hate
 
-- I am missing the yield operator that comes with most modern languages. Implementing an own Iterator is a pain in the ass
+- I am missing the yield operator that comes with most modern languages. It makes implementation of a Generator so much easier :-(
