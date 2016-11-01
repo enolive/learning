@@ -31,6 +31,12 @@ public class RomanToArabicTest {
                 assertThat(target.toArabic("XII")).isEqualTo(12);
                 assertThat(target.toArabic("XVI")).isEqualTo(16);
             });
+
+            it("should subtract lower digits", () -> {
+                assertThat(target.toArabic("IV")).isEqualTo(4);
+                assertThat(target.toArabic("IX")).isEqualTo(9);
+                assertThat(target.toArabic("IIX")).isEqualTo(8);
+            });
         });
     }
 }
