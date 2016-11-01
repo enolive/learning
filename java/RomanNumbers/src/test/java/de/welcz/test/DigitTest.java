@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 @RunWith(OleasterRunner.class)
 public class DigitTest {
     {
-
         describe("Digit index", () -> {
             it("should retrieve the right position", () -> {
                 // act

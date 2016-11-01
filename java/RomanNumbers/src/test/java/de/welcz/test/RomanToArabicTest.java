@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @RunWith(OleasterRunner.class)
 public class RomanToArabicTest {
@@ -36,6 +37,21 @@ public class RomanToArabicTest {
                 assertThat(target.toArabic("IV")).isEqualTo(4);
                 assertThat(target.toArabic("IX")).isEqualTo(9);
                 assertThat(target.toArabic("IIX")).isEqualTo(8);
+            });
+
+            it("should fail on invalid roman numbers", () ->
+                    assertThatExceptionOfType(IllegalArgumentException.class)
+                            .isThrownBy(() -> target.toArabic("CRAP")));
+
+            it("should convert Orwell's 1984", () -> {
+                assertThat(target.toArabic("MCMXXCIV")).isEqualTo(1984);
+                assertThat(target.toArabic("MCMLXXXIV")).isEqualTo(1984);
+                assertThat(target.toArabic("MDCCCCLXXXIV")).isEqualTo(1984);
+            });
+
+            it("should convert my birth year", () -> {
+                assertThat(target.toArabic("MCMLXXVIII")).isEqualTo(1978);
+                assertThat(target.toArabic("MCMLXXIIX")).isEqualTo(1978);
             });
         });
     }
