@@ -1,17 +1,30 @@
 import {DoorState} from "./door_state";
+class Door {
+    get state(): DoorState {
+        return this._state;
+    }
+
+    private _state: DoorState = DoorState.Closed;
+
+    flip() {
+        this._state = this._state === DoorState.Opened
+            ? DoorState.Closed : DoorState.Opened;
+    }
+}
+
 export class Doors {
     private runCount: number = 0;
-    private doorStates: Array<DoorState>;
+    private doors: Array<Door>;
 
     constructor() {
-        this.doorStates = new Array(100);
-        for (let i = 0; i < this.doorStates.length; i++) {
-            this.doorStates[i] = DoorState.Closed;
+        this.doors = new Array(100);
+        for (let i = 0; i < this.doors.length; i++) {
+            this.doors[i] = new Door();
         }
     }
 
     getStateOfDoor(doorNumber: number): DoorState {
-        return this.doorStates[doorNumber];
+        return this.doors[doorNumber].state;
     }
 
     run(times?: number) {
@@ -21,24 +34,19 @@ export class Doors {
         }
     }
 
-    runOnce() {
+    private runOnce() {
         this.runCount++;
-        for (let i = 0; i < this.doorStates.length; i++) {
-            if (Doors.isDivisibleBy(i, this.runCount)) {
-                this.flipDoor(i);
-            }
-        }
-    }
-
-    private flipDoor(doorNumber: number) {
-        if (this.doorStates[doorNumber] === DoorState.Opened)
-            this.doorStates[doorNumber] = DoorState.Closed;
-        else
-            this.doorStates[doorNumber] = DoorState.Opened;
+        this.doors
+            .filter((_, doorNumber) => Doors.isDivisibleBy(doorNumber, this.runCount))
+            .forEach(door => door.flip());
     }
 
     private static isDivisibleBy(i: number, denominator: number) {
         return (i % denominator === 0);
     }
 }
+
+
+
+
 

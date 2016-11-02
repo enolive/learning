@@ -1,15 +1,32 @@
 "use strict";
 var door_state_1 = require("./door_state");
+var Door = (function () {
+    function Door() {
+        this._state = door_state_1.DoorState.Closed;
+    }
+    Object.defineProperty(Door.prototype, "state", {
+        get: function () {
+            return this._state;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Door.prototype.flip = function () {
+        this._state = this._state === door_state_1.DoorState.Opened
+            ? door_state_1.DoorState.Closed : door_state_1.DoorState.Opened;
+    };
+    return Door;
+}());
 var Doors = (function () {
     function Doors() {
         this.runCount = 0;
-        this.doorStates = new Array(100);
-        for (var i = 0; i < this.doorStates.length; i++) {
-            this.doorStates[i] = door_state_1.DoorState.Closed;
+        this.doors = new Array(100);
+        for (var i = 0; i < this.doors.length; i++) {
+            this.doors[i] = new Door();
         }
     }
     Doors.prototype.getStateOfDoor = function (doorNumber) {
-        return this.doorStates[doorNumber];
+        return this.doors[doorNumber].state;
     };
     Doors.prototype.run = function (times) {
         times = times || 1;
@@ -18,18 +35,11 @@ var Doors = (function () {
         }
     };
     Doors.prototype.runOnce = function () {
+        var _this = this;
         this.runCount++;
-        for (var i = 0; i < this.doorStates.length; i++) {
-            if (Doors.isDivisibleBy(i, this.runCount)) {
-                this.flipDoor(i);
-            }
-        }
-    };
-    Doors.prototype.flipDoor = function (doorNumber) {
-        if (this.doorStates[doorNumber] === door_state_1.DoorState.Opened)
-            this.doorStates[doorNumber] = door_state_1.DoorState.Closed;
-        else
-            this.doorStates[doorNumber] = door_state_1.DoorState.Opened;
+        this.doors
+            .filter(function (_, doorNumber) { return Doors.isDivisibleBy(doorNumber, _this.runCount); })
+            .forEach(function (door) { return door.flip(); });
     };
     Doors.isDivisibleBy = function (i, denominator) {
         return (i % denominator === 0);
