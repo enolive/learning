@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Sources" pattern="file[small]:*/&amp;&amp;!file[small]:.idea//*&amp;&amp;!file:*.js.map&amp;&amp;!file[small]:typing//*" />
+</component>

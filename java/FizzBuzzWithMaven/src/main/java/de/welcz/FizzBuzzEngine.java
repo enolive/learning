@@ -31,8 +31,8 @@ public class FizzBuzzEngine {
     @NotNull
     public String calculateNext(final int number) {
         return rules.stream()
-                .filter(r -> r.appliesTo(number))
-                .map(Rule::getResult)
+                .filter(rule -> rule.appliesTo(number))
+                .map(rule -> rule.getResult())
                 .findFirst()
                 .orElse(Integer.toString(number));
     }
