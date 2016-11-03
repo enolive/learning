@@ -9,8 +9,14 @@
     "karma-coverage": "^1.1.1",
     "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.0.2",
+    "karma-requirejs": "^1.1.0",
     "karma-typescript": "^2.0.6",
+    "requirejs": "^2.3.2",
     "tslint": "^3.15.1",
     "typescript": "^2.0.3"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.38",
+    "lodash": "^4.16.6"
   }
 }

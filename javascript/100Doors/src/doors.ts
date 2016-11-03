@@ -1,16 +1,5 @@
+import {Door} from "./door";
 import {DoorState} from "./door_state";
-class Door {
-    get state(): DoorState {
-        return this._state;
-    }
-
-    private _state: DoorState = DoorState.Closed;
-
-    flip() {
-        this._state = this._state === DoorState.Opened
-            ? DoorState.Closed : DoorState.Opened;
-    }
-}
 
 export class Doors {
     private runCount: number = 0;
@@ -29,9 +18,7 @@ export class Doors {
 
     run(times?: number) {
         times = times || 1;
-        for (let i = 0; i < times; i++) {
-            this.runOnce();
-        }
+        _.range(times).forEach(() => this.runOnce());
     }
 
     private runOnce() {
