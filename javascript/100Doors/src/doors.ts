@@ -1,3 +1,4 @@
+///<reference path="../node_modules/@types/lodash/index.d.ts"/>
 import {Door} from "./door";
 import {DoorState} from "./door_state";
 

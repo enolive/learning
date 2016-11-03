@@ -1,5 +1,5 @@
 "use strict";
-///<reference path="../typing/jasmine.d.ts"/>
+///<reference path="../node_modules/@types/jasmine/index.d.ts"/>
 var door_state_1 = require("../src/door_state");
 var doors_1 = require("../src/doors");
 describe("100 Doors", function () {

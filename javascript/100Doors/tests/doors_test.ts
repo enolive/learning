@@ -1,4 +1,4 @@
-///<reference path="../typing/jasmine.d.ts"/>
+///<reference path="../node_modules/@types/jasmine/index.d.ts"/>
 import {DoorState} from "../src/door_state";
 import {Doors} from "../src/doors";
 
