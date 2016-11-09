@@ -1,8 +1,6 @@
 import org.scalatest.{BeforeAndAfterEach, FlatSpec, Matchers}
 
-class ConverterTest extends FlatSpec
-  with Matchers
-  with BeforeAndAfterEach {
+class ConverterTest extends FlatSpec with Matchers with BeforeAndAfterEach {
   var target: Converter = _
 
   override protected def beforeEach(): Unit = {
