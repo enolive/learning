@@ -1,5 +1,5 @@
 
-class Digit(digit: String) {
+case class RomanDigit(digit: String) {
   def toArabic: Int = {
     digit match {
       case "I" => 1
