@@ -8,7 +8,7 @@ class AllDigitsTest extends FlatSpec with Matchers {
         digits should contain only RomanDigit('X')
     }
 
-    it should "have expected two digits" in {
+    it should "have expected three digits" in {
         val digits = AllDigits.of("XII")
         digits should contain allElementsOf List(RomanDigit('X'), RomanDigit('I'), RomanDigit('I'))
     }
