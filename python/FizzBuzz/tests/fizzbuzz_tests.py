@@ -45,7 +45,7 @@ class FizzBuzzEngineTests(unittest.TestCase):
 
     @parameterized.expand([
         (15, "Fizz-Buzz"),
-        (30l, "Fizz-Buzz"),
+        (30, "Fizz-Buzz"),
     ])
     def test_numbers_divisible_by_3_and_5_return_Fizz_Buzz(self, number, expected):
         # act
