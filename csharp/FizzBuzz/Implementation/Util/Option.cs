@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Implementation
+namespace Implementation.Util
 {
     public class Option<T> where T : class
     {

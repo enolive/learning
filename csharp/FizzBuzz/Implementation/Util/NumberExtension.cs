@@ -1,4 +1,4 @@
-﻿namespace Implementation
+﻿namespace Implementation.Util
 {
     public static class NumberExtension
     {
