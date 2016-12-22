@@ -1,7 +1,14 @@
 
-case class RomanDigit(digit: Char) extends ConvertToArabic {
+case class RomanDigit(digit: Char) {
     def toArabic: Int = {
-        toArabic(digit)
+        digit match {
+            case 'I' => 1
+            case 'V' => 5
+            case 'X' => 10
+            case 'L' => 50
+            case 'C' => 100
+            case 'D' => 500
+            case 'M' => 1000
+        }
     }
-
 }
