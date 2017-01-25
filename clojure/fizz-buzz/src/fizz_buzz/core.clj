@@ -1,7 +1,7 @@
 (ns fizz-buzz.core
   (:gen-class))
 
-(defn is-divisible-by? [number denominator]
+(defn- is-divisible-by? [number denominator]
   (= (mod number denominator) 0))
 
 (def rules (list
