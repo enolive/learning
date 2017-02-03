@@ -20,7 +20,7 @@ var Doors = (function () {
         var _this = this;
         this.runCount++;
         this.doors
-            .filter(function (_, doorNumber) { return Doors.isDivisibleBy(doorNumber, _this.runCount); })
+            .filter(function (door, doorNumber) { return Doors.isDivisibleBy(doorNumber, _this.runCount); })
             .forEach(function (door) { return door.flip(); });
     };
     Doors.isDivisibleBy = function (i, denominator) {

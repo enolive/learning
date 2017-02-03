@@ -24,7 +24,7 @@ export class Doors {
     private runOnce() {
         this.runCount++;
         this.doors
-            .filter((_, doorNumber) => Doors.isDivisibleBy(doorNumber, this.runCount))
+            .filter((door, doorNumber) => Doors.isDivisibleBy(doorNumber, this.runCount))
             .forEach(door => door.flip());
     }
 
