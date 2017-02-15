@@ -1,5 +1,7 @@
 "use strict";
+///<reference path="../node_modules/@types/lodash/index.d.ts"/>
 var door_1 = require("./door");
+var _ = require("../node_modules/lodash/lodash.min.js");
 var Doors = (function () {
     function Doors() {
         this.runCount = 0;

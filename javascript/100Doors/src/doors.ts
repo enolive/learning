@@ -1,5 +1,7 @@
+///<reference path="../node_modules/@types/lodash/index.d.ts"/>
 import {Door} from "./door";
 import {DoorState} from "./door_state";
+import * as _ from '../node_modules/lodash/lodash.min.js';
 
 export class Doors {
     private runCount: number = 0;
