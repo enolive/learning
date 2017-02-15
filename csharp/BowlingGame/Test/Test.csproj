@@ -59,8 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BowlingGameTest.cs" />
+    <Compile Include="Builder\ASequence.cs" />
     <Compile Include="FluentAssertions\BowlingGameAssertions.cs" />
     <Compile Include="FluentAssertions\BowlingGameAssertionsExtension.cs" />
+    <Compile Include="FrameTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
