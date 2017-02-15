@@ -32,6 +32,19 @@ namespace Test
             var firstFrame = frames.First();
             firstFrame.Incomplete.Should().BeTrue();
         }
+
+        [Fact]
+        public void TwoRollsShouldResultInOneCompleteFrame()
+        {
+            // arrange
+            var rolls = ASequence.Of(1, 2);
+            // act
+            var frames = AllFrames.From(rolls).AsList();
+            // assert
+            frames.Should().HaveCount(1);
+            var firstFrame = frames.First();
+            firstFrame.Incomplete.Should().BeFalse();
+        }
     }
 
     public class AllFrames
@@ -39,20 +52,20 @@ namespace Test
         public static IEnumerable<Frame> From(IEnumerable<int> rolls)
         {
             var frames = new List<Frame>();
-            foreach (var roll in rolls)
+            if (rolls.Any())
             {
-                frames.Add(new Frame(roll));
+                frames.Add(new Frame(rolls.Take(2).ToArray()));
+                
             }
-            
             return frames;
         }
     }
 
     public class Frame
     {
-        public Frame(int roll)
+        public Frame(params int[] rolls)
         {
-            Incomplete = true;
+            Incomplete = rolls.Length < 2;
         }
 
         public bool Incomplete { get; }

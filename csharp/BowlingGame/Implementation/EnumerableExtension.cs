@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Implementation
 {
@@ -11,6 +12,12 @@ namespace Implementation
             {
                 action(item);
             }
+        }
+
+        public static IList<T> AsList<T>(this IEnumerable<T> items)
+        {
+            var enumerable = items as IList<T> ?? items.ToList();
+            return enumerable;
         }
     }
 }
