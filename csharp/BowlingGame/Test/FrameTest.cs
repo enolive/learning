@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using FluentAssertions;
 using Implementation;
 using Test.Builder;
@@ -31,6 +30,8 @@ namespace Test
             frames.Should().HaveCount(1);
             var firstFrame = frames.First();
             firstFrame.Incomplete.Should().BeTrue();
+            firstFrame.Score.Should().Be(1);
+            firstFrame.Strike.Should().BeFalse();
         }
 
         [Fact]
@@ -44,30 +45,34 @@ namespace Test
             frames.Should().HaveCount(1);
             var firstFrame = frames.First();
             firstFrame.Incomplete.Should().BeFalse();
+            firstFrame.Score.Should().Be(3);
+            firstFrame.Strike.Should().BeFalse();
         }
-    }
 
-    public class AllFrames
-    {
-        public static IEnumerable<Frame> From(IEnumerable<int> rolls)
+        [Fact]
+        public void StrikeShouldResultInOneCompleteFrame()
         {
-            var frames = new List<Frame>();
-            if (rolls.Any())
-            {
-                frames.Add(new Frame(rolls.Take(2).ToArray()));
-                
-            }
-            return frames;
+            // arrange
+            var rolls = ASequence.Of(10, 5);
+            // act
+            var frame = AllFrames.From(rolls).First();
+            // assert
+            frame.Incomplete.Should().BeFalse();
+            frame.Score.Should().Be(10);
+            frame.Strike.Should().BeTrue();
         }
-    }
 
-    public class Frame
-    {
-        public Frame(params int[] rolls)
+        [Fact]
+        public void MoreThanTwoRollsShouldResultIntoSeparateFrames()
         {
-            Incomplete = rolls.Length < 2;
+            // arrange
+            var rolls = ASequence.Of(6, 3, 10, 4, 2);
+            // act
+            var frames = AllFrames.From(rolls).AsList();
+            // assert
+            frames.Should().HaveCount(3);
+            var frameScores = frames.Select(f => f.Score);
+            frameScores.Should().ContainInOrder(9, 10, 6);
         }
-
-        public bool Incomplete { get; }
     }
 }
