@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C22B337F-4968-4966-95EB-37C5DBBD2E52}</ProjectGuid>
+    <ProjectGuid>{09BFD2DC-51DD-402B-9B7C-984D73ED786F}</ProjectGuid>
     <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -58,21 +58,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BowlingGameTest.cs" />
-    <Compile Include="Builder\ASequence.cs" />
-    <Compile Include="FluentAssertions\BowlingGameAssertions.cs" />
-    <Compile Include="FluentAssertions\BowlingGameAssertionsExtension.cs" />
-    <Compile Include="FrameTest.cs" />
+    <Compile Include="Greeter.cs" />
+    <Compile Include="Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Implementation\Implementation.csproj">
-      <Project>{4F593717-1DF4-4F8D-A4DC-BB9B70A27313}</Project>
-      <Name>Implementation</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

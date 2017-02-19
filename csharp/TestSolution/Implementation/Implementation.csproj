@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4F593717-1DF4-4F8D-A4DC-BB9B70A27313}</ProjectGuid>
+    <ProjectGuid>{0363DEBF-2370-4507-910B-3433CE1EE8DB}</ProjectGuid>
     <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -39,12 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllFrames.cs" />
-    <Compile Include="BowlingGame.cs" />
-    <Compile Include="EnumerableExtension.cs" />
-    <Compile Include="Frame.cs" />
-    <Compile Include="FrameType.cs" />
-    <Compile Include="Multiplicator.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Greeter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
