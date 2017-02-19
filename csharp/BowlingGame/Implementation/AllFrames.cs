@@ -5,6 +5,29 @@ namespace Implementation
 {
     public class AllFrames
     {
+        private sealed class NormalFrame : Frame
+        {
+            public NormalFrame(params int[] rolls)
+            {
+                Score = rolls.Sum();
+                NumberOfRolls = rolls.Length;
+                Incomplete = NumberOfRolls < 2;
+            }
+
+            public override bool Incomplete { get; }
+            public override int Score { get; }
+            public override int NumberOfRolls { get; }
+            public override bool Strike => false;
+        }
+
+        private sealed class StrikeFrame : Frame
+        {
+            public override bool Incomplete => false;
+            public override int Score => Frame.StrikeScore;
+            public override int NumberOfRolls => 1;
+            public override bool Strike => true;
+        }
+
         public static IEnumerable<Frame> From(IEnumerable<int> rolls)
         {
             var frames = new List<Frame>();
