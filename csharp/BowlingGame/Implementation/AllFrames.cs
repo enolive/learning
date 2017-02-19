@@ -23,25 +23,23 @@ namespace Implementation
         private sealed class StrikeFrame : Frame
         {
             public override bool Incomplete => false;
-            public override int Score => Frame.StrikeScore;
+            public override int Score => StrikeScore;
             public override int NumberOfRolls => 1;
             public override bool Strike => true;
         }
 
         public static IEnumerable<Frame> From(IEnumerable<int> rolls)
         {
-            var frames = new List<Frame>();
-            var rollsList = rolls;
+            var rollsList = rolls.AsList();
             while (rollsList.Any())
             {
-                var frame = CreateFrame(rollsList.Take(2));
-                frames.Add(frame);
-                rollsList = rollsList.Skip(frame.NumberOfRolls);
+                var frame = CreateFrame(rollsList.Take(2).ToArray());
+                rollsList = rollsList.Skip(frame.NumberOfRolls).AsList();
+                yield return frame;
             }
-            return frames;
         }
 
-        private static Frame CreateFrame(IEnumerable<int> rollsList)
+        private static Frame CreateFrame(IList<int> rollsList)
         {
             var firstRoll = rollsList.First();
             Frame frame;
