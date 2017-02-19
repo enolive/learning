@@ -10,11 +10,4 @@
         public abstract FrameType FrameType { get; }
         public abstract int FirstRoll { get; }
     }
-
-    public enum FrameType
-    {
-        Normal,
-        Spare,
-        Strike
-    }
 }

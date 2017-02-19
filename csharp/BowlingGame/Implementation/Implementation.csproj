@@ -43,6 +43,8 @@
     <Compile Include="BowlingGame.cs" />
     <Compile Include="EnumerableExtension.cs" />
     <Compile Include="Frame.cs" />
+    <Compile Include="FrameType.cs" />
+    <Compile Include="Multiplicator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -23,14 +23,22 @@ namespace Test
             _target.Should().HaveTotalScoreOf(31);
         }
 
-        // [Fact]
-        // TODO: ignored because i need to write an infrastructure for frames first
+        [Fact]
         public void DoubleStrikeShouldTripleFollowingPointsInFrame()
         {
             // act
             RollPoints(10, 10, 2, 3);
             // assert
             _target.Should().HaveTotalScoreOf(45);
+        }
+
+        [Fact]
+        public void TripleStrikeShouldTripleFollowingPointsInFrame()
+        {
+            // act
+            RollPoints(10, 10, 10, 6, 2);
+            // assert
+            _target.Should().HaveTotalScoreOf(84);
         }
 
         [Fact]
