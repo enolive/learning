@@ -31,7 +31,20 @@ namespace Test
             var firstFrame = frames.First();
             firstFrame.Incomplete.Should().BeTrue();
             firstFrame.Score.Should().Be(1);
-            firstFrame.Strike.Should().BeFalse();
+            firstFrame.FrameType.Should().Be(FrameType.Normal);
+        }
+
+        [Fact]
+        public void TwoRollsWithScoreOfTenShouldBeSpare()
+        {
+            // arrange
+            var rolls = ASequence.Of(4, 6);
+            // act
+            var frame = AllFrames.From(rolls).First();
+            // assert
+            frame.Incomplete.Should().BeFalse();
+            frame.Score.Should().Be(10);
+            frame.FrameType.Should().Be(FrameType.Spare);
         }
 
         [Fact]
@@ -46,7 +59,7 @@ namespace Test
             var firstFrame = frames.First();
             firstFrame.Incomplete.Should().BeFalse();
             firstFrame.Score.Should().Be(3);
-            firstFrame.Strike.Should().BeFalse();
+            firstFrame.FrameType.Should().Be(FrameType.Normal);
         }
 
         [Fact]
@@ -59,7 +72,7 @@ namespace Test
             // assert
             frame.Incomplete.Should().BeFalse();
             frame.Score.Should().Be(10);
-            frame.Strike.Should().BeTrue();
+            frame.FrameType.Should().Be(FrameType.Strike);
         }
 
         [Fact]

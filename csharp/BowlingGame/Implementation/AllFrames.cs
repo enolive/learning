@@ -12,20 +12,25 @@ namespace Implementation
                 Score = rolls.Sum();
                 NumberOfRolls = rolls.Length;
                 Incomplete = NumberOfRolls < 2;
+                FrameType = Score == CompleteScore
+                    ? FrameType.Spare : FrameType.Normal;
+                FirstRoll = rolls.First();
             }
 
             public override bool Incomplete { get; }
             public override int Score { get; }
             public override int NumberOfRolls { get; }
-            public override bool Strike => false;
+            public override FrameType FrameType { get; }
+            public override int FirstRoll { get; }
         }
 
         private sealed class StrikeFrame : Frame
         {
             public override bool Incomplete => false;
-            public override int Score => StrikeScore;
+            public override int Score => CompleteScore;
             public override int NumberOfRolls => 1;
-            public override bool Strike => true;
+            public override FrameType FrameType => FrameType.Strike;
+            public override int FirstRoll => Score;
         }
 
         public static IEnumerable<Frame> From(IEnumerable<int> rolls)
@@ -43,7 +48,7 @@ namespace Implementation
         {
             var firstRoll = rollsList.First();
             Frame frame;
-            if (firstRoll == Frame.StrikeScore)
+            if (firstRoll == Frame.CompleteScore)
             {
                 frame = new StrikeFrame();
             }
