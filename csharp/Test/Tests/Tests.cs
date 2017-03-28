@@ -7,9 +7,19 @@ namespace Tests
     public class Tests
     {
         [Fact]
-        public void Test1()
+        public void OneShouldReturnOne()
         {
-            true.Should().BeFalse();
+            var fizzBuzz = new FizzBuzz();
+            var result = fizzBuzz.CalculateFor(1);
+            result.Should().Be("1");
+        }
+    }
+
+    public class FizzBuzz
+    {
+        public string CalculateFor(int number)
+        {
+            return "1";
         }
     }
 }
