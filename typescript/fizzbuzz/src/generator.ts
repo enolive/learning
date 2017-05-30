@@ -3,6 +3,7 @@ import {Rule} from './rule';
 
 export class Generator {
     private _rules = [
+        new Rule('Fizz-Buzz', 3, 5),
         new Rule('Fizz', 3),
         new Rule('Buzz', 5),
     ];
@@ -11,7 +12,6 @@ export class Generator {
         let matchingRules = this._rules
             .filter(r => r.appliesTo(number))
             .map(r => r.result);
-
         return _.head(matchingRules) || number.toString();
     }
 }
