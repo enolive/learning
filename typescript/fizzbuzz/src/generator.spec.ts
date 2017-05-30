@@ -16,4 +16,9 @@ describe('Fizz Buzz Generator', () => {
         expect(target.resultFor(3)).toEqual('Fizz');
         expect(target.resultFor(6)).toEqual('Fizz');
     });
+
+    it('should return Buzz for numbers divisible by 5', () => {
+        expect(target.resultFor(5)).toEqual('Buzz');
+    });
+
 });

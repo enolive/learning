@@ -1,13 +1,17 @@
-let isDivisibleBy = function (number: number, denominator: number) {
-    return number % denominator == 0;
-};
+import * as _ from 'lodash';
+import {Rule} from './rule';
 
 export class Generator {
-    resultFor(number: number): string {
-        if (isDivisibleBy(number, 3)) {
-            return 'Fizz';
-        }
+    private _rules = [
+        new Rule('Fizz', 3),
+        new Rule('Buzz', 5),
+    ];
 
-        return number.toString();
+    resultFor(number: number): string {
+        let matchingRules = this._rules
+            .filter(r => r.appliesTo(number))
+            .map(r => r.result);
+
+        return _.head(matchingRules) || number.toString();
     }
 }
