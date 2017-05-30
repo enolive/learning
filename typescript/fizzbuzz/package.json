@@ -6,6 +6,7 @@
   "repository": "https://github.com/enolive/learning",
   "description": "Fizz Buzz with TDD in TypeScript using Karma/Jasmine",
   "devDependencies": {
+    "@types/jasmine": "^2.5.47",
     "jasmine-core": "^2.6.2",
     "karma": "^1.7.0",
     "karma-chrome-launcher": "^2.1.1",
