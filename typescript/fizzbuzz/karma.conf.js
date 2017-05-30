@@ -14,7 +14,7 @@ module.exports = function (config) {
         },
         reporters: ['progress'],
         autoWatch: true,
-        browsers: ['PhantomJS', 'Chrome'],
+        browsers: ['PhantomJS'],
         singleRun: false,
         concurrency: Infinity
     })
