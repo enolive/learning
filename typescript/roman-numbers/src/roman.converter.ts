@@ -16,7 +16,7 @@ export class RomanConverter {
         return roman
             .split("")
             .map((c) => this.convertDigit(c))
-            .reduce(NumberCollection.count);
+            .reduce(NumberCollection.sum);
     }
 
     private convertDigit(character: string): number {

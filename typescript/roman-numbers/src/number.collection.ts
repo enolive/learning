@@ -1,5 +1,5 @@
 export class NumberCollection {
-    public static count(a: number, b: number): number {
+    public static sum(a: number, b: number): number {
         return a + b;
     }
 }
