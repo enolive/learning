@@ -4,7 +4,7 @@
   "description": "Roman Numbers with TDD in Mocha",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/mocha/bin/mocha -r ts-node/register test/**/*.spec.ts --reporter nyan"
   },
   "repository": "github.com/enolive/learning",
   "author": "Christoph Welcz",
