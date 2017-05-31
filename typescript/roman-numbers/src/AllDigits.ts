@@ -1,4 +1,4 @@
-import {RomanDigit} from "./roman.digit";
+import {RomanDigit} from "./RomanDigit";
 
 export class AllDigits {
     public static of(roman: string) {

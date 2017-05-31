@@ -1,5 +1,5 @@
-import {AllDigits} from "./all.digits";
-import {NumberCollection} from "./number.collection";
+import {AllDigits} from "./AllDigits";
+import {NumberCollection} from "./NumberCollection";
 
 export class ConvertRoman {
     public static toArabic(roman: string): number {

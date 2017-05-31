@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {RomanDigit} from "../src/roman.digit";
+import {RomanDigit} from "../src/RomanDigit";
 
 describe("Single Roman Digit", () => {
     it("should be converted", () => {

@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {ConvertRoman} from "../src/roman.converter";
+import {ConvertRoman} from "../src/RomanConverter";
 
 describe("Roman to Arabic converter", () => {
 

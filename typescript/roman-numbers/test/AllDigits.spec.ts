@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {AllDigits} from "../src/all.digits";
+import {AllDigits} from "../src/AllDigits";
 //noinspection TsLint - ordering this into the other imports seems not possible
 import * as _ from "lodash";
 
