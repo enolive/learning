@@ -16,4 +16,24 @@ describe("Single Roman Digit", () => {
         expect(() => new RomanDigit("R").toArabic())
             .to.throw(RangeError, "Invalid roman digit 'R'.");
     });
+
+    it("should accept multi-digit input for lookup", () => {
+        const digit = new RomanDigit("II");
+        expect(digit.toArabic()).to.equal(1);
+    });
+
+    it("should detect higher value of next digit", () => {
+        const digit = new RomanDigit("IV");
+        expect(digit.isFollowingHigher()).to.equal(true);
+    });
+
+    it("should detect lower value of next digit", () => {
+        const digit = new RomanDigit("VI");
+        expect(digit.isFollowingHigher()).to.equal(false);
+    });
+
+    it("should ignore missing follower correctly", () => {
+        const digit = new RomanDigit("V");
+        expect(digit.isFollowingHigher()).to.equal(false);
+    });
 });

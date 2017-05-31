@@ -16,11 +16,19 @@ export class RomanDigit {
         }
     }
 
+    private _first: string;
+
     constructor(private roman: string) {
-        RomanDigit.throwOnInvalidCharacter(roman);
+        this._first = roman[0];
+        RomanDigit.throwOnInvalidCharacter(this._first);
     }
 
     public toArabic(): number {
-        return RomanDigit.digitMap[this.roman];
+        return RomanDigit.digitMap[this._first];
+    }
+
+    public isFollowingHigher(): boolean {
+        const follower = this.roman[1];
+        return RomanDigit.digitMap[follower] >= this.toArabic();
     }
 }
