@@ -3,7 +3,7 @@ import {Rule} from "./rule";
 export class RuleBuilder {
     private denominators: number[] = [];
 
-    public forDenominator(denominator: number): RuleBuilder {
+    public denominator(denominator: number): RuleBuilder {
         this.denominators.push(denominator);
         return this;
     }

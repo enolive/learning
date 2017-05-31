@@ -20,4 +20,8 @@ describe("Fizz Buzz Generator", () => {
         expect(target.resultFor(5)).to.equal("Buzz");
         expect(target.resultFor(10)).to.equal("Buzz");
     });
+
+    it("should return Fizz-Buzz for numbers that are divisible by 3 and 5", () => {
+       expect(target.resultFor(15)).to.equal("Fizz-Buzz");
+    });
 });

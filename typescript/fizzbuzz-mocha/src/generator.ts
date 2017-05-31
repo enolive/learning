@@ -7,8 +7,9 @@ export class Generator {
     }
 
     private _rules = [
-        Generator.rule().forDenominator(3).returning("Fizz"),
-        Generator.rule().forDenominator(5).returning("Buzz"),
+        Generator.rule().denominator(3).denominator(5).returning("Fizz-Buzz"),
+        Generator.rule().denominator(3).returning("Fizz"),
+        Generator.rule().denominator(5).returning("Buzz"),
     ];
 
     public resultFor(input: number): string {
