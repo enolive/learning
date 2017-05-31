@@ -1,6 +1,4 @@
 export class RomanDigit {
-    private _roman: string;
-
     //noinspection TsLint - ordering is not appropriate here
     private static digitMap = {
         I: 1,
@@ -12,14 +10,17 @@ export class RomanDigit {
         M: 1000,
     };
 
-    constructor(roman: string) {
+    private static throwOnInvalidCharacter(roman: string) {
         if (!(roman in RomanDigit.digitMap)) {
             throw RangeError(`Invalid roman digit '${roman}'.`);
         }
-        this._roman = roman;
+    }
+
+    constructor(private roman: string) {
+        RomanDigit.throwOnInvalidCharacter(roman);
     }
 
     public toArabic(): number {
-        return RomanDigit.digitMap[this._roman];
+        return RomanDigit.digitMap[this.roman];
     }
 }
