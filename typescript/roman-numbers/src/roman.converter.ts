@@ -1,9 +1,6 @@
+import {NumberCollection} from "./number.collection";
+
 export class RomanConverter {
-
-    private static count(a: number, b: number): number {
-        return a + b;
-    }
-
     //noinspection TsLint - ordering is not appropriate here
     private digitMap = {
         I: 1,
@@ -19,7 +16,7 @@ export class RomanConverter {
         return roman
             .split("")
             .map((c) => this.convertDigit(c))
-            .reduce(RomanConverter.count);
+            .reduce(NumberCollection.count);
     }
 
     private convertDigit(character: string): number {
