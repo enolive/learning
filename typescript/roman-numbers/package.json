@@ -1,0 +1,25 @@
+{
+  "name": "roman-numbers",
+  "version": "1.0.0",
+  "description": "Roman Numbers with TDD in Mocha",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "github.com/enolive/learning",
+  "author": "Christoph Welcz",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^3.5.2",
+    "@types/mocha": "^2.2.41",
+    "chai": "^4.0.0",
+    "mocha": "^3.4.2",
+    "ts-node": "^3.0.4",
+    "tslint": "^5.3.2",
+    "typescript": "^2.3.4"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.64",
+    "lodash": "^4.17.4"
+  }
+}
