@@ -1,0 +1,26 @@
+{
+  "name": "fizzbuzz-mocha",
+  "version": "0.1.0",
+  "description": "Fizz Buzz with TypeScript/Mocha",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enolive/learning.git"
+  },
+  "author": "Christoph Welcz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enolive/learning/issues"
+  },
+  "homepage": "https://github.com/enolive/learning#readme",
+  "devDependencies": {
+    "@types/chai": "^3.5.2",
+    "@types/mocha": "^2.2.41",
+    "chai": "^4.0.0",
+    "mocha": "^3.4.2",
+    "ts-node": "^3.0.4"
+  }
+}
