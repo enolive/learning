@@ -1,5 +1,9 @@
 export class Generator {
-    resultFor(number: number): string {
-        return number.toString();
+    public resultFor(input: number): string {
+        if (input === 3) {
+            return "Fizz";
+        }
+
+        return input.toString();
     }
 }
