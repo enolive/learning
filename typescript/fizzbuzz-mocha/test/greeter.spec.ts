@@ -1,19 +1,20 @@
 import {expect} from 'chai';
-
-class Greeter {
-    sayHello(): string {
-        return 'Hello World!';
-    }
-}
-
-let sayHello = function () {
-    let greeter = new Greeter();
-    return greeter.sayHello();
-};
+import {Greeter} from '../src/greeter';
 
 describe('Greeter', () => {
+    let target: Greeter;
+
+    beforeEach(() => {
+        target = new Greeter();
+    });
+
     it('should greet the world', () => {
-        let result = sayHello();
+        let result = target.sayHello();
         expect(result).to.equal('Hello World!');
+    });
+
+    it('should greet the given person', () => {
+       expect(target.sayHelloTo('Christoph')).to.equal('Hello Christoph!');
+       expect(target.sayHelloTo('Tofu')).to.equal('Hello Tofu!');
     });
 });
