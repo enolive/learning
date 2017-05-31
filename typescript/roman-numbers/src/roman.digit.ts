@@ -16,6 +16,10 @@ export class RomanDigit {
         }
     }
 
+    private static convert(digit: string) {
+        return RomanDigit.digitMap[digit];
+    }
+
     private _first: string;
 
     constructor(private roman: string) {
@@ -24,11 +28,14 @@ export class RomanDigit {
     }
 
     public toArabic(): number {
-        return RomanDigit.digitMap[this._first];
+        const current = RomanDigit.convert(this._first);
+        return this.isFollowingHigher()
+            ? -current
+            : current;
     }
 
-    public isFollowingHigher(): boolean {
+    private isFollowingHigher(): boolean {
         const follower = this.roman[1];
-        return RomanDigit.digitMap[follower] >= this.toArabic();
+        return RomanDigit.convert(follower) > RomanDigit.convert(this._first);
     }
 }

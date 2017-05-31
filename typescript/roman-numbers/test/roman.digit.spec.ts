@@ -24,16 +24,16 @@ describe("Single Roman Digit", () => {
 
     it("should detect higher value of next digit", () => {
         const digit = new RomanDigit("IV");
-        expect(digit.isFollowingHigher()).to.equal(true);
+        expect(digit.toArabic()).to.equal(-1);
     });
 
     it("should detect lower value of next digit", () => {
         const digit = new RomanDigit("VI");
-        expect(digit.isFollowingHigher()).to.equal(false);
+        expect(digit.toArabic()).to.equal(5);
     });
 
     it("should ignore missing follower correctly", () => {
         const digit = new RomanDigit("V");
-        expect(digit.isFollowingHigher()).to.equal(false);
+        expect(digit.toArabic()).to.equal(5);
     });
 });
