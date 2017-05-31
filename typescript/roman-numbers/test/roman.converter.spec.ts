@@ -1,34 +1,34 @@
 import {expect} from "chai";
-import {RomanConverter} from "../src/roman.converter";
+import {ConvertRoman} from "../src/roman.converter";
 
 describe("Roman to Arabic converter", () => {
-    let target: RomanConverter;
-
-    beforeEach(() => target = new RomanConverter());
-
     describe("single digits", () => {
         it("should be converted", () => {
-            expect(target.toArabic("I")).to.equal(1);
-            expect(target.toArabic("V")).to.equal(5);
-            expect(target.toArabic("X")).to.equal(10);
-            expect(target.toArabic("L")).to.equal(50);
-            expect(target.toArabic("C")).to.equal(100);
-            expect(target.toArabic("D")).to.equal(500);
-            expect(target.toArabic("M")).to.equal(1000);
+            expect(ConvertRoman.toArabic("I")).to.equal(1);
+            expect(ConvertRoman.toArabic("V")).to.equal(5);
+            expect(ConvertRoman.toArabic("X")).to.equal(10);
+            expect(ConvertRoman.toArabic("L")).to.equal(50);
+            expect(ConvertRoman.toArabic("C")).to.equal(100);
+            expect(ConvertRoman.toArabic("D")).to.equal(500);
+            expect(ConvertRoman.toArabic("M")).to.equal(1000);
         });
 
         it("should throw on invalid", () => {
-            expect(() => target.toArabic("R")).to.throw(RangeError, "Invalid roman digit 'R'.");
+            expect(() => ConvertRoman.toArabic("R")).to.throw(RangeError, "Invalid roman digit 'R'.");
         });
     });
 
     describe("summation of digits", () => {
         it("should return 2 for II", () => {
-           expect(target.toArabic("II")).to.equal(2);
+           expect(ConvertRoman.toArabic("II")).to.equal(2);
         });
 
         it("should return 6 for VI", () => {
-           expect(target.toArabic("VI")).to.equal(6);
+           expect(ConvertRoman.toArabic("VI")).to.equal(6);
+        });
+
+        it("should return 42 for XXXXII", () => {
+           expect(ConvertRoman.toArabic("XXXXII")).to.equal(42);
         });
     });
 });
