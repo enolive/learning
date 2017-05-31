@@ -1,5 +1,9 @@
 export class RomanConverter {
 
+    private static count(a: number, b: number): number {
+        return a + b;
+    }
+
     //noinspection TsLint - ordering is not appropriate here
     private digitMap = {
         I: 1,
@@ -12,15 +16,16 @@ export class RomanConverter {
     };
 
     public toArabic(roman: string): number {
-        const character = roman[0];
-        return this.convertDigit(character);
+        return roman
+            .split("")
+            .map((c) => this.convertDigit(c))
+            .reduce(RomanConverter.count);
     }
 
     private convertDigit(character: string): number {
-        const digit = this.digitMap[character];
-        if (!digit) {
+        if (!(character in this.digitMap)) {
             throw RangeError(`Invalid roman digit '${character}'.`);
         }
-        return digit;
+        return this.digitMap[character];
     }
 }

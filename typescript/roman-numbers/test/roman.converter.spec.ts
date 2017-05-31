@@ -21,4 +21,14 @@ describe("Roman to Arabic converter", () => {
             expect(() => target.toArabic("R")).to.throw(RangeError, "Invalid roman digit 'R'.");
         });
     });
+
+    describe("summation of digits", () => {
+        it("should return 2 for II", () => {
+           expect(target.toArabic("II")).to.equal(2);
+        });
+
+        it("should return 6 for VI", () => {
+           expect(target.toArabic("VI")).to.equal(6);
+        });
+    });
 });
