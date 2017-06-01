@@ -9,7 +9,6 @@ export class RomanDigit {
         D: 500,
         M: 1000,
     };
-
     private static throwOnInvalidCharacter(roman: string) {
         if (!(roman in RomanDigit.digitMap)) {
             throw RangeError(`Invalid roman digit '${roman}'.`);
@@ -20,22 +19,21 @@ export class RomanDigit {
         return RomanDigit.digitMap[digit];
     }
 
+    private _roman: string;
+
     private _first: string;
 
-    constructor(private roman: string) {
+    constructor(roman: string) {
         this._first = roman[0];
+        this._roman = roman;
         RomanDigit.throwOnInvalidCharacter(this._first);
     }
 
     public toArabic(): number {
         const current = RomanDigit.convert(this._first);
-        return this.isFollowingHigher()
+        const follower = RomanDigit.convert(this._roman[1]);
+        return follower > current
             ? -current
             : current;
-    }
-
-    private isFollowingHigher(): boolean {
-        const follower = this.roman[1];
-        return RomanDigit.convert(follower) > RomanDigit.convert(this._first);
     }
 }
