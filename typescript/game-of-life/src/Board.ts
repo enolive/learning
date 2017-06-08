@@ -1,13 +1,13 @@
 import {Position} from "./Position";
 
 export class Board {
-    private wasSetAlive: boolean = false;
+    private wasSetAlive: Position;
 
-    public isCellAliveAt(location: Position) {
-        return this.wasSetAlive;
+    public isCellAliveAt(position: Position) {
+        return position.equals(this.wasSetAlive);
     }
 
     public setCellAliveAt(position: Position) {
-        this.wasSetAlive = true;
+        this.wasSetAlive = position;
     }
 }
