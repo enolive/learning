@@ -6,7 +6,7 @@ export class Position {
         return (37 * position.x) ^ position.y;
     }
 
-    constructor(x: number, y: number) {
+    public constructor(x: number, y: number) {
         this._x = x;
         this._y = y;
     }
