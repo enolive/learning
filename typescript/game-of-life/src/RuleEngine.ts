@@ -2,7 +2,7 @@ import {CellState} from "./CellState";
 
 export class RuleEngine {
 
-    public nextState(current: CellState, livingNeighbours: number): CellState {
+    public static nextState(current: CellState, livingNeighbours: number): CellState {
         if (livingNeighbours === 2) {
             return current;
         }
