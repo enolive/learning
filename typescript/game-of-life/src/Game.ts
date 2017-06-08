@@ -3,8 +3,6 @@ import {CellState} from "./CellState";
 import {Dimensions} from "./Dimensions";
 import {Position} from "./Position";
 import {RuleEngine} from "./RuleEngine";
-//noinspection TsLint
-import * as _ from "lodash";
 
 export class Game {
     private _dimensions: Dimensions;
