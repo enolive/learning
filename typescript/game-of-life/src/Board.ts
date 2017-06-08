@@ -14,10 +14,12 @@ export class Board {
     }
 
     public countLivingNeighboursOf(position: Position) {
-        const candidates = new Position(position.x - 1, position.y - 1);
-        if (this.isCellAliveAt(candidates)) {
-            return 1;
-        }
-        return 0;
+        const candidates = [
+            new Position(position.x - 1, position.y - 1),
+            new Position(position.x, position.y - 1),
+        ];
+        return candidates
+            .filter((c) => this.isCellAliveAt(c))
+            .length;
     }
 }

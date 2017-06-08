@@ -33,7 +33,8 @@ describe("Board", () => {
     it("should count living neighbours of cell surrounded by neighbours correctly", () => {
        target.setCellsAliveAt(
            new Position(0, 0),
+           new Position(1, 0),
        );
-       expect(target.countLivingNeighboursOf(new Position(1, 1))).to.equal(1);
+       expect(target.countLivingNeighboursOf(new Position(1, 1))).to.equal(2);
     });
 });
