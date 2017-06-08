@@ -12,4 +12,8 @@ export class Board {
     public setCellsAliveAt(...position: Position[]) {
         position.forEach((p) => this.livingCells.add(p));
     }
+
+    public countLivingNeighboursOf(position: Position) {
+        return 0;
+    }
 }
