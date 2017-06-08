@@ -2,8 +2,8 @@ export class Position {
     private _x: number;
     private _y: number;
 
-    public static hash(position: Position) {
-        return (37 * position.x) ^ position.y;
+    public static hash(p: Position) {
+        return (37 * p.x) ^ p.y;
     }
 
     public constructor(x: number, y: number) {
