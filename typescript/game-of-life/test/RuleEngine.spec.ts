@@ -8,6 +8,7 @@ describe("Rules of Game of Life", () => {
     beforeEach(() => engine = new RuleEngine());
 
     it("should cell with less than 2 living neighbours die", () => {
+        expect(engine.nextState(CellState.Living, 0)).to.equal(CellState.Dead);
         expect(engine.nextState(CellState.Living, 1)).to.equal(CellState.Dead);
     });
 });
