@@ -11,7 +11,22 @@
       "check-format"
     ],
     "no-unused-expression": false,
-    "no-bitwise": false
+    "no-bitwise": false,
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "private-static-field",
+          "private-instance-field",
+          "public-static-method",
+          "public-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method",
+          "private-static-method"
+        ]
+      }
+    ]
   },
   "rulesDirectory": []
 }
