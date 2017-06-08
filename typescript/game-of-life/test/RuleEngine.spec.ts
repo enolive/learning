@@ -1,24 +1,13 @@
 import {expect} from "chai";
-
-export class Engine {
-
-    nextState(current: CellState, livingNeighbours: number) {
-        return CellState.Dead;
-    }
-}
-
-export enum CellState {
-    Dead,
-    Living
-
-}
+import {CellState} from "../src/CellState";
+import {RuleEngine} from "../src/RuleEngine";
 
 describe("Rules of Game of Life", () => {
-   it("should cell with less than 2 living neighbours die", () => {
-       const engine = new Engine();
-       const state = CellState.Living;
-       const livingNeighbours = 1;
-       const nextState = engine.nextState(state, livingNeighbours);
-       expect(nextState).to.equal(CellState.Dead);
-   })
+    let engine: RuleEngine;
+
+    beforeEach(() => engine = new RuleEngine());
+
+    it("should cell with less than 2 living neighbours die", () => {
+        expect(engine.nextState(CellState.Living, 1)).to.equal(CellState.Dead);
+    });
 });
