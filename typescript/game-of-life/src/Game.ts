@@ -24,11 +24,9 @@ export class Game {
 
     public nextGeneration(): void {
         const newBoard = new Board();
-
         const positions = Game.positions(this._dimensions);
         positions.forEach((position) => {
-            const nextCell = this.nextStateOf(position);
-            if (nextCell === CellState.Living) {
+            if (this.nextStateOf(position) === CellState.Living) {
                 newBoard.setCellsAliveAt(position);
             } else {
                 newBoard.setCellsDeadAt(position);
