@@ -1,0 +1,19 @@
+{
+  "name": "game-of-life",
+  "version": "1.0.0",
+  "description": "Conway's Game of Life with TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha --opts mocha.opts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enolive/learning.git"
+  },
+  "author": "Christoph Welcz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enolive/learning/issues"
+  },
+  "homepage": "https://github.com/enolive/learning#readme"
+}
