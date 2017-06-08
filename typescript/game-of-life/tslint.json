@@ -10,7 +10,8 @@
       "allow-leading-underscore",
       "check-format"
     ],
-    "no-unused-expression": false
+    "no-unused-expression": false,
+    "no-bitwise": false
   },
   "rulesDirectory": []
 }
