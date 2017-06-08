@@ -22,8 +22,8 @@
           "public-constructor",
           "public-instance-method",
           "protected-instance-method",
-          "private-instance-method",
-          "private-static-method"
+          "private-static-method",
+          "private-instance-method"
         ]
       }
     ]
