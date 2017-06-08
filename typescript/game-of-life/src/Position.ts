@@ -3,6 +3,19 @@ export class Position {
         return (37 * position.x) ^ position.y;
     }
 
-    constructor(private x: number, private y: number) {
+    private _x: number;
+    private _y: number;
+
+    constructor(x: number, y: number) {
+        this._x = x;
+        this._y = y;
+    }
+
+    public get x(): number {
+        return this._x;
+    }
+
+    public get y(): number {
+        return this._y;
     }
 }

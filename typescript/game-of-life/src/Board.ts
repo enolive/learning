@@ -14,6 +14,10 @@ export class Board {
     }
 
     public countLivingNeighboursOf(position: Position) {
+        const candidates = new Position(position.x - 1, position.y - 1);
+        if (this.isCellAliveAt(candidates)) {
+            return 1;
+        }
         return 0;
     }
 }
