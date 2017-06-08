@@ -14,6 +14,7 @@ describe("Board", () => {
 
     it("should allow cells to be set to alive", () => {
         target.setCellAliveAt(new Position(1, 1));
+        target.setCellAliveAt(new Position(1, 2));
         expect(target.isCellAliveAt(new Position(1, 1))).to.be.true;
     });
 
