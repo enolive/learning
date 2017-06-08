@@ -27,6 +27,7 @@ describe("Board", () => {
     });
 
     it("should count living neighbours of cell without neighbours correctly", () => {
+        target.setCellsAliveAt(new Position(1, 1));
         expect(target.countLivingNeighboursOf(new Position(3, 6))).to.equal(0);
     });
 
