@@ -7,10 +7,6 @@ export class Position {
             return false;
         }
 
-        if (other.x === this.x && other.y === this.y) {
-            return true;
-        }
-
-        return false;
+        return other.x === this.x && other.y === this.y;
     }
 }
