@@ -13,13 +13,16 @@ describe("Board", () => {
     });
 
     it("should allow cells to be set to alive", () => {
-        target.setCellAliveAt(new Position(1, 1));
-        target.setCellAliveAt(new Position(1, 2));
-        expect(target.isCellAliveAt(new Position(1, 1))).to.be.true;
+        target.setCellsAliveAt(
+            new Position(1, 1),
+            new Position(1, 2),
+            new Position(5, 3),
+        );
+        expect(target.isCellAliveAt(new Position(1, 2))).to.be.true;
     });
 
     it("should memorize the position of the cell that is alive", () => {
-        target.setCellAliveAt(new Position(1, 2));
+        target.setCellsAliveAt(new Position(1, 2));
         expect(target.isCellAliveAt(new Position(1, 1))).to.be.false;
     });
 });
