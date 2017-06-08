@@ -20,6 +20,10 @@ export class Board {
             .length;
     }
 
+    public setCellsDeadAt(...positions: Position[]) {
+        positions.forEach((p) => this.livingCells.delete(p));
+    }
+
     private static neighboursOf(position: Position) {
         return [
             new Position(position.x - 1, position.y - 1),
