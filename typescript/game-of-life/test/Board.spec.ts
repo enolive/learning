@@ -40,9 +40,27 @@ describe("Board", () => {
         expect(target.countLivingNeighboursOf(new Position(1, 1))).to.equal(8);
     });
 
+    it("should count two living neighbours", () => {
+        target.setCellsAliveAt(
+            new Position(1, 0),
+            new Position(1, 1),
+            new Position(1, 2),
+        );
+        expect(target.countLivingNeighboursOf(new Position(0, 0))).to.equal(2);
+    });
+
+    it("should count three living neighbours", () => {
+        target.setCellsAliveAt(
+            new Position(1, 0),
+            new Position(1, 1),
+            new Position(1, 2),
+        );
+        expect(target.countLivingNeighboursOf(new Position(0, 1))).to.equal(3);
+    });
+
     it("should let a living cell die", () => {
-       target.setCellsAliveAt(new Position(1, 1));
-       target.setCellsDeadAt(new Position(1, 1));
-       expect(target.isCellAliveAt(new Position(1, 1))).to.be.false;
+        target.setCellsAliveAt(new Position(1, 1));
+        target.setCellsDeadAt(new Position(1, 1));
+        expect(target.isCellAliveAt(new Position(1, 1))).to.be.false;
     });
 });

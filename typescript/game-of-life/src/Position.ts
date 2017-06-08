@@ -3,7 +3,10 @@ export class Position {
     private _y: number;
 
     public static hash(p: Position) {
-        return (37 * p.x) ^ p.y;
+        let hash: number;
+        hash = p.x;
+        hash = (hash << 5) + hash + p.y;
+        return hash;
     }
 
     public constructor(x: number, y: number) {

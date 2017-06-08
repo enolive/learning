@@ -9,8 +9,8 @@ export class Board {
         return this.livingCells.has(position);
     }
 
-    public setCellsAliveAt(...position: Position[]) {
-        position.forEach((p) => this.livingCells.add(p));
+    public setCellsAliveAt(...positions: Position[]) {
+        positions.forEach((p) => this.livingCells.add(p));
     }
 
     public countLivingNeighboursOf(position: Position) {
