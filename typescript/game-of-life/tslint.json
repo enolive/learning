@@ -9,7 +9,8 @@
       true,
       "allow-leading-underscore",
       "check-format"
-    ]
+    ],
+    "no-unused-expression": false
   },
   "rulesDirectory": []
 }
