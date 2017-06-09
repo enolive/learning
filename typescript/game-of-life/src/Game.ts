@@ -22,7 +22,7 @@ export class Game {
 
     public nextGeneration(): void {
         const newBoard = new Board();
-        const positions = Game.positions(this._dimensions);
+        const positions = this._dimensions.positions();
         positions.forEach((position) => {
             if (this.nextStateOf(position) === CellState.Living) {
                 newBoard.setCellsAliveAt(position);
@@ -34,22 +34,10 @@ export class Game {
         this._board = newBoard;
     }
 
-    private static positions(dimensions: Dimensions) {
-        const positions = [];
-        for (let x = 0; x < dimensions.width; x++) {
-            for (let y = 0; y < dimensions.height; y++) {
-                const position = new Position(x, y);
-                positions.push(position);
-            }
-        }
-        return positions;
-    }
-
     private nextStateOf(position: Position) {
         const livingNeighbours = this._board.countLivingNeighboursOf(position);
         const currentCell = this._board.isCellAliveAt(position)
             ? CellState.Living : CellState.Dead;
-        const nextCell = RuleEngine.nextState(currentCell, livingNeighbours);
-        return nextCell;
+        return RuleEngine.nextState(currentCell, livingNeighbours);
     }
 }
