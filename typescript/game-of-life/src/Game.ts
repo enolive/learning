@@ -1,17 +1,9 @@
 import {Board} from "./Board";
+import {Cell} from "./Cell";
 import {CellState} from "./CellState";
 import {Dimensions} from "./Dimensions";
 import {Position} from "./Position";
 import {RuleEngine} from "./RuleEngine";
-
-export class Cell {
-    private _state: CellState;
-    private _position: Position;
-    public constructor(state: CellState, position: Position) {
-        this._state = state;
-        this._position = position;
-    }
-}
 
 export class Game {
     private _dimensions: Dimensions;
@@ -33,29 +25,29 @@ export class Game {
         const newBoard = new Board();
         this._dimensions
             .positions()
-            .forEach((position) => {
-                if (this.nextStateOf(position) === CellState.Living) {
-                    newBoard.setCellsAliveAt(position);
-                } else {
-                    newBoard.setCellsDeadAt(position);
-                }
-            });
-
+            .map((position) => Game.currentCell(this._board, position))
+            .map((current) => Game.nextCell(this._board, current))
+            .forEach((next) => Game.transform(newBoard, next));
         this._board = newBoard;
     }
 
-    private getNextStateOfCellAt(position: Position): Cell {
-        const livingNeighbours = this._board.countLivingNeighboursOf(position);
-        const currentState = this._board.isCellAliveAt(position)
-            ? CellState.Living : CellState.Dead;
-        const nextState = RuleEngine.nextState(currentState, livingNeighbours);
-        return new Cell(nextState, position);
+    private static transform(newBoard: Board, cell: Cell) {
+        if (cell.state === CellState.Living) {
+            newBoard.setCellsAliveAt(cell.position);
+        } else {
+            newBoard.setCellsDeadAt(cell.position);
+        }
     }
 
-    private nextStateOf(position: Position) {
-        const livingNeighbours = this._board.countLivingNeighboursOf(position);
-        const currentCell = this._board.isCellAliveAt(position)
+    private static nextCell(board: Board, currentCell: Cell) {
+        const livingNeighbours = board.countLivingNeighboursOf(currentCell.position);
+        const nextState = RuleEngine.nextState(currentCell.state, livingNeighbours);
+        return new Cell(nextState, currentCell.position);
+    }
+
+    private static currentCell(board: Board, position: Position) {
+        const currentState = board.isCellAliveAt(position)
             ? CellState.Living : CellState.Dead;
-        return RuleEngine.nextState(currentCell, livingNeighbours);
+        return new Cell(currentState, position);
     }
 }
