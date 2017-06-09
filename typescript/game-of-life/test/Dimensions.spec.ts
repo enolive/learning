@@ -2,7 +2,7 @@ import {expect} from "chai";
 import {Dimensions} from "../src/Dimensions";
 import {Position} from "../src/Position";
 
-describe("Dimensions of Board", () => {
+describe("Cartesian product for the Board Dimensions", () => {
     it("should have zero positions for 0x0", () => {
         expect(new Dimensions(0, 0).positions()).to.be.empty;
         expect(new Dimensions(-100, -42).positions()).to.be.empty;
