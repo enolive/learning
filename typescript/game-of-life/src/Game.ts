@@ -1,6 +1,5 @@
 import {Board} from "./Board";
 import {Cell} from "./Cell";
-import {CellState} from "./CellState";
 import {Dimensions} from "./Dimensions";
 import {Position} from "./Position";
 import {RuleEngine} from "./RuleEngine";
@@ -23,20 +22,12 @@ export class Game {
             .positions()
             .map((position) => this._board.getCellAt(position))
             .map((current) => Game.nextCell(this._board, current))
-            .forEach((next) => Game.transform(newBoard, next));
+            .forEach((next) => newBoard.transform(next));
         this._board = newBoard;
     }
 
     public getCellAt(position: Position) {
         return this._board.getCellAt(position);
-    }
-
-    private static transform(newBoard: Board, cell: Cell) {
-        if (cell.state === CellState.Living) {
-            newBoard.setCellsAliveAt(cell.position);
-        } else {
-            newBoard.setCellsDeadAt(cell.position);
-        }
     }
 
     private static nextCell(board: Board, currentCell: Cell) {

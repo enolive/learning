@@ -18,15 +18,19 @@ export class Board {
             .length;
     }
 
-    public setCellsDeadAt(...positions: Position[]) {
-        positions.forEach((p) => this.livingCells.delete(p));
-    }
-
     public getCellAt(position: Position): Cell {
         const state = this.isCellAliveAt(position)
             ? CellState.Living
             : CellState.Dead;
         return new Cell(state, position);
+    }
+
+    public transform(cell: Cell) {
+        if (cell.state === CellState.Living) {
+            this.livingCells.add(cell.position);
+        } else {
+            this.livingCells.delete(cell.position);
+        }
     }
 
     private static neighboursOf(position: Position) {

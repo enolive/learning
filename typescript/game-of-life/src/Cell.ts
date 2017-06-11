@@ -17,4 +17,12 @@ export class Cell {
         this._state = state;
         this._position = position;
     }
+
+    public living(): Cell {
+        return new Cell(CellState.Living, this._position);
+    }
+
+    public dead(): Cell {
+        return new Cell(CellState.Dead, this.position);
+    }
 }

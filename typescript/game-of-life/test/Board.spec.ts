@@ -59,17 +59,24 @@ describe("Board", () => {
         expect(target.countLivingNeighboursOf(new Position(0, 1))).to.equal(3);
     });
 
-    it("should let a living cell die", () => {
-        target.setCellsAliveAt(new Position(1, 1));
-        target.setCellsDeadAt(new Position(1, 1));
-        expect(isCellAliveAt(new Position(1, 1))).to.be.false;
-    });
-
     it("should get specified cell", () => {
         const position = new Position(1, 1);
         const cell = target.getCellAt(position);
         expect(cell.position).to.equal(position);
         expect(cell.state).to.equal(CellState.Dead);
+    });
+
+    it("should transform cells to be alive", () => {
+        const cell = target.getCellAt(new Position(1, 1));
+        target.transform(cell.living());
+        expect(isCellAliveAt(cell.position)).to.be.true;
+    });
+
+    it("should transform cells to be dead", () => {
+        const cell = target.getCellAt(new Position(1, 1));
+        target.transform(cell.living());
+        target.transform(cell.dead());
+        expect(isCellAliveAt(cell.position)).to.be.false;
     });
 
     function isCellAliveAt(position: Position) {
