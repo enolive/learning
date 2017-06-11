@@ -1,5 +1,6 @@
 import {expect} from "chai";
 import {Board} from "../src/Board";
+import {CellState} from "../src/CellState";
 import {Position} from "../src/Position";
 
 describe("Board", () => {
@@ -64,7 +65,14 @@ describe("Board", () => {
         expect(isCellAliveAt(new Position(1, 1))).to.be.false;
     });
 
+    it("should get specified cell", () => {
+        const position = new Position(1, 1);
+        const cell = target.getCellAt(position);
+        expect(cell.position).to.equal(position);
+        expect(cell.state).to.equal(CellState.Dead);
+    });
+
     function isCellAliveAt(position: Position) {
-        return target.isCellAliveAt(position);
+        return target.getCellAt(position).state === CellState.Living;
     }
 });

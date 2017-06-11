@@ -1,26 +1,38 @@
 import {expect} from "chai";
+import {CellState} from "../src/CellState";
 import {Dimensions} from "../src/Dimensions";
 import {Game} from "../src/Game";
 import {Position} from "../src/Position";
 
 describe("Game of Life", () => {
+    let game: Game;
+
+    beforeEach(() => game = new Game(new Dimensions(10, 10)));
+
     it("should let a bar flip in next generation", () => {
-        const dimensions = new Dimensions(10, 10);
-        const game = new Game(dimensions);
+        // arrange
+        const expected = [
+            0, 0, 0,
+            1, 1, 1,
+            0, 0, 0,
+        ];
         game.setCellsAliveAt(
             new Position(1, 0),
             new Position(1, 1),
             new Position(1, 2),
         );
+        // act
         game.nextGeneration();
-        expect(game.isCellAliveAt(new Position(0, 0))).to.be.false;
-        expect(game.isCellAliveAt(new Position(1, 0))).to.be.false;
-        expect(game.isCellAliveAt(new Position(2, 0))).to.be.false;
-        expect(game.isCellAliveAt(new Position(0, 1))).to.be.true;
-        expect(game.isCellAliveAt(new Position(1, 1))).to.be.true;
-        expect(game.isCellAliveAt(new Position(2, 1))).to.be.true;
-        expect(game.isCellAliveAt(new Position(0, 2))).to.be.false;
-        expect(game.isCellAliveAt(new Position(1, 2))).to.be.false;
-        expect(game.isCellAliveAt(new Position(2, 2))).to.be.false;
+        // assert
+        const actual = getCellStatesAt(
+            new Position(0, 0), new Position(1, 0), new Position(2, 0),
+            new Position(0, 1), new Position(1, 1), new Position(2, 1),
+            new Position(0, 2), new Position(1, 2), new Position(2, 2),
+        );
+        expect(actual).to.deep.equal(expected);
     });
+
+    function getCellStatesAt(...position: Position[]) {
+        return position.map((p) => game.getCellAt(p).state === CellState.Living ? 1 : 0);
+    }
 });

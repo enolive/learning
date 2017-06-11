@@ -17,18 +17,18 @@ export class Game {
         this._board.setCellsAliveAt(...positions);
     }
 
-    public isCellAliveAt(position: Position): boolean {
-        return this._board.isCellAliveAt(position);
-    }
-
     public nextGeneration(): void {
         const newBoard = new Board();
         this._dimensions
             .positions()
-            .map((position) => Game.currentCell(this._board, position))
+            .map((position) => this._board.getCellAt(position))
             .map((current) => Game.nextCell(this._board, current))
             .forEach((next) => Game.transform(newBoard, next));
         this._board = newBoard;
+    }
+
+    public getCellAt(position: Position) {
+        return this._board.getCellAt(position);
     }
 
     private static transform(newBoard: Board, cell: Cell) {
@@ -43,11 +43,5 @@ export class Game {
         const livingNeighbours = board.countLivingNeighboursOf(currentCell.position);
         const nextState = RuleEngine.nextState(currentCell.state, livingNeighbours);
         return new Cell(nextState, currentCell.position);
-    }
-
-    private static currentCell(board: Board, position: Position) {
-        const currentState = board.isCellAliveAt(position)
-            ? CellState.Living : CellState.Dead;
-        return new Cell(currentState, position);
     }
 }
