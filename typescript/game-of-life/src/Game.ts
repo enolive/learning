@@ -1,10 +1,11 @@
 import {Board} from "./Board";
 import {Cell} from "./Cell";
 import {Dimensions} from "./Dimensions";
+import {IBoard} from "./IBoard";
 import {Position} from "./Position";
 import {RuleEngine} from "./RuleEngine";
 
-export class Game {
+export class Game implements IBoard {
     private _dimensions: Dimensions;
     private _board: Board = new Board();
 

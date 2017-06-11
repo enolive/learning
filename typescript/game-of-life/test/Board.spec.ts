@@ -2,11 +2,16 @@ import {expect} from "chai";
 import {Board} from "../src/Board";
 import {CellState} from "../src/CellState";
 import {Position} from "../src/Position";
+import {BoardTransform} from "./BoardTransform";
 
 describe("Board", () => {
     let target: Board;
+    let transform: BoardTransform;
 
-    beforeEach(() => target = new Board());
+    beforeEach(() => {
+        target = new Board();
+        transform = new BoardTransform(target);
+    });
 
     it("should have all cells initially dead", () => {
         expect(isCellAliveAt(new Position(1, 1))).to.be.false;
@@ -80,9 +85,7 @@ describe("Board", () => {
     });
 
     function setCellsAliveAt(...positions: Position[]) {
-        positions
-            .map((p) => target.getCellAt(p))
-            .forEach((c) => target.transform(c.living()));
+        transform.setCellsAliveAt(...positions);
     }
 
     function isCellAliveAt(position: Position) {

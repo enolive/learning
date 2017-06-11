@@ -1,9 +1,10 @@
 import {Set} from "hash-set-map";
 import {Cell} from "./Cell";
 import {CellState} from "./CellState";
+import {IBoard} from "./IBoard";
 import {Position} from "./Position";
 
-export class Board {
+export class Board implements IBoard {
 
     private livingCells = new Set<Position>(Position.hashKey);
 
