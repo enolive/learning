@@ -14,7 +14,7 @@ describe("Board", () => {
     });
 
     it("should allow cells to be set to alive", () => {
-        target.setCellsAliveAt(
+        setCellsAliveAt(
             new Position(1, 1),
             new Position(1, 2),
             new Position(5, 3),
@@ -23,17 +23,17 @@ describe("Board", () => {
     });
 
     it("should memorize the position of the cell that is alive", () => {
-        target.setCellsAliveAt(new Position(1, 2));
+        setCellsAliveAt(new Position(1, 2));
         expect(isCellAliveAt(new Position(1, 1))).to.be.false;
     });
 
     it("should count living neighbours of cell without neighbours correctly", () => {
-        target.setCellsAliveAt(new Position(1, 1));
+        setCellsAliveAt(new Position(1, 1));
         expect(target.countLivingNeighboursOf(new Position(3, 6))).to.equal(0);
     });
 
     it("should count living neighbours of cell surrounded by neighbours correctly", () => {
-        target.setCellsAliveAt(
+        setCellsAliveAt(
             new Position(0, 0), new Position(1, 0), new Position(2, 0),
             new Position(0, 1), new Position(2, 1),
             new Position(0, 2), new Position(1, 2), new Position(2, 2),
@@ -42,7 +42,7 @@ describe("Board", () => {
     });
 
     it("should count two living neighbours", () => {
-        target.setCellsAliveAt(
+        setCellsAliveAt(
             new Position(1, 0),
             new Position(1, 1),
             new Position(1, 2),
@@ -51,7 +51,7 @@ describe("Board", () => {
     });
 
     it("should count three living neighbours", () => {
-        target.setCellsAliveAt(
+        setCellsAliveAt(
             new Position(1, 0),
             new Position(1, 1),
             new Position(1, 2),
@@ -78,6 +78,12 @@ describe("Board", () => {
         target.transform(cell.dead());
         expect(isCellAliveAt(cell.position)).to.be.false;
     });
+
+    function setCellsAliveAt(...positions: Position[]) {
+        positions
+            .map((p) => target.getCellAt(p))
+            .forEach((c) => target.transform(c.living()));
+    }
 
     function isCellAliveAt(position: Position) {
         return target.getCellAt(position).state === CellState.Living;
