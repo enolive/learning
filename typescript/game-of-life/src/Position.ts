@@ -2,11 +2,8 @@ export class Position {
     private _x: number;
     private _y: number;
 
-    public static hash(p: Position) {
-        let hash: number;
-        hash = p.x;
-        hash = (hash << 5) + hash + p.y;
-        return hash;
+    public static hashKey(p: Position) {
+        return `${p.x}:${p.y}`;
     }
 
     public constructor(x: number, y: number) {

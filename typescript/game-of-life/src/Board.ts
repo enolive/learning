@@ -3,7 +3,7 @@ import {Position} from "./Position";
 
 export class Board {
 
-    private livingCells = new Set<Position>(Position.hash);
+    private livingCells = new Set<Position>(Position.hashKey);
 
     public isCellAliveAt(position: Position) {
         return this.livingCells.has(position);
