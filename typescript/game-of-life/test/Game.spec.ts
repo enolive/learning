@@ -3,11 +3,16 @@ import {CellState} from "../src/CellState";
 import {Dimensions} from "../src/Dimensions";
 import {Game} from "../src/Game";
 import {Position} from "../src/Position";
+import {BoardTransform} from "./BoardTransform";
 
 describe("Game of Life", () => {
     let game: Game;
+    let transform: BoardTransform;
 
-    beforeEach(() => game = new Game(new Dimensions(10, 10)));
+    beforeEach(() => {
+        game = new Game(new Dimensions(10, 10));
+        transform = new BoardTransform(game);
+    });
 
     it("should let a bar flip in next generation", () => {
         // arrange
@@ -16,7 +21,7 @@ describe("Game of Life", () => {
             1, 1, 1,
             0, 0, 0,
         ];
-        game.setCellsAliveAt(
+        transform.setCellsAliveAt(
             new Position(1, 0),
             new Position(1, 1),
             new Position(1, 2),

@@ -7,10 +7,6 @@ export class Board {
 
     private livingCells = new Set<Position>(Position.hashKey);
 
-    public setCellsAliveAt(...positions: Position[]) {
-        positions.forEach((p) => this.livingCells.add(p));
-    }
-
     public countLivingNeighboursOf(position: Position) {
         return Board
             .neighboursOf(position)

@@ -12,22 +12,23 @@ export class Game {
         this._dimensions = dimensions;
     }
 
-    public setCellsAliveAt(...positions: Position[]): void {
-        this._board.setCellsAliveAt(...positions);
-    }
-
     public nextGeneration(): void {
         const newBoard = new Board();
+        const oldBoard = this._board;
         this._dimensions
             .positions()
-            .map((position) => this._board.getCellAt(position))
-            .map((current) => Game.nextCell(this._board, current))
+            .map((position) => oldBoard.getCellAt(position))
+            .map((current) => Game.nextCell(oldBoard, current))
             .forEach((next) => newBoard.transform(next));
         this._board = newBoard;
     }
 
     public getCellAt(position: Position) {
         return this._board.getCellAt(position);
+    }
+
+    public transform(cell: Cell) {
+        this._board.transform(cell);
     }
 
     private static nextCell(board: Board, currentCell: Cell) {
