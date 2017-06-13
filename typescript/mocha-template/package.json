@@ -1,0 +1,24 @@
+{
+  "name": "mocha-template",
+  "version": "1.0.0",
+  "description": "Just a template to start TDD with Mocha",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha --opts mocha.opts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.0.0",
+    "@types/mocha": "^2.2.41",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "ts-node": "^3.0.6",
+    "tslint": "^5.4.3",
+    "typescript": "^2.3.4"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.66",
+    "lodash": "^4.17.4"
+  }
+}
