@@ -4,7 +4,19 @@
   "description": "roman numbers with tdd",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha --opts mocha.opts"
+    "test": "node_modules/nyc/bin/nyc.js node_modules/mocha/bin/mocha"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   },
   "repository": "http://github.com/enolive/learning",
   "author": "",
@@ -14,6 +26,8 @@
     "@types/mocha": "^2.2.41",
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
+    "nyc": "^11.0.2",
+    "source-map-support": "^0.4.15",
     "ts-node": "^3.0.6",
     "tslint": "^5.4.3",
     "typescript": "^2.3.4"
