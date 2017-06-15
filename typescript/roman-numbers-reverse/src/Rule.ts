@@ -10,7 +10,8 @@ export class Rule {
         return this._arabic;
     }
 
-    public constructor(roman: string, arabic: number) {
+    public constructor(parameters: { roman: string, arabic: number }) {
+        const {roman, arabic} = parameters;
         this._roman = roman;
         this._arabic = arabic;
     }

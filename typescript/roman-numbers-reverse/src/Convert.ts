@@ -9,18 +9,18 @@ export class Convert {
     }
 
     private static chainOfRules = [
-        new Rule("M", 1000),
-        new Rule("CM", 900),
-        new Rule("D", 500),
-        new Rule("CD", 400),
-        new Rule("C", 100),
-        new Rule("XC", 90),
-        new Rule("L", 50),
-        new Rule("XL", 40),
-        new Rule("X", 10),
-        new Rule("IX", 9),
-        new Rule("V", 5),
-        new Rule("IV", 4),
-        new Rule("I", 1),
+        new Rule({roman: "M", arabic: 1000}),
+        new Rule({roman: "CM", arabic: 900}),
+        new Rule({roman: "D", arabic: 500}),
+        new Rule({roman: "CD", arabic: 400}),
+        new Rule({roman: "C", arabic: 100}),
+        new Rule({roman: "XC", arabic: 90}),
+        new Rule({roman: "L", arabic: 50}),
+        new Rule({roman: "XL", arabic: 40}),
+        new Rule({roman: "X", arabic: 10}),
+        new Rule({roman: "IX", arabic: 9}),
+        new Rule({roman: "V", arabic: 5}),
+        new Rule({roman: "IV", arabic: 4}),
+        new Rule({roman: "I", arabic: 1}),
     ];
 }
