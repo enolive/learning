@@ -12,7 +12,7 @@ export class Convert {
             new Rule("I", 1),
         ];
 
-        rules.forEach((r) => conversion.convertRomanDigit(r.roman, r.arabic));
+        rules.forEach((r) => conversion.apply(r));
         return conversion.result;
     }
 }

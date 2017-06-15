@@ -1,3 +1,4 @@
+import {Rule} from "./Rule";
 export class ArabicConversion {
     public get result(): string {
         return this._result;
@@ -11,11 +12,10 @@ export class ArabicConversion {
         this._result = "";
     }
 
-    public convertRomanDigit(romanDigit: string, arabicDigit: number) {
-        while (this.arabic >= arabicDigit) {
-            this._result += romanDigit;
-            this.arabic -= arabicDigit;
+    public apply(rule: Rule) {
+        while (this.arabic >= rule.arabic) {
+            this._result += rule.roman;
+            this.arabic -= rule.arabic;
         }
     }
-
 }
