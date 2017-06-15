@@ -9,12 +9,6 @@ and friends at a Coding Dojo.
 * written in TypeScript
 * TSLint compliant
 
-## What's left to do?
-
-* Implement the other roman digits (L, C, D, M).
-* Find a better way for digit conversion than that awkward while loop 
-  (maybe using tail recursion or a filter-map-reduce-chain).
-
 ## How to run
 
 ```

@@ -7,15 +7,18 @@ export class ArabicConversion {
     private _result: string;
     private arabic: number;
 
-    constructor(arabicNumber: number) {
-        this.arabic = arabicNumber;
+    constructor(arabic: number) {
+        this.arabic = arabic;
         this._result = "";
     }
 
     public apply(rule: Rule) {
-        while (this.arabic >= rule.arabic) {
-            this._result += rule.roman;
-            this.arabic -= rule.arabic;
+        if (this.arabic < rule.arabic) {
+            return;
         }
+
+        this._result += rule.roman;
+        this.arabic -= rule.arabic;
+        return this.apply(rule);
     }
 }
