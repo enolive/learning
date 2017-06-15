@@ -1,15 +1,19 @@
 export class ArabicConversion {
-    public roman: string;
-    public arabic: number;
+    public get result(): string {
+        return this._result;
+    }
+
+    private _result: string;
+    private arabic: number;
 
     constructor(arabicNumber: number) {
         this.arabic = arabicNumber;
-        this.roman = "";
+        this._result = "";
     }
 
     public convertRomanDigit(romanDigit: string, arabicDigit: number) {
         while (this.arabic >= arabicDigit) {
-            this.roman += romanDigit;
+            this._result += romanDigit;
             this.arabic -= arabicDigit;
         }
     }

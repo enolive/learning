@@ -1,14 +1,18 @@
 import {ArabicConversion} from "./ArabicConversion";
+import {Rule} from "./Rule";
 
 export class Convert {
     public static toRomanNumber(arabic: number): string {
         const conversion = new ArabicConversion(arabic);
+        const rules = [
+            new Rule("X", 10),
+            new Rule("IX", 9),
+            new Rule("V", 5),
+            new Rule("IV", 4),
+            new Rule("I", 1),
+        ];
 
-        conversion.convertRomanDigit("X", 10);
-        conversion.convertRomanDigit("IX", 9);
-        conversion.convertRomanDigit("V", 5);
-        conversion.convertRomanDigit("IV", 4);
-        conversion.convertRomanDigit("I", 1);
-        return conversion.roman;
+        rules.forEach((r) => conversion.convertRomanDigit(r.roman, r.arabic));
+        return conversion.result;
     }
 }
