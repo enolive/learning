@@ -40,6 +40,9 @@
 # NPM libraries:
 node_modules/
 
+# Istanbul output
+.nyc_output/
+
 # Nuget packages:
 packages/
 

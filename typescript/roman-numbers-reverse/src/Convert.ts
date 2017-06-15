@@ -1,21 +1,14 @@
-import {Result} from "./Result";
+import {ArabicConversion} from "./ArabicConversion";
 
 export class Convert {
     public static toRomanNumber(arabic: number): string {
-        const res = new Result(arabic);
+        const conversion = new ArabicConversion(arabic);
 
-        this.convertRomanDigit(res, 10, "X");
-        this.convertRomanDigit(res, 9, "IX");
-        this.convertRomanDigit(res, 5, "V");
-        this.convertRomanDigit(res, 4, "IV");
-        this.convertRomanDigit(res, 1, "I");
-        return res.roman;
-    }
-
-    private static convertRomanDigit(res: Result, arabicDigit: number, romanDigit: string) {
-        while (res.arabic >= arabicDigit) {
-            res.roman += romanDigit;
-            res.arabic -= arabicDigit;
-        }
+        conversion.convertRomanDigit("X", 10);
+        conversion.convertRomanDigit("IX", 9);
+        conversion.convertRomanDigit("V", 5);
+        conversion.convertRomanDigit("IV", 4);
+        conversion.convertRomanDigit("I", 1);
+        return conversion.roman;
     }
 }
