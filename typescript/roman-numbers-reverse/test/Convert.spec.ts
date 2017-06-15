@@ -15,7 +15,7 @@ describe("convert arabic to roman", () => {
             expect(Convert.toRomanNumber(8)).to.equal("VIII");
         });
 
-        it("should return X for arabic less than 50", () => {
+        it("should return X for arabic less than 40", () => {
             expect(Convert.toRomanNumber(10)).to.equal("X");
             expect(Convert.toRomanNumber(15)).to.equal("XV");
             expect(Convert.toRomanNumber(18)).to.equal("XVIII");
@@ -41,6 +41,14 @@ describe("convert arabic to roman", () => {
 
         it("should return IX for arabic 9", () => {
             expect(Convert.toRomanNumber(9)).to.equal("IX");
+        });
+        
+        it("should return XL for arabic 40", () => {
+            expect(Convert.toRomanNumber(40)).to.equal("XL");
+        });
+
+        it("should return XC for arabic 90", () => {
+            expect(Convert.toRomanNumber(90)).to.equal("XC");
         });
     });
 });
