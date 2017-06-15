@@ -4,7 +4,7 @@ import {Rule} from "./Rule";
 export class Convert {
     public static toRomanNumber(arabic: number): string {
         const conversion = new ArabicConversion(arabic);
-        Convert.chainOfRules.forEach((r) => conversion.apply(r));
+        Convert.chainOfRules.forEach((rule) => conversion.apply(rule));
         return conversion.result;
     }
 
