@@ -20,6 +20,18 @@ describe("convert arabic to roman", () => {
             expect(Convert.toRomanNumber(15)).to.equal("XV");
             expect(Convert.toRomanNumber(18)).to.equal("XVIII");
         });
+
+        it("should return L for arabic less than 90", () => {
+            expect(Convert.toRomanNumber(50)).to.equal("L");
+            expect(Convert.toRomanNumber(52)).to.equal("LII");
+            expect(Convert.toRomanNumber(75)).to.equal("LXXV");
+        });
+        
+        it("should return C for arabic less than 400", () => {
+            expect(Convert.toRomanNumber(100)).to.equal("C"); 
+            expect(Convert.toRomanNumber(123)).to.equal("CXXIII"); 
+            expect(Convert.toRomanNumber(359)).to.equal("CCCLIX"); 
+        });
     });
 
     describe("subtraction rules", () => {
