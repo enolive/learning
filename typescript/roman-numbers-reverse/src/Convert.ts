@@ -9,6 +9,10 @@ export class Convert {
     }
 
     private static chainOfRules = [
+        new Rule("M", 1000),
+        new Rule("CM", 900),
+        new Rule("D", 500),
+        new Rule("CD", 400),
         new Rule("C", 100),
         new Rule("XC", 90),
         new Rule("L", 50),

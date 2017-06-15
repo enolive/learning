@@ -26,11 +26,20 @@ describe("convert arabic to roman", () => {
             expect(Convert.toRomanNumber(52)).to.equal("LII");
             expect(Convert.toRomanNumber(75)).to.equal("LXXV");
         });
-        
+
         it("should return C for arabic less than 400", () => {
-            expect(Convert.toRomanNumber(100)).to.equal("C"); 
-            expect(Convert.toRomanNumber(123)).to.equal("CXXIII"); 
-            expect(Convert.toRomanNumber(359)).to.equal("CCCLIX"); 
+            expect(Convert.toRomanNumber(100)).to.equal("C");
+            expect(Convert.toRomanNumber(359)).to.equal("CCCLIX");
+        });
+
+        it("should return D for arabic less than 900", () => {
+            expect(Convert.toRomanNumber(500)).to.equal("D");
+            expect(Convert.toRomanNumber(871)).to.equal("DCCCLXXI");
+        });
+
+        it("should return M for arabic above 1000", () => {
+            expect(Convert.toRomanNumber(1000)).to.equal("M");
+            expect(Convert.toRomanNumber(1458)).to.equal("MCDLVIII");
         });
     });
 
@@ -42,13 +51,27 @@ describe("convert arabic to roman", () => {
         it("should return IX for arabic 9", () => {
             expect(Convert.toRomanNumber(9)).to.equal("IX");
         });
-        
+
         it("should return XL for arabic 40", () => {
             expect(Convert.toRomanNumber(40)).to.equal("XL");
         });
 
         it("should return XC for arabic 90", () => {
             expect(Convert.toRomanNumber(90)).to.equal("XC");
+        });
+
+        it("should return CD for arabic 400", () => {
+            expect(Convert.toRomanNumber(400)).to.equal("CD");
+        });
+
+        it("should return CM for arabic 900", () => {
+            expect(Convert.toRomanNumber(900)).to.equal("CM");
+        });
+    });
+
+    describe("high-level tests", () => {
+        it("should convert 1984", () => {
+            expect(Convert.toRomanNumber(1984)).to.equal("MCMLXXXIV");
         });
     });
 });
