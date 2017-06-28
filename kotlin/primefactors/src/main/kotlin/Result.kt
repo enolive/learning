@@ -6,6 +6,7 @@ class Result(input: Int) {
         get() = _list
 
     fun split(factor: Int) {
+        return splitFp(factor)
         while (canBeFactorized(factor)) {
             addToList(factor)
             removeFromNumber(factor)
@@ -13,10 +14,12 @@ class Result(input: Int) {
     }
 
     fun splitFp(factor: Int) {
-        while (canBeFactorized(factor)) {
-            addToList(factor)
-            removeFromNumber(factor)
+        if (!canBeFactorized(factor)) {
+            return
         }
+        addToList(factor)
+        removeFromNumber(factor)
+        return splitFp(factor)
     }
 
     private fun removeFromNumber(factor: Int) {
