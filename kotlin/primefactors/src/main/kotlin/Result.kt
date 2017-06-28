@@ -1,5 +1,8 @@
 class Result(val input: Int) {
-    private var remainder = input
+    private var _remainder = input
+    val remainder: Int
+        get() = _remainder
+        
     private val _list = ArrayList<Int>()
 
     val list: Iterable<Int>
@@ -15,7 +18,7 @@ class Result(val input: Int) {
     }
 
     private fun removeFromNumber(factor: Int) {
-        remainder /= factor
+        _remainder /= factor
     }
 
     private fun addToList(factor: Int) {
