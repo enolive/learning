@@ -1,5 +1,5 @@
 class Result(val input: Int) {
-    constructor(result: Result, factor: Int) : this(result.input) {
+    private constructor(result: Result, factor: Int) : this(result.input) {
         _list.addAll(result.list)
         _remainder = result.remainder
         split(factor)
