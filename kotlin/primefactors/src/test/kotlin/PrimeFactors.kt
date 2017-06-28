@@ -4,9 +4,9 @@ class PrimeFactors {
         fun of(number: Int): ArrayList<Int> {
             val list = ArrayList<Int>()
             val input = number
-            split(input, 2, list)
-            split(input, 3, list)
-            split(input, 5, list)
+            for (i in arrayOf(2, 3, 5)) {
+                split(input, i, list)
+            }
             return list
         }
 
