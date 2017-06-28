@@ -5,10 +5,6 @@ class Result(input: Int) {
     val list: Iterable<Int>
         get() = _list
 
-    fun removeThatShit(factor: Int) {
-        return split(factor)
-    }
-
     fun split(factor: Int) {
         if (!canBeFactorized(factor)) {
             return
