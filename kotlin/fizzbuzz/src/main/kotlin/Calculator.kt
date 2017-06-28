@@ -1,13 +1,15 @@
 class Calculator {
+    private val rules = sequenceOf(
+            Rule(15, "Fizz-Buzz"),
+            Rule(5, "Buzz"),
+            Rule(3, "Fizz")
+    )
+
     fun next(input: Int): String {
-        when {
-            isDivisibleBy(input, 15) -> return "Fizz-Buzz"
-            isDivisibleBy(input, 3) -> return "Fizz"
-            isDivisibleBy(input, 5) -> return "Buzz"
-            else -> return input.toString()
-        }
-
+        return rules
+                .filter { rule -> rule.appliesTo(input) }
+                .map { rule -> rule.result }
+                .firstOrNull() ?: input.toString()
     }
-
-    private fun isDivisibleBy(input: Int, denominator: Int) = input % denominator == 0
 }
+
