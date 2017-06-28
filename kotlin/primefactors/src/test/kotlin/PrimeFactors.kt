@@ -9,24 +9,6 @@ class PrimeFactors {
             }
             return result.list
         }
-
-        private fun split(result: Result, factor: Int) {
-            while (canBeFactorized(result, factor)) {
-                add(result, factor)
-                remove(result, factor)
-            }
-        }
-
-        private fun remove(result: Result, factor: Int) {
-            result.remainder /= factor
-        }
-
-        private fun add(result: Result, factor: Int) {
-            result.list.add(factor)
-        }
-
-        private fun canBeFactorized(result: Result, factor: Int) = result.remainder % factor == 0
-
     }
 }
 
