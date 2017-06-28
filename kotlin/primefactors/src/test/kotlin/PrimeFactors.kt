@@ -5,9 +5,13 @@ class PrimeFactors {
             val input = number
             val result = Result(input)
             for (i in arrayOf(2, 3, 5)) {
-                split(result, i, result.list)
+                split(result, i)
             }
             return result.list
+        }
+
+        private fun split(result: Result, factor: Int) {
+            split(result, factor, result.list)
         }
 
         private fun split(result: Result, factor: Int, list: ArrayList<Int>) {
