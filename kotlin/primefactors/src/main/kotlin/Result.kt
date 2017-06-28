@@ -1,4 +1,4 @@
-class Result(input: Int) {
+class Result(val input: Int) {
     private var remainder = input
     private val _list = ArrayList<Int>()
 
