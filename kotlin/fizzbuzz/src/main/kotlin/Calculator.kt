@@ -1,15 +1,17 @@
 class Calculator {
-    private val rules = sequenceOf(
-            Rule(15, "Fizz-Buzz"),
-            Rule(5, "Buzz"),
-            Rule(3, "Fizz")
-    )
 
     fun next(input: Int): String {
+        val rules = sequenceOf(
+                ConcreteRule(15, "Fizz-Buzz"),
+                ConcreteRule(5, "Buzz"),
+                ConcreteRule(3, "Fizz"),
+                DefaultRule(input)
+        )
+
         return rules
                 .filter { rule -> rule.appliesTo(input) }
                 .map { rule -> rule.result }
-                .firstOrNull() ?: input.toString()
+                .first()
     }
 }
 
