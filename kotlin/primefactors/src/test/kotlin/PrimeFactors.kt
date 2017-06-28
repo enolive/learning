@@ -1,7 +1,4 @@
 class PrimeFactors {
-    fun split(i: Int): Iterable<Int> {
-        return PrimeFactors.of(i)
-    }
 
     companion object {
         fun of(number: Int): ArrayList<Int> {
@@ -9,6 +6,7 @@ class PrimeFactors {
             val input = number
             split(input, 2, list)
             split(input, 3, list)
+            split(input, 5, list)
             return list
         }
 
