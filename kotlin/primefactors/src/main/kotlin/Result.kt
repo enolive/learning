@@ -1,8 +1,14 @@
 class Result(val input: Int) {
+    constructor(result: Result) : this(result.input) {
+        _list.addAll(result.list)
+        _remainder = result.remainder
+    }
+    
     private var _remainder = input
+
     val remainder: Int
         get() = _remainder
-        
+
     private val _list = ArrayList<Int>()
 
     val list: Iterable<Int>

@@ -11,8 +11,9 @@ class PrimeFactors {
                 return result.list
             }
             
-            result.split(factor)
-            return doItFp(result, factor + 1)
+            val nextResult = Result(result)
+            nextResult.split(factor)
+            return doItFp(nextResult, factor + 1)
         }
     }
 }
