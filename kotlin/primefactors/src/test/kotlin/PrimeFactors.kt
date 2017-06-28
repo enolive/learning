@@ -1,7 +1,7 @@
 class PrimeFactors {
 
     companion object {
-        fun of(number: Int): ArrayList<Int> {
+        fun of(number: Int): Iterable<Int> {
             val result = Result(number)
             for (i in arrayOf(2, 3, 5)) {
                 result.split(i)
@@ -12,22 +12,25 @@ class PrimeFactors {
 }
 
 class Result(input: Int) {
-    var remainder = input
-    val list = ArrayList<Int>()
+    private var remainder = input
+    private val _list = ArrayList<Int>()
+
+    val list: Iterable<Int>
+        get() = _list
 
     fun split(factor: Int) {
         while (canBeFactorized(factor)) {
-            add(factor)
-            remove(factor)
+            addToList(factor)
+            removeFromNumber(factor)
         }
     }
 
-    private fun remove(factor: Int) {
+    private fun removeFromNumber(factor: Int) {
         remainder /= factor
     }
 
-    private fun add(factor: Int) {
-        list.add(factor)
+    private fun addToList(factor: Int) {
+        _list.add(factor)
     }
 
     private fun canBeFactorized(factor: Int) = remainder % factor == 0
