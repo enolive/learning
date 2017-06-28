@@ -7,12 +7,12 @@ class PrimeFactors {
         }
 
         private fun doItFp(result: Result, factor: Int): Iterable<Int> {
-            if (result.remainder > result.input) {
+            if (factor > result.remainder) {
                 return result.list
             }
             
-            (factor..result.input).forEach { factor -> result.split(factor) }
-            return result.list
+            result.split(factor)
+            return doItFp(result, factor + 1)
         }
     }
 }
