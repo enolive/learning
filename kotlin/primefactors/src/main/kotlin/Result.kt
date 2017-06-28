@@ -12,6 +12,13 @@ class Result(input: Int) {
         }
     }
 
+    fun splitFp(factor: Int) {
+        while (canBeFactorized(factor)) {
+            addToList(factor)
+            removeFromNumber(factor)
+        }
+    }
+
     private fun removeFromNumber(factor: Int) {
         remainder /= factor
     }
