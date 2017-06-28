@@ -11,7 +11,7 @@ class PrimeFactors {
                 return result.list
             }
 
-            val nextResult = Result(result, factor)
+            val nextResult = result.next(factor)
             return doItFp(nextResult, factor + 1)
         }
 
