@@ -5,21 +5,17 @@ class Result(input: Int) {
     val list: Iterable<Int>
         get() = _list
 
-    fun split(factor: Int) {
-        return splitFp(factor)
-        while (canBeFactorized(factor)) {
-            addToList(factor)
-            removeFromNumber(factor)
-        }
+    fun removeThatShit(factor: Int) {
+        return split(factor)
     }
 
-    fun splitFp(factor: Int) {
+    fun split(factor: Int) {
         if (!canBeFactorized(factor)) {
             return
         }
         addToList(factor)
         removeFromNumber(factor)
-        return splitFp(factor)
+        return split(factor)
     }
 
     private fun removeFromNumber(factor: Int) {
