@@ -1,17 +1,9 @@
 class Result(val input: Int) {
-    private constructor(result: Result, factor: Int) : this(result.input) {
-        _list.addAll(result.list)
-        _remainder = result.remainder
-        split(factor)
-    }
-    
     private var _remainder = input
-
     val remainder: Int
         get() = _remainder
 
     private val _list = ArrayList<Int>()
-
     val list: Iterable<Int>
         get() = _list
 
@@ -25,8 +17,12 @@ class Result(val input: Int) {
     }
 
     fun next(factor: Int): Result {
-        val nextResult = Result(this, factor)
-        return nextResult
+        val result = Result(input)
+        result._list.addAll(list)
+        result._remainder = remainder
+        result.split(factor)
+
+        return result
     }
 
     private fun removeFromNumber(factor: Int) {
