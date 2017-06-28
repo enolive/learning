@@ -10,7 +10,7 @@ class PrimeFactorsTest : FunSpec() {
         test("2 returns 2", {
             val factors = arrayOf(2)
 
-            assertThat(factors).containsExactly(2);            
+            assertThat(factors).containsExactly(2)           
         })
     }
 }
