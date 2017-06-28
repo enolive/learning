@@ -30,6 +30,10 @@ class PrimeFactorsTest : FunSpec() {
         test("9 returns 3,3", {
             assertThat(PrimeFactors.of(9)).containsExactlyInAnyOrder(3, 3)
         })
+
+        test("23 returns 23", {
+            assertThat(PrimeFactors.of(23)).containsExactlyInAnyOrder(23)
+        })
     }
 
 }
