@@ -12,16 +12,13 @@ class PrimeFactors {
         }
 
         private fun split(result: Result, factor: Int, list: ArrayList<Int>) {
-            split(result.remainder, factor, list)
-        }
-
-        private fun split(remainder: Int, factor: Int, extractedFactors: ArrayList<Int>) {
-            var copy = remainder
+            var copy = result.remainder
             while (copy % factor == 0) {
-                extractedFactors.add(factor)
+                list.add(factor)
                 copy /= factor
             }
         }
+
     }
 }
 
