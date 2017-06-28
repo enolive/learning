@@ -17,6 +17,10 @@ class PrimeFactorsTest : FunSpec() {
             assertThat(factors.split(4)).containsExactly(2, 2)
         })
         
+        test("6 returns 3,2", {
+            assertThat(factors.split(6)).containsExactly(3, 2)  
+        })
+        
         test("8 returns 2,2,2", {
             assertThat(factors.split(8)).containsExactly(2, 2, 2)
         })
