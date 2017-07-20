@@ -5,5 +5,5 @@ object HelloWorld extends App {
     // Logger.log(greeter.sayHello())
 
     // the new style
-    // Logger.log(() => greeter.sayHello())
+    Logger.log(() => greeter.sayHello())
 }
