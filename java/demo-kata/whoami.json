@@ -1,0 +1,26 @@
+{
+  "name": "Christoph Welcz",
+  "birthDate": "23.06.1978",
+  "company": {
+    "name": "DATEV e.G.",
+    "since": "2005"
+  },
+  "professions": [
+    "Software Developer",
+    "Master of Sloth & Incompentence"
+  ],
+  "interests": [
+    "Software Craftsmanship",
+    "Clean Code",
+    "TDD",
+    "Continuous Refactoring"
+  ],
+  "contact": {
+    "git": "https://github.com/enolive",
+    "twitter": "@ChristophWelcz",
+    "mail": [
+      "christoph@welcz.de",
+      "christoph.welcz@datev.de"
+      ]
+  }
+}
