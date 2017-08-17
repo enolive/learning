@@ -5,7 +5,16 @@
   ],
   "jsRules": {},
   "rules": {
-    "no-unused-expression": false
+    "no-unused-expression": false,
+    "no-trailing-whitespace": false,
+    "arrow-parens": false,
+    "member-access": false,
+    "member-ordering": [
+      true,
+      {
+        "order": "fields-first"
+      }
+    ]
   },
   "rulesDirectory": []
 }
