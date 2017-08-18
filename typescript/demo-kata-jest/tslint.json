@@ -12,6 +12,22 @@
     "quotemark": [
       true,
       "single"
+    ],
+    "member-access": [
+      true,
+      "no-public"
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "instance-field",
+          "public-static-method",
+          "public-instance-method",
+          "private-static-method",
+          "private-instance-method"
+        ]
+      }
     ]
   },
   "rulesDirectory": []
