@@ -8,6 +8,10 @@
     "semicolon": [
       true,
       "never"
+    ],
+    "quotemark": [
+      true,
+      "single"
     ]
   },
   "rulesDirectory": []
