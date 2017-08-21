@@ -1,7 +1,7 @@
-import {expect} from "chai";
+import {expect} from 'chai'
 
-describe("Fizz-Buzz Generator", () => {
-    it("should do something", () => {
-        expect(true).to.be.false;
-    });
-});
+describe('Fizz-Buzz Generator', () => {
+    it('should do something', () => {
+        expect(true).to.equal(false)
+    })
+})
