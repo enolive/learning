@@ -59,4 +59,4 @@ packages/
 **/target/
 
 # Typescript Output
-**/build/
+build/
