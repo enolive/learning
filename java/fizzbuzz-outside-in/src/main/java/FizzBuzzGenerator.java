@@ -1,21 +1,24 @@
-public class FizzBuzzGenerator {
-    public String calculate(int input) {
-        if (isDivisibleBy(input, 3) && isDivisibleBy(input, 5)) {
-            return "Buzz";
-        }
+import java.util.Arrays;
 
-        if (isDivisibleBy(input, 5)) {
-            return "Buzz";
-        }
-        
-        if (isDivisibleBy(input, 3)) {
-            return "Fizz";
-        }
-        
-        return String.valueOf(input);
+public class FizzBuzzGenerator {
+    private final Rule[] chainOfRules;
+    private final Rule[] defaultRules = new Rule[]{
+            new FizzBuzzRule("Fizz-Buzz", 3, 5),
+            new FizzBuzzRule("Buzz", 5),
+            new FizzBuzzRule("Fizz", 3)
+    };
+
+    public FizzBuzzGenerator(Rule... chainOfRules) {
+        this.chainOfRules = (chainOfRules.length != 0)
+                ? chainOfRules
+                : defaultRules;
     }
 
-    private boolean isDivisibleBy(int input, int denominator) {
-        return input % denominator == 0;
+    public String calculate(int input) {
+        return Arrays.stream(chainOfRules)
+                     .filter(r -> r.appliesTo(input))
+                     .map(r -> r.getResult())
+                     .findFirst()
+                     .orElse(String.valueOf(input));
     }
 }
