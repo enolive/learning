@@ -16,7 +16,7 @@ private fun allRules() = buildSequence {
 
 private val otherwise = { _: Int -> true }
 private val numberItself = { input: Int -> input.toString() }
-private val returns = {constantValue: String -> { _: Int -> constantValue }}
+private val returns = { constantValue: String -> { _: Int -> constantValue } }
 
 private fun isDivisibleBy(vararg denominators: Int) =
         { input: Int -> denominators.all { input % it == 0 } }
