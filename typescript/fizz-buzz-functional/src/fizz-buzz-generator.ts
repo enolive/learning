@@ -1,19 +1,19 @@
 export class FizzBuzzGenerator {
     generate(input: number) {
-        if (this.isDivisibleBy(input, 15)) {
+        function isDivisibleBy(i: number, denominator: number) {
+            return i !== 0 && i % denominator === 0
+        }
+
+        if (isDivisibleBy(input, 15)) {
             return 'Fizz-Buzz'
         }
-        if (this.isDivisibleBy(input, 5)) {
+        if (isDivisibleBy(input, 5)) {
             return 'Buzz'
         }
-        if (this.isDivisibleBy(input, 3)) {
+        if (isDivisibleBy(input, 3)) {
             return 'Fizz'
         }
 
         return input.toString()
-    }
-
-    private isDivisibleBy(input: number, denominator: number) {
-        return input !== 0 && input % denominator === 0
     }
 }
