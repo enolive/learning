@@ -11,6 +11,7 @@
     ],
     "no-unused-expression": false,
     "quotemark": [
+      true,
       "single"
     ],
     "semicolon": [
