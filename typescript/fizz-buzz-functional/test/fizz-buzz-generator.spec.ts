@@ -15,4 +15,9 @@ describe('Fizz-Buzz Generator', () => {
         expect(generator.generate(3)).to.equal('Fizz')
         expect(generator.generate(6)).to.equal('Fizz')
     })
+
+    it('should return Buzz for numbers divisible by 5', () => {
+        expect(generator.generate(5)).to.equal('Buzz')
+        expect(generator.generate(10)).to.equal('Buzz')
+    })
 })
