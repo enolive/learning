@@ -14,6 +14,6 @@ export class FizzBuzzGenerator {
     }
 
     private isDivisibleBy(input: number, denominator: number) {
-        return input % denominator === 0
+        return input !== 0 && input % denominator === 0
     }
 }

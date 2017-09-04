@@ -25,4 +25,8 @@ describe('Fizz-Buzz Generator', () => {
         expect(generator.generate(15)).to.equal('Fizz-Buzz')
         expect(generator.generate(30)).to.equal('Fizz-Buzz')
     })
+    
+    it('should return 0 for 0', () => {
+        expect(generator.generate(0)).to.equal('0')
+    })
 })
