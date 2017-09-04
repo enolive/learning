@@ -20,4 +20,9 @@ describe('Fizz-Buzz Generator', () => {
         expect(generator.generate(5)).to.equal('Buzz')
         expect(generator.generate(10)).to.equal('Buzz')
     })
+
+    it('should return Fizz-Buzz for numbers divisible by 3 and 5', () => {
+        expect(generator.generate(15)).to.equal('Fizz-Buzz')
+        expect(generator.generate(30)).to.equal('Fizz-Buzz')
+    })
 })
