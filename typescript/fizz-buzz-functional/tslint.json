@@ -5,6 +5,11 @@
   ],
   "jsRules": {},
   "rules": {
+    "member-access": [
+      true,
+      "no-public"
+    ],
+    "no-unused-expression": false,
     "quotemark": [
       "single"
     ],
