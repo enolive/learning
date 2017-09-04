@@ -7,12 +7,12 @@ export class FizzBuzzGenerator {
         ]
 
         const [match] = rules
-            .filter(r => this.isDivisibleBy(input, r.denominators))
+            .filter(r => this.isDivisibleBy(r.denominators)(input))
             .map(r => r.result)
         return match || input.toString()
     }
 
-    private isDivisibleBy(input: number, denominators: number[]) {
-        return denominators.every(denominator => input !== 0 && input % denominator === 0)
+    private isDivisibleBy(denominators: number[]) {
+        return (input: number) => denominators.every(denominator => input !== 0 && input % denominator === 0)
     }
 }
