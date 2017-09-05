@@ -1,16 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser'
+import {NgModule} from '@angular/core'
+import {AppComponent} from './app.component'
+import {InputComponent} from './input/input.component'
+import {FormsModule} from '@angular/forms'
+import {FizzBuzzService} from './shared/fizz-buzz.service'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    InputComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [FizzBuzzService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}
