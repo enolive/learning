@@ -1,6 +1,6 @@
 import {FizzBuzzService} from './fizz-buzz.service'
 
-fdescribe('FizzBuzzService', () => {
+describe('FizzBuzzService', () => {
   let service: FizzBuzzService
 
   beforeEach(() => service = new FizzBuzzService())

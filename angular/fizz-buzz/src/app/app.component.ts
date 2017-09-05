@@ -6,7 +6,7 @@ import {Component} from '@angular/core'
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Fizz-Buzz'
+  title = 'Fizz-Foo-Zazz-Buzz'
   computationResult: string
 
   onComputationCompleted(event: string) {
