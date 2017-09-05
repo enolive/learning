@@ -1,5 +1,5 @@
-<p>
+<form (submit)="startComputation()">
   <label>Gib mir ne Zahl:</label>
-  <input type="number" [(ngModel)]="oneNumber">
-  <button (click)="startComputation()">Los!</button>
-</p>
+  <input name="oneNumberInput" type="number" [(ngModel)]="oneNumber">
+  <button>Los!</button>
+</form>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core'
+import {Component, EventEmitter, OnInit, Output} from '@angular/core'
 import {FizzBuzzService} from '../shared/fizz-buzz.service'
 
 @Component({
@@ -8,6 +8,8 @@ import {FizzBuzzService} from '../shared/fizz-buzz.service'
 })
 export class InputComponent implements OnInit {
   oneNumber: number
+  @Output()
+  computationCompleted = new EventEmitter<string>()
 
   private service: FizzBuzzService
 
@@ -19,6 +21,7 @@ export class InputComponent implements OnInit {
   }
 
   startComputation() {
-    alert(this.service.compute(this.oneNumber))
+    const result = this.service.compute(this.oneNumber)
+    this.computationCompleted.emit(result)
   }
 }
