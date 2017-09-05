@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core'
 export class OutputComponent implements OnInit {
 
   @Input()
-  computationResult: string
+  computationResult = ''
 
   constructor() {
   }
@@ -16,4 +16,7 @@ export class OutputComponent implements OnInit {
   ngOnInit() {
   }
 
+  hasResult() {
+    return this.computationResult && this.computationResult.length > 0
+  }
 }
