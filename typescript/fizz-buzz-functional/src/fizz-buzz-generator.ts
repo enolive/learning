@@ -4,7 +4,7 @@ export class FizzBuzzGenerator {
             return i !== 0 && i % denominator === 0
         }
 
-        if (isDivisibleBy(input, 15)) {
+        if (isDivisibleBy(input, 3) && isDivisibleBy(input, 5)) {
             return 'Fizz-Buzz'
         }
         if (isDivisibleBy(input, 5)) {
