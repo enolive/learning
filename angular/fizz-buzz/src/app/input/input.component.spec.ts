@@ -10,7 +10,8 @@ describe('InputComponent', () => {
 
   beforeEach(async(() => {
     const serviceStub = {
-      compute: () => {}
+      compute: () => {
+      },
     }
     TestBed.configureTestingModule({
         declarations: [InputComponent],
@@ -32,6 +33,16 @@ describe('InputComponent', () => {
     component.oneNumber = 42
     component.startComputation()
     expect(spy.compute).toHaveBeenCalledWith(42)
+  })
+
+  it('should emit an event when computation is completed', () => {
+    const spy = TestBed.get(FizzBuzzService)
+    let interceptedResult = ''
+    spyOn(spy, 'compute').and.returnValue('Result')
+    component.oneNumber = 42
+    component.computationCompleted.subscribe(result => interceptedResult = result)
+    component.startComputation()
+    expect(interceptedResult).toEqual('Result')
   })
 
   it('should be created', () => {
