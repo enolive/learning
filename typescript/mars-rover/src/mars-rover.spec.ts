@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {MarsRover} from './mars-rover'
+import {Direction, MarsRover} from './mars-rover'
 
 describe('Mars Rover', () => {
     it('should set starting location', () => {
@@ -10,5 +10,10 @@ describe('Mars Rover', () => {
     it('should use default location when no location was given', () => {
         const rover = new MarsRover()
         expect(rover.location).to.deep.equal([0, 0])
+    })
+
+    it('should use the given direction', () => {
+        const rover = new MarsRover([3, 3], Direction.SOUTH)
+        expect(rover.direction).to.equal(Direction.SOUTH)
     })
 })
