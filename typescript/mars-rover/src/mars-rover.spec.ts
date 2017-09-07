@@ -51,5 +51,11 @@ describe('Mars Rover', () => {
             rover.commands = ['f', 'f', 'f']
             expect(rover.location).to.deep.equal([9, 21])
         })
+
+        it('should increase X when moving east', () => {
+            const rover = new MarsRover([12, 21], Direction.EAST)
+            rover.commands = ['f']
+            expect(rover.location).to.deep.equal([13, 21])
+        })
     })
 })

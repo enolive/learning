@@ -1,4 +1,5 @@
 export enum Direction {
+    EAST = 'East',
     WEST = 'West',
     SOUTH = 'South',
     NORTH = 'North',
@@ -46,6 +47,9 @@ export class MarsRover {
                 break
             case Direction.WEST:
                 x--
+                break
+            case Direction.EAST:
+                x++
                 break
         }
         return [x, y]
