@@ -1,11 +1,11 @@
 export enum Direction {
-    SOUTH,
-    NORTH,
+    SOUTH = 'South',
+    NORTH = 'North',
 }
 
 export class MarsRover {
     constructor(location?: [number, number], direction?: Direction) {
-        this._direction = direction
+        this._direction = direction || Direction.NORTH
         this._location = location || [0, 0]
     }
 
