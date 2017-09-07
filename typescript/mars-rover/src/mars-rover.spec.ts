@@ -57,5 +57,29 @@ describe('Mars Rover', () => {
             rover.commands = ['f']
             expect(rover.location).to.deep.equal([13, 21])
         })
+
+        it('should increase Y when moving backwards facing north', () => {
+            const rover = new MarsRover([12, 21], Direction.NORTH)
+            rover.commands = ['b']
+            expect(rover.location).to.deep.equal([12, 22])
+        })
+
+        it('should reduce Y when moving backwards facing south', () => {
+            const rover = new MarsRover([12, 21], Direction.SOUTH)
+            rover.commands = ['b']
+            expect(rover.location).to.deep.equal([12, 20])
+        })
+
+        it('should increase X when moving backwards facing west', () => {
+            const rover = new MarsRover([12, 21], Direction.WEST)
+            rover.commands = ['b']
+            expect(rover.location).to.deep.equal([13, 21])
+        })
+
+        it('should reduce X when moving backwards facing east', () => {
+            const rover = new MarsRover([12, 21], Direction.EAST)
+            rover.commands = ['b']
+            expect(rover.location).to.deep.equal([11, 21])
+        })
     })
 })

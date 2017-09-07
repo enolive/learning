@@ -20,7 +20,7 @@ export class MarsRover {
     set commands(value: string[]) {
         this._commands = value
         this._commands.forEach(command => {
-            this._location = this.getChangedLocation(this.location)
+            this._location = this.getChangedLocation(this.location, command)
         })
     }
 
@@ -36,20 +36,21 @@ export class MarsRover {
         return this._location
     }
 
-    private getChangedLocation(location: [number, number]): [number, number] {
+    private getChangedLocation(location: [number, number], command: string): [number, number] {
         let [x, y] = location
+        const change = command === 'f' ? 1 : -1
         switch (this.direction) {
             case Direction.NORTH:
-                y--
+                y -= change
                 break
             case Direction.SOUTH:
-                y++
+                y += change
                 break
             case Direction.WEST:
-                x--
+                x -= change
                 break
             case Direction.EAST:
-                x++
+                x += change
                 break
         }
         return [x, y]
