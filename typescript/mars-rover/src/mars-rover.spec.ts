@@ -27,9 +27,29 @@ describe('Mars Rover', () => {
 
     describe('The rover receives a character array of commands', () => {
         it('should set commands array', () => {
-            const mr = new MarsRover([12, 21], Direction.NORTH)
-            mr.commands = ['do', 'this', 'and', 'then', 'do', 'that']
-            expect(mr.commands).to.deep.equal(['do', 'this', 'and', 'then', 'do', 'that'])
+            const rover = new MarsRover([12, 21], Direction.NORTH)
+            rover.commands = ['do', 'this', 'and', 'then', 'do', 'that']
+            expect(rover.commands).to.deep.equal(['do', 'this', 'and', 'then', 'do', 'that'])
+        })
+    })
+
+    describe('Implement commands that move the rover forward/backward (f,b)', () => {
+        it('should reduce Y when moving north', () => {
+            const rover = new MarsRover([12, 21], Direction.NORTH)
+            rover.commands = ['f', 'f']
+            expect(rover.location).to.deep.equal([12, 19])
+        })
+
+        it('should increase Y when moving south', () => {
+            const rover = new MarsRover([12, 21], Direction.SOUTH)
+            rover.commands = ['f']
+            expect(rover.location).to.deep.equal([12, 22])
+        })
+
+        it('should reduce X when moving west', () => {
+            const rover = new MarsRover([12, 21], Direction.WEST)
+            rover.commands = ['f', 'f', 'f']
+            expect(rover.location).to.deep.equal([9, 21])
         })
     })
 })
