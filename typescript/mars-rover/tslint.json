@@ -10,6 +10,14 @@
       "allow-leading-underscore"
     ],
     "arrow-parens": false,
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "fields-first"
+        ]
+      }
+    ],
     "member-access": [
       true,
       "no-public"
