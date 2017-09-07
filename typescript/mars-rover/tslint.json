@@ -5,6 +5,10 @@
   ],
   "jsRules": {},
   "rules": {
+    "variable-name": [
+      true,
+      "allow-leading-underscore"
+    ],
     "arrow-parens": false,
     "member-access": [
       true,
