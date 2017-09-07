@@ -24,4 +24,12 @@ describe('Mars Rover', () => {
                 expect(rover.direction).to.equal(Direction.NORTH)
             })
         })
+
+    describe('The rover receives a character array of commands', () => {
+        it('should set commands array', () => {
+            const mr = new MarsRover([12, 21], Direction.NORTH)
+            mr.commands = ['do', 'this', 'and', 'then', 'do', 'that']
+            expect(mr.commands).to.deep.equal(['do', 'this', 'and', 'then', 'do', 'that'])
+        })
+    })
 })

@@ -9,6 +9,16 @@ export class MarsRover {
         this._location = location || [0, 0]
     }
 
+    private _commands: string[]
+
+    get commands(): string[] {
+        return this._commands
+    }
+
+    set commands(value: string[]) {
+        this._commands = value
+    }
+
     private _direction: Direction
     get direction(): Direction {
         return this._direction
