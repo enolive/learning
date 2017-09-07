@@ -1,14 +1,5 @@
 import {expect} from 'chai'
-
-class MarsRover {
-    constructor(private _location: [number, number]) {
-
-    }
-
-    get location(): [number, number] {
-        return this._location
-    }
-}
+import {MarsRover} from './mars-rover'
 
 describe('Mars Rover', () => {
     it('should set starting location', () => {
