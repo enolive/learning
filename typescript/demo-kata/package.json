@@ -1,6 +1,9 @@
 {
   "name": "demo-kata",
   "version": "0.0.1",
+  "scripts": {
+    "test": "mocha --require ts-node/register --reporter nyan test/**/*.ts"
+  },
   "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.0.1",
