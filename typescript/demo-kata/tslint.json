@@ -5,6 +5,9 @@
   ],
   "jsRules": {},
   "rules": {
+    "arrow-parens": [
+      false
+    ],
     "semicolon": [
       true,
       "never"
