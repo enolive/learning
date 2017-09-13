@@ -29,4 +29,20 @@ describe('Fizz-Buzz Generator', () => {
     it('should return 0 for 0', () => {
         expect(generator.generate(0)).to.equal('0')
     })
+
+    it('should return Zazz for numbers divisible by 7', () => {
+        expect(generator.generate(7)).to.equal('Zazz')
+    })
+
+    it('should return Fizz-Buzz-Zazz', () => {
+        expect(generator.generate(105)).to.equal('Fizz-Buzz-Zazz')
+    })
+    
+    it('should return Fizz-Buzz-Porn-Zazz', () => {
+        expect(generator.generate(2730)).to.equal('Fizz-Buzz-Porn-Zazz')
+    })
+
+    it('should return Porn for numbers that contain 27', () => {
+        expect(generator.generate(127)).to.equal('Porn')
+    })
 })

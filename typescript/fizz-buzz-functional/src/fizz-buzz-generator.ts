@@ -1,19 +1,24 @@
 export class FizzBuzzGenerator {
     generate(input: number) {
-        function isDivisibleBy(i: number, denominator: number) {
-            return i !== 0 && i % denominator === 0
-        }
+        const resultSequence = this.allTheRules()
+            .filter(r => r.appliesTo(input))
+            .map(r => r.result)
+        return resultSequence.length !== 0
+            ? resultSequence.join('-')
+            : input.toString()
+    }
 
-        if (isDivisibleBy(input, 3) && isDivisibleBy(input, 5)) {
-            return 'Fizz-Buzz'
-        }
-        if (isDivisibleBy(input, 5)) {
-            return 'Buzz'
-        }
-        if (isDivisibleBy(input, 3)) {
-            return 'Fizz'
-        }
+    private allTheRules(): Array<{ appliesTo: (input: number) => boolean, result: string }> {
+        const numberDivisibleBy = denominator => input =>
+            input !== 0 && input % denominator === 0
+        const contains = infix => input =>
+            input.toString().includes(infix)
 
-        return input.toString()
+        return [
+            {appliesTo: numberDivisibleBy(3), result: 'Fizz'},
+            {appliesTo: numberDivisibleBy(5), result: 'Buzz'},
+            {appliesTo: contains(27), result: 'Porn'},
+            {appliesTo: numberDivisibleBy(7), result: 'Zazz'},
+        ]
     }
 }
