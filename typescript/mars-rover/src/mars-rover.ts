@@ -20,9 +20,8 @@ export class MarsRover {
     set commands(value: string[]) {
         this._commands = value
         this._commands
-            .map(c => this.getChange(c))
-            .forEach(change => {
-                this._location = this.getChangedLocation(this.location, change)
+            .forEach(command => {
+                this._location = this.getChangedLocation(this.location, command)
             })
     }
 
@@ -38,16 +37,16 @@ export class MarsRover {
         return this._location
     }
 
-    private getChangedLocation(location: [number, number], change: number): [number, number] {
+    private getChangedLocation(location: [number, number], command: string): [number, number] {
         const [x, y] = location
-        const [transformX, transformY] = this.getTransformation()
-        return [transformX(change)(x), transformY(change)(y)]
+        const [transformX, transformY] = this.getTransformation(this.moveDirection(command))
+        return [transformX(x), transformY(y)]
     }
 
-    private getTransformation() {
-        const sub = by => transform => transform - by
-        const add = by => transform => transform + by
-        const id = by => transform => transform
+    private getTransformation(moveDirection) {
+        const sub = transform => transform - moveDirection(1)
+        const add = transform => transform + moveDirection(1)
+        const id = transform => transform
 
         const map = new Map([
             [Direction.NORTH, [id, sub]],
@@ -58,7 +57,13 @@ export class MarsRover {
         return map.get(this.direction)
     }
 
-    private getChange(command: string) {
-        return command === 'f' ? 1 : -1
+    private moveDirection(command: string) {
+        const forward = transform => transform
+        const backward = transform => -transform
+        const map = new Map([
+            ['f', forward],
+            ['b', backward],
+        ])
+        return map.get(command) || forward
     }
 }
