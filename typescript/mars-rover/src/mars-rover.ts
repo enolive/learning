@@ -22,8 +22,8 @@ export class MarsRover {
         this._commands
             .map(c => this.getChange(c))
             .forEach(change => {
-            this._location = this.getChangedLocation(this.location, change)
-        })
+                this._location = this.getChangedLocation(this.location, change)
+            })
     }
 
     private _direction: Direction
@@ -48,17 +48,14 @@ export class MarsRover {
         const sub = by => transform => transform - by
         const add = by => transform => transform + by
         const id = by => transform => transform
-        
-        switch (this.direction) {
-            case Direction.NORTH:
-                return [id, sub]
-            case Direction.SOUTH:
-                return [id, add]
-            case Direction.WEST:
-                return [sub, id]
-            case Direction.EAST:
-                return [add, id]
-        }
+
+        const map = new Map([
+            [Direction.NORTH, [id, sub]],
+            [Direction.SOUTH, [id, add]],
+            [Direction.WEST, [sub, id]],
+            [Direction.EAST, [add, id]],
+        ])
+        return map.get(this.direction)
     }
 
     private getChange(command: string) {
