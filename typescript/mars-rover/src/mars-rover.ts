@@ -58,12 +58,12 @@ export class MarsRover {
     }
 
     private moveDirection(command: string) {
-        const forward = transform => transform
-        const backward = transform => -transform
+        const id = transform => transform
+        const negate = transform => -transform
         const map = new Map([
-            ['f', forward],
-            ['b', backward],
+            ['f', id],
+            ['b', negate],
         ])
-        return map.get(command) || forward
+        return map.get(command) || id
     }
 }
