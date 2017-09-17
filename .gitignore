@@ -48,10 +48,8 @@ node_modules/
 packages/
 
 # CSharp output directories:
-**/bin/Debug/
-**/bin/Release/
-**/obj/Debug/
-**/obj/Release/
+**/bin/
+**/obj/
 
 # PHP composer vendor directory:
 **/vendor/
