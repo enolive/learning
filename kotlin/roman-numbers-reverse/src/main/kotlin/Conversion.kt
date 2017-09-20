@@ -1,4 +1,7 @@
-class Conversion(private val remainingInput: Int, private val digits: Array<String> = emptyArray()) {
+internal class Conversion(
+        private val remainingInput: Int,
+        private val digits: Array<String> = emptyArray()
+) {
     val result get() = digits.joinToString("")
 
     fun apply(rule: Rule): Conversion {

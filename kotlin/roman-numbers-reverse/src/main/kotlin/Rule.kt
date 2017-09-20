@@ -1,1 +1,1 @@
-class Rule(val arabic: Int, val roman: String)
+internal class Rule(val arabic: Int, val roman: String)
