@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/roman-numbers-reverse.iml" filepath="$PROJECT_DIR$/.idea/modules/roman-numbers-reverse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/roman-numbers-reverse_main.iml" filepath="$PROJECT_DIR$/.idea/modules/roman-numbers-reverse_main.iml" group="roman-numbers-reverse" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/roman-numbers-reverse_test.iml" filepath="$PROJECT_DIR$/.idea/modules/roman-numbers-reverse_test.iml" group="roman-numbers-reverse" />
     </modules>
   </component>
 </project>
