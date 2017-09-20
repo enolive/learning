@@ -26,6 +26,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.0.0",
+    "@types/lodash": "^4.14.74",
     "@types/mocha": "^2.2.41",
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
@@ -34,5 +35,8 @@
     "ts-node": "^3.0.6",
     "tslint": "^5.4.3",
     "typescript": "^2.3.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
   }
 }

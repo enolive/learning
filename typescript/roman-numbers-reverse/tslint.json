@@ -5,12 +5,26 @@
   ],
   "jsRules": {},
   "rules": {
-    "variable-name": [
+    "member-ordering": [
       true,
-      "allow-leading-underscore",
-      "check-format"
+      {
+        "order": "fields-first"
+      }
     ],
-    "no-trailing-whitespace": false
+    "arrow-parens": false,
+    "member-access": [
+      true,
+      "no-public"
+    ],
+    "no-unused-expression": false,
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "semicolon": [
+      true,
+      "never"
+    ]
   },
   "rulesDirectory": []
 }
