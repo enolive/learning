@@ -1,11 +1,13 @@
 class Arabic(private val input: Int) {
-    fun toRoman(): String {
-        if (input == 2) {
-            return "II"
-        }
-        if (input == 1) {
-            return "I"
-        }
-        return ""
-    }
+    private val rules = listOf(
+            Rule(10, "X"),
+            Rule(5, "V"),
+            Rule(1, "I")
+    )
+
+    fun toRoman(): String = rules
+            .fold(Conversion(input)) { conversion, rule -> conversion.apply(rule) }
+            .result
+
 }
+
