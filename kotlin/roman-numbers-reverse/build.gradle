@@ -23,8 +23,9 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.8.0'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.0'
+    testCompile group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.0.0'
 }
 
 compileKotlin {
