@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo-kata.iml" filepath="$PROJECT_DIR$/.idea/modules/demo-kata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo-kata_main.iml" filepath="$PROJECT_DIR$/.idea/modules/demo-kata_main.iml" group="demo-kata" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo-kata_test.iml" filepath="$PROJECT_DIR$/.idea/modules/demo-kata_test.iml" group="demo-kata" />
+    </modules>
+  </component>
+</project>
