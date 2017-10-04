@@ -29,12 +29,6 @@ dependencies {
     testCompile 'org.assertj:assertj-core:3.8.0'
 }
 
-junitPlatform {
-    filters {
-        includeClassNamePattern '.*'
-    }
-}
-
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
