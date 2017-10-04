@@ -29,9 +29,9 @@ dependencies {
     testCompile 'org.assertj:assertj-core:3.8.0'
 }
 
-test {
-    filter {
-        includeTestsMatching '*'
+junitPlatform {
+    filters {
+        includeClassNamePattern '.*'
     }
 }
 
