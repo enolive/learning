@@ -1,0 +1,43 @@
+group 'de.welcz'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        kotlin_version = '1.1.51'
+        junit_version = '5.0.1'
+        junit_platform_version = '1.0.1'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.junit.platform:junit-platform-gradle-plugin:$junit_platform_version"
+    }
+}
+
+
+apply plugin: 'kotlin'
+apply plugin: 'java'
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    testCompile 'org.assertj:assertj-core:3.8.0'
+    testCompile "org.junit.jupiter:junit-jupiter-api:$junit_version"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    // NOTE: currently required for fancy IDE support
+    // see also https://github.com/joel-costigliola/assertj-core/issues/1072
+    testCompile 'junit:junit:4.12'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
