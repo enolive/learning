@@ -4,13 +4,8 @@ class Roman(private val input: String) {
         var remainingInput = input
         var conversion = Conversion(sum, remainingInput)
         conversion = apply(conversion, "V", 5)
-        val pair = Pair(conversion.remainingInput, conversion.sum)
-        remainingInput = pair.first
-        sum = pair.second
-        var conversion1 = Conversion(sum, remainingInput)
-        conversion1 = apply(conversion1, "I", 1)
-        val pair2 = Pair(conversion1.remainingInput, conversion1.sum)
-        return pair2.second
+        conversion = apply(conversion, "I", 1)
+        return conversion.sum
     }
 
     private fun apply(remainingInput: String, sum: Int, roman: String, arabic: Int): Pair<String, Int> {
