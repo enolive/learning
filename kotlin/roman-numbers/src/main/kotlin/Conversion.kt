@@ -17,7 +17,7 @@ internal class Conversion(private val remainingInput: String, val sum: Int = 0) 
     fun failIfInputRemains() {
         assert(remainingInput.isEmpty()) { 
             """expected that the input that remains is empty, but it doesn't.
-                |$remainingInput""".trimMargin() 
+                |this might be due to invalid input.: "$remainingInput"""".trimMargin() 
         }
     }
 }
