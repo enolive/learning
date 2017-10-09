@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/roman-numbers.iml" filepath="$PROJECT_DIR$/.idea/modules/roman-numbers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/roman-numbers_main.iml" filepath="$PROJECT_DIR$/.idea/modules/roman-numbers_main.iml" group="roman-numbers" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/roman-numbers_test.iml" filepath="$PROJECT_DIR$/.idea/modules/roman-numbers_test.iml" group="roman-numbers" />
+    </modules>
+  </component>
+</project>
