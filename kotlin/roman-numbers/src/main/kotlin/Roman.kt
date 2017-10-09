@@ -19,11 +19,25 @@ class Roman(private val input: String) {
         return Pair(remainingInput1, sum1)
     }
 
+    private fun apply(conversion: Conversion, roman: String, arabic: Int): Conversion {
+        var newRemainingInput = conversion.remainingInput
+        var newSum = conversion.sum
+        while (newRemainingInput.startsWith(roman)) {
+            newSum += arabic
+            newRemainingInput = newRemainingInput.cutAtStart()
+        }
+        return Conversion(newSum, newRemainingInput)
+    }
+
     private fun String.cutAtStart(): String {
         return when {
             !this.isEmpty() -> this.substring(1)
             else -> this
         }
     }
+
+}
+
+class Conversion(val sum: Int, val remainingInput: String) {
 
 }
