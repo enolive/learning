@@ -1,13 +1,9 @@
 internal class Conversion(private val remainingInput: String, val sum: Int = 0) {
     fun apply(rule: Rule): Conversion {
         val (roman, arabic) = rule
-        tailrec fun applyRec(remainingInput: String, sum: Int): Conversion {
-            return when {
-                !remainingInput.startsWith(roman) -> Conversion(remainingInput, sum)
-                else -> {
-                    applyRec(remainingInput.cutAtStart(roman), sum + arabic)
-                }
-            }
+        tailrec fun applyRec(remainingInput: String, sum: Int): Conversion = when {
+            !remainingInput.startsWith(roman) -> Conversion(remainingInput, sum)
+            else -> applyRec(remainingInput.cutAtStart(roman), sum + arabic)
         }
         return applyRec(remainingInput, sum)
     }
