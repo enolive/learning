@@ -10,12 +10,16 @@ class Roman(private val input: String) {
 
 class Conversion(val remainingInput: String, val sum: Int = 0) {
     fun apply(roman: String, arabic: Int): Conversion {
-        if (!remainingInput.startsWith(roman)) {
-            return this
+        tailrec fun applyRec(conversion: Conversion, roman: String, arabic: Int): Conversion {
+            if (!conversion.remainingInput.startsWith(roman)) {
+                return conversion
+            }
+            val newConversion = Conversion(conversion.remainingInput.cutAtStart(), conversion.sum + arabic)
+            return applyRec(newConversion, roman, arabic)
         }
-        val newConversion = Conversion(remainingInput.cutAtStart(), sum + arabic)
-        return newConversion.apply(roman, arabic)
+        return applyRec(this, roman, arabic)
     }
+
 
     private fun String.cutAtStart(): String {
         return when {
