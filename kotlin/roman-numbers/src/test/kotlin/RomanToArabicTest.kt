@@ -1,5 +1,5 @@
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.*
 
 class RomanToArabicTest {
     @Test
@@ -13,5 +13,19 @@ class RomanToArabicTest {
     fun `return V's as 5`() {
         assertThat(Roman("V").toArabic()).isEqualTo(5)
         assertThat(Roman("VIII").toArabic()).isEqualTo(8)
+    }
+    
+    @Nested
+    @DisplayName("subtraction rules")
+    inner class SubtractionRules {
+        @Test
+        fun `return IV as 4`() {
+            assertThat(Roman("IV").toArabic()).isEqualTo(4)
+        }
+
+        @Test
+        fun `return IX as 9`() {
+            assertThat(Roman("IX").toArabic()).isEqualTo(9)
+        }
     }
 }
