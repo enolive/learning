@@ -10,13 +10,9 @@ class Roman(private val input: String) {
     }
 
     private fun apply(remainingInput: String, sum: Int, roman: String, arabic: Int): Pair<String, Int> {
-        var remainingInput1 = remainingInput
-        var sum1 = sum
-        while (remainingInput1.startsWith(roman)) {
-            sum1 += arabic
-            remainingInput1 = remainingInput1.cutAtStart()
-        }
-        return Pair(remainingInput1, sum1)
+        var conversion = Conversion(sum, remainingInput)
+        conversion = apply(conversion, roman, arabic)
+        return Pair(conversion.remainingInput, conversion.sum)
     }
 
     private fun apply(conversion: Conversion, roman: String, arabic: Int): Conversion {
