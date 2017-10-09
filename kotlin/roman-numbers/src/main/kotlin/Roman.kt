@@ -12,6 +12,7 @@ class Roman(private val input: String) {
         rules.forEach { 
             conversion = conversion.apply(it)
         }
+        conversion.failIfInputRemains()
         return conversion.sum
     }
 }
