@@ -63,5 +63,25 @@ class RomanToArabicTest {
         fun `return IX as 9`() {
             assertThat(Roman("IX").toArabic()).isEqualTo(9)
         }
+
+        @Test
+        fun `return XL as 40`() {
+            assertThat(Roman("XL").toArabic()).isEqualTo(40)
+        }
+
+        @Test
+        fun `return XC as 90`() {
+            assertThat(Roman("XC").toArabic()).isEqualTo(90)
+        }
+
+        @Test
+        fun `return CD as 400`() {
+            assertThat(Roman("CD").toArabic()).isEqualTo(400)
+        }
+
+        @Test
+        fun `return CM as 900`() {
+            assertThat(Roman("CM").toArabic()).isEqualTo(900)
+        }
     }
 }
