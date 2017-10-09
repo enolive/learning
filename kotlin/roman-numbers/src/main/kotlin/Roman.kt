@@ -1,17 +1,9 @@
 class Roman(private val input: String) {
     fun toArabic(): Int {
-        var sum = 0
-        var remainingInput = input
-        var conversion = Conversion(sum, remainingInput)
+        var conversion = Conversion(input)
         conversion = apply(conversion, "V", 5)
         conversion = apply(conversion, "I", 1)
         return conversion.sum
-    }
-
-    private fun apply(remainingInput: String, sum: Int, roman: String, arabic: Int): Pair<String, Int> {
-        var conversion = Conversion(sum, remainingInput)
-        conversion = apply(conversion, roman, arabic)
-        return Pair(conversion.remainingInput, conversion.sum)
     }
 
     private fun apply(conversion: Conversion, roman: String, arabic: Int): Conversion {
@@ -21,7 +13,7 @@ class Roman(private val input: String) {
             newSum += arabic
             newRemainingInput = newRemainingInput.cutAtStart()
         }
-        return Conversion(newSum, newRemainingInput)
+        return Conversion(newRemainingInput, newSum)
     }
 
     private fun String.cutAtStart(): String {
@@ -33,6 +25,6 @@ class Roman(private val input: String) {
 
 }
 
-class Conversion(val sum: Int, val remainingInput: String) {
+class Conversion(val remainingInput: String, val sum: Int = 0) {
 
 }
