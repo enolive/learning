@@ -1,5 +1,6 @@
 class Roman(private val input: String) {
     private val rules = listOf(
+            Rule("L", 50),
             Rule("X", 10),
             Rule("IX", 9),
             Rule("V", 5),
