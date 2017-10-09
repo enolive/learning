@@ -7,22 +7,8 @@ class Roman(private val input: String) {
     }
 
     private fun apply(conversion: Conversion, roman: String, arabic: Int): Conversion {
-        var newRemainingInput = conversion.remainingInput
-        var newSum = conversion.sum
-        while (newRemainingInput.startsWith(roman)) {
-            newSum += arabic
-            newRemainingInput = newRemainingInput.cutAtStart()
-        }
-        return Conversion(newRemainingInput, newSum)
+        return conversion.apply(roman, arabic)
     }
-
-    private fun String.cutAtStart(): String {
-        return when {
-            !this.isEmpty() -> this.substring(1)
-            else -> this
-        }
-    }
-
 }
 
 class Conversion(val remainingInput: String, val sum: Int = 0) {
