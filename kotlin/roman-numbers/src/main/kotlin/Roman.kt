@@ -2,10 +2,14 @@ class Roman(private val input: String) {
     fun toArabic(): Int {
         var sum = 0
         var remainingInput = input
-        val pair = apply(remainingInput, sum, "V", 5)
+        var conversion = Conversion(sum, remainingInput)
+        conversion = apply(conversion, "V", 5)
+        val pair = Pair(conversion.remainingInput, conversion.sum)
         remainingInput = pair.first
         sum = pair.second
-        val pair2 = apply(remainingInput, sum, "I", 1)
+        var conversion1 = Conversion(sum, remainingInput)
+        conversion1 = apply(conversion1, "I", 1)
+        val pair2 = Pair(conversion1.remainingInput, conversion1.sum)
         return pair2.second
     }
 
