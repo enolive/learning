@@ -15,12 +15,8 @@ class Roman(private val input: String) {
             Rule("I", 1)
     )
 
-    fun toArabic(): Int {
-        var conversion = Conversion(input)
-        rules.forEach { 
-            conversion = conversion.apply(it)
-        }
-        conversion.failIfInputRemains()
-        return conversion.sum
-    }
+    fun toArabic(): Int = rules
+            .fold(Conversion(input)) { acc, rule -> acc.apply(rule) }
+            .failIfInputRemains()
+            .sum
 }
