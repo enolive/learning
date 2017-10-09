@@ -8,16 +8,16 @@ internal class Conversion(private val remainingInput: String, val sum: Int = 0) 
         return applyRec(remainingInput, sum)
     }
 
-    private fun String.cutAtStart(roman: String): String = when {
-        this.length >= roman.length -> this.substring(roman.length)
-        else -> this
-    }
-
     fun failIfInputRemains(): Conversion {
         assert(remainingInput.isEmpty()) { 
             """expected that the input that remains is empty, but it doesn't.
                 |this might be due to invalid input.: "$remainingInput"""".trimMargin() 
         }
         return this
+    }
+
+    private fun String.cutAtStart(prefix: String): String = when {
+        this.length >= prefix.length -> this.substring(prefix.length)
+        else -> this
     }
 }
