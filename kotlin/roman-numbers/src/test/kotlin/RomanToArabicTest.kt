@@ -8,4 +8,10 @@ class RomanToArabicTest {
         assertThat(Roman("II").toArabic()).isEqualTo(2)
         assertThat(Roman("III").toArabic()).isEqualTo(3)
     }
+
+    @Test
+    fun `return V's as 5`() {
+        assertThat(Roman("V").toArabic()).isEqualTo(5)
+        assertThat(Roman("VIII").toArabic()).isEqualTo(8)
+    }
 }
