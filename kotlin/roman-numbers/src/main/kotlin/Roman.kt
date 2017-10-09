@@ -4,11 +4,16 @@ class Roman(private val input: String) {
         var remainingInput = input
         while (remainingInput.startsWith("I")) {
             sum += 1
-            if (!remainingInput.isEmpty()) {
-                remainingInput = remainingInput.substring(1)
-            }
+            remainingInput = remainingInput.cutAtStart()
         }
         return sum
+    }
+
+    private fun String.cutAtStart(): String {
+        return when {
+            !this.isEmpty() -> this.substring(1)
+            else -> this
+        }
     }
 
 }
