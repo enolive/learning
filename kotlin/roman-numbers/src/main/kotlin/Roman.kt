@@ -11,15 +11,19 @@ class Roman(private val input: String) {
 class Conversion(val remainingInput: String, val sum: Int = 0) {
     fun apply(roman: String, arabic: Int): Conversion {
         tailrec fun applyRec(conversion: Conversion, roman: String, arabic: Int): Conversion {
-            if (!conversion.remainingInput.startsWith(roman)) {
+            val (remainingInput, sum) = conversion
+            if (!remainingInput.startsWith(roman)) {
                 return conversion
             }
-            val newConversion = Conversion(conversion.remainingInput.cutAtStart(), conversion.sum + arabic)
+            val newConversion = Conversion(remainingInput.cutAtStart(), sum + arabic)
             return applyRec(newConversion, roman, arabic)
         }
         return applyRec(this, roman, arabic)
     }
 
+    private operator fun component1() = remainingInput
+
+    private operator fun component2() = sum
 
     private fun String.cutAtStart(): String {
         return when {
