@@ -1,11 +1,16 @@
 class Roman(private val input: String) {
     fun toArabic(): Int {
         var conversion = Conversion(input)
-        conversion = conversion.apply("X", 10)
-        conversion = conversion.apply("IX", 9)
-        conversion = conversion.apply("V", 5)
-        conversion = conversion.apply("IV", 4)
-        conversion = conversion.apply("I", 1)
+        val rules = listOf(
+                Rule("X", 10),
+                Rule("IX", 9),
+                Rule("V", 5),
+                Rule("IV", 4),
+                Rule("I", 1)
+        )
+        rules.forEach { 
+            conversion = conversion.apply(it.roman, it.arabic)
+        }
         return conversion.sum
     }
 }
