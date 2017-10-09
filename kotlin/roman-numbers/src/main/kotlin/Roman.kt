@@ -1,12 +1,14 @@
 class Roman(private val input: String) {
     fun toArabic(): Int {
-        if (input == "III") {
-            return 3
+        var sum = 0
+        var remainingInput = input
+        while (remainingInput.startsWith("I")) {
+            sum += 1
+            if (!remainingInput.isEmpty()) {
+                remainingInput = remainingInput.substring(1)
+            }
         }
-        if (input == "II") {
-            return 2
-        }
-        return 1
+        return sum
     }
 
 }
