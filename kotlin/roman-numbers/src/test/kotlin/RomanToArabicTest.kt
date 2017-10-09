@@ -43,6 +43,12 @@ class RomanToArabicTest {
             assertThat(Roman("D").toArabic()).isEqualTo(500)
             assertThat(Roman("DCCLXI").toArabic()).isEqualTo(761)
         }
+
+        @Test
+        fun `return M's as 1000`() {
+            assertThat(Roman("M").toArabic()).isEqualTo(1000)
+            assertThat(Roman("MDCLXVI").toArabic()).isEqualTo(1666)
+        }
     }
     
     @Nested
