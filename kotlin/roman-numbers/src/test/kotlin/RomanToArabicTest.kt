@@ -19,6 +19,12 @@ class RomanToArabicTest {
             assertThat(Roman("V").toArabic()).isEqualTo(5)
             assertThat(Roman("VIII").toArabic()).isEqualTo(8)
         }
+
+        @Test
+        fun `return X's as 10`() {
+            assertThat(Roman("X").toArabic()).isEqualTo(10)
+            assertThat(Roman("XXVIII").toArabic()).isEqualTo(28)
+        }
     }
     
     @Nested
