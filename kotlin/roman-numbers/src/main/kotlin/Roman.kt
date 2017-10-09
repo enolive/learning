@@ -8,27 +8,19 @@ class Roman(private val input: String) {
 
 }
 
-class Conversion(val remainingInput: String, val sum: Int = 0) {
+class Conversion(private val remainingInput: String, val sum: Int = 0) {
     fun apply(roman: String, arabic: Int): Conversion {
-        tailrec fun applyRec(conversion: Conversion, roman: String, arabic: Int): Conversion {
-            val (remainingInput, sum) = conversion
-            if (!remainingInput.startsWith(roman)) {
-                return conversion
+        tailrec fun applyRec(remainingInput: String, sum: Int): Conversion {
+            return when {
+                !remainingInput.startsWith(roman) -> Conversion(remainingInput, sum)
+                else -> applyRec(remainingInput.cutAtStart(), sum + arabic)
             }
-            val newConversion = Conversion(remainingInput.cutAtStart(), sum + arabic)
-            return applyRec(newConversion, roman, arabic)
         }
-        return applyRec(this, roman, arabic)
+        return applyRec(remainingInput, sum)
     }
 
-    private operator fun component1() = remainingInput
-
-    private operator fun component2() = sum
-
-    private fun String.cutAtStart(): String {
-        return when {
-            !this.isEmpty() -> this.substring(1)
-            else -> this
-        }
+    private fun String.cutAtStart(): String = when {
+        !this.isEmpty() -> this.substring(1)
+        else -> this
     }
 }
