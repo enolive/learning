@@ -13,15 +13,8 @@ class Conversion(val remainingInput: String, val sum: Int = 0) {
         if (!remainingInput.startsWith(roman)) {
             return this
         }
-        
-        var newRemainingInput = remainingInput
-        var newSum = sum
-        
-        while (newRemainingInput.startsWith(roman)) {
-            newSum += arabic
-            newRemainingInput = newRemainingInput.cutAtStart()
-        }
-        return Conversion(newRemainingInput, newSum)
+        val newConversion = Conversion(remainingInput.cutAtStart(), sum + arabic)
+        return newConversion.apply(roman, arabic)
     }
 
     private fun String.cutAtStart(): String {
