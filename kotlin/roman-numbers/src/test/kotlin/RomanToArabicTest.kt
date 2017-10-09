@@ -84,4 +84,23 @@ class RomanToArabicTest {
             assertThat(Roman("CM").toArabic()).isEqualTo(900)
         }
     }
+    
+    @Nested
+    @DisplayName("high-level tests")
+    inner class HighLevel {
+        @Test
+        fun `Number of the Devil 666`() {
+            assertThat(Roman("DCLXVI").toArabic()).isEqualTo(666)
+        }
+
+        @Test
+        fun `George Orwell 1984`() {
+            assertThat(Roman("MCMLXXXIV").toArabic()).isEqualTo(1984)
+        }
+
+        @Test
+        fun `End of the World Y2K38 due to 32-bit Unix timestamp`() {
+            assertThat(Roman("MMXXXVIII").toArabic()).isEqualTo(2038)
+        }
+    }
 }
