@@ -17,28 +17,35 @@ class RockPaperScissorsTest {
     @ParameterizedTest
     @EnumSource(value = PlayerChoice.class)
     void sameChoiceShouldDraw(PlayerChoice choice) {
-        Result result = player.plays(choice).against(choice);
-        assertThat(result).isEqualTo(Result.DRAW);
+        assertThat(player.plays(choice)
+                         .against(choice))
+                .isEqualTo(Result.DRAW);
     }
 
     @Test
     void scissorsWinAgainstPaper() {
-        Result result = player.plays(PlayerChoice.SCISSORS).against(PlayerChoice.PAPER);
-        assertThat(result).isEqualTo(Result.WIN);
+        assertThat(player.plays(PlayerChoice.SCISSORS)
+                         .against(PlayerChoice.PAPER))
+                .isEqualTo(Result.WIN);
     }
 
     @Test
     void paperWinsAgainstRock() {
-        Result result = player.plays(PlayerChoice.PAPER).against(PlayerChoice.ROCK);
-        assertThat(result).isEqualTo(Result.WIN);
+        assertThat(player.plays(PlayerChoice.PAPER)
+                         .against(PlayerChoice.ROCK))
+                .isEqualTo(Result.WIN);
     }
 
     @Test
     void rockWinsAgainstScissors() {
-        Result result = player.plays(PlayerChoice.ROCK).against(PlayerChoice.SCISSORS);
-        assertThat(result).isEqualTo(Result.WIN);
+        assertThat(player.plays(PlayerChoice.ROCK)
+                         .against(PlayerChoice.SCISSORS))
+                .isEqualTo(Result.WIN);
+        assertThat(player.plays(PlayerChoice.SCISSORS)
+                         .against(PlayerChoice.ROCK))
+                .isEqualTo(Result.LOSS);
     }
-    
+
     @Test
     void playerShouldBeAnnotated() {
         Player.Winning[] winnings = player.getClass().getAnnotationsByType(Player.Winning.class);

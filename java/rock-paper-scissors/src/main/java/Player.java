@@ -20,11 +20,14 @@ public class Player {
 
     public Result against(PlayerChoice opponent) {
         Map<PlayerChoice, PlayerChoice> winning = determineWinningRules();
+        if (player == opponent) {
+            return Result.DRAW;
+        }
         if (winning.get(player) == opponent) {
             return Result.WIN;
         }
 
-        return Result.DRAW;
+        return Result.LOSS;
     }
 
     private Map<PlayerChoice, PlayerChoice> determineWinningRules() {
