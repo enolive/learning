@@ -11,31 +11,14 @@ import static com.google.common.collect.Maps.immutableEntry;
 @Player.Winning(self = PlayerChoice.ROCK, opponent = PlayerChoice.SCISSORS)
 @Player.Winning(self = PlayerChoice.SCISSORS, opponent = PlayerChoice.PAPER)
 public class Player {
-    private PlayerChoice player;
 
-    public Player plays(PlayerChoice player) {
-        this.player = player;
-        return this;
+    private Player() {
     }
 
-    public Result against(PlayerChoice opponent) {
-        Map<PlayerChoice, PlayerChoice> winning = determineWinningRules();
-        if (player == opponent) {
-            return Result.DRAW;
-        }
-        if (winning.get(player) == opponent) {
-            return Result.WIN;
-        }
-
-        return Result.LOSS;
+    public static Playing thatPlays(PlayerChoice player) {
+        return new PlayingImpl(player);
     }
 
-    private Map<PlayerChoice, PlayerChoice> determineWinningRules() {
-        Winning[] winnings = getClass().getAnnotationsByType(Winning.class);
-        return Arrays.stream(winnings)
-                     .map(w -> immutableEntry(w.self(), w.opponent()))
-                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-    }
 
     @Repeatable(Winnings.class)
     public @interface Winning {
@@ -48,5 +31,38 @@ public class Player {
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Winnings {
         Winning[] value();
+    }
+
+    private static class PlayingImpl implements Playing {
+        private final PlayerChoice player;
+
+        public PlayingImpl(PlayerChoice player) {
+            this.player = player;
+        }
+
+        @Override
+        public Result against(PlayerChoice opponent) {
+            Map<PlayerChoice, PlayerChoice> winning = determineWinningRules();
+            if (getPlayer() == opponent) {
+                return Result.DRAW;
+            }
+            if (winning.get(getPlayer()) == opponent) {
+                return Result.WIN;
+            }
+
+            return Result.LOSS;
+        }
+
+        @Override
+        public PlayerChoice getPlayer() {
+            return player;
+        }
+
+        private Map<PlayerChoice, PlayerChoice> determineWinningRules() {
+            Winning[] winnings = Player.class.getAnnotationsByType(Winning.class);
+            return Arrays.stream(winnings)
+                         .map(w -> immutableEntry(w.self(), w.opponent()))
+                         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        }
     }
 }
