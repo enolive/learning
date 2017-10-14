@@ -1,3 +1,3 @@
 public enum Result {
-    DRAW
+    WIN, DRAW
 }

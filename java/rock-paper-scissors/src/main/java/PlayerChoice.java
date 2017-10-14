@@ -1,3 +1,5 @@
 public enum PlayerChoice {
-    PAPER
+    PAPER,
+    SCISSORS,
+    ROCK
 }
