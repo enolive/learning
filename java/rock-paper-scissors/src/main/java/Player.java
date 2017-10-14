@@ -3,7 +3,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("WeakerAccess")
@@ -16,17 +15,13 @@ public class Player {
     private static final Rule[] ruleChain = new Rule[]{
             new Rule((self, opponent) -> self == opponent, Result.DRAW),
             new Rule((self, opponent) -> winsAgainst.get(self) == opponent, Result.WIN),
-            new Rule(otherwise(), Result.LOSS)};
+            new Rule((self, opponent) -> true, Result.LOSS)};
 
     private Player() {
     }
 
     public static Playing thatPlays(PlayerChoice player) {
         return new PlayingImpl(player);
-    }
-
-    private static BiFunction<PlayerChoice, PlayerChoice, Boolean> otherwise() {
-        return (self, opponent) -> true;
     }
 
     private static Map<PlayerChoice, PlayerChoice> determineWinningRules() {
@@ -45,7 +40,7 @@ public class Player {
 
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Winnings {
-        @SuppressWarnings({"unused", "Required for repeatable to work"}) 
+        @SuppressWarnings({"unused", "Required for repeatable to work"})
         Winning[] value();
     }
 
