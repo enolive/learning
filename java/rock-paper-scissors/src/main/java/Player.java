@@ -37,7 +37,6 @@ public class Player {
         PlayerChoice opponent();
     }
 
-
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Winnings {
         @SuppressWarnings({"unused", "Required for repeatable to work"})
