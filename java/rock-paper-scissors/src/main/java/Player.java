@@ -1,5 +1,3 @@
-import com.google.common.collect.Maps;
-
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,19 +13,20 @@ public class Player {
     }
 
     public Result against(PlayerChoice opponent) {
-        
-        Map<PlayerChoice, PlayerChoice> map = Stream
-                .of(
-                        immutableEntry(PlayerChoice.SCISSORS, PlayerChoice.PAPER),
-                        immutableEntry(PlayerChoice.PAPER, PlayerChoice.ROCK)
-                )
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        Map<PlayerChoice, PlayerChoice> winning = mapContaining(
+                immutableEntry(PlayerChoice.SCISSORS, PlayerChoice.PAPER),
+                immutableEntry(PlayerChoice.PAPER, PlayerChoice.ROCK));
 
-        if (map.get(player) == opponent) {
+        if (winning.get(player) == opponent) {
             return Result.WIN;
         }
 
         return Result.DRAW;
+    }
+
+    private Map<PlayerChoice, PlayerChoice> mapContaining(Map.Entry<PlayerChoice, PlayerChoice>... entries) {
+        return Stream.of(entries)
+                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
 
