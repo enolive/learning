@@ -30,13 +30,14 @@ public class Player {
 
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Winnings {
+        @SuppressWarnings("unused") 
         Winning[] value();
     }
 
     private static class PlayingImpl implements Playing {
         private final PlayerChoice player;
 
-        public PlayingImpl(PlayerChoice player) {
+        PlayingImpl(PlayerChoice player) {
             this.player = player;
         }
 

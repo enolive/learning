@@ -17,17 +17,20 @@ class RockPaperScissorsTest {
 
     @Test
     void scissorsWinAgainstPaper() {
-        RockPaperScissorsAssert.assertThat(Player.thatPlays(PlayerChoice.SCISSORS)).winsAgainst(PlayerChoice.PAPER);
+        RockPaperScissorsAssert.assertThat(Player.thatPlays(PlayerChoice.SCISSORS))
+                               .winsAgainst(PlayerChoice.PAPER);
     }
 
     @Test
     void paperWinsAgainstRock() {
-        RockPaperScissorsAssert.assertThat(Player.thatPlays(PlayerChoice.PAPER)).winsAgainst(PlayerChoice.ROCK);
+        RockPaperScissorsAssert.assertThat(Player.thatPlays(PlayerChoice.PAPER))
+                               .winsAgainst(PlayerChoice.ROCK);
     }
 
     @Test
     void rockWinsAgainstScissors() {
-        RockPaperScissorsAssert.assertThat(Player.thatPlays(PlayerChoice.ROCK)).winsAgainst(PlayerChoice.SCISSORS);
+        RockPaperScissorsAssert.assertThat(Player.thatPlays(PlayerChoice.ROCK))
+                               .winsAgainst(PlayerChoice.SCISSORS);
     }
 
     @Test
