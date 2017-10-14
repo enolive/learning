@@ -1,4 +1,3 @@
-import org.assertj.core.api.AbstractAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -39,28 +38,3 @@ class RockPaperScissorsTest {
         assertThat(winnings).isNotEmpty();
     }
 }
-
-class RockPaperScissorsAssert extends AbstractAssert<RockPaperScissorsAssert, Playing> {
-
-    private RockPaperScissorsAssert(Playing playing, Class<?> selfType) {
-        super(playing, selfType);
-    }
-
-    static RockPaperScissorsAssert assertThat(Playing playing) {
-        return new RockPaperScissorsAssert(playing, RockPaperScissorsAssert.class);
-    }
-
-    RockPaperScissorsAssert winsAgainst(PlayerChoice opponent) {
-        Result result = actual.against(opponent);
-        if (result != Result.WIN) {
-            failWithMessage("expected to win with <%s> against <%s> but actually our result was <%s>.",
-                    actual.getPlayer(), opponent, result);
-        }
-        Result opponentResult = Player.thatPlays(opponent).against(actual.getPlayer());
-        if (opponentResult != Result.LOSS) {
-            failWithMessage("expected that the opponent using <%s> loses against ourselves with <%s> but actually our result was <%s>",
-                    opponent, actual.getPlayer(), opponentResult);
-        }
-        return this;
-    }
-} 

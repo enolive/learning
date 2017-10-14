@@ -3,14 +3,20 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-import static com.google.common.collect.Maps.immutableEntry;
-
+@SuppressWarnings("WeakerAccess")
 @Player.Winning(self = PlayerChoice.PAPER, opponent = PlayerChoice.ROCK)
 @Player.Winning(self = PlayerChoice.ROCK, opponent = PlayerChoice.SCISSORS)
 @Player.Winning(self = PlayerChoice.SCISSORS, opponent = PlayerChoice.PAPER)
 public class Player {
+
+    private static final Map<PlayerChoice, PlayerChoice> winsAgainst = determineWinningRules();
+    private static final Rule[] ruleChain = new Rule[]{
+            new Rule((self, opponent) -> self == opponent, Result.DRAW),
+            new Rule((self, opponent) -> winsAgainst.get(self) == opponent, Result.WIN),
+            new Rule(otherwise(), Result.LOSS)};
 
     private Player() {
     }
@@ -19,6 +25,15 @@ public class Player {
         return new PlayingImpl(player);
     }
 
+    private static BiFunction<PlayerChoice, PlayerChoice, Boolean> otherwise() {
+        return (self, opponent) -> true;
+    }
+
+    private static Map<PlayerChoice, PlayerChoice> determineWinningRules() {
+        Winning[] winnings = Player.class.getAnnotationsByType(Winning.class);
+        return Arrays.stream(winnings)
+                     .collect(Collectors.toMap(Winning::self, Winning::opponent));
+    }
 
     @Repeatable(Winnings.class)
     public @interface Winning {
@@ -30,40 +45,32 @@ public class Player {
 
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Winnings {
-        @SuppressWarnings("unused") 
+        @SuppressWarnings({"unused", "Required for repeatable to work"}) 
         Winning[] value();
     }
 
     private static class PlayingImpl implements Playing {
-        private final PlayerChoice player;
+        private final PlayerChoice ownChoice;
 
-        PlayingImpl(PlayerChoice player) {
-            this.player = player;
+        PlayingImpl(PlayerChoice ownChoice) {
+            this.ownChoice = ownChoice;
         }
 
         @Override
         public Result against(PlayerChoice opponent) {
-            Map<PlayerChoice, PlayerChoice> winning = determineWinningRules();
-            if (getPlayer() == opponent) {
-                return Result.DRAW;
-            }
-            if (winning.get(getPlayer()) == opponent) {
-                return Result.WIN;
-            }
+            // HINT: the rule chain is by definition always filterable due to the otherwise rule
+            //noinspection ConstantConditions 
+            return Arrays.stream(ruleChain)
+                         .filter(r -> r.appliesTo(getOwnChoice(), opponent))
+                         .map(Rule::getResult)
+                         .findFirst()
+                         .get();
 
-            return Result.LOSS;
         }
 
         @Override
-        public PlayerChoice getPlayer() {
-            return player;
-        }
-
-        private Map<PlayerChoice, PlayerChoice> determineWinningRules() {
-            Winning[] winnings = Player.class.getAnnotationsByType(Winning.class);
-            return Arrays.stream(winnings)
-                         .map(w -> immutableEntry(w.self(), w.opponent()))
-                         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        public PlayerChoice getOwnChoice() {
+            return ownChoice;
         }
     }
 }

@@ -1,3 +1,5 @@
 public enum Result {
-    WIN, LOSS, DRAW
+    WIN, 
+    LOSS, 
+    DRAW
 }
