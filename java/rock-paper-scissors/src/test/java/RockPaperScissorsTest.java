@@ -38,4 +38,10 @@ class RockPaperScissorsTest {
         Result result = player.plays(PlayerChoice.ROCK).against(PlayerChoice.SCISSORS);
         assertThat(result).isEqualTo(Result.WIN);
     }
+    
+    @Test
+    void playerShouldBeAnnotated() {
+        Player.Winning[] winnings = player.getClass().getAnnotationsByType(Player.Winning.class);
+        assertThat(winnings).isNotEmpty();
+    }
 }
