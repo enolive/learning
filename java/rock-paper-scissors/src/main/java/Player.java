@@ -15,6 +15,7 @@ public class Player {
     public Result against(PlayerChoice opponent) {
         Map<PlayerChoice, PlayerChoice> winning = mapContaining(
                 immutableEntry(PlayerChoice.SCISSORS, PlayerChoice.PAPER),
+                immutableEntry(PlayerChoice.ROCK, PlayerChoice.SCISSORS),
                 immutableEntry(PlayerChoice.PAPER, PlayerChoice.ROCK));
 
         if (winning.get(player) == opponent) {

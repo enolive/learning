@@ -32,4 +32,10 @@ class RockPaperScissorsTest {
         Result result = player.plays(PlayerChoice.PAPER).against(PlayerChoice.ROCK);
         assertThat(result).isEqualTo(Result.WIN);
     }
+
+    @Test
+    void rockWinsAgainstScissors() {
+        Result result = player.plays(PlayerChoice.ROCK).against(PlayerChoice.SCISSORS);
+        assertThat(result).isEqualTo(Result.WIN);
+    }
 }
