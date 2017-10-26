@@ -5,13 +5,12 @@
   ],
   "jsRules": {},
   "rules": {
-    "arrow-parens": [
-      false
-    ],
+    "arrow-parens": false,
     "semicolon": [
       true,
       "never"
     ],
+    "no-trailing-whitespace": false,
     "quotemark": [
       true,
       "single"
