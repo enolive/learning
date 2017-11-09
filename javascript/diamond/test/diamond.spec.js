@@ -1,5 +1,3 @@
-'use strict'
-
 import {expect} from 'chai'
 import {Diamond} from '../src/diamond'
 import {DiamondUtil} from '../src/diamond-util'
@@ -48,7 +46,12 @@ describe('Diamond kata', () => {
         })
     })
 
-    describe('Outside-in tests', () => {
+    describe('Diamond tests', () => {
+        it('should fail for invalid input', () => {
+            expect(() => Diamond.forCharacter('0')).to.throw('input must be between A and Z')
+            expect(() => Diamond.forCharacter('a')).to.throw('input must be between A and Z')
+        })
+        
         it('should generate a diamond for A', () => {
             expect(Diamond.forCharacter('A')).to.deep.equal([
                 'A'

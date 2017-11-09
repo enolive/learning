@@ -1,10 +1,17 @@
-'use strict'
-
 import {DiamondUtil} from './diamond-util'
 
 export class Diamond {
     static forCharacter(input = 'Z') {
+        this.require(
+            () => input >= 'A' && input <= 'Z', 
+            'input must be between A and Z')
         return DiamondUtil.mirror(this.makeUpperHalf(DiamondUtil.distanceFromA(input)))
+    }
+
+    static require(condition, message) {
+        if (!condition()) {
+            throw message
+        }
     }
 
     static makeUpperHalf(distanceFromA) {
