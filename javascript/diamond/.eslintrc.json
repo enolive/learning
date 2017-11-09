@@ -8,7 +8,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "no-undef": "off",
+    "no-unreachable": "warn",
     "indent": [
       "error",
       4
