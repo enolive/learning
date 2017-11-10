@@ -31,6 +31,15 @@ class BowlingTest {
         assertThat(bowling.score).isEqualTo(24)
     }
 
+    @Test
+    fun `it should score a strike`() {
+        bowling.roll(10)
+        bowling.roll(4)
+        bowling.roll(5)
+        rollMany(0, 16)
+        assertThat(bowling.score).isEqualTo(28)
+    }
+
     private fun rollMany(pins: Int, times: Int) {
         (1..times).forEach { bowling.roll(pins) }
     }
