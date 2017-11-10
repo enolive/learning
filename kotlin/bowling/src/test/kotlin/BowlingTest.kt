@@ -3,7 +3,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class BowlingTest {
-    lateinit var bowling: Bowling
+    private lateinit var bowling: Bowling
 
     @BeforeEach
     fun setUp() {
@@ -24,20 +24,20 @@ class BowlingTest {
 
     @Test
     fun `it should score a spare`() {
-        bowling.roll(5)
-        bowling.roll(5)
-        bowling.roll(7)
+        rollPins(5, 5, 7)
         rollMany(0, 17)
         assertThat(bowling.score).isEqualTo(24)
     }
 
     @Test
     fun `it should score a strike`() {
-        bowling.roll(10)
-        bowling.roll(4)
-        bowling.roll(5)
+        rollPins(10, 4, 5)
         rollMany(0, 16)
         assertThat(bowling.score).isEqualTo(28)
+    }
+
+    private fun rollPins(vararg pins: Int) {
+        pins.forEach { bowling.roll(it) }
     }
 
     @Test
@@ -46,8 +46,7 @@ class BowlingTest {
         assertThat(bowling.score).isEqualTo(300)
     }
 
-    private fun rollMany(pins: Int, times: Int) {
-        (1..times).forEach { bowling.roll(pins) }
-    }
+    private fun rollMany(pins: Int, times: Int) = 
+            (1..times).forEach { bowling.roll(pins) }
 }
 
