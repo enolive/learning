@@ -1,11 +1,24 @@
 class Bowling {
-    private var currentScore: Int = 0
+    private val rolls = mutableListOf<Int>()
 
     fun roll(pins: Int) {
-        currentScore += pins
+        rolls.add(pins)
     }
 
     val score: Int
-        get() = currentScore
+        get() {
+            var rollIndex = 0
+            var currentScore = 0
 
+            (1..10).forEach {
+                if (rolls[rollIndex] + rolls[rollIndex + 1] == 10) {
+                    currentScore += 10 + rolls[rollIndex + 2]
+                    rollIndex += 2
+                } else {
+                    currentScore += rolls[rollIndex] + rolls[rollIndex + 1]
+                    rollIndex += 2
+                }
+            }
+            return currentScore
+        }
 }
