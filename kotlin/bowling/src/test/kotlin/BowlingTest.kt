@@ -40,6 +40,12 @@ class BowlingTest {
         assertThat(bowling.score).isEqualTo(28)
     }
 
+    @Test
+    fun `it should score a perfect game`() {
+        rollMany(10, 12)
+        assertThat(bowling.score).isEqualTo(300)
+    }
+
     private fun rollMany(pins: Int, times: Int) {
         (1..times).forEach { bowling.roll(pins) }
     }

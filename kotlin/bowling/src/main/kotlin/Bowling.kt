@@ -10,16 +10,18 @@ class Bowling {
             var current = CurrentScore(0, 0, rolls)
 
             allFrames().forEach {
-                if (isStrike(current)) {
-                    current = scoreStrike(current)
-                } else if (isSpare(current)) {
-                    current = scoreSpare(current)
-                } else {
-                    current = scoreNormalFrame(current)
-                }
+                current = next(current)
             }
             return current.points
         }
+
+    private fun next(current: CurrentScore): CurrentScore {
+        return when {
+            isStrike(current) -> scoreStrike(current)
+            isSpare(current) -> scoreSpare(current)
+            else -> scoreNormalFrame(current)
+        }
+    }
 
     private fun isStrike(current: CurrentScore) = current.rolls[current.rollIndex] == 10
 
@@ -50,8 +52,5 @@ class Bowling {
     private fun sparePoints(current: CurrentScore) = 10 + current.rolls[current.rollIndex + 2]
 
     private fun allFrames() = (1..10)
-    class CurrentScore(val points: Int, val rollIndex: Int, val rolls: List<Int>) {
-
-    }
 
 }
