@@ -22,6 +22,12 @@ class BowlingTests(unittest.TestCase):
         self.roll_many(0, 17)
         assert_that(self.bowling.get_score()).is_equal_to(24)
 
+    def test_strike(self):
+        self.roll_pins(10)
+        self.roll_pins(4, 5)
+        self.roll_many(0, 16)
+        assert_that(self.bowling.get_score()).is_equal_to(28)
+
     def roll_pins(self, *pins: int) -> None:
         for p in pins:
             self.bowling.roll(p)
