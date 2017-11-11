@@ -14,7 +14,8 @@ class Bowling(object):
 
     def score_frame(self, ball_index: int, score: int) -> (int, int):
         if self.is_strike(ball_index):
-            ball_index, score = self.score_strike(ball_index, score)
+            fun = self.score_strike
+            ball_index, score = fun(ball_index, score)
         elif self.is_spare(ball_index):
             ball_index, score = self.score_spare(ball_index, score)
         else:
@@ -27,16 +28,14 @@ class Bowling(object):
     def is_spare(self, ball_index: int) -> bool:
         return self.get_frame_score(ball_index) == 10
 
-    def score_normal_frame(self, ball_index: int, score: int) -> (int, int):
-        return ball_index + 2, score + self.get_frame_score(ball_index)
+    def score_strike(self, ball_index: int, score: int) -> (int, int):
+        return ball_index + 1, score + 10 + self.get_frame_score(ball_index + 1)
 
     def score_spare(self, ball_index: int, score: int) -> (int, int):
         return ball_index + 2, score + 10 + self.rolls[ball_index + 2]
 
-    def score_strike(self, ball_index: int, score: int) -> (int, int):
-        score += 10 + self.get_frame_score(ball_index + 1)
-        ball_index += 1
-        return ball_index, score
+    def score_normal_frame(self, ball_index: int, score: int) -> (int, int):
+        return ball_index + 2, score + self.get_frame_score(ball_index)
 
     def get_frame_score(self, ball_index: int) -> int:
         return self.rolls[ball_index] + self.rolls[ball_index + 1]
