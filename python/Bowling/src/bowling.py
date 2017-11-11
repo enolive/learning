@@ -32,19 +32,13 @@ class Bowling(object):
         return self.get_frame_score(ball_index) == 10
 
     def score_strike(self, ball_index: int) -> (int, int):
-        def g(score):
-            return ball_index + 1, score + 10 + self.get_frame_score(ball_index + 1)
-        return g
+        return lambda score: (ball_index + 1, score + 10 + self.get_frame_score(ball_index + 1))
 
     def score_spare(self, ball_index: int) -> (int, int):
-        def g(score):
-            return ball_index + 2, score + 10 + self.rolls[ball_index + 2]
-        return g
+        return lambda score: (ball_index + 2, score + 10 + self.rolls[ball_index + 2])
 
     def score_normal_frame(self, ball_index: int) -> (int, int):
-        def g(score):
-            return ball_index + 2, score + self.get_frame_score(ball_index)
-        return g
+        return lambda score: (ball_index + 2, score + self.get_frame_score(ball_index))
 
     def get_frame_score(self, ball_index: int) -> int:
         return self.rolls[ball_index] + self.rolls[ball_index + 1]
