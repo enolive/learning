@@ -31,9 +31,7 @@ class Bowling(object):
         return ball_index + 2, score + self.get_frame_score(ball_index)
 
     def score_spare(self, ball_index: int, score: int) -> (int, int):
-        score += 10 + self.rolls[ball_index + 2]
-        ball_index += 2
-        return ball_index, score
+        return ball_index + 2, score + 10 + self.rolls[ball_index + 2]
 
     def score_strike(self, ball_index: int, score: int) -> (int, int):
         score += 10 + self.get_frame_score(ball_index + 1)
