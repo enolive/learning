@@ -9,10 +9,16 @@ class Bowling(object):
         score = 0
         ball_index = 0
         for frame in range(0, 10):
-            if self.rolls[ball_index] + self.rolls[ball_index + 1] == 10:
-                score += 10 + self.rolls[ball_index + 2]
+            if self.score_frame(ball_index) == 10:
+                score += 10 + self.score_spare(ball_index)
                 ball_index += 2
             else:
-                score += self.rolls[ball_index] + self.rolls[ball_index + 1]
+                score += self.score_frame(ball_index)
                 ball_index += 2
         return score
+
+    def score_frame(self, ball_index):
+        return self.rolls[ball_index] + self.rolls[ball_index + 1]
+
+    def score_spare(self, ball_index):
+        return self.rolls[ball_index + 2]
