@@ -13,7 +13,7 @@ class Bowling(object):
         return score
 
     def score_frame(self, ball_index: int, score: int) -> (int, int):
-        ball_index, score = self.get_scoring_function(ball_index)(ball_index)(score)
+        ball_index, score = self.get_scoring_function(ball_index)(score)
         return score, ball_index
 
     def get_scoring_function(self, ball_index):
@@ -23,7 +23,7 @@ class Bowling(object):
             fun = self.score_spare
         else:
             fun = self.score_normal_frame
-        return fun
+        return fun(ball_index)
 
     def is_strike(self, ball_index: int) -> bool:
         return self.rolls[ball_index] == 10
