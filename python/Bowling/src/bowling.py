@@ -13,14 +13,16 @@ class Bowling(object):
         return score
 
     def score_frame(self, ball_index: int, score: int) -> (int, int):
-        if self.is_strike(ball_index):
-            fun = self.score_strike
-            ball_index, score = fun(ball_index, score)
-        elif self.is_spare(ball_index):
-            ball_index, score = self.score_spare(ball_index, score)
-        else:
-            ball_index, score = self.score_normal_frame(ball_index, score)
+        ball_index, score = self.get_scoring_function(ball_index)(ball_index, score)
         return score, ball_index
+
+    def get_scoring_function(self, ball_index):
+        if self.is_strike(ball_index):
+            return self.score_strike
+        elif self.is_spare(ball_index):
+            return self.score_spare
+        else:
+            return self.score_normal_frame
 
     def is_strike(self, ball_index: int) -> bool:
         return self.rolls[ball_index] == 10
