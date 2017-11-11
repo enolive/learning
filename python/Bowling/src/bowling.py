@@ -1,3 +1,6 @@
+from typing import Callable, Tuple
+
+
 class Bowling(object):
     def __init__(self):
         self.rolls = []
@@ -31,13 +34,15 @@ class Bowling(object):
     def is_spare(self, ball_index: int) -> bool:
         return self.get_frame_score(ball_index) == 10
 
-    def score_strike(self, ball_index: int) -> (int, int):
+    ScoreFunction = Callable[[int], Tuple[int, int]]
+
+    def score_strike(self, ball_index: int) -> ScoreFunction:
         return lambda score: (ball_index + 1, score + 10 + self.get_frame_score(ball_index + 1))
 
-    def score_spare(self, ball_index: int) -> (int, int):
+    def score_spare(self, ball_index: int) -> ScoreFunction:
         return lambda score: (ball_index + 2, score + 10 + self.rolls[ball_index + 2])
 
-    def score_normal_frame(self, ball_index: int) -> (int, int):
+    def score_normal_frame(self, ball_index: int) -> ScoreFunction:
         return lambda score: (ball_index + 2, score + self.get_frame_score(ball_index))
 
     def get_frame_score(self, ball_index: int) -> int:
