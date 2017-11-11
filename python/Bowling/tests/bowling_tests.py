@@ -18,11 +18,13 @@ class BowlingTests(unittest.TestCase):
         assert_that(self.bowling.get_score()).is_equal_to(20)
 
     def test_spare(self):
-        self.bowling.roll(5)
-        self.bowling.roll(5)
-        self.bowling.roll(7)
+        self.roll_pins(5, 5, 7)
         self.roll_many(0, 17)
         assert_that(self.bowling.get_score()).is_equal_to(24)
+
+    def roll_pins(self, *pins: int) -> None:
+        for p in pins:
+            self.bowling.roll(p)
 
     def roll_many(self, pins: int, times: int) -> None:
         for i in range(0, times):
