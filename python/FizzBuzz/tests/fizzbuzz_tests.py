@@ -1,7 +1,7 @@
 import unittest
 
 from assertpy import assert_that
-from nose_parameterized import parameterized
+from parameterized import parameterized
 
 from implementation.fizzbuzz import Engine
 
