@@ -17,8 +17,8 @@ class Bowling(object):
                 ball_index += 2
         return score
 
-    def score_frame(self, ball_index):
+    def score_frame(self, ball_index: int) -> int:
         return self.rolls[ball_index] + self.rolls[ball_index + 1]
 
-    def score_spare(self, ball_index):
+    def score_spare(self, ball_index: int) -> int:
         return self.rolls[ball_index + 2]
