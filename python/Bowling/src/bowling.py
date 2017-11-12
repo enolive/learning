@@ -1,3 +1,4 @@
+from functools import reduce
 from typing import Callable, Tuple
 
 
@@ -10,14 +11,20 @@ class Bowling(object):
 
     @property
     def get_score(self) -> int:
-        score, ball_index = 0, 0
-        for frame in range(0, 10):
-            score, ball_index = self.score_frame(ball_index, score)
+        _, score = reduce(
+            lambda acc, _: self.score_frame(acc[0], acc[1]),
+            self.all_frames(),
+            (0, 0)
+        )
         return score
+
+    @staticmethod
+    def all_frames():
+        return range(0, 10)
 
     def score_frame(self, ball_index: int, score: int) -> (int, int):
         ball_index, score = self.get_scoring_function(ball_index)(score)
-        return score, ball_index
+        return ball_index, score
 
     def get_scoring_function(self, ball_index):
         rules = (
