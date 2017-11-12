@@ -26,7 +26,7 @@ class Bowling(object):
         ball_index, score = current_frame
         return self.get_scoring_function(ball_index)(score)
 
-    def get_scoring_function(self, ball_index):
+    def get_scoring_function(self, ball_index: int) -> Callable[[int], Tuple[int, int]]:
         rules = (
             (self.is_strike, self.score_strike),
             (self.is_spare, self.score_spare),
