@@ -12,7 +12,7 @@ class Bowling(object):
     @property
     def get_score(self) -> int:
         _, score = reduce(
-            lambda acc, _: self.score_frame(acc[0], acc[1]),
+            lambda acc, _: self.score_frame(acc),
             self.all_frames(),
             (0, 0)
         )
@@ -22,9 +22,9 @@ class Bowling(object):
     def all_frames():
         return range(0, 10)
 
-    def score_frame(self, ball_index: int, score: int) -> (int, int):
-        ball_index, score = self.get_scoring_function(ball_index)(score)
-        return ball_index, score
+    def score_frame(self, current_frame: Tuple[int, int]) -> (int, int):
+        ball_index, score = current_frame
+        return self.get_scoring_function(ball_index)(score)
 
     def get_scoring_function(self, ball_index):
         rules = (
