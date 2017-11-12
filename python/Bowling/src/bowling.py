@@ -23,12 +23,10 @@ class Bowling(object):
         rules = (
             (self.is_strike, self.score_strike),
             (self.is_spare, self.score_spare),
-            (self.otherwise, self.score_normal_frame),
+            (lambda _: True, self.score_normal_frame),
         )
-
-        rule = filter(lambda r: r[0](ball_index) is True, rules)
-        found = next(rule)
-        return found[1](ball_index)
+        found_rule = next(map(lambda r: r[1], filter(lambda r: r[0](ball_index) is True, rules)))
+        return found_rule(ball_index)
 
     def is_strike(self, ball_index: int) -> bool:
         return self.get_ball_points(ball_index) == 10
@@ -36,20 +34,15 @@ class Bowling(object):
     def is_spare(self, ball_index: int) -> bool:
         return self.get_frame_score(ball_index) == 10
 
-    def otherwise(self, ball_index):
-        return True
-
-    ScoreFunction = Callable[[int], Tuple[int, int]]
-
-    def score_strike(self, ball_index: int) -> ScoreFunction:
+    def score_strike(self, ball_index: int) -> Callable[[int], Tuple[int, int]]:
         return lambda score: (ball_index + 1, score + 10 +
                               self.get_ball_points(ball_index + 1) +
                               self.get_ball_points(ball_index + 2))
 
-    def score_spare(self, ball_index: int) -> ScoreFunction:
+    def score_spare(self, ball_index: int) -> Callable[[int], Tuple[int, int]]:
         return lambda score: (ball_index + 2, score + 10 + self.get_ball_points(ball_index + 2))
 
-    def score_normal_frame(self, ball_index: int) -> ScoreFunction:
+    def score_normal_frame(self, ball_index: int) -> Callable[[int], Tuple[int, int]]:
         return lambda score: (ball_index + 2, score + self.get_frame_score(ball_index))
 
     def get_frame_score(self, ball_index: int) -> int:
