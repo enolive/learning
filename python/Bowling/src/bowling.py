@@ -25,7 +25,7 @@ class Bowling(object):
             (self.is_spare, self.score_spare),
             (lambda _: True, self.score_normal_frame),
         )
-        found_rule = next(map(lambda r: r[1], filter(lambda r: r[0](ball_index) is True, rules)))
+        found_rule = next(map(lambda r: r[1], filter(lambda r: r[0](ball_index), rules)))
         return found_rule(ball_index)
 
     def is_strike(self, ball_index: int) -> bool:
