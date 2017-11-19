@@ -1,7 +1,7 @@
 # Game of Life
 
-This kata was done during the GDCR at SWEC17.
-I finished the implementation using
+This kata was initially done during the GDCR at SWEC17.
+I finished the implementation afterwards using
 Python, NoseTest and Behave for the Feature Specifications.
 
 ## What's hot?
