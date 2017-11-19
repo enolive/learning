@@ -4,13 +4,13 @@ export let generateFizzBuzz = number => {
     //     {appliesTo: isDivisibleBy(3, number), result: 'Fizz'},
     //     {appliesTo: isDivisibleBy(5, number), result: 'Buzz'},
     // ]
-    let r1 = {appliesTo: isDivisibleBy(3, number), result: 'Fizz'}
-    if (true === r1.appliesTo) {
-        result += ((result) ? '-' : '') + r1.result
+    let b = {appliesTo: 3, result: 'Fizz'}
+    if (true === isDivisibleBy(3, number)) {
+        result += ((result) ? '-' : '') + b.result
     }
-    let r2 = {appliesTo: isDivisibleBy(5, number), result: 'Buzz'}
-    if (true === r2.appliesTo) {
-        result += ((result) ? '-' : '') + r2.result
+    let f = {appliesTo: isDivisibleBy(5, number), result: 'Buzz'}
+    if (true === isDivisibleBy(5, number)) {
+        result += ((result) ? '-' : '') + f.result
     }
     return result || number.toString()
 }
