@@ -17,6 +17,12 @@ export let generateFizzBuzz = number => {
     if (!result) return number.toString()
 }
 
+/**
+ * returns result of isDivisibleBy
+ * @param denominator
+ * @param number
+ * @returns {boolean}
+ */
 let isDivisibleBy = (denominator, number) => {
     return number % denominator === 0
 }
