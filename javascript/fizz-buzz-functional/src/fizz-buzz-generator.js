@@ -1,8 +1,11 @@
 export let generateFizzBuzz = number => {
-    const rules = allRules()
+    const rules = [
+        {appliesTo: isDivisibleBy(3, number), result: 'Fizz'},
+        {appliesTo: isDivisibleBy(5, number), result: 'Buzz'},
+    ]
     let result = ''
     for (const r of rules) {
-        if (r.appliesTo(number)) {
+        if (r.appliesTo) {
             if (result) {
                 result += '-'
             }
@@ -12,11 +15,7 @@ export let generateFizzBuzz = number => {
     return result || number.toString()
 }
 
-let allRules = () => [
-    {appliesTo: isDivisibleBy(3), result: 'Fizz'},
-    {appliesTo: isDivisibleBy(5), result: 'Buzz'},
-]
-
-let isDivisibleBy = denominator => number =>
-    number % denominator === 0
+let isDivisibleBy = (denominator, number) => {
+    return number % denominator === 0
+}
 
