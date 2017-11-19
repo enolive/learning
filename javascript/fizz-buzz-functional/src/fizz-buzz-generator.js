@@ -6,8 +6,7 @@ export let generateFizzBuzz = number => {
     ]
     for (const r of rules)
         if (r.appliesTo) {
-            if (result) result += '-'
-            result += r.result
+            result += ((result) ? '-' : '') + r.result
         }
 
     return result || number.toString()
