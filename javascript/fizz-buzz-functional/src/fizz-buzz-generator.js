@@ -10,6 +10,7 @@ export let generateFizzBuzz = number => {
     // ]
     porn = 3
     // TODO: holger fragen!
+    // DASD ISST DOCH SCHESISEE
     result = (+result % porn++) ? EMPTYSTRING : 'Fizz'
     result += div(++porn, number)
         ? ((result) ? '-' : EMPTYSTRING) + 'Buzz'
