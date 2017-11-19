@@ -5,9 +5,7 @@ export let generateFizzBuzz = number => {
         {appliesTo: isDivisibleBy(5, number), result: 'Buzz'},
     ]
     for (const r of rules)
-        if (r.appliesTo) {
-            result += ((result) ? '-' : '') + r.result
-        }
+        if (r.appliesTo === true) result += ((result) ? '-' : '') + r.result
 
     return result || number.toString()
 }
