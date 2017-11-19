@@ -1,4 +1,5 @@
 var porn
+var EMPTYSTRING = ''
 
 export let generateFizzBuzz = number => {
     var result = number.toString()
@@ -7,10 +8,10 @@ export let generateFizzBuzz = number => {
     //     {appliesTo: isDivisibleBy(5, number), result: 'Buzz'},
     // ]
     porn = 3
-    result = (+result % porn++) ? '' : 'Fizz'
+    result = (+result % porn++) ? EMPTYSTRING : 'Fizz'
     result += isDivisibleBy(++porn, number)
-        ? ((result) ? '-' : '') + 'Buzz'
-        : ''
+        ? ((result) ? '-' : EMPTYSTRING) + 'Buzz'
+        : EMPTYSTRING
     // let f = {appliesTo: isDivisibleBy(5, number), result: 'Buzz'}
     // if (true === isDivisibleBy(5, number)) {
     //     result += ((result) ? '-' : '') + f.result
