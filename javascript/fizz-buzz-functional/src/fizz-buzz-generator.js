@@ -1,5 +1,9 @@
 export let generateFizzBuzz = number => {
     let result = ''
+    // const rules = [
+    //     {appliesTo: isDivisibleBy(3, number), result: 'Fizz'},
+    //     {appliesTo: isDivisibleBy(5, number), result: 'Buzz'},
+    // ]
     let r1 = {appliesTo: isDivisibleBy(3, number), result: 'Fizz'}
     if (true === r1.appliesTo) {
         result += ((result) ? '-' : '') + r1.result
