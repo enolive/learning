@@ -4,10 +4,11 @@ export let generateFizzBuzz = number => {
     //     {appliesTo: isDivisibleBy(3, number), result: 'Fizz'},
     //     {appliesTo: isDivisibleBy(5, number), result: 'Buzz'},
     // ]
-    result = !(+result % 3)
+    let porn = 3
+    result = !(+result % porn++)
         ? 'Fizz'
         : ''
-    result += isDivisibleBy(5, number)
+    result += isDivisibleBy(++porn, number)
         ? ((result) ? '-' : '') + 'Buzz'
         : ''
     // let f = {appliesTo: isDivisibleBy(5, number), result: 'Buzz'}
