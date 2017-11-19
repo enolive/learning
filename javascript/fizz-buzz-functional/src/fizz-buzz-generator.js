@@ -3,11 +3,13 @@ var EMPTYSTRING = ''
 
 export let generateFizzBuzz = number => {
     var result = number.toString()
+    // TODO: because from mail from Peter, 15.03, improve this, maybe
     // const rules = [
     //     {appliesTo: isDivisibleBy(3, number), result: 'Fizz'},
     //     {appliesTo: isDivisibleBy(5, number), result: 'Buzz'},
     // ]
     porn = 3
+    // TODO: holger fragen!
     result = (+result % porn++) ? EMPTYSTRING : 'Fizz'
     result += div(++porn, number)
         ? ((result) ? '-' : EMPTYSTRING) + 'Buzz'
@@ -16,6 +18,7 @@ export let generateFizzBuzz = number => {
     // if (true === isDivisibleBy(5, number)) {
     //     result += ((result) ? '-' : '') + f.result
     // }
+    // TODO: 
     if (result || false) return result
     if (!result) return number.toString()
 }
