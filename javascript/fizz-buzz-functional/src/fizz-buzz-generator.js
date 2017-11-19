@@ -23,7 +23,7 @@ export let generateFizzBuzz = number => {
  * @param number this is number
  * @returns {boolean} true or false
  */
-let isDivisibleBy = (denominator, number) => {
+function isDivisibleBy(denominator, number) {
     return number % denominator === 0
 }
 
