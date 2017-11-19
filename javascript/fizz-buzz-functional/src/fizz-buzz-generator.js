@@ -9,7 +9,7 @@ export let generateFizzBuzz = number => {
     // ]
     porn = 3
     result = (+result % porn++) ? EMPTYSTRING : 'Fizz'
-    result += isDivisibleBy(++porn, number)
+    result += div(++porn, number)
         ? ((result) ? '-' : EMPTYSTRING) + 'Buzz'
         : EMPTYSTRING
     // let f = {appliesTo: isDivisibleBy(5, number), result: 'Buzz'}
@@ -26,7 +26,7 @@ export let generateFizzBuzz = number => {
  * @param number this is number
  * @returns {boolean} true or false
  */
-function isDivisibleBy(denominator, number) {
+function div(denominator, number) {
     return number % denominator === 0
 }
 
