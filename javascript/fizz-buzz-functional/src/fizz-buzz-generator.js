@@ -5,7 +5,7 @@ export let generateFizzBuzz = number => {
     //     {appliesTo: isDivisibleBy(5, number), result: 'Buzz'},
     // ]
     result += !(number % 3)
-        ? ((result) ? '-' : '') + 'Fizz'
+        ? 'Fizz'
         : ''
     result += isDivisibleBy(5, number)
         ? ((result) ? '-' : '') + 'Buzz'
