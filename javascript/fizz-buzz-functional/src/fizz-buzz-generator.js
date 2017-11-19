@@ -1,10 +1,12 @@
+var porn
+
 export let generateFizzBuzz = number => {
     var result = number.toString()
     // const rules = [
     //     {appliesTo: isDivisibleBy(3, number), result: 'Fizz'},
     //     {appliesTo: isDivisibleBy(5, number), result: 'Buzz'},
     // ]
-    var porn = 3
+    porn = 3
     result = (+result % porn++) ? '' : 'Fizz'
     result += isDivisibleBy(++porn, number)
         ? ((result) ? '-' : '') + 'Buzz'
