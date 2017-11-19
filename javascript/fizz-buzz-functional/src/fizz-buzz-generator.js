@@ -15,7 +15,8 @@ export let generateFizzBuzz = number => {
     // if (true === isDivisibleBy(5, number)) {
     //     result += ((result) ? '-' : '') + f.result
     // }
-    return result || number.toString()
+    if (result || false) return result
+    if (!result) return number.toString()
 }
 
 let isDivisibleBy = (denominator, number) => {
