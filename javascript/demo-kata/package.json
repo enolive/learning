@@ -1,10 +1,10 @@
 {
   "name": "demo-kata",
   "version": "1.0.0",
-  "description": "",
+  "description": "Just a simple template for doing coding katas with ES6 and Mocha/Chai",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require babel-core/register --watch"
   },
   "keywords": [],
   "author": "",
