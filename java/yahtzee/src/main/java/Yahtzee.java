@@ -11,4 +11,8 @@ public class Yahtzee {
     public int ones() {
         return (int) Arrays.stream(dices).filter(d -> d == 1).count();
     }
+
+    public int twos() {
+        return (int) Arrays.stream(dices).filter(d -> d == 2).count() * 2;
+    }
 }

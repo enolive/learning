@@ -9,4 +9,11 @@ class YahtzeeTest {
         assertThat(new Yahtzee(1, 2, 3, 4, 5).ones()).isEqualTo(1);
         assertThat(new Yahtzee(1, 2, 3, 4, 1).ones()).isEqualTo(2);
     }
+
+    @Test
+    void it_should_score_twos() {
+        assertThat(new Yahtzee(1, 2, 3, 4, 5).twos()).isEqualTo(2);
+        assertThat(new Yahtzee(2, 2, 3, 4, 5).twos()).isEqualTo(4);
+        assertThat(new Yahtzee(2, 2, 2, 4, 5).twos()).isEqualTo(6);
+    }
 }
