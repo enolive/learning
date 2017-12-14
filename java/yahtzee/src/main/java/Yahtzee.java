@@ -62,14 +62,14 @@ public class Yahtzee {
     }
 
     public int smallStraight() {
-        return dicesContainAll(1, 2, 3, 4, 5) 
-                ? sumOfAllDices() 
+        return dicesContainAll(1, 2, 3, 4, 5)
+                ? sumOfAllDices()
                 : 0;
     }
 
     public int largeStraight() {
-        return dicesContainAll(2, 3, 4, 5, 6) 
-                ? sumOfAllDices() 
+        return dicesContainAll(2, 3, 4, 5, 6)
+                ? sumOfAllDices()
                 : 0;
     }
 
@@ -77,8 +77,14 @@ public class Yahtzee {
         return sumOfAllDices();
     }
 
-    private int sumOfAllDices() {
-        return Arrays.stream(dices).sum();
+    public int fullHouse() {
+        long[] pairAndTriple = distinctEyes()
+                .filter(e -> isPair(e) || areThreeOfAKind(e))
+                .mapToLong(Yahtzee::eyesTimesOccurrence)
+                .toArray();
+        return pairAndTriple.length == 2
+                ? (int) Arrays.stream(pairAndTriple).sum()
+                : 0;
     }
 
     private static boolean isPair(Map.Entry<Integer, Long> e) {
@@ -95,6 +101,10 @@ public class Yahtzee {
 
     private static boolean areFourOfAKind(Map.Entry<Integer, Long> e) {
         return e.getValue() == 4;
+    }
+
+    private int sumOfAllDices() {
+        return Arrays.stream(dices).sum();
     }
 
     private boolean dicesContainAll(Integer... eyes) {

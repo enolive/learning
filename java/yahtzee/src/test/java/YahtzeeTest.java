@@ -86,4 +86,11 @@ class YahtzeeTest {
         assertThat(new Yahtzee(4, 3, 4, 2, 6).chance()).isEqualTo(19);
         assertThat(new Yahtzee(1, 5, 3, 1, 6).chance()).isEqualTo(16);        
     }
+
+    @Test
+    void it_should_score_a_full_house() {
+        assertThat(new Yahtzee(5, 5, 5, 5, 5).fullHouse()).isEqualTo(0);
+        assertThat(new Yahtzee(3, 3, 3, 2, 2).fullHouse()).isEqualTo(13);
+        assertThat(new Yahtzee(2, 3, 3, 2, 2).fullHouse()).isEqualTo(12);
+    }
 }
