@@ -37,4 +37,12 @@ class YahtzeeTest {
         assertThat(new Yahtzee(1, 5, 3, 4, 5).fives()).isEqualTo(10);
         assertThat(new Yahtzee(1, 5, 5, 4, 5).fives()).isEqualTo(15);
     }
+
+    @Test
+    void it_should_score_single_pair() {
+        assertThat(new Yahtzee(1, 2, 3, 4, 5).pair()).isEqualTo(0);
+        assertThat(new Yahtzee(1, 1, 3, 4, 5).pair()).isEqualTo(2);
+        assertThat(new Yahtzee(1, 3, 3, 4, 5).pair()).isEqualTo(6);
+        assertThat(new Yahtzee(1, 3, 3, 4, 4).pair()).isEqualTo(8);
+    }
 }
