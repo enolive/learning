@@ -34,15 +34,7 @@ public class Yahtzee {
     }
 
     public int pair() {
-        Map<Integer, Long> groupByEyes = Arrays
-                .stream(dices)
-                .boxed()
-                .collect(Collectors.groupingBy(
-                        Function.identity(), Collectors.counting()));
-        Stream<Map.Entry<Integer, Long>> pairs = groupByEyes.entrySet()
-                                                            .stream()
-                                                            .filter(Yahtzee::isPair);
-        return pairs
+        return pairs()
                 .max(Comparator.comparing(Map.Entry::getKey))
                 .map(Yahtzee::pairValue)
                 .orElse(0L)
@@ -50,20 +42,12 @@ public class Yahtzee {
     }
 
     public int twoPairs() {
-        Map<Integer, Long> groupByEyes = Arrays
-                .stream(dices)
-                .boxed()
-                .collect(Collectors.groupingBy(
-                        Function.identity(), Collectors.counting()));
-        long[] pairValues = groupByEyes.entrySet()
-                                  .stream()
-                                  .filter(Yahtzee::isPair)
-                                  .mapToLong(Yahtzee::pairValue)
-                                  .toArray();
-        if (pairValues.length != 2) {
-            return 0;
-        }
-        return (int) Arrays.stream(pairValues).sum();
+        long[] pairValues = pairs()
+                .mapToLong(Yahtzee::pairValue)
+                .toArray();
+        return pairValues.length != 2
+                ? 0
+                : (int) Arrays.stream(pairValues).sum();
     }
 
     private static boolean isPair(Map.Entry<Integer, Long> e) {
@@ -72,6 +56,21 @@ public class Yahtzee {
 
     private static Long pairValue(Map.Entry<Integer, Long> e) {
         return e.getKey() * e.getValue();
+    }
+
+    private Stream<Map.Entry<Integer, Long>> pairs() {
+        return distinctEyes()
+                .entrySet()
+                .stream()
+                .filter(Yahtzee::isPair);
+    }
+
+    private Map<Integer, Long> distinctEyes() {
+        return Arrays
+                .stream(dices)
+                .boxed()
+                .collect(Collectors.groupingBy(
+                        Function.identity(), Collectors.counting()));
     }
 
     private int countEyesFor(int whichEye) {
