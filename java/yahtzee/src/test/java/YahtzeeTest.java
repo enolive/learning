@@ -80,4 +80,10 @@ class YahtzeeTest {
         assertThat(new Yahtzee(2, 3, 4, 5, 6).largeStraight()).isEqualTo(20);
         assertThat(new Yahtzee(2, 3, 6, 4, 5).largeStraight()).isEqualTo(20);
     }
+
+    @Test
+    void it_should_score_a_chance() {
+        assertThat(new Yahtzee(4, 3, 4, 2, 6).chance()).isEqualTo(19);
+        assertThat(new Yahtzee(1, 5, 3, 1, 6).chance()).isEqualTo(16);        
+    }
 }

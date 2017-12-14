@@ -76,6 +76,14 @@ public class Yahtzee {
 
     }
 
+    public int chance() {
+        return sumOfAllDices();
+    }
+
+    private int sumOfAllDices() {
+        return Arrays.stream(dices).sum();
+    }
+
     private static boolean isPair(Map.Entry<Integer, Long> e) {
         return e.getValue() == 2;
     }
