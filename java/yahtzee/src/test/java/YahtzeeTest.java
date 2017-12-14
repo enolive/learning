@@ -16,4 +16,10 @@ class YahtzeeTest {
         assertThat(new Yahtzee(2, 2, 3, 4, 5).twos()).isEqualTo(4);
         assertThat(new Yahtzee(2, 2, 2, 4, 5).twos()).isEqualTo(6);
     }
+    @Test
+    void it_should_score_threes() {
+        assertThat(new Yahtzee(1, 2, 3, 4, 5).threes()).isEqualTo(3);
+        assertThat(new Yahtzee(1, 2, 3, 4, 3).threes()).isEqualTo(6);
+        assertThat(new Yahtzee(3, 3, 3, 4, 3).threes()).isEqualTo(12);
+    }
 }

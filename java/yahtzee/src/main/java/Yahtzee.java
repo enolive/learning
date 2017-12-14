@@ -21,4 +21,8 @@ public class Yahtzee {
                 .stream(dices).filter(d -> d == whichEye)
                 .count() * whichEye;
     }
+
+    public int threes() {
+        return countEyesFor(3);
+    }
 }
