@@ -40,12 +40,20 @@ public class Yahtzee {
                 .collect(Collectors.groupingBy(
                         Function.identity(), Collectors.counting()));
         return groupByEyes.entrySet()
-                  .stream()
-                  .filter(e -> e.getValue() == 2)
-                  .max(Comparator.comparing(Map.Entry::getKey))
-                  .map(e -> e.getKey() * e.getValue())
-                  .orElse(0L)
-                  .intValue();
+                          .stream()
+                          .filter(Yahtzee::isPair)
+                          .max(Comparator.comparing(Map.Entry::getKey))
+                          .map(Yahtzee::pairValue)
+                          .orElse(0L)
+                          .intValue();
+    }
+
+    private static boolean isPair(Map.Entry<Integer, Long> e) {
+        return e.getValue() == 2;
+    }
+
+    private static Long pairValue(Map.Entry<Integer, Long> e) {
+        return e.getKey() * e.getValue();
     }
 
     private int countEyesFor(int whichEye) {
