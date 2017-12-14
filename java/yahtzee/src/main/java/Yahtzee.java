@@ -36,26 +36,43 @@ public class Yahtzee {
     public int pair() {
         return pairs()
                 .max(Comparator.comparing(Map.Entry::getKey))
-                .map(Yahtzee::pairValue)
+                .map(Yahtzee::eyesTimesOccurrence)
                 .orElse(0L)
                 .intValue();
     }
 
     public int twoPairs() {
         long[] pairValues = pairs()
-                .mapToLong(Yahtzee::pairValue)
+                .mapToLong(Yahtzee::eyesTimesOccurrence)
                 .toArray();
         return pairValues.length != 2
                 ? 0
                 : (int) Arrays.stream(pairValues).sum();
     }
 
+    public int triple() {
+        return (int) triples()
+                .mapToLong(Yahtzee::eyesTimesOccurrence)
+                .sum();
+    }
+
     private static boolean isPair(Map.Entry<Integer, Long> e) {
         return e.getValue() == 2;
     }
 
-    private static Long pairValue(Map.Entry<Integer, Long> e) {
+    private static Long eyesTimesOccurrence(Map.Entry<Integer, Long> e) {
         return e.getKey() * e.getValue();
+    }
+
+    private static boolean isTriple(Map.Entry<Integer, Long> e) {
+        return e.getValue() == 3;
+    }
+
+    private Stream<Map.Entry<Integer, Long>> triples() {
+        return distinctEyes()
+                .entrySet()
+                .stream()
+                .filter(Yahtzee::isTriple);
     }
 
     private Stream<Map.Entry<Integer, Long>> pairs() {
