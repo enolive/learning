@@ -52,13 +52,15 @@ public class Yahtzee {
     public int threeOfAKind() {
         return (int) distinctEyes().filter(Yahtzee::areThreeOfAKind)
                                    .mapToLong(Yahtzee::eyesTimesOccurrence)
-                                   .sum();
+                                   .findFirst()
+                                   .orElse(0L);
     }
 
     public int fourOfAKind() {
         return (int) distinctEyes().filter(Yahtzee::areFourOfAKind)
                                    .mapToLong(Yahtzee::eyesTimesOccurrence)
-                                   .sum();
+                                   .findFirst()
+                                   .orElse(0L);
     }
 
     public int smallStraight() {
@@ -87,6 +89,13 @@ public class Yahtzee {
                 : 0;
     }
 
+    public int yahtzee() {
+        return (int) distinctEyes().filter(Yahtzee::isYahtzee)
+                                   .mapToLong(Yahtzee::eyesTimesOccurrence)
+                                   .findFirst()
+                                   .orElse(0L);
+    }
+
     private static boolean isPair(Map.Entry<Integer, Long> e) {
         return e.getValue() == 2;
     }
@@ -101,6 +110,10 @@ public class Yahtzee {
 
     private static boolean areFourOfAKind(Map.Entry<Integer, Long> e) {
         return e.getValue() == 4;
+    }
+
+    private static boolean isYahtzee(Map.Entry<Integer, Long> e) {
+        return e.getValue() == 5;
     }
 
     private int sumOfAllDices() {
