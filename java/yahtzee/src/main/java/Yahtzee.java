@@ -16,13 +16,13 @@ public class Yahtzee {
         return countEyesFor(2);
     }
 
+    public int threes() {
+        return countEyesFor(3);
+    }
+
     private int countEyesFor(int whichEye) {
         return (int) Arrays
                 .stream(dices).filter(d -> d == whichEye)
                 .count() * whichEye;
-    }
-
-    public int threes() {
-        return countEyesFor(3);
     }
 }
