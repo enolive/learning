@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -55,6 +54,12 @@ public class Yahtzee {
                                    .sum();
     }
 
+    public int fourOfAKind() {
+        return (int) distinctEyes().filter(Yahtzee::areFourOfAKind)
+                                   .mapToLong(Yahtzee::eyesTimesOccurrence)
+                                   .sum();
+    }
+
     private static boolean isPair(Map.Entry<Integer, Long> e) {
         return e.getValue() == 2;
     }
@@ -65,6 +70,10 @@ public class Yahtzee {
 
     private static boolean areThreeOfAKind(Map.Entry<Integer, Long> e) {
         return e.getValue() == 3;
+    }
+
+    private static boolean areFourOfAKind(Map.Entry<Integer, Long> e) {
+        return e.getValue() == 4;
     }
 
     private Stream<Map.Entry<Integer, Long>> distinctEyes() {

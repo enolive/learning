@@ -23,14 +23,14 @@ class YahtzeeTest {
         assertThat(new Yahtzee(1, 2, 3, 4, 3).threes()).isEqualTo(6);
         assertThat(new Yahtzee(3, 3, 3, 4, 3).threes()).isEqualTo(12);
     }
-    
+
     @Test
     void it_should_score_fours() {
         assertThat(new Yahtzee(1, 2, 3, 1, 5).fours()).isEqualTo(0);
         assertThat(new Yahtzee(1, 2, 3, 4, 5).fours()).isEqualTo(4);
         assertThat(new Yahtzee(1, 4, 3, 4, 5).fours()).isEqualTo(8);
     }
-    
+
     @Test
     void it_should_score_fives() {
         assertThat(new Yahtzee(1, 3, 3, 4, 1).fives()).isEqualTo(0);
@@ -58,5 +58,12 @@ class YahtzeeTest {
         assertThat(new Yahtzee(1, 1, 3, 4, 5).threeOfAKind()).isEqualTo(0);
         assertThat(new Yahtzee(1, 1, 1, 4, 5).threeOfAKind()).isEqualTo(3);
         assertThat(new Yahtzee(3, 3, 3, 4, 5).threeOfAKind()).isEqualTo(9);
+    }
+
+    @Test
+    void it_should_score_four_of_a_kind() {
+        assertThat(new Yahtzee(5, 1, 1, 1, 2).fourOfAKind()).isEqualTo(0);
+        assertThat(new Yahtzee(1, 1, 1, 1, 2).fourOfAKind()).isEqualTo(4);
+        assertThat(new Yahtzee(1, 3, 3, 3, 3).fourOfAKind()).isEqualTo(12);
     }
 }
