@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -63,14 +62,19 @@ public class Yahtzee {
     }
 
     public int smallStraight() {
-        Set<Integer> set = Arrays.stream(dices)
-                                 .boxed()
-                                 .collect(Collectors.toSet());
-        if (set.containsAll(Arrays.asList(1, 2, 3, 4, 5))) {
+        if (dicesContainAll(1, 2, 3, 4, 5)) {
             return 15;
         }
         return 0;
-    }   
+    }
+
+    public int largeStraight() {
+        if (dicesContainAll(2, 3, 4, 5, 6)) {
+            return 20;
+        }
+        return 0;
+
+    }
 
     private static boolean isPair(Map.Entry<Integer, Long> e) {
         return e.getValue() == 2;
@@ -86,6 +90,13 @@ public class Yahtzee {
 
     private static boolean areFourOfAKind(Map.Entry<Integer, Long> e) {
         return e.getValue() == 4;
+    }
+
+    private boolean dicesContainAll(Integer... eyes) {
+        Set<Integer> set = Arrays.stream(dices)
+                                 .boxed()
+                                 .collect(Collectors.toSet());
+        return set.containsAll(Arrays.asList(eyes));
     }
 
     private Stream<Map.Entry<Integer, Long>> distinctEyes() {

@@ -73,4 +73,11 @@ class YahtzeeTest {
         assertThat(new Yahtzee(1, 2, 3, 4, 5).smallStraight()).isEqualTo(15);
         assertThat(new Yahtzee(5, 2, 3, 4, 1).smallStraight()).isEqualTo(15);
     }
+
+    @Test
+    void it_should_score_a_large_straight() {
+        assertThat(new Yahtzee(2, 3, 4, 5, 1).largeStraight()).isEqualTo(0);
+        assertThat(new Yahtzee(2, 3, 4, 5, 6).largeStraight()).isEqualTo(20);
+        assertThat(new Yahtzee(2, 3, 6, 4, 5).largeStraight()).isEqualTo(20);
+    }
 }
