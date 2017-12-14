@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="jatzy_main" target="1.8" />
+      <module name="jatzy_test" target="1.8" />
+      <module name="y_main" target="1.8" />
+      <module name="y_test" target="1.8" />
+      <module name="yah_main" target="1.8" />
+      <module name="yah_test" target="1.8" />
+      <module name="yahtz_main" target="1.8" />
+      <module name="yahtz_test" target="1.8" />
+      <module name="yahtzee_main" target="1.8" />
+      <module name="yahtzee_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
