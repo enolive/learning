@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jatzy.iml" filepath="$PROJECT_DIR$/.idea/modules/jatzy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jatzy_main.iml" filepath="$PROJECT_DIR$/.idea/modules/jatzy_main.iml" group="jatzy" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jatzy_test.iml" filepath="$PROJECT_DIR$/.idea/modules/jatzy_test.iml" group="jatzy" />
+    </modules>
+  </component>
+</project>

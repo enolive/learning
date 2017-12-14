@@ -1,0 +1,33 @@
+group 'de.welcz'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        junit_version = '5.+'
+        junit_platform_version = '1.+'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.junit.platform:junit-platform-gradle-plugin:$junit_platform_version"
+    }
+}
+
+apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile "org.junit.jupiter:junit-jupiter-api:$junit_version"
+    testCompile "org.assertj:assertj-core:3.8.0"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    // NOTE: currently required for fancy IDE support
+    // see also https://github.com/joel-costigliola/assertj-core/issues/1072
+    testCompile 'junit:junit:4.12'
+}
