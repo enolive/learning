@@ -20,6 +20,14 @@ public class Yahtzee {
         return countEyesFor(3);
     }
 
+    public int fours() {
+        return countEyesFor(4);
+    }
+
+    public int fives() {
+        return countEyesFor(5);
+    }
+
     private int countEyesFor(int whichEye) {
         return (int) Arrays
                 .stream(dices).filter(d -> d == whichEye)
