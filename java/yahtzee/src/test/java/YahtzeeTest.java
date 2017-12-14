@@ -66,4 +66,11 @@ class YahtzeeTest {
         assertThat(new Yahtzee(1, 1, 1, 1, 2).fourOfAKind()).isEqualTo(4);
         assertThat(new Yahtzee(1, 3, 3, 3, 3).fourOfAKind()).isEqualTo(12);
     }
+
+    @Test
+    void it_should_score_a_small_straight() {
+        assertThat(new Yahtzee(1, 2, 3, 4, 6).smallStraight()).isEqualTo(0);
+        assertThat(new Yahtzee(1, 2, 3, 4, 5).smallStraight()).isEqualTo(15);
+        assertThat(new Yahtzee(5, 2, 3, 4, 1).smallStraight()).isEqualTo(15);
+    }
 }

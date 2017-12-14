@@ -1,5 +1,7 @@
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -60,6 +62,16 @@ public class Yahtzee {
                                    .sum();
     }
 
+    public int smallStraight() {
+        Set<Integer> set = Arrays.stream(dices)
+                                 .boxed()
+                                 .collect(Collectors.toSet());
+        if (set.containsAll(Arrays.asList(1, 2, 3, 4, 5))) {
+            return 15;
+        }
+        return 0;
+    }   
+
     private static boolean isPair(Map.Entry<Integer, Long> e) {
         return e.getValue() == 2;
     }
@@ -88,7 +100,8 @@ public class Yahtzee {
 
     private int countEyesFor(int whichEye) {
         return (int) Arrays
-                .stream(dices).filter(d -> d == whichEye)
+                .stream(dices)
+                .filter(d -> d == whichEye)
                 .count() * whichEye;
     }
 }
