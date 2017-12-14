@@ -45,4 +45,11 @@ class YahtzeeTest {
         assertThat(new Yahtzee(1, 3, 3, 4, 5).pair()).isEqualTo(6);
         assertThat(new Yahtzee(1, 3, 3, 4, 4).pair()).isEqualTo(8);
     }
+
+    @Test
+    void it_should_score_two_pairs() {
+        assertThat(new Yahtzee(4, 4, 2, 3, 5).twoPairs()).isEqualTo(0);
+        assertThat(new Yahtzee(1, 1, 3, 3, 5).twoPairs()).isEqualTo(8);
+        assertThat(new Yahtzee(4, 4, 3, 3, 5).twoPairs()).isEqualTo(14);
+    }
 }
