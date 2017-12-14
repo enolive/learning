@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class Yahtzee {
     private final int[] dices;
 
-    public Yahtzee(int... dices) {
+    Yahtzee(int... dices) {
 
         this.dices = dices;
     }
