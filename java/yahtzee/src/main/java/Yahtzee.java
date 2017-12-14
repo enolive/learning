@@ -34,11 +34,10 @@ public class Yahtzee {
     }
 
     public int pair() {
-        return distinctEyes().filter(Yahtzee::isPair)
-                             .max(Comparator.comparing(Map.Entry::getKey))
-                             .map(Yahtzee::eyesTimesOccurrence)
-                             .orElse(0L)
-                             .intValue();
+        return (int) distinctEyes().filter(Yahtzee::isPair)
+                                   .mapToLong(Yahtzee::eyesTimesOccurrence)
+                                   .max()
+                                   .orElse(0L);
     }
 
     public int twoPairs() {
@@ -50,8 +49,8 @@ public class Yahtzee {
                 : (int) Arrays.stream(pairValues).sum();
     }
 
-    public int triple() {
-        return (int) distinctEyes().filter(Yahtzee::isTriple)
+    public int threeOfAKind() {
+        return (int) distinctEyes().filter(Yahtzee::areThreeOfAKind)
                                    .mapToLong(Yahtzee::eyesTimesOccurrence)
                                    .sum();
     }
@@ -64,7 +63,7 @@ public class Yahtzee {
         return e.getKey() * e.getValue();
     }
 
-    private static boolean isTriple(Map.Entry<Integer, Long> e) {
+    private static boolean areThreeOfAKind(Map.Entry<Integer, Long> e) {
         return e.getValue() == 3;
     }
 

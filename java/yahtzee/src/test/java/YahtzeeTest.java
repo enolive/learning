@@ -54,9 +54,9 @@ class YahtzeeTest {
     }
 
     @Test
-    void it_should_score_triple() {
-        assertThat(new Yahtzee(1, 1, 3, 4, 5).triple()).isEqualTo(0);
-        assertThat(new Yahtzee(1, 1, 1, 4, 5).triple()).isEqualTo(3);
-        assertThat(new Yahtzee(3, 3, 3, 4, 5).triple()).isEqualTo(9);
+    void it_should_score_three_of_a_kind() {
+        assertThat(new Yahtzee(1, 1, 3, 4, 5).threeOfAKind()).isEqualTo(0);
+        assertThat(new Yahtzee(1, 1, 1, 4, 5).threeOfAKind()).isEqualTo(3);
+        assertThat(new Yahtzee(3, 3, 3, 4, 5).threeOfAKind()).isEqualTo(9);
     }
 }
