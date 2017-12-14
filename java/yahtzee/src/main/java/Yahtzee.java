@@ -9,7 +9,6 @@ public class Yahtzee {
     private final int[] dices;
 
     Yahtzee(int... dices) {
-
         this.dices = dices;
     }
 
@@ -100,12 +99,12 @@ public class Yahtzee {
         return e.getValue() == 2;
     }
 
-    private static Long eyesTimesOccurrence(Map.Entry<Integer, Long> e) {
-        return e.getKey() * e.getValue();
-    }
-
     private static boolean areThreeOfAKind(Map.Entry<Integer, Long> e) {
         return e.getValue() == 3;
+    }
+
+    private static Long eyesTimesOccurrence(Map.Entry<Integer, Long> e) {
+        return e.getKey() * e.getValue();
     }
 
     private static boolean areFourOfAKind(Map.Entry<Integer, Long> e) {
@@ -116,15 +115,11 @@ public class Yahtzee {
         return e.getValue() == 5;
     }
 
-    private int sumOfAllDices() {
-        return Arrays.stream(dices).sum();
-    }
-
-    private boolean dicesContainAll(Integer... eyes) {
-        Set<Integer> set = Arrays.stream(dices)
-                                 .boxed()
-                                 .collect(Collectors.toSet());
-        return set.containsAll(Arrays.asList(eyes));
+    private int countEyesFor(int whichEye) {
+        return (int) Arrays
+                .stream(dices)
+                .filter(d -> d == whichEye)
+                .count() * whichEye;
     }
 
     private Stream<Map.Entry<Integer, Long>> distinctEyes() {
@@ -137,10 +132,14 @@ public class Yahtzee {
                 .stream();
     }
 
-    private int countEyesFor(int whichEye) {
-        return (int) Arrays
-                .stream(dices)
-                .filter(d -> d == whichEye)
-                .count() * whichEye;
+    private boolean dicesContainAll(Integer... eyes) {
+        Set<Integer> set = Arrays.stream(dices)
+                                 .boxed()
+                                 .collect(Collectors.toSet());
+        return set.containsAll(Arrays.asList(eyes));
+    }
+
+    private int sumOfAllDices() {
+        return Arrays.stream(dices).sum();
     }
 }
