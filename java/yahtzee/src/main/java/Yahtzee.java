@@ -62,18 +62,15 @@ public class Yahtzee {
     }
 
     public int smallStraight() {
-        if (dicesContainAll(1, 2, 3, 4, 5)) {
-            return 15;
-        }
-        return 0;
+        return dicesContainAll(1, 2, 3, 4, 5) 
+                ? sumOfAllDices() 
+                : 0;
     }
 
     public int largeStraight() {
-        if (dicesContainAll(2, 3, 4, 5, 6)) {
-            return 20;
-        }
-        return 0;
-
+        return dicesContainAll(2, 3, 4, 5, 6) 
+                ? sumOfAllDices() 
+                : 0;
     }
 
     public int chance() {
