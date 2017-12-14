@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Yahtzee {
     private final int[] dices;
 
@@ -7,12 +9,6 @@ public class Yahtzee {
     }
 
     public int ones() {
-        int count = 0;
-        for (int dice : dices) {
-            if (dice == 1) {
-                count++;
-            }
-        }
-        return count;
+        return (int) Arrays.stream(dices).filter(d -> d == 1).count();
     }
 }
