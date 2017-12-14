@@ -3,16 +3,22 @@ import java.util.Arrays;
 public class Yahtzee {
     private final int[] dices;
 
-    public Yahtzee(int ...dices) {
+    public Yahtzee(int... dices) {
 
         this.dices = dices;
     }
 
     public int ones() {
-        return (int) Arrays.stream(dices).filter(d -> d == 1).count();
+        return countEyesFor(1);
     }
 
     public int twos() {
-        return (int) Arrays.stream(dices).filter(d -> d == 2).count() * 2;
+        return countEyesFor(2);
+    }
+
+    private int countEyesFor(int whichEye) {
+        return (int) Arrays
+                .stream(dices).filter(d -> d == whichEye)
+                .count() * whichEye;
     }
 }
