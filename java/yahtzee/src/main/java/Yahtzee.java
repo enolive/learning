@@ -79,12 +79,10 @@ public class Yahtzee {
     }
 
     public int fullHouse() {
-        long[] pairAndTriple = distinctEyes()
-                .filter(e -> isPair(e) || areThreeOfAKind(e))
-                .mapToLong(Yahtzee::eyesTimesOccurrence)
-                .toArray();
-        return pairAndTriple.length == 2
-                ? (int) Arrays.stream(pairAndTriple).sum()
+        int pair = pair();
+        int triple = threeOfAKind();
+        return triple > 0 && pair > 0 
+                ? pair + triple 
                 : 0;
     }
 
