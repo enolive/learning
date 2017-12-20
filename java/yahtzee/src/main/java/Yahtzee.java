@@ -9,12 +9,7 @@ public class Yahtzee {
     private final int[] dices;
 
     Yahtzee(int... dices) {
-        if (dices.length != 5) {
-            throw new IllegalArgumentException("The number of dices must be 5.");
-        }
-        if (dices[0] == 0) {
-            throw new IllegalArgumentException("");
-        }
+        throwOnInvalid(dices);
         this.dices = dices;
     }
 
@@ -87,8 +82,8 @@ public class Yahtzee {
     public int fullHouse() {
         int pair = pair();
         int triple = threeOfAKind();
-        return triple > 0 && pair > 0 
-                ? pair + triple 
+        return triple > 0 && pair > 0
+                ? pair + triple
                 : 0;
     }
 
@@ -117,6 +112,23 @@ public class Yahtzee {
 
     private static boolean isYahtzee(Map.Entry<Integer, Long> e) {
         return e.getValue() == 5;
+    }
+
+    private void throwOnInvalid(int[] dices) {
+        if (!hasValidLength(dices)) {
+            throw new IllegalArgumentException("The number of dices must be 5.");
+        }
+        if (Arrays.stream(dices).anyMatch(dice -> !hasValidEyeCount(dice))) {
+            throw new IllegalArgumentException("The eye count for each dice must be between 1 and 6.");
+        }
+    }
+
+    private boolean hasValidLength(int[] dices) {
+        return (dices.length == 5);
+    }
+
+    private boolean hasValidEyeCount(int dice) {
+        return dice >= 1 && dice <= 6;
     }
 
     private int countEyesFor(int whichEye) {

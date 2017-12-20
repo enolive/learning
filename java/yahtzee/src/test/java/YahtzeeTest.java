@@ -112,6 +112,10 @@ class YahtzeeTest {
 
     @Test
     void it_should_fail_on_invalid_eye_count_of_any_dice() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Yahtzee(0, 1, 1, 1, 1)).withMessage("");
+        String expectedMessage = "The eye count for each dice must be between 1 and 6.";
+        assertThatIllegalArgumentException().isThrownBy(() -> new Yahtzee(0, 1, 1, 1, 1)).withMessage(expectedMessage);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Yahtzee(7, 1, 1, 1, 1)).withMessage(expectedMessage);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Yahtzee(1, 1, 8, 1, 1)).withMessage(expectedMessage);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Yahtzee(1, 1, 1, 1, -1)).withMessage(expectedMessage);
     }
 }
