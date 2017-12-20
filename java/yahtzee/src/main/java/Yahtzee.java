@@ -9,6 +9,12 @@ public class Yahtzee {
     private final int[] dices;
 
     Yahtzee(int... dices) {
+        if (dices.length != 5) {
+            throw new IllegalArgumentException("The number of dices must be 5.");
+        }
+        if (dices[0] == 0) {
+            throw new IllegalArgumentException("");
+        }
         this.dices = dices;
     }
 
