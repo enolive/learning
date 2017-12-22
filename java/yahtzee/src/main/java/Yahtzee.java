@@ -124,7 +124,7 @@ public class Yahtzee {
     }
 
     private boolean hasValidLength(int[] dices) {
-        return (dices.length == 5);
+        return dices.length == 5;
     }
 
     private boolean hasValidEyeCount(int dice) {
