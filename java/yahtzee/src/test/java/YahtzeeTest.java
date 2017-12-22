@@ -108,6 +108,7 @@ class YahtzeeTest {
         String expectedMessage = "The number of dices must be 5.";
         assertThatIllegalArgumentException().isThrownBy(() -> new Yahtzee(1)).withMessage(expectedMessage);
         assertThatIllegalArgumentException().isThrownBy(() -> new Yahtzee(1, 2, 3, 4)).withMessage(expectedMessage);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Yahtzee(1, 2, 3, 4, 5, 1)).withMessage(expectedMessage);
     }
 
     @Test
