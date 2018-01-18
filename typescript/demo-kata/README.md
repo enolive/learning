@@ -10,3 +10,5 @@ nach folgenden Regeln:
 * Zahl ist durch 5 teilbar: Ausgabe "Buzz"
 * Zahl ist durch 3 und 5 teilbar: Ausgabe "Fizz-Buzz"
 * Alle anderen Zahlen: Ausgabe der Zahl selber
+
+# Konfiguration
