@@ -19,7 +19,7 @@ export class FizzBuzzControl {
 
     private static is(limit: number) {
         return {
-            valid: () => !isNaN(limit) && limit <= 1000
+            valid: () => !isNaN(limit) && limit <= 1000,
         }
     }
 }
