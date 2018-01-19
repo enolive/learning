@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {FizzBuzz} from '../src/fizz-buzz'
+import {FizzBuzz} from '../../src/services/fizz-buzz'
 
 describe('Fizz-Buzz', () => {
     let generator: FizzBuzz

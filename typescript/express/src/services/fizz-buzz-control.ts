@@ -9,7 +9,7 @@ export class FizzBuzzControl {
     private generator = new FizzBuzz()
 
     calculateUpTo(limit: number): Observable<string[]> {
-        return !FizzBuzzControl.isValid(limit)
+        return !FizzBuzzControl.is(limit).valid()
             ? Observable.throw(new RangeError('invalid limit'))
             : Observable
                 .range(1, limit)
@@ -17,7 +17,9 @@ export class FizzBuzzControl {
                 .toArray()
     }
 
-    private static isValid(limit: number) {
-        return !isNaN(limit) && limit <= 1000
+    private static is(limit: number) {
+        return {
+            valid: () => !isNaN(limit) && limit <= 1000
+        }
     }
 }

@@ -8,8 +8,7 @@
     "rxjs": "^5.5.6"
   },
   "config": {
-    "port": 3000,
-    "baseUrl": "/api"
+    "PORT": 3040
   },
   "devDependencies": {
     "@types/chai": "^4.1.1",
@@ -17,12 +16,15 @@
     "@types/mocha": "^2.2.46",
     "chai": "^4.1.2",
     "mocha": "^5.0.0",
+    "nodemon": "^1.14.11",
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
     "typescript": "^2.6.2"
   },
   "scripts": {
-    "start": "ts-node server.ts",
+    "start": "run server",
+    "server": "ts-node src/server.ts",
+    "server:watch": "nodemon -e 'ts json' --watch 'src' --exec npm run server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
