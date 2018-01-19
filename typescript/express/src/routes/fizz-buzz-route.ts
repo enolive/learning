@@ -4,7 +4,7 @@ import {FizzBuzzControl} from '../services/fizz-buzz-control'
 const router = express.Router()
 const control = new FizzBuzzControl()
 
-router.get('/:limit', (request, response) => control
+router.get('/numbers/:limit', (request, response) => control
     .calculateUpTo(request.params.limit)
     .subscribe(
         value => response.json(value),
