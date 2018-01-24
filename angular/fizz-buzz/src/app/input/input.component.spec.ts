@@ -14,6 +14,7 @@ describe('InputComponent', () => {
     beforeEach(async(() => {
             const serviceStub = {
                 compute: () => {
+                    return { subscribe: () => {}}
                 },
             }
             TestBed.configureTestingModule({
@@ -29,6 +30,22 @@ describe('InputComponent', () => {
         fixture = TestBed.createComponent(InputComponent)
         component = fixture.componentInstance
         fixture.detectChanges()
+    })
+
+    it('should display error on wrong response', function () {
+        const spy = TestBed.get(FizzBuzzService)
+        spyOn(spy, 'compute').and.returnValue(Observable.throw(new Error('I AM ERROR')))
+        component.startComputation()
+        expect(component.hasErrors).toEqual(true)
+        expect(component.errorMessage).toEqual('I AM ERROR')
+    })
+
+    it('should reset error state on each computation', function () {
+        component.hasErrors = true
+        component.errorMessage = 'Something'
+        component.startComputation()
+        expect(component.hasErrors).toEqual(false)
+        expect(component.errorMessage).toEqual('')
     })
 
     it('should invoke service on computation', () => {

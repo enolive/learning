@@ -10,6 +10,7 @@ describe('Fizz-Buzz Control', () => {
         // noinspection TypeScriptValidateTypes
         expect(() => control.calculateUpTo(NaN).subscribe()).to.throw(RangeError)
         expect(() => control.calculateUpTo(1001).subscribe()).to.throw(RangeError)
+        expect(() => control.calculateUpTo(0).subscribe()).to.throw(RangeError)
     })
 
     it('should return the expected results', () => {

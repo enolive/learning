@@ -1,5 +1,8 @@
 <form (submit)="startComputation()">
-  <label>Maximum:</label>
-  <input name="limit" type="number" placeholder="1 bis 1000" [(ngModel)]="limit">
-  <button class="btn btn-primary">Los!</button>
+    <label>Maximum:</label>
+    <input name="limit" type="number" placeholder="1 bis 1000" [(ngModel)]="limit">
+    <button class="btn btn-primary">Los!</button>
 </form>
+<div class="alert-danger" *ngIf="hasErrors">
+    {{errorMessage}}
+</div> 
