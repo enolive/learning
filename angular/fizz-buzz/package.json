@@ -10,7 +10,9 @@
     "start:client": "cd frontend && npm start",
     "start:server": "cd backend && npm start",
     "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:client": "cd frontend && npm test",
+    "test:server": "cd backend && npm test",
+    "test": "npm run test:server && npm run test:client"
   },
   "keywords": [],
   "author": "",

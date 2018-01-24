@@ -26,7 +26,8 @@
     "start": "npm run server",
     "server": "ts-node src/server.ts",
     "server:watch": "nodemon -e 'ts json' --watch 'src' --exec npm run server",
-    "test": "mocha --watch --watch-extensions ts --require ts-node/register test/**/*.ts"
+    "test": "mocha --require ts-node/register test/**/*.ts",
+    "test:watch": "mocha --watch --watch-extensions ts --require ts-node/register test/**/*.ts"
   },
   "keywords": [],
   "author": "",
