@@ -1,4 +1,4 @@
-import {FizzBuzzControl} from '../../src/services/fizz-buzz-control'
+import {FizzBuzzControl} from '../../src/control/fizz-buzz-control'
 import {expect} from 'chai'
 
 describe('Fizz-Buzz Control', () => {

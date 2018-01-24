@@ -6,10 +6,10 @@ import {Component} from '@angular/core'
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Fizz-Foo-Zazz-Buzz'
-  computationResult: string
+  title = 'Fizz-Buzz'
+  results: string[]
 
-  onComputationCompleted(event: string) {
-    this.computationResult = event
+  onComputationCompleted(event: string[]) {
+    this.results = event
   }
 }

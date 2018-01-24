@@ -1,29 +1,16 @@
 import {Injectable} from '@angular/core'
+import {HttpClient} from '@angular/common/http'
+import {Observable} from 'rxjs/Observable'
 
 @Injectable()
 export class FizzBuzzService {
-  compute(input: number) {
-    const resultList = this.ruleSet()
-      .filter(r => r.appliesTo(input))
-      .map(r => r.result)
-      .join('-')
-    return resultList || input.toString()
-  }
+    private baseUrl = 'http://localhost:3040/api/fizz-buzz'
 
-  private ruleSet(): [{ appliesTo: (input: number) => boolean; result: string }] {
-    return [
-      {appliesTo: this.numberDivisibleBy(3), result: 'Fizz'},
-      {appliesTo: this.numberContains(27), result: 'Foo'},
-      {appliesTo: this.numberDivisibleBy(5), result: 'Zazz'},
-      {appliesTo: this.numberDivisibleBy(7), result: 'Buzz'},
-    ]
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  private numberDivisibleBy(denominator: number) {
-    return input => input % denominator === 0
-  }
-
-  private numberContains(contains: number) {
-    return input => input.toString().includes(contains)
-  }
+    compute(limit: number): Observable<string[]> {
+        return this.http
+            .get<string[]>(`${this.baseUrl}/numbers/${limit}`)
+    }
 }

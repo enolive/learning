@@ -1,5 +1,5 @@
 import * as express from 'express'
-import {FizzBuzzControl} from '../services/fizz-buzz-control'
+import {FizzBuzzControl} from '../control/fizz-buzz-control'
 
 const router = express.Router()
 const control = new FizzBuzzControl()

@@ -8,13 +8,13 @@ import {Component, Input} from '@angular/core'
 export class OutputComponent {
 
   @Input()
-  computationResult = ''
+  results = []
 
   hasResult() {
-    if (!this.computationResult) {
+    if (!this.results) {
       return false
     }
 
-    return this.computationResult.length > 0
+    return this.results.length > 0
   }
 }

@@ -20,17 +20,17 @@ describe('OutputComponent', () => {
   })
 
   it('should have no result when output is missing', () => {
-    component.computationResult = null
+    component.results = null
     expect(component.hasResult()).toEqual(false)
   })
 
   it('should have no result when result is empty', () => {
-    component.computationResult = ''
+    component.results = []
     expect(component.hasResult()).toEqual(false)
   })
 
   it('should have result when result exists', () => {
-    component.computationResult = 'Something'
+    component.results = ['1']
     expect(component.hasResult()).toEqual(true)
   })
 

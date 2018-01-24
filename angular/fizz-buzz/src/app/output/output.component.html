@@ -1,3 +1,6 @@
-<p *ngIf="hasResult()">
-  Du bekommst: {{computationResult}}
-</p>
+<div *ngIf="hasResult()">
+    <div class="list-group">
+        <h5 class="list-group-item list-group-item-primary">Du bekommst:</h5>
+        <p *ngFor="let result of results" class="list-group-item">{{result}}</p>
+    </div>
+</div>

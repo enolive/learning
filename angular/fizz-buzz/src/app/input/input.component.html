@@ -1,5 +1,5 @@
 <form (submit)="startComputation()">
-  <label>Gib mir ne Zahl:</label>
-  <input name="oneNumberInput" type="number" [(ngModel)]="oneNumber">
-  <button>Los!</button>
+  <label>Maximum:</label>
+  <input name="limit" type="number" placeholder="1 bis 1000" [(ngModel)]="limit">
+  <button class="btn btn-primary">Los!</button>
 </form>
