@@ -11,6 +11,13 @@ npm install
 npm start
 ```
 
+## How to run the tests
+
+```
+# make sure backend is running as I've added one API test to the client
+npm test
+```
+
 ## What I've learned
 
 * work with Observables
