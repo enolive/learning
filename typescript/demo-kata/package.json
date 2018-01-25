@@ -4,9 +4,12 @@
   "scripts": {
     "test": "mocha --require ts-node/register --reporter nyan test/**/*.ts --watch --watch-extensions ts"
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.17.4"
+  },
   "devDependencies": {
     "@types/chai": "^4.1.2",
+    "@types/lodash": "^4.14.96",
     "@types/mocha": "^2.2.47",
     "chai": "^4.1.2",
     "mocha": "^5.0.0",
