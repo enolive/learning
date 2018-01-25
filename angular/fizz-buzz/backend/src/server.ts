@@ -1,5 +1,7 @@
 import * as express from 'express'
 import fizz_buzz_route from './boundary/fizz-buzz-route'
+import {getBaseUri, getPort} from './read-config'
+import * as url from 'url'
 
 const startServer = () => {
     const app = express()
@@ -17,18 +19,16 @@ const startServer = () => {
             .send(message('unknown command'))
     })
 
-    const port = getPort()
+    const result = url.parse(getBaseUri())
+    const port = +result.port
+    const host = result.hostname
 
-    console.log(`listening to port ${port}... (press Ctrl+C to cancel)`)
-    app.listen(port)
+    app.listen(port, host, () => {
+        console.log(`listening on ${port} ${host}.. (press Ctrl+C to cancel)`)
+    })
 
 }
-const getPort = () => {
-    const value = +process.env.npm_package_config_PORT
-    return isNaN(value) || !value
-        ? 3000
-        : value
-}
+
 const message = (m: string) => ({message: m})
 
 startServer()
