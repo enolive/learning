@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 
-describe('Fizz-Buzz Generator', () => {
+describe('Framework', () => {
     it('should do something', () => {
         expect(true).to.equal(false)
     })
