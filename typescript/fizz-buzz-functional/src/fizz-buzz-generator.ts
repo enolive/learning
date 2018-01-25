@@ -1,24 +1,25 @@
 export class FizzBuzzGenerator {
+    private rules = [
+        {appliesTo: this.numberDivisibleBy(3), result: 'Fizz'},
+        {appliesTo: this.numberDivisibleBy(5), result: 'Buzz'},
+        {appliesTo: this.contains(27), result: 'Porn'},
+        {appliesTo: this.numberDivisibleBy(7), result: 'Zazz'},
+    ]
+
     generate(input: number) {
-        const resultSequence = this.allTheRules()
+        return this.rules
             .filter(r => r.appliesTo(input))
             .map(r => r.result)
-        return resultSequence.length !== 0
-            ? resultSequence.join('-')
-            : input.toString()
+            .join('-') || input.toString()
     }
 
-    private allTheRules(): Array<{ appliesTo: (input: number) => boolean, result: string }> {
-        const numberDivisibleBy = denominator => input =>
+    private numberDivisibleBy(denominator: number) {
+        return (input: number) =>
             input !== 0 && input % denominator === 0
-        const contains = infix => input =>
-            input.toString().includes(infix)
+    }
 
-        return [
-            {appliesTo: numberDivisibleBy(3), result: 'Fizz'},
-            {appliesTo: numberDivisibleBy(5), result: 'Buzz'},
-            {appliesTo: contains(27), result: 'Porn'},
-            {appliesTo: numberDivisibleBy(7), result: 'Zazz'},
-        ]
+    private contains(infix: number) {
+        return (input: number) =>
+            input.toString().includes(infix.toString())
     }
 }

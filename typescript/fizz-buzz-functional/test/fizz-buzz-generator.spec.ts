@@ -37,7 +37,7 @@ describe('Fizz-Buzz Generator', () => {
     it('should return Fizz-Buzz-Zazz', () => {
         expect(generator.generate(105)).to.equal('Fizz-Buzz-Zazz')
     })
-    
+
     it('should return Fizz-Buzz-Porn-Zazz', () => {
         expect(generator.generate(2730)).to.equal('Fizz-Buzz-Porn-Zazz')
     })
