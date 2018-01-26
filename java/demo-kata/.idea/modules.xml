@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/demo-kata.iml" filepath="$PROJECT_DIR$/demo-kata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fizzbuzz.iml" filepath="$PROJECT_DIR$/.idea/modules/fizzbuzz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fizzbuzz_main.iml" filepath="$PROJECT_DIR$/.idea/modules/fizzbuzz_main.iml" group="fizzbuzz" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fizzbuzz_test.iml" filepath="$PROJECT_DIR$/.idea/modules/fizzbuzz_test.iml" group="fizzbuzz" />
     </modules>
   </component>
 </project>
