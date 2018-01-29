@@ -1,8 +1,0 @@
-{
-  "timestamp": 1517248440656,
-  "status": 500,
-  "error": "Internal Server Error",
-  "exception": "kotlin.NotImplementedError",
-  "message": "An operation is not implemented: not implemented",
-  "path": "/fizz-buzz/numbers/100"
-}
