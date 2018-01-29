@@ -26,7 +26,6 @@ class FizzBuzzInKotlin : FizzBuzzService {
             .joinToString("-") { it.result }
             .orIfEmpty { number.toString() }
 
-    private fun String.orIfEmpty(alternative: () -> String): String {
-        return if (isEmpty()) alternative() else this
-    }
+    private fun String.orIfEmpty(alternative: () -> String) = 
+            if (isEmpty()) alternative() else this
 }

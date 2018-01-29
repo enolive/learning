@@ -39,9 +39,7 @@ public class FizzBuzzInJava implements FizzBuzzService {
     }
 
     private String orIfEmpty(String result, Supplier<String> alternative) {
-        return result.isEmpty()
-                ? alternative.get()
-                : result;
+        return result.isEmpty() ? alternative.get() : result;
     }
 
     private class Rule {
