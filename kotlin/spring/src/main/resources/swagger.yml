@@ -1,0 +1,30 @@
+swagger: "2.0"
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+paths:
+  /fizz-buzz/numbers/:limit:
+    get:
+      summary: gets fizz-buzz numbers up to the specified limit
+      operationId: getNumbers
+      tags:
+        - FizzBuzzController
+      parameters:
+        - name: limit
+          description: the upper limit of the calculation
+          type: integer
+          minimum: 1
+          maximum: 1000
+      responses:
+        "200":
+          description: Ok
+          schema:
+            type: array
+            items:
+              type: string
+            example:
+              ["1", "2", "Fizz", "4", "Buzz"]
+        "400":
+          description: Bad Request

@@ -10,6 +10,7 @@ class FizzBuzzController @Autowired
 constructor(private val fizzBuzz: FizzBuzzService) {
     @RequestMapping("/fizz-buzz/numbers/{limit}")
     fun getNumbers(@PathVariable("limit") limit: Int): Array<String> {
+        require(limit in 1..1000) { "limit must be between 1 and 1000" }
         return fizzBuzz.calculateUpTo(limit)
     }
 }
