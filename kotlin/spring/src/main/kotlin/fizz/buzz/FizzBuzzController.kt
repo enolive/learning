@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
-@CrossOrigin(origins = ["http://localhost:4200"])
 @RestController
 class FizzBuzzController @Autowired
 constructor(private val fizzBuzz: FizzBuzzService) {
