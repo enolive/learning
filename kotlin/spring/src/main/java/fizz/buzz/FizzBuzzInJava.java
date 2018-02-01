@@ -1,6 +1,6 @@
-package hello;
+package fizz.buzz;
 
-import org.springframework.stereotype.Service;
+import fizz.buzz.FizzBuzzService;
 
 import java.util.Arrays;
 import java.util.List;

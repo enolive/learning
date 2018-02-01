@@ -28,3 +28,12 @@ paths:
               ["1", "2", "Fizz", "4", "Buzz"]
         "400":
           description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    properties:
+      message:
+        type: string
+      url:
+        type: string      
