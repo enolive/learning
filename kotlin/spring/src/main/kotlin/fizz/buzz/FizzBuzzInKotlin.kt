@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service
 class FizzBuzzInKotlin : FizzBuzzService {
     private val rules = arrayOf(
             Rule(isDivisibleBy(3), "Fizz"),
-            Rule(isDivisibleBy(5), "Buzz")
+            Rule(isDivisibleBy(5), "Buzz"),
+            Rule(isDivisibleBy(7), "Zazz")
     )
 
     override fun calculateUpTo(limit: Int) =
@@ -19,7 +20,7 @@ class FizzBuzzInKotlin : FizzBuzzService {
 
     private data class Rule(val appliesTo: (Int) -> Boolean, val result: String)
 
-    private fun calculate(number: Int) =
+    fun calculate(number: Int) =
         rules
             .filter { it.appliesTo(number) }
             .joinToString("-") { it.result }

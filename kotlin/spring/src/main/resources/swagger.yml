@@ -1,9 +1,10 @@
 swagger: "2.0"
 schemes:
   - http
-  - https
 produces:
   - application/json
+host: localhost:3040
+basePath: /api
 paths:
   /fizz-buzz/numbers/:limit:
     get:
@@ -27,13 +28,30 @@ paths:
             example:
               ["1", "2", "Fizz", "4", "Buzz"]
         "400":
-          description: Bad Request
+          description: Invalid Parameters
           schema:
             $ref: '#/definitions/Error'
 definitions:
   Error:
+    type: object
     properties:
+      timestamp:
+        type: integer
+      status:
+        type: integer
+        description: HTTP status code
+        example:
+          200
+          400
+      error:
+        type: string
+        description: human readable HTTP status code
       message:
         type: string
-      url:
-        type: string      
+        description: short reason for the error
+      exception:
+        type: string
+        description: The exception being thrown
+      path:
+        type: string
+        description: The URL that was requested
