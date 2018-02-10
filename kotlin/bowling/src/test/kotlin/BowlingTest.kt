@@ -13,7 +13,7 @@ class BowlingTest {
     @Test
     fun `it should score a gutter game`() {
         rollMany(0, 20)
-        assertThat(bowling.score).isEqualTo(0)
+        assertThat(bowling.score).isEqualTo(10)
     }
 
     @Test

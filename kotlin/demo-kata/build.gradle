@@ -3,7 +3,7 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     ext {
-        kotlin_version = '1.2.0'
+        kotlin_version = '1.2.+'
         junit_version = '5.+'
         junit_platform_version = '1.+'
     }
@@ -26,13 +26,10 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    testCompile 'org.assertj:assertj-core:3.8.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    testCompile 'org.assertj:assertj-core:3.9.0'
     testCompile "org.junit.jupiter:junit-jupiter-api:$junit_version"
     testRuntime "org.junit.jupiter:junit-jupiter-engine:$junit_version"
-    // NOTE: currently required for fancy IDE support
-    // see also https://github.com/joel-costigliola/assertj-core/issues/1072
-    testCompile 'junit:junit:4.12'
 }
 
 compileKotlin {
