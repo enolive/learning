@@ -1,6 +1,6 @@
 module Lib
-    ( someFunc
+    ( generateFor
     ) where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+generateFor :: Int -> String
+generateFor n = "1"
