@@ -4,7 +4,8 @@ import Test.Hspec.Runner (hspec)
 import FizzBuzz (generateFor)
 
 main :: IO ()
-main = hspec $
+main =
+  hspec $
   describe "Fizz-Buzz Generator" $ do
     it "should return normal numbers as is" $ do
       generateFor 1 `shouldBe` "1"
