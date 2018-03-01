@@ -1,6 +1,6 @@
-module Lib
+module FizzBuzz
     ( generateFor
     ) where
 
 generateFor :: Int -> String
-generateFor n = "1"
+generateFor n = show n
