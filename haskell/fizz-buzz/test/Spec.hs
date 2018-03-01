@@ -12,3 +12,6 @@ main = hspec $
     it "should return numbers divisible by 3 as Fizz" $ do
       generateFor 3 `shouldBe` "Fizz"
       generateFor 6 `shouldBe` "Fizz"
+    it "should return numbers divisible by 5 as Buzz" $ do
+      generateFor 5 `shouldBe` "Buzz"
+      generateFor 10 `shouldBe` "Buzz"

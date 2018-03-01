@@ -4,6 +4,7 @@ module FizzBuzz
 
 generateFor :: Int -> String
 generateFor n
+  | n `divisibleBy` 5 = "Buzz"
   | n `divisibleBy` 3 = "Fizz"
   | otherwise = show n
 
