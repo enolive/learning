@@ -14,10 +14,8 @@ numbersDivisibleBy :: Int -> Int -> Bool
 numbersDivisibleBy d n = n `mod` d == 0
 
 generateFor :: Int -> String
-generateFor n
-  | null resultList = show n
-  | otherwise = intercalate "-" resultList
-  where
-    resultList = map getResult . filter (`appliesTo` n) $ rules
-    getResult = snd
-    appliesTo (a, _) = a
+generateFor n = interHyphen n [result | (appliesTo, result) <- rules, appliesTo n]
+
+interHyphen :: Int -> [String] -> String
+interHyphen defaultValue [] = show defaultValue
+interHyphen _ xs = intercalate "-" xs
