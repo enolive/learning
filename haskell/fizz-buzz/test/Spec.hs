@@ -9,5 +9,6 @@ main = hspec $
     it "should return normal numbers as is" $ do
       generateFor 1 `shouldBe` "1"
       generateFor 2 `shouldBe` "2"
-    it "should return 3 as Fizz" $ do
+    it "should return numbers divisible by 3 as Fizz" $ do
       generateFor 3 `shouldBe` "Fizz"
+      generateFor 6 `shouldBe` "Fizz"
