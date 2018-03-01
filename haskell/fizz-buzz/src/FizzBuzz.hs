@@ -5,7 +5,7 @@ module FizzBuzz
 import Data.List (intercalate)
 
 generateFor :: Int -> String
-generateFor n = interHyphen n [result | (appliesTo, result) <- rules, appliesTo n]
+generateFor input = interHyphen input [result | (appliesTo, result) <- rules, appliesTo input]
 
 rules :: [(Int -> Bool, String)]
 rules = [
@@ -14,7 +14,7 @@ rules = [
   ]
 
 numbersDivisibleBy :: Int -> Int -> Bool
-numbersDivisibleBy d n = n `mod` d == 0
+numbersDivisibleBy divisor number = number `mod` divisor == 0
 
 interHyphen :: Int -> [String] -> String
 interHyphen defaultValue [] = show defaultValue
