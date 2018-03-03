@@ -1,10 +1,14 @@
 module HelloWorld
   ( greet
-  , greetWorld
+  , defaultPerson
+  , name
   ) where
 
-greet :: String -> String
-greet name = "Hello, " ++ name ++ "!"
+newtype Person = Person
+  { name :: String
+  }
 
-greetWorld :: String
-greetWorld = greet "World"
+defaultPerson = Person {name = "World"}
+
+greet :: Person -> String
+greet p = "Hello, " ++ name p ++ "!"
