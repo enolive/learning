@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: cd0767f86971aaaea2746fdabf37bce9b9349db0363985eb59baebac613fcbad
+-- hash: 08b548c261628c71132c6d812d45364f41c5e658d008184dc93242e19d7cd258
 
 name:           demo-kata
 version:        0.1.0.0
@@ -31,7 +31,7 @@ library
   build-depends:
       base >=4.7 && <5
   exposed-modules:
-      FizzBuzz
+      HelloWorld
   other-modules:
       Paths_demo_kata
   default-language: Haskell2010
@@ -47,6 +47,6 @@ test-suite demo-kata-test
     , demo-kata
     , hspec
   other-modules:
-      FizzBuzzSpec
+      HelloWorldSpec
       Paths_demo_kata
   default-language: Haskell2010
