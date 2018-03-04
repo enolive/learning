@@ -8,6 +8,7 @@ newtype Person = Person
   { name :: String
   }
 
+defaultPerson :: Person
 defaultPerson = Person {name = "World"}
 
 greet :: Person -> String
