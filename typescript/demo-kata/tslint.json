@@ -31,6 +31,10 @@
           "private-instance-method"
         ]
       }
+    ],
+    "variable-name": [
+      true,
+      "allow-leading-underscore"
     ]
   },
   "rulesDirectory": []
