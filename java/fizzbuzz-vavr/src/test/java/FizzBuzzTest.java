@@ -37,7 +37,7 @@ class FizzBuzzTest {
     }
 
     @Test
-    void seuence_should_contain_the_expected_values() {
+    void sequence_should_contain_the_expected_values() {
         assertThat(fizzBuzz.sequence().take(15))
                 .containsExactly("1", "2", "Fizz", "4",
                         "Buzz", "Fizz", "7", "8",
