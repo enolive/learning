@@ -54,4 +54,14 @@ public class RomanToArabicTest {
         assertThat(converter.toArabic("M")).isEqualTo(1000);
         assertThat(converter.toArabic("MCMLXXVIII")).isEqualTo(1978);
     }
+
+    @Test
+    void it_should_convert_according_to_subtraction_rules() {
+        assertThat(converter.toArabic("IV")).isEqualTo(4);
+        assertThat(converter.toArabic("IX")).isEqualTo(9);
+        assertThat(converter.toArabic("XL")).isEqualTo(40);
+        assertThat(converter.toArabic("XC")).isEqualTo(90);
+        assertThat(converter.toArabic("CD")).isEqualTo(400);
+        assertThat(converter.toArabic("CM")).isEqualTo(900);
+    }
 }
