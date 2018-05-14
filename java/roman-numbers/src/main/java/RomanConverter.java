@@ -26,38 +26,9 @@ public class RomanConverter {
     }
 
     public int toArabic(String input) {
-        var result = 0;
-        var romanToArabicConversion = new RomanToArabicConversion(input, result);
+        var romanToArabicConversion = new RomanToArabicConversion(input);
         romanToArabicConversion = romanToArabicConversion.apply("V", 5);
         romanToArabicConversion = romanToArabicConversion.apply("I", 1);
         return romanToArabicConversion.getResult();
-    }
-
-    private class RomanToArabicConversion {
-        private String input;
-        private int result;
-
-        public RomanToArabicConversion(String input, int result) {
-            this.input = input;
-            this.result = result;
-        }
-
-        public String getInput() {
-            return input;
-        }
-
-        public int getResult() {
-            return result;
-        }
-
-        public RomanToArabicConversion apply(String roman, int arabic) {
-            var newResult = result;
-            var newInput = input;
-            while (newInput.startsWith(roman)) {
-                newResult = newResult + arabic;
-                newInput = newInput.substring(roman.length());
-            }
-            return new RomanToArabicConversion(newInput, newResult);
-        }
     }
 }
