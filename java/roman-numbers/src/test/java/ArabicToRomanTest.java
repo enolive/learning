@@ -33,4 +33,10 @@ class ArabicToRomanTest {
         assertThat(converter.toRoman(20)).isEqualTo("XX");
         assertThat(converter.toRoman(36)).isEqualTo("XXXVI");
     }
+
+    @Test
+    void it_should_convert_according_to_subtraction_rules() {
+        assertThat(converter.toRoman(4)).isEqualTo("IV");
+        assertThat(converter.toRoman(9)).isEqualTo("IX");
+    }
 }

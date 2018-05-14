@@ -17,10 +17,10 @@ class ArabicToRomanConversion {
         return String.join("", digits);
     }
 
-    ArabicToRomanConversion apply(int arabic, String roman) {
-        final var numberOfDigits = remainingInput / arabic;
-        final var digits = this.digits.appendAll(repeat(numberOfDigits, roman));
-        final var remainingInput = this.remainingInput % arabic;
+    ArabicToRomanConversion apply(Rule rule) {
+        final var numberOfDigits = remainingInput / rule.getArabic();
+        final var digits = this.digits.appendAll(repeat(numberOfDigits, rule.getRoman()));
+        final var remainingInput = this.remainingInput % rule.getArabic();
         return new ArabicToRomanConversion(remainingInput, digits);
     }
 
