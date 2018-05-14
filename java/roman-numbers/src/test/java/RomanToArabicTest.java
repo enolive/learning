@@ -15,5 +15,7 @@ public class RomanToArabicTest {
     @Test
     void it_should_convert_Is_to_1s() {
         assertThat(converter.toArabic("I")).isEqualTo(1);
+        assertThat(converter.toArabic("II")).isEqualTo(2);
+        assertThat(converter.toArabic("III")).isEqualTo(3);
     }
 }
