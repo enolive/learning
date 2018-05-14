@@ -24,4 +24,10 @@ public class RomanToArabicTest {
         assertThat(converter.toArabic("V")).isEqualTo(5);
         assertThat(converter.toArabic("VIII")).isEqualTo(8);
     }
+
+    @Test
+    void it_should_convert_Xs_to_10s() {
+        assertThat(converter.toArabic("X")).isEqualTo(10);
+        assertThat(converter.toArabic("XXVII")).isEqualTo(27);
+    }
 }
