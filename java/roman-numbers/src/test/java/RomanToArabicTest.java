@@ -30,4 +30,10 @@ public class RomanToArabicTest {
         assertThat(converter.toArabic("X")).isEqualTo(10);
         assertThat(converter.toArabic("XXVII")).isEqualTo(27);
     }
+
+    @Test
+    void it_should_convert_L_to_50() {
+        assertThat(converter.toArabic("L")).isEqualTo(50);
+        assertThat(converter.toArabic("LXXXVI")).isEqualTo(86);
+    }
 }

@@ -26,10 +26,9 @@ public class RomanConverter {
     }
 
     public int toArabic(String input) {
-        var romanToArabicConversion = new RomanToArabicConversion(input);
-        romanToArabicConversion = romanToArabicConversion.apply("X", 10);
-        romanToArabicConversion = romanToArabicConversion.apply("V", 5);
-        romanToArabicConversion = romanToArabicConversion.apply("I", 1);
-        return romanToArabicConversion.getResult();
+        return rules
+                .foldLeft(new RomanToArabicConversion(input), (acc, rule) -> acc.apply(rule.getRoman(), rule.getArabic()))
+                .getResult();
+
     }
 }
