@@ -22,5 +22,6 @@ public class RomanToArabicTest {
     @Test
     void it_should_convert_V_to_5() {
         assertThat(converter.toArabic("V")).isEqualTo(5);
+        assertThat(converter.toArabic("VIII")).isEqualTo(8);
     }
 }

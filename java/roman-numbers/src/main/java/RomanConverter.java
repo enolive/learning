@@ -1,7 +1,5 @@
 import io.vavr.collection.List;
 
-import java.util.Objects;
-
 public class RomanConverter {
     private final List<Rule> rules = List.of(
             new Rule(1000, "M"),
@@ -29,14 +27,40 @@ public class RomanConverter {
 
     public int toArabic(String input) {
         var result = 0;
-        if (input == "V") {
-            return 5;
-        }
+        RomanToArabicConversion romanToArabicConversion = new RomanToArabicConversion(input, result).invoke();
+        input = romanToArabicConversion.getInput();
+        result = romanToArabicConversion.getResult();
         while (input.startsWith("I")) {
             result = result + 1;
             input = input.substring("I".length());
         }
         return result;
 
+    }
+
+    private class RomanToArabicConversion {
+        private String input;
+        private int result;
+
+        public RomanToArabicConversion(String input, int result) {
+            this.input = input;
+            this.result = result;
+        }
+
+        public String getInput() {
+            return input;
+        }
+
+        public int getResult() {
+            return result;
+        }
+
+        public RomanToArabicConversion invoke() {
+            while (input.startsWith("V")) {
+                result = result + 5;
+                input = input.substring("V".length());
+            }
+            return this;
+        }
     }
 }
