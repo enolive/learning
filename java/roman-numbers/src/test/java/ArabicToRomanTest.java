@@ -38,5 +38,33 @@ class ArabicToRomanTest {
     void it_should_convert_according_to_subtraction_rules() {
         assertThat(converter.toRoman(4)).isEqualTo("IV");
         assertThat(converter.toRoman(9)).isEqualTo("IX");
+        assertThat(converter.toRoman(40)).isEqualTo("XL");
+        assertThat(converter.toRoman(90)).isEqualTo("XC");
+        assertThat(converter.toRoman(400)).isEqualTo("CD");
+        assertThat(converter.toRoman(900)).isEqualTo("CM");
+    }
+
+    @Test
+    void it_should_convert_50_to_L() {
+        assertThat(converter.toRoman(50)).isEqualTo("L");
+        assertThat(converter.toRoman(73)).isEqualTo("LXXIII");
+    }
+
+    @Test
+    void it_should_convert_100s_to_Cs() {
+        assertThat(converter.toRoman(100)).isEqualTo("C");
+        assertThat(converter.toRoman(123)).isEqualTo("CXXIII");
+    }
+
+    @Test
+    void it_should_convert_500_to_D() {
+        assertThat(converter.toRoman(500)).isEqualTo("D");
+        assertThat(converter.toRoman(857)).isEqualTo("DCCCLVII");
+    }
+
+    @Test
+    void it_should_convert_1000s_to_Ms() {
+        assertThat(converter.toRoman(1000)).isEqualTo("M");
+        assertThat(converter.toRoman(1978)).isEqualTo("MCMLXXVIII");
     }
 }
