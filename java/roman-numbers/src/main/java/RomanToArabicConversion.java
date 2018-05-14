@@ -1,3 +1,9 @@
+import io.vavr.Tuple2;
+import io.vavr.collection.Stream;
+import io.vavr.control.Option;
+
+import java.util.function.Function;
+
 class RomanToArabicConversion {
     private String input;
     private int result;
@@ -16,12 +22,18 @@ class RomanToArabicConversion {
     }
 
     RomanToArabicConversion apply(Rule rule) {
-        var newResult = result;
-        var newInput = input;
-        while (newInput.startsWith(rule.getRoman())) {
-            newResult = newResult + rule.getArabic();
-            newInput = newInput.substring(rule.getRoman().length());
-        }
+        final var numberOfRomans = Stream
+                .unfoldLeft(input, makeTuple(rule))
+                .length();
+        final var newResult = numberOfRomans * rule.getArabic() + result;
+        final var offset = numberOfRomans * rule.getRoman().length();
+        final var newInput = input.substring(offset);
         return new RomanToArabicConversion(newInput, newResult);
+    }
+
+    private Function<String, Option<Tuple2<? extends String, ? extends Integer>>> makeTuple(Rule rule) {
+        return remaining -> remaining.startsWith(rule.getRoman())
+                        ? Option.of(new Tuple2<>(remaining.substring(rule.getRoman().length()), 0))
+                        : Option.none();
     }
 }
