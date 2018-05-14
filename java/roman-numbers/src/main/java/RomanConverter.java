@@ -27,7 +27,9 @@ public class RomanConverter {
 
     public int toArabic(String input) {
         return rules
-                .foldLeft(new RomanToArabicConversion(input), (acc, rule) -> acc.apply(rule.getRoman(), rule.getArabic()))
+                .foldLeft(
+                        new RomanToArabicConversion(input),
+                        RomanToArabicConversion::apply)
                 .getResult();
 
     }

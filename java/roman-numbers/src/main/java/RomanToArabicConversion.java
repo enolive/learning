@@ -24,4 +24,14 @@ class RomanToArabicConversion {
         }
         return new RomanToArabicConversion(newInput, newResult);
     }
+
+    public RomanToArabicConversion apply(Rule rule) {
+        var newResult = result;
+        var newInput = input;
+        while (newInput.startsWith(rule.getRoman())) {
+            newResult = newResult + rule.getArabic();
+            newInput = newInput.substring(rule.getRoman().length());
+        }
+        return new RomanToArabicConversion(newInput, newResult);
+    }
 }
