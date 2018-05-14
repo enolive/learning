@@ -28,12 +28,12 @@ public class RomanConverter {
     }
 
     public int toArabic(String input) {
-        if (Objects.equals(input, "III")) {
-            return 3;
+        var result = 0;
+        while (input.startsWith("I")) {
+            result++;
+            input = input.substring(1);
         }
-        if (Objects.equals(input, "II")) {
-            return 2;
-        }
-        return 1;
+        return result;
+
     }
 }
