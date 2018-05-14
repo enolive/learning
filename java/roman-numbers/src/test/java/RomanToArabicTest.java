@@ -36,4 +36,22 @@ public class RomanToArabicTest {
         assertThat(converter.toArabic("L")).isEqualTo(50);
         assertThat(converter.toArabic("LXXXVI")).isEqualTo(86);
     }
+
+    @Test
+    void it_should_convert_Cs_to_100s() {
+        assertThat(converter.toArabic("C")).isEqualTo(100);
+        assertThat(converter.toArabic("CLXVI")).isEqualTo(166);
+    }
+
+    @Test
+    void it_should_convert_D_to_500() {
+        assertThat(converter.toArabic("D")).isEqualTo(500);
+        assertThat(converter.toArabic("DCLXVI")).isEqualTo(666);
+    }
+
+    @Test
+    void it_should_convert_Ms_to_1000s() {
+        assertThat(converter.toArabic("M")).isEqualTo(1000);
+        assertThat(converter.toArabic("MCMLXXVIII")).isEqualTo(1978);
+    }
 }
