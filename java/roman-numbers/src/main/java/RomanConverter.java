@@ -25,4 +25,7 @@ public class RomanConverter {
                 .getResult();
     }
 
+    public int toArabic(String input) {
+        return 1;
+    }
 }
