@@ -29,14 +29,8 @@ public class RomanConverter {
         var result = 0;
         var romanToArabicConversion = new RomanToArabicConversion(input, result);
         romanToArabicConversion = romanToArabicConversion.apply("V", 5);
-        input = romanToArabicConversion.getInput();
-        result = romanToArabicConversion.getResult();
-        while (input.startsWith("I")) {
-            result = result + 1;
-            input = input.substring("I".length());
-        }
-        return result;
-
+        romanToArabicConversion = romanToArabicConversion.apply("I", 1);
+        return romanToArabicConversion.getResult();
     }
 
     private class RomanToArabicConversion {
