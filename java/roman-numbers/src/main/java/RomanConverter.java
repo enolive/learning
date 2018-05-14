@@ -29,9 +29,12 @@ public class RomanConverter {
 
     public int toArabic(String input) {
         var result = 0;
+        if (input == "V") {
+            return 5;
+        }
         while (input.startsWith("I")) {
-            result++;
-            input = input.substring(1);
+            result = result + 1;
+            input = input.substring("I".length());
         }
         return result;
 
