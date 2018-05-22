@@ -1,8 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.20.0.
+-- This file has been generated from package.yaml by hpack version 0.28.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 08b548c261628c71132c6d812d45364f41c5e658d008184dc93242e19d7cd258
+-- hash: 5ba214d56e899c4d8b77a884b0cb15f466e3c274b5e381476e72f4edc053b0cf
 
 name:           demo-kata
 version:        0.1.0.0
@@ -16,7 +16,6 @@ license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
 cabal-version:  >= 1.10
-
 extra-source-files:
     ChangeLog.md
     README.md
