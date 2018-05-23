@@ -14,7 +14,8 @@ class JustATest {
         assertThat(true).isFalse();
     }
 
-    @ParameterizedTest(name = "{0} -> {1}")
+    @DisplayName("test with parameters")
+    @ParameterizedTest
     @CsvSource(value = {
             "5, bar",
             "4, bla",
