@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -194,6 +195,20 @@ class RomanConverterTest {
             void it_should_convert_according_to_subtraction_rules(String input, int expected) {
                 assertThat(converter.toArabic(input)).isEqualTo(expected);
             }
+        }
+    }
+
+    @Nested
+    class BackAndForth {
+        @ParameterizedTest
+        @ValueSource(ints = {
+                0,
+                1,
+                1978,
+                1234567890
+        })
+        void it_should_convert_an_arabic_value_back_and_forth(int input) {
+            assertThat(converter.toArabic(converter.toRoman(input))).isEqualTo(input);
         }
     }
 }

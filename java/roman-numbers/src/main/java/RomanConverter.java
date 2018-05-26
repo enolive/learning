@@ -1,23 +1,25 @@
+import io.vavr.Tuple;
+import io.vavr.Tuple2;
 import io.vavr.collection.List;
 
-public class RomanConverter {
-    private final List<Rule> rules = List.of(
-            new Rule(1000, "M"),
-            new Rule(900, "CM"),
-            new Rule(500, "D"),
-            new Rule(400, "CD"),
-            new Rule(100, "C"),
-            new Rule(90, "XC"),
-            new Rule(50, "L"),
-            new Rule(40, "XL"),
-            new Rule(10, "X"),
-            new Rule(9, "IX"),
-            new Rule(5, "V"),
-            new Rule(4, "IV"),
-            new Rule(1, "I")
+class RomanConverter {
+    private final List<Tuple2<Integer, String>> rules = List.of(
+            Tuple.of(1000, "M"),
+            Tuple.of(900, "CM"),
+            Tuple.of(500, "D"),
+            Tuple.of(400, "CD"),
+            Tuple.of(100, "C"),
+            Tuple.of(90, "XC"),
+            Tuple.of(50, "L"),
+            Tuple.of(40, "XL"),
+            Tuple.of(10, "X"),
+            Tuple.of(9, "IX"),
+            Tuple.of(5, "V"),
+            Tuple.of(4, "IV"),
+            Tuple.of(1, "I")
     );
 
-    public String toRoman(int arabic) {
+    String toRoman(int arabic) {
         return rules
                 .foldLeft(
                         new ArabicToRomanConversion(arabic),
@@ -25,7 +27,7 @@ public class RomanConverter {
                 .getResult();
     }
 
-    public int toArabic(String input) {
+    int toArabic(String input) {
         return rules
                 .foldLeft(
                         new RomanToArabicConversion(input),

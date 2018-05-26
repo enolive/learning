@@ -1,8 +1,9 @@
+import io.vavr.Tuple2;
 import io.vavr.collection.Stream;
 
-class ArabicToRomanConversion {
-    private int remainingInput;
-    private Stream<String> digits;
+final class ArabicToRomanConversion {
+    private final int remainingInput;
+    private final Stream<String> digits;
 
     ArabicToRomanConversion(int remainingInput) {
         this(remainingInput, Stream.empty());
@@ -14,17 +15,17 @@ class ArabicToRomanConversion {
     }
 
     String getResult() {
-        return String.join("", digits);
+        return digits.mkString();
     }
 
-    ArabicToRomanConversion apply(Rule rule) {
-        final var numberOfDigits = remainingInput / rule.getArabic();
-        final var digits = this.digits.appendAll(repeat(numberOfDigits, rule.getRoman()));
-        final var remainingInput = this.remainingInput % rule.getArabic();
-        return new ArabicToRomanConversion(remainingInput, digits);
+    ArabicToRomanConversion apply(Tuple2<Integer, String> rule) {
+        return apply(rule._1, rule._2);
     }
 
-    private Stream<String> repeat(int times, String roman) {
-        return Stream.range(0, times).map(i -> roman);
+    private ArabicToRomanConversion apply(Integer arabic, String roman) {
+        final var numberOfDigits = remainingInput / arabic;
+        final var newDigits = Stream.of(roman).cycle(numberOfDigits).prependAll(digits);
+        final var newInput = remainingInput % arabic;
+        return new ArabicToRomanConversion(newInput, newDigits);
     }
 }
