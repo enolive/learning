@@ -1,0 +1,2 @@
+module RuleSpec where
+
