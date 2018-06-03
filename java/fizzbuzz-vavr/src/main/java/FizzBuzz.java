@@ -15,8 +15,8 @@ class FizzBuzz {
         return a + "-" + b;
     }
 
-    private static String choice(String a, String b) {
-        return a.isEmpty() ? b : a;
+    private static String choice(String word, String number) {
+        return word.isEmpty() ? number : word;
     }
 
     Stream<String> sequence() {
