@@ -1,23 +1,15 @@
 import Big from "big.js";
 import {Book} from "./book";
+import {Maybe} from "./maybe";
 
 export class Bundle {
     private books = new Map<number, Book>();
-
-    get discount(): number {
-        switch (this.size) {
-            case 2:
-                return 0.95;
-            case 3:
-                return 0.9;
-            case 4:
-                return 0.85;
-            case 5:
-                return 0.80;
-            default:
-                return 1.0;
-        }
-    }
+    private sizeToDiscount = new Map<number, number>([
+        [2, 0.95],
+        [3, 0.90],
+        [4, 0.85],
+        [5, 0.80],
+    ]);
 
     get price(): Big {
         return new Big(8).mul(this.size).mul(this.discount);
@@ -27,7 +19,14 @@ export class Bundle {
         return this.books.size;
     }
 
+    private get discount(): number {
+        return Maybe
+            .of(this.sizeToDiscount.get(this.size))
+            .orElseGet(() => 1.0);
+    }
+
     add(book: Book) {
         this.books.set(book.band, book);
     }
+
 }
