@@ -1,12 +1,6 @@
-import Big from "big.js";
 import {expect} from "chai";
 import {beforeEach, describe, it} from "mocha";
-
-export class Basket {
-    get price(): Big {
-        return new Big(8);
-    }
-}
+import {Basket} from "../src/basket";
 
 describe("Basket of books", () => {
     let basket: Basket;
