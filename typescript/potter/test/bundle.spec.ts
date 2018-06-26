@@ -1,12 +1,6 @@
 import {expect} from "chai";
-
-class Bundle {
-    private _size: number = 0;
-
-    get size(): number {
-        return this._size;
-    }
-}
+import {beforeEach, describe, it} from "mocha";
+import {Bundle} from "../src/bundle";
 
 describe("Bundle of Books", () => {
     let bundle: Bundle;
