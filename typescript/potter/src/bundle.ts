@@ -7,8 +7,8 @@ export class Bundle {
     private sizeToDiscount = new Map<number, number>([
         [2, 0.95],
         [3, 0.90],
-        [4, 0.85],
-        [5, 0.80],
+        [4, 0.80],
+        [5, 0.75],
     ]);
 
     get price(): Big {

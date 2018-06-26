@@ -1,7 +1,7 @@
 import {expect} from "chai";
 import {beforeEach, describe, it} from "mocha";
-import {Bundle} from "../src/bundle";
 import {Book} from "../src/book";
+import {Bundle} from "../src/bundle";
 
 describe("Bundle of Books", () => {
     let bundle: Bundle;
@@ -60,12 +60,12 @@ describe("Bundle of Books", () => {
 
         it("4 books", () => {
             addDifferentBooks(4);
-            expect(bundle.price.toFixed(2)).to.equal("27.20");
+            expect(bundle.price.toFixed(2)).to.equal("25.60");
         });
 
         it("5 books", () => {
             addDifferentBooks(5);
-            expect(bundle.price.toFixed(2)).to.equal("32.00");
+            expect(bundle.price.toFixed(2)).to.equal("30.00");
         });
 
         function addDifferentBooks(howMany: number) {

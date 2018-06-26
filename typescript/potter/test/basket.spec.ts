@@ -31,6 +31,19 @@ describe("Basket of books", () => {
         basket.add(new Book(3));
         basket.add(new Book(4));
         basket.add(new Book(5));
-        expect(basket.price.toFixed(2)).to.equal("32.00");
+        expect(basket.price.toFixed(2)).to.equal("30.00");
+    });
+
+    it("integration test", () => {
+        basket.add(new Book(1));
+        basket.add(new Book(2));
+        basket.add(new Book(3));
+        basket.add(new Book(4));
+
+        basket.add(new Book(2));
+        basket.add(new Book(3));
+        basket.add(new Book(4));
+        basket.add(new Book(5));
+        expect(basket.price.toFixed(2)).to.equal("51.20");
     });
 });
