@@ -15,8 +15,13 @@ describe("Bundle of Books", () => {
     });
 
     it("should allow to add a book", () => {
-        const book = new Book(1);
-        bundle.add(book);
+        bundle.add(new Book(1));
         expect(bundle.size).to.equal(1);
+    });
+
+    it("should allow multiple different books", () => {
+        bundle.add(new Book(1));
+        bundle.add(new Book(2));
+        expect(bundle.size).to.equal(2);
     });
 });
