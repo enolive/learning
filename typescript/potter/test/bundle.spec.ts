@@ -31,6 +31,15 @@ describe("Bundle of Books", () => {
             bundle.add(new Book(1));
             expect(bundle.size).to.equal(1);
         });
+
+        it("should return true for successful add", () => {
+            expect(bundle.add(new Book(1))).to.equal(true);
+        });
+
+        it("should return false for already existing book", () => {
+            bundle.add(new Book(1));
+            expect(bundle.add(new Book(1))).to.equal(false);
+        });
     });
 
     describe("calculating price for", () => {

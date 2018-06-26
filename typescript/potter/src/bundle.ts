@@ -25,8 +25,12 @@ export class Bundle {
             .orElseGet(() => 1.0);
     }
 
-    add(book: Book) {
+    add(book: Book): boolean {
+        if (this.books.has(book.band)) {
+            return false;
+        }
         this.books.set(book.band, book);
+        return true;
     }
 
 }
