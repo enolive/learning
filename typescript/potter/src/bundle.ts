@@ -1,16 +1,13 @@
 import {Book} from "./book";
 
 export class Bundle {
-    private books: Book[] = [];
+    private books = new Map<number, Book>();
 
     get size(): number {
-        return this.books.length;
+        return this.books.size;
     }
 
     add(book: Book) {
-        if (this.books.some(b => b.band === book.band)) {
-            return;
-        }
-        this.books.push(book);
+        this.books.set(book.band, book);
     }
 }
