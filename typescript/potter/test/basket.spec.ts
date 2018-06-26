@@ -24,4 +24,13 @@ describe("Basket of books", () => {
         basket.add(new Book(1));
         expect(basket.price.toFixed(2)).to.equal("16.00");
     });
+
+    it("should give discount for the different books", () => {
+        basket.add(new Book(1));
+        basket.add(new Book(2));
+        basket.add(new Book(3));
+        basket.add(new Book(4));
+        basket.add(new Book(5));
+        expect(basket.price.toFixed(2)).to.equal("32.00");
+    });
 });
