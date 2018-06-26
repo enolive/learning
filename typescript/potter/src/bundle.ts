@@ -26,11 +26,14 @@ export class Bundle {
     }
 
     add(book: Book): boolean {
-        if (this.books.has(book.band)) {
+        if (this.has(book)) {
             return false;
         }
         this.books.set(book.band, book);
         return true;
     }
 
+    has(book: Book) {
+        return this.books.has(book.band);
+    }
 }
