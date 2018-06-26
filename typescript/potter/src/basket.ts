@@ -12,10 +12,11 @@ export class Basket {
     private bundles: Bundle[] = [];
 
     get price(): Big {
-        return flow(
+        const getSumOfPrices = flow(
             map((bundle: Bundle) => bundle.price),
             reduce((a: Big, b: Big) => a.add(b))(new Big(0)),
-        )(this.bundles);
+        );
+        return getSumOfPrices(this.bundles);
     }
 
     add(book: Book) {
