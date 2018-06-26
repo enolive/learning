@@ -1,5 +1,4 @@
 import {expect} from "chai";
-import {describe, it} from "mocha";
 
 class Bundle {
     private _size: number = 0;
@@ -10,8 +9,13 @@ class Bundle {
 }
 
 describe("Bundle of Books", () => {
+    let bundle: Bundle;
+
+    beforeEach(() => {
+        bundle = new Bundle();
+    });
+
     it("should be initially empty", () => {
-        const bundle = new Bundle();
         expect(bundle.size).to.equal(0);
     });
 });
