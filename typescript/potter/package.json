@@ -12,6 +12,7 @@
   "devDependencies": {
     "@types/big.js": "^4.0.5",
     "@types/chai": "^4.1.4",
+    "@types/lodash": "^4.14.110",
     "@types/mocha": "^5.2.3",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
@@ -20,6 +21,7 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "big.js": "^5.1.2"
+    "big.js": "^5.1.2",
+    "lodash": "^4.17.10"
   }
 }

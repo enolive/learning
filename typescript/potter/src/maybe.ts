@@ -11,7 +11,9 @@ export class Maybe<T> {
     }
 
     static of(value) {
-        return value ? Maybe.just(value) : Maybe.nothing();
+        return value === null || value === undefined
+            ? Maybe.nothing()
+            : Maybe.just(value);
     }
 
     orElseGet(alternative: () => T): T {

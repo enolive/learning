@@ -1,36 +1,43 @@
 import Big from "big.js";
+import {filter, flow, map, minBy, reduce} from "lodash/fp";
 import {Book} from "./book";
 import {Bundle} from "./bundle";
+import {Maybe} from "./maybe";
+
+interface IAddToBundle {
+    addToBundle(): boolean;
+}
 
 export class Basket {
     private bundles: Bundle[] = [];
 
     get price(): Big {
-        return this.bundles
-            .map(bundle => bundle.price)
-            .reduce((a, b) => a.add(b), new Big(0));
-    }
-
-    private static smallestSize(a: Bundle, b: Bundle) {
-        return a.size - b.size;
+        return flow(
+            map((bundle: Bundle) => bundle.price),
+            reduce((a: Big, b: Big) => a.add(b))(new Big(0)),
+        )(this.bundles);
     }
 
     add(book: Book) {
-        this.bundleThatDoesNotContain(book).add(book);
-        this.sortBySizeAscending();
+        this.bundleThatDoesNotContain(book).addToBundle();
     }
 
-    private sortBySizeAscending() {
-        this.bundles.sort((a, b) => Basket.smallestSize(a, b));
+    private bundleThatDoesNotContain(book: Book): IAddToBundle {
+        const getSmallestBundle = flow(
+            filter((bundle: Bundle) => !bundle.has(book)),
+            minBy((bundle: Bundle) => bundle.size),
+        );
+        return {
+            addToBundle: () => Maybe
+                .of(getSmallestBundle(this.bundles))
+                .orElseGet(() => this.addNewBundle())
+                .add(book),
+        };
     }
 
-    private bundleThatDoesNotContain(book: Book): Bundle {
-        const emptyBundle = this.bundles.find(bundle => !bundle.has(book));
-        if (emptyBundle) {
-            return emptyBundle;
-        }
+    private addNewBundle() {
         const newBundle = new Bundle();
-        this.bundles.push(newBundle);
+        this.bundles = [newBundle, ...this.bundles];
         return newBundle;
     }
 }
