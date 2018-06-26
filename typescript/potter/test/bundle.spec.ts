@@ -24,4 +24,10 @@ describe("Bundle of Books", () => {
         bundle.add(new Book(2));
         expect(bundle.size).to.equal(2);
     });
+
+    it("should ignore adding the same book multiple times", () => {
+        bundle.add(new Book(1));
+        bundle.add(new Book(1));
+        expect(bundle.size).to.equal(1);
+    });
 });
