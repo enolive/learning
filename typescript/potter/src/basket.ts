@@ -20,9 +20,8 @@ export class Basket {
         this.sortBySizeAscending();
     }
 
-    private sortBySizeAscending(): Bundle[] {
+    private sortBySizeAscending() {
         this.bundles.sort((a, b) => Basket.smallestSize(a, b));
-        return this.bundles;
     }
 
     private bundleThatDoesNotContain(book: Book): Bundle {
