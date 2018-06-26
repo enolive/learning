@@ -1,4 +1,7 @@
 export class Maybe<T> {
+    private constructor(private readonly value: T) {
+    }
+
     static just(value) {
         return new Maybe(value);
     }
@@ -9,9 +12,6 @@ export class Maybe<T> {
 
     static of(value) {
         return value ? Maybe.just(value) : Maybe.nothing();
-    }
-
-    private constructor(private readonly value: T) {
     }
 
     orElseGet(alternative: () => T): T {
