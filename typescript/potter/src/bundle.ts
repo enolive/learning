@@ -3,10 +3,17 @@ import {Book} from "./book";
 
 export class Bundle {
     private books = new Map<number, Book>();
+
     get discount(): number {
         switch (this.size) {
             case 2:
                 return 0.95;
+            case 3:
+                return 0.9;
+            case 4:
+                return 0.85;
+            case 5:
+                return 0.80;
             default:
                 return 1.0;
         }

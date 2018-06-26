@@ -33,16 +33,37 @@ describe("Bundle of Books", () => {
         });
     });
 
-    describe("calculating price", () => {
-        it("should calculate the book price for 1", () => {
-            bundle.add(new Book(1));
+    describe("calculating price for", () => {
+        it("1 book", () => {
+            addDifferentBooks(1);
             expect(bundle.price.toFixed(2)).to.equal("8.00");
         });
 
-        it("should calculate the book price for 2", () => {
-            bundle.add(new Book(1));
-            bundle.add(new Book(2));
+        it("2 books", () => {
+            addDifferentBooks(2);
             expect(bundle.price.toFixed(2)).to.equal("15.20");
         });
+
+        it("3 books", () => {
+            addDifferentBooks(3);
+            expect(bundle.price.toFixed(2)).to.equal("21.60");
+        });
+
+        it("4 books", () => {
+            addDifferentBooks(4);
+            expect(bundle.price.toFixed(2)).to.equal("27.20");
+        });
+
+        it("4 books", () => {
+            addDifferentBooks(5);
+            expect(bundle.price.toFixed(2)).to.equal("32.00");
+        });
+
+        function addDifferentBooks(howMany: number) {
+            Array(howMany)
+                .fill("")
+                .map((_, index) => new Book(index + 1))
+                .forEach(book => bundle.add(book));
+        }
     });
 });
