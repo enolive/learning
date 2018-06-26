@@ -54,7 +54,7 @@ describe("Bundle of Books", () => {
             expect(bundle.price.toFixed(2)).to.equal("27.20");
         });
 
-        it("4 books", () => {
+        it("5 books", () => {
             addDifferentBooks(5);
             expect(bundle.price.toFixed(2)).to.equal("32.00");
         });
