@@ -38,8 +38,7 @@ export class Bundle {
         if (this.has(book)) {
             return this;
         }
-        const newEntries: ReadonlyArray<[number, Book]> = [[book.band, book], ...this.books.entries()];
-        return new Bundle(newEntries);
+        return new Bundle([[book.band, book], ...this.books.entries()]);
     }
 
     has(book: Book) {
