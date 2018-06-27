@@ -1,4 +1,5 @@
 import {expect} from "chai";
+import {flow, map, range, reduce} from "lodash/fp";
 import {beforeEach, describe, it} from "mocha";
 import {Book} from "../src/book";
 import {Bundle} from "../src/bundle";
@@ -7,7 +8,7 @@ describe("Bundle of Books", () => {
     let bundle: Bundle;
 
     beforeEach(() => {
-        bundle = new Bundle();
+        bundle = Bundle.empty();
     });
 
     describe("adding books", () => {
@@ -16,63 +17,45 @@ describe("Bundle of Books", () => {
         });
 
         it("should allow to add a book", () => {
-            bundle.add(new Book(1));
-            expect(bundle.size).to.equal(1);
+            expect(bundle.add(new Book(1)).size).to.equal(1);
         });
 
         it("should allow multiple different books", () => {
-            bundle.add(new Book(1));
-            bundle.add(new Book(2));
-            expect(bundle.size).to.equal(2);
+            expect(bundle.add(new Book(1)).add(new Book(2)).size).to.equal(2);
         });
 
         it("should ignore adding the same book multiple times", () => {
-            bundle.add(new Book(1));
-            bundle.add(new Book(1));
-            expect(bundle.size).to.equal(1);
-        });
-
-        it("should return true for successful add", () => {
-            expect(bundle.add(new Book(1))).to.equal(true);
-        });
-
-        it("should return false for already existing book", () => {
-            bundle.add(new Book(1));
-            expect(bundle.add(new Book(1))).to.equal(false);
+            expect(bundle.add(new Book(1)).add(new Book(1)).size).to.equal(1);
         });
     });
 
     describe("calculating price for", () => {
         it("1 book", () => {
-            addDifferentBooks(1);
-            expect(bundle.price.toFixed(2)).to.equal("8.00");
+            expect(addDifferentBooks(1).price.toFixed(2)).to.equal("8.00");
         });
 
         it("2 books", () => {
-            addDifferentBooks(2);
-            expect(bundle.price.toFixed(2)).to.equal("15.20");
+            expect(addDifferentBooks(2).price.toFixed(2)).to.equal("15.20");
         });
 
         it("3 books", () => {
-            addDifferentBooks(3);
-            expect(bundle.price.toFixed(2)).to.equal("21.60");
+            expect(addDifferentBooks(3).price.toFixed(2)).to.equal("21.60");
         });
 
         it("4 books", () => {
-            addDifferentBooks(4);
-            expect(bundle.price.toFixed(2)).to.equal("25.60");
+            expect(addDifferentBooks(4).price.toFixed(2)).to.equal("25.60");
         });
 
         it("5 books", () => {
-            addDifferentBooks(5);
-            expect(bundle.price.toFixed(2)).to.equal("30.00");
+            expect(addDifferentBooks(5).price.toFixed(2)).to.equal("30.00");
         });
 
         function addDifferentBooks(howMany: number) {
-            Array(howMany)
-                .fill("")
-                .map((_, index) => new Book(index + 1))
-                .forEach(book => bundle.add(book));
+            return flow(
+                range(1),
+                map((band: number) => new Book(band)),
+                reduce((acc: Bundle, book: Book) => acc.add(book))(bundle),
+            )(howMany + 1);
         }
     });
 });

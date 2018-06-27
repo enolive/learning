@@ -3,13 +3,18 @@ import {Book} from "./book";
 import {Maybe} from "./maybe";
 
 export class Bundle {
-    private books = new Map<number, Book>();
-    private sizeToDiscount = new Map<number, number>([
+    private static sizeToDiscount = new Map<number, number>([
         [2, 0.95],
         [3, 0.90],
         [4, 0.80],
         [5, 0.75],
     ]);
+
+    private books: Map<number, Book>;
+
+    private constructor(private entries: ReadonlyArray<[number, Book]> = []) {
+        this.books = new Map<number, Book>(entries);
+    }
 
     get price(): Big {
         return new Big(8).mul(this.size).mul(this.discount);
@@ -21,16 +26,20 @@ export class Bundle {
 
     private get discount(): number {
         return Maybe
-            .of(this.sizeToDiscount.get(this.size))
+            .of(Bundle.sizeToDiscount.get(this.size))
             .orElseGet(() => 1.0);
     }
 
-    add(book: Book): boolean {
+    static empty() {
+        return new Bundle();
+    }
+
+    add(book: Book): Bundle {
         if (this.has(book)) {
-            return false;
+            return this;
         }
-        this.books.set(book.band, book);
-        return true;
+        const newEntries: ReadonlyArray<[number, Book]> = [[book.band, book], ...this.books.entries()];
+        return new Bundle(newEntries);
     }
 
     has(book: Book) {

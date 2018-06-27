@@ -1,15 +1,12 @@
 import Big from "big.js";
-import {filter, flow, map, minBy, reduce} from "lodash/fp";
+import {filter, flow, map, minBy, reduce, without} from "lodash/fp";
 import {Book} from "./book";
 import {Bundle} from "./bundle";
 import {Maybe} from "./maybe";
 
-interface IAddToBundle {
-    addToBundle(): boolean;
-}
-
 export class Basket {
-    private bundles: Bundle[] = [];
+    private constructor(private bundles: Bundle[] = []) {
+    }
 
     get price(): Big {
         const getSumOfPrices = flow(
@@ -19,26 +16,19 @@ export class Basket {
         return getSumOfPrices(this.bundles);
     }
 
-    add(book: Book) {
-        this.bundleThatDoesNotContain(book).addToBundle();
+    static empty() {
+        return new Basket();
     }
 
-    private bundleThatDoesNotContain(book: Book): IAddToBundle {
+    add(book: Book): Basket {
         const getSmallestBundle = flow(
             filter((bundle: Bundle) => !bundle.has(book)),
             minBy((bundle: Bundle) => bundle.size),
         );
-        return {
-            addToBundle: () => Maybe
-                .of(getSmallestBundle(this.bundles))
-                .orElseGet(() => this.addNewBundle())
-                .add(book),
-        };
-    }
-
-    private addNewBundle() {
-        const newBundle = new Bundle();
-        this.bundles = [newBundle, ...this.bundles];
-        return newBundle;
+        const smallestBundle = Maybe
+            .of(getSmallestBundle(this.bundles))
+            .orElseGet(() => Bundle.empty());
+        const other = without([smallestBundle])(this.bundles);
+        return new Basket([smallestBundle.add(book), ...other]);
     }
 }
