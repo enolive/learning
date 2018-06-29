@@ -84,13 +84,13 @@ class HarryPotterTest {
 
     @Test
     void edgeCases() {
-        assertThat(HarryPotter.getPrice(books(1, 1, 2, 2, 3, 3, 4, 5))).isEqualByComparingTo("111.20");
+        assertThat(HarryPotter.getPrice(books(1, 1, 2, 2, 3, 3, 4, 5))).isEqualByComparingTo("51.20");
         assertThat(HarryPotter.getPrice(books(
                 1, 1, 1, 1,
                 2, 2, 2, 2,
                 3, 3, 3, 3,
                 4, 4, 4,
-                5, 5, 5))).isEqualByComparingTo("0");
+                5, 5, 5))).isEqualByComparingTo("111.20");
     }
 
     private List<Book> books(int... volumes) {
