@@ -9,12 +9,17 @@ class BookSet {
         this.count = count;
     }
 
-    public int getVolume() {
+    boolean notEmpty() {
+        return count > 0;
+    }
+
+    int getVolume() {
         return volume;
     }
 
-    public int getCount() {
-        return count;
+    @Override
+    public int hashCode() {
+        return Objects.hash(volume, count);
     }
 
     @Override
@@ -27,15 +32,15 @@ class BookSet {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(volume, count);
-    }
-
-    @Override
     public String toString() {
         return "BookSet{" +
                 "volume=" + volume +
                 ", count=" + count +
                 '}';
     }
+
+    BookSet takeOneBook() {
+        return new BookSet(volume, count - 1);
+    }
+
 }
