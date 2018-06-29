@@ -17,6 +17,8 @@ class HarryPotter {
     }
 
     static Seq<Bundle> getBundles(Seq<BookSet> bookSets) {
+
+
         return Stream
                 .unfoldLeft(
                         new CreateBundle(bookSets),
@@ -47,18 +49,24 @@ class HarryPotter {
     }
 
     static Seq<Bundle> adjust(Seq<Bundle> bundles) {
-        final var bundlesWith3Or5 = bundles.filter(b -> b.has(3) || b.has(5));
-        if (bundlesWith3Or5.length() == 2) {
-            final var bundleWith3 = bundles.filter(b -> b.has(3)).head();
-            final var bundleWith5 = bundles.filter(b -> b.has(5)).head();
-            final var commonCount = Math.min(bundleWith3.getBundleCount(), bundleWith5.getBundleCount());
-            final var remainingWith3 = new Bundle(3, bundleWith3.getBundleCount() - commonCount);
-            final var remainingWith5 = new Bundle(5, bundleWith5.getBundleCount() - commonCount);
-            return bundles.removeAll(bundlesWith3Or5)
-                    .prependAll(List.of(remainingWith3, new Bundle(4, commonCount * 2), remainingWith5))
-                    .removeAll(b -> b.getBundleCount() == 0);
+        final var bundlesWith3Or5 = bundles
+                .filter(b -> b.has(3) || b.has(5))
+                .sortBy(Bundle::getBookCount);
+        if (bundlesWith3Or5.length() != 2) {
+            return bundles;
         }
-        return bundles;
+        final var bundleWith3 = bundlesWith3Or5.get(0);
+        final var bundleWith5 = bundlesWith3Or5.get(1);
+        final var commonCount = Math.min(bundleWith3.getBundleCount(), bundleWith5.getBundleCount());
+        final var remainingWith3 = reduceBundleCount(bundleWith3, commonCount);
+        final var remainingWith5 = reduceBundleCount(bundleWith5, commonCount);
+        return bundles.removeAll(bundlesWith3Or5)
+                .prependAll(List.of(remainingWith3, new Bundle(4, commonCount * 2), remainingWith5))
+                .removeAll(b -> b.getBundleCount() == 0);
+    }
+
+    private static Bundle reduceBundleCount(Bundle bundle, int byCount) {
+        return new Bundle(bundle.getBookCount(), bundle.getBundleCount() - byCount);
     }
 
     private static BigDecimal getPrice(Bundle bundle) {
