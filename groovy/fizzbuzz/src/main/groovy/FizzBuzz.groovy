@@ -9,6 +9,8 @@ class FizzBuzz {
         def result = rules.findAll { appliesTo, _ -> appliesTo(input) }
                           .collect { _, result -> result }
                           .join('-')
-        result.empty ? input.toString() : result
+        Optional.of(result)
+                .filter { !it.empty }
+                .orElseGet { input.toString() }
     }
 }
