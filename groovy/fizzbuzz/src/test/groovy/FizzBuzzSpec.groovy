@@ -19,10 +19,23 @@ class FizzBuzzSpec extends Specification {
         6     || "Fizz"
     }
 
+    def "numbers divisible by 5 should be returned as Buzz"() {
+        expect:
+        calculate(input) == expected
+        where:
+        input || expected
+        5     || "Buzz"
+    }
+
     def calculate(int input) {
-        if (input % 3 == 0) {
-            return "Fizz"
+        switch (input) {
+            case {isDivisibleBy(it, 3)}: return "Fizz"
+            case {isDivisibleBy(it, 5)}: return "Buzz"
+            default: return input.toString()
         }
-        input.toString()
+    }
+
+    private static isDivisibleBy(int input, int divisor) {
+        input % divisor == 0
     }
 }
