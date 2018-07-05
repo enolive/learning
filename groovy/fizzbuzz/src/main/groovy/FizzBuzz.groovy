@@ -1,16 +1,14 @@
 class FizzBuzz {
-    def static calculate(int input) {
-        def rules = [
-                new Tuple2<Integer, String>(3, "Fizz"),
-                new Tuple2<Integer, String>(5, "Buzz"),
-        ]
-        def result = rules.findAll { isDivisibleBy input, it.first }
-                .collect { it.second }
-                .join('-')
-        if (result.empty) input.toString() else result
-    }
+    static private divisibleBy = { int number, int divisor -> number % divisor == 0 }
+    static private rules = [
+            new Tuple2(divisibleBy.rcurry(3), "Fizz"),
+            new Tuple2(divisibleBy.rcurry(5), "Buzz"),
+    ]
 
-    private static isDivisibleBy(int input, int divisor) {
-        input % divisor == 0
+    def static calculate(int input) {
+        def result = rules.findAll { appliesTo, _ -> appliesTo(input) }
+                          .collect { _, result -> result }
+                          .join('-')
+        (result.empty) ? input.toString() : result
     }
 }
