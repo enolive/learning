@@ -1,5 +1,7 @@
 import spock.lang.Specification
 
+import static FizzBuzz.calculate
+
 class FizzBuzzSpec extends Specification {
     def "normal numbers should be returned as is"() {
         expect:
@@ -34,20 +36,6 @@ class FizzBuzzSpec extends Specification {
         where:
         input || expected
         15    || "Fizz-Buzz"
-    }
-
-    def calculate(int input) {
-        def rules = [
-                new Tuple2<Integer, String>(3, "Fizz"),
-                new Tuple2<Integer, String>(5, "Buzz"),
-        ]
-        def result = rules.findAll { it -> isDivisibleBy(input, it.first) }
-                .collect { it -> it.second }
-                .join('-')
-        if (result.empty) input.toString() else result
-    }
-
-    private static isDivisibleBy(int input, int divisor) {
-        input % divisor == 0
+        30    || "Fizz-Buzz"
     }
 }
