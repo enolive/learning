@@ -9,6 +9,6 @@ class FizzBuzz {
         def result = rules.findAll { appliesTo, _ -> appliesTo(input) }
                           .collect { _, result -> result }
                           .join('-')
-        (result.empty) ? input.toString() : result
+        result.empty ? input.toString() : result
     }
 }
