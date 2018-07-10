@@ -1,15 +1,22 @@
 module.exports = function (config) {
     config.set({
-        frameworks: ['jasmine', 'karma-typescript'],
+        basePath: 'lib',
+        frameworks: ['jasmine'],
         files: [
-            {pattern: 'src/**/*.ts'},
-            {pattern: 'test/**/*.ts'}
+            {pattern: 'src/**/*.js'},
+            {pattern: 'test/**/*.js'}
         ],
         preprocessors: {
-            'src/**/*.ts': ['karma-typescript', 'coverage'],
-            'test/**/*.ts': ['karma-typescript']
+            'src/**/*.js': ['coverage', 'sourcemap'],
+            'test/**/*.js': ['sourcemap']
         },
-        reporters: ['progress', 'karma-typescript'],
-        browsers: ['Chromium']
+        reporters: ['progress', 'coverage', 'karma-remap-istanbul'],
+        remapIstanbulReporter: {
+            reports: {
+                html: 'coverage',
+                lcovonly: './coverage/coverage.lcov'
+            }
+        },
+        browsers: ['ChromiumHeadless']
     });
 };

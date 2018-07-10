@@ -1,5 +1,3 @@
-import {Generator} from '../src/generator';
-
 describe('Fizz Buzz Generator', () => {
     let target: Generator;
 
@@ -9,7 +7,7 @@ describe('Fizz Buzz Generator', () => {
 
     it('should return normal numbers', () => {
         expect(target.resultFor(1)).toEqual('1');
-        expect(target.resultFor(2)).toEqual('2');
+        expect(target.resultFor(2)).toEqual('3');
     });
 
     it('should return Fizz for numbers divisible by 3', () => {

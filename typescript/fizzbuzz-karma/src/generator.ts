@@ -1,7 +1,4 @@
-import * as _ from 'lodash';
-import {Rule} from './rule';
-
-export class Generator {
+class Generator {
     private _rules = [
         new Rule('Fizz-Buzz', 3, 5),
         new Rule('Fizz', 3),
@@ -9,9 +6,9 @@ export class Generator {
     ];
 
     resultFor(number: number): string {
-        let matchingRules = this._rules
+        let [matchingRule] = this._rules
             .filter(r => r.appliesTo(number))
             .map(r => r.result);
-        return _.head(matchingRules) || number.toString();
+        return matchingRule || number.toString();
     }
 }
