@@ -10,12 +10,17 @@ module.exports = function (config) {
             'src/**/*.js': ['coverage', 'sourcemap'],
             'test/**/*.js': ['sourcemap']
         },
-        reporters: ['progress', 'coverage', 'karma-remap-istanbul'],
-        remapIstanbulReporter: {
-            reports: {
-                html: 'coverage',
-                lcovonly: './coverage/coverage.lcov'
-            }
+        reporters: ['progress', 'coverage', 'remap-coverage'],
+        coverageReporter: {
+            reporters: [
+                {type: 'in-memory'}
+            ]
+        },
+        remapCoverageReporter: {
+            'text-summary': null,
+            html: './coverage/html',
+            cobertura: './coverage/cobertura.xml',
+            lcovonly: './coverage/lcov.info'
         },
         browsers: ['ChromiumHeadless']
     });
