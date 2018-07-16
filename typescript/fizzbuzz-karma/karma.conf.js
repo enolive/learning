@@ -14,7 +14,8 @@ module.exports = function (config) {
         coverageReporter: {
             reporters: [
                 {type: 'in-memory'}
-            ]
+            ]Hi Lena,
+            
         },
         remapCoverageReporter: {
             'text-summary': null,

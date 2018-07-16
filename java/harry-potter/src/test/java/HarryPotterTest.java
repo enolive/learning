@@ -1,4 +1,5 @@
 import io.vavr.collection.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -20,6 +21,7 @@ class HarryPotterTest {
         assertThat(HarryPotter.getGroupPrice(numberOfBooks)).isEqualByComparingTo(expected);
     }
 
+    @Disabled
     @Test
     void getBookSets() {
         assertThat(HarryPotter.getBookSets(List.of(
@@ -36,18 +38,7 @@ class HarryPotterTest {
                 );
     }
 
-    @Test
-    void getRemainingSets() {
-        assertThat(HarryPotter.getRemainingSets(List.of(
-                new BookSet(1, 3),
-                new BookSet(2, 3),
-                new BookSet(3, 1)
-        ))).containsExactly(
-                new BookSet(1, 2),
-                new BookSet(2, 2)
-        );
-    }
-
+    @Disabled
     @Test
     void getBundles() {
         assertThat(HarryPotter.getBundles(List.of(
@@ -58,6 +49,7 @@ class HarryPotterTest {
         );
     }
 
+    @Disabled
     @Test
     void adjust() {
         assertThat(HarryPotter.adjust(List.of(new Bundle(3, 1)))).containsExactly(new Bundle(3, 1));
@@ -67,6 +59,7 @@ class HarryPotterTest {
                 new Bundle(3, 2), new Bundle(4, 2));
     }
 
+    @Disabled
     @Test
     void singleDiscount() {
         assertThat(HarryPotter.getPrice(books(1))).isEqualByComparingTo("8.00");
@@ -76,12 +69,14 @@ class HarryPotterTest {
         assertThat(HarryPotter.getPrice(books(1, 2, 3, 4, 5))).isEqualByComparingTo("30.00");
     }
 
+    @Disabled
     @Test
     void multipleDiscount() {
         assertThat(HarryPotter.getPrice(books(1, 1, 2, 2))).isEqualByComparingTo("30.40");
         assertThat(HarryPotter.getPrice(books(1, 1, 2, 3))).isEqualByComparingTo("29.60");
     }
 
+    @Disabled
     @Test
     void edgeCases() {
         assertThat(HarryPotter.getPrice(books(1, 1, 2, 2, 3, 3, 4, 5))).isEqualByComparingTo("51.20");
