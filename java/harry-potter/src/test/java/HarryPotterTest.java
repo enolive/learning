@@ -1,5 +1,4 @@
 import io.vavr.collection.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -92,14 +91,12 @@ class HarryPotterTest {
         return List.ofAll(volumes).map(Book::new);
     }
 
-    @Disabled
     @Test
     void multipleDiscount() {
         assertThat(HarryPotter.getPrice(books(1, 1, 2, 2))).isEqualByComparingTo("30.40");
         assertThat(HarryPotter.getPrice(books(1, 1, 2, 3))).isEqualByComparingTo("29.60");
     }
 
-    @Disabled
     @Test
     void edgeCases() {
         assertThat(HarryPotter.getPrice(books(1, 1, 2, 2, 3, 3, 4, 5))).isEqualByComparingTo("51.20");
