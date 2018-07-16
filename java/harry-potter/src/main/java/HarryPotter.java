@@ -92,7 +92,15 @@ class HarryPotter {
     }
 
     static BigDecimal getPrice(List<Book> books) {
-        return null;
+        final var bookSets = getBookSets(books);
+        final var bundles = getBundles(bookSets);
+        final var adjusted = adjust(bundles);
+        return adjusted.map(HarryPotter::getBundlePrice)
+                       .foldLeft(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private static BigDecimal getBundlePrice(Bundle bundle) {
+        return getGroupPrice(bundle.getNumberOfDistinctBooks()).multiply(BigDecimal.valueOf(bundle.getCount()));
     }
 
     private static BookSet bookSetFromGrouping(Tuple2<Integer, List<Book>> tuple) {

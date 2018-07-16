@@ -79,7 +79,6 @@ class HarryPotterTest {
                 .containsExactly(new Bundle(3, 2), new Bundle(4, 2));
     }
 
-    @Disabled
     @Test
     void singleDiscount() {
         assertThat(HarryPotter.getPrice(books(1))).isEqualByComparingTo("8.00");
