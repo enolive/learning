@@ -7,19 +7,19 @@ class BookSet {
         this.count = count;
     }
 
-    @Override
-    public String toString() {
-        return "BookSet{" +
-                "volume=" + volume +
-                ", count=" + count +
-                '}';
-    }
-
     int getVolume() {
         return volume;
     }
 
     int getCount() {
         return count;
+    }
+
+    @Override
+    public String toString() {
+        return "BookSet{" +
+                "volume=" + volume +
+                ", count=" + count +
+                '}';
     }
 }

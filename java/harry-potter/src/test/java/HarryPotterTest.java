@@ -43,15 +43,23 @@ class HarryPotterTest {
                 );
     }
 
-    @Disabled
     @Test
     void getBundles() {
-        assertThat(HarryPotter.getBundles(List.of(
-                new BookSet(1, 3),
-                new BookSet(2, 3)
-        ))).containsExactly(
-                new Bundle(2, 3)
+        final var bookSets = List.of(
+                new BookSet(1, 1),
+                new BookSet(2, 1),
+                new BookSet(3, 2),
+                new BookSet(4, 2)
         );
+        final var bundlesComparator = Comparator.comparing(Bundle::getNumberOfDistinctBooks)
+                                                .thenComparing(Bundle::getCount);
+        assertThat(HarryPotter.getBundles(bookSets))
+                .as("book sets should be placed into bundles of distinct books")
+                .usingElementComparator(bundlesComparator)
+                .containsExactly(
+                        new Bundle(2, 1),
+                        new Bundle(4, 1)
+                );
     }
 
     @Disabled
