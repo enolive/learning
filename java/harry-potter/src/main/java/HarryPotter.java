@@ -1,9 +1,7 @@
 import io.vavr.Function1;
-import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import io.vavr.collection.Stream;
-import io.vavr.control.Option;
 
 import java.math.BigDecimal;
 
@@ -33,7 +31,8 @@ class HarryPotter {
     }
 
     private static Stream<Integer> getBundleSizes(List<BookSet> bookSets) {
-        return Stream.unfoldLeft(Tuple.of(bookSets, 0), HarryPotter::tryCalculateBundleSize);
+        final var seed = new CalculateBundleSizes(bookSets);
+        return seed.invoke();
     }
 
     static List<Bundle> adjustBundles(List<Bundle> bundles) {
@@ -75,27 +74,6 @@ class HarryPotter {
                 Case($(3), 21.6),
                 Case($(4), 25.6),
                 Case($(5), 30.0));
-    }
-
-    private static Option<Tuple2<? extends Tuple2<List<BookSet>, Integer>, ? extends Integer>> tryCalculateBundleSize(
-            Tuple2<List<BookSet>, Integer> remaining) {
-        final var remainingSets = remaining._1;
-        final var usedBooks = remaining._2;
-        return tryCalculateBundleSize(remainingSets, usedBooks);
-    }
-
-    private static Option<Tuple2<? extends Tuple2<List<BookSet>, Integer>, ? extends Integer>> tryCalculateBundleSize(
-            List<BookSet> remainingSets, Integer usedBooks) {
-        return remainingSets.isEmpty()
-                ? Option.none()
-                : Option.of(calculateBundleSize(remainingSets, usedBooks));
-    }
-
-    private static Tuple2<Tuple2<List<BookSet>, Integer>, Integer> calculateBundleSize(List<BookSet> remainingSets, Integer usedBooks) {
-        final var booksInCurrentSet = remainingSets.head().getCount();
-        final var sizeOfCurrentBundle = booksInCurrentSet - usedBooks;
-        final var nextSeed = Tuple.of(remainingSets.tail(), booksInCurrentSet);
-        return Tuple.of(nextSeed, sizeOfCurrentBundle);
     }
 
     private static BigDecimal getBundlePrice(Bundle bundle) {
