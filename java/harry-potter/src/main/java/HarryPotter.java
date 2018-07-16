@@ -25,7 +25,8 @@ class HarryPotter {
     static List<BookSet> getBookSets(List<Book> books) {
         return books.groupBy(book -> book.volume)
                     .toList()
-                    .map(HarryPotter::fromTuple);
+                    .map(HarryPotter::fromTuple)
+                    .sortBy(BookSet::getCount);
     }
 
     private static BookSet fromTuple(Tuple2<Integer, List<Book>> tuple) {

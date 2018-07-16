@@ -34,11 +34,12 @@ class HarryPotterTest {
         final var bookSetComparator = Comparator.comparing(BookSet::getVolume)
                                                 .thenComparing(BookSet::getCount);
         assertThat(HarryPotter.getBookSets(books))
+                .as("books should be grouped by their volume and sorted by their count ascending")
                 .usingElementComparator(bookSetComparator)
                 .containsExactly(
-                        new BookSet(1, 3),
+                        new BookSet(3, 1),
                         new BookSet(2, 2),
-                        new BookSet(3, 1)
+                        new BookSet(1, 3)
                 );
     }
 
