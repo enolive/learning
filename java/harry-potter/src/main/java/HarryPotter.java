@@ -26,18 +26,21 @@ class HarryPotter {
     }
 
     static List<BookSet> getBookSets(List<Book> books) {
-        return books.groupBy(book -> book.volume)
+        return books.groupBy(Book::getVolume)
                     .toList()
                     .map(HarryPotter::bookSetFromGrouping)
                     .sortBy(BookSet::getCount);
     }
 
     static List<Bundle> getBundles(List<BookSet> bookSets) {
-        final var bundleSizes = Stream.unfoldLeft(Tuple.of(bookSets, 0), HarryPotter::tryCalculateBundleSize);
-        return bundleSizes.zipWithIndex()
-                          .map(HarryPotter::bundleFromSizeAndIndex)
-                          .filter(Bundle::nonEmpty)
-                          .toList();
+        return getBundleSizes(bookSets).zipWithIndex()
+                                       .map(HarryPotter::bundleFromSizeAndIndex)
+                                       .filter(Bundle::nonEmpty)
+                                       .toList();
+    }
+
+    private static Stream<Integer> getBundleSizes(List<BookSet> bookSets) {
+        return Stream.unfoldLeft(Tuple.of(bookSets, 0), HarryPotter::tryCalculateBundleSize);
     }
 
     private static Option<Tuple2<? extends Tuple2<List<BookSet>, Integer>, ? extends Integer>> tryCalculateBundleSize(
