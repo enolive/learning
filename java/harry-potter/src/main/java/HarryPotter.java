@@ -1,4 +1,5 @@
 import io.vavr.Function1;
+import io.vavr.Tuple2;
 import io.vavr.collection.List;
 
 import java.math.BigDecimal;
@@ -22,7 +23,13 @@ class HarryPotter {
     }
 
     static List<BookSet> getBookSets(List<Book> books) {
-        return null;
+        return books.groupBy(book -> book.volume)
+                    .toList()
+                    .map(HarryPotter::fromTuple);
+    }
+
+    private static BookSet fromTuple(Tuple2<Integer, List<Book>> tuple) {
+        return new BookSet(tuple._1, tuple._2.length());
     }
 
     static List<Bundle> getBundles(List<BookSet> bookSets) {

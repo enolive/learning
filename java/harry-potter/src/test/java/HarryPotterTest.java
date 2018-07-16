@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,11 +31,15 @@ class HarryPotterTest {
                 new Book(2),
                 new Book(2),
                 new Book(3));
-        assertThat(HarryPotter.getBookSets(books)).containsExactly(
-                new BookSet(1, 3),
-                new BookSet(2, 2),
-                new BookSet(3, 1)
-        );
+        final var bookSetComparator = Comparator.comparing(BookSet::getVolume)
+                                                .thenComparing(BookSet::getCount);
+        assertThat(HarryPotter.getBookSets(books))
+                .usingElementComparator(bookSetComparator)
+                .containsExactly(
+                        new BookSet(1, 3),
+                        new BookSet(2, 2),
+                        new BookSet(3, 1)
+                );
     }
 
     @Disabled
