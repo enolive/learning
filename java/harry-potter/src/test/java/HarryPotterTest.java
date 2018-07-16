@@ -64,16 +64,16 @@ class HarryPotterTest {
 
     @Test
     void adjust() {
-        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 1))))
+        assertThat(HarryPotter.adjustBundles(List.of(new Bundle(3, 1))))
                 .usingElementComparator(BUNDLES_COMPARATOR)
                 .containsExactly(new Bundle(3, 1));
-        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 1), new Bundle(5, 1))))
+        assertThat(HarryPotter.adjustBundles(List.of(new Bundle(3, 1), new Bundle(5, 1))))
                 .usingElementComparator(BUNDLES_COMPARATOR)
                 .containsExactly(new Bundle(4, 2));
-        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 2), new Bundle(5, 2))))
+        assertThat(HarryPotter.adjustBundles(List.of(new Bundle(3, 2), new Bundle(5, 2))))
                 .usingElementComparator(BUNDLES_COMPARATOR)
                 .containsExactly(new Bundle(4, 4));
-        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 3), new Bundle(5, 1))))
+        assertThat(HarryPotter.adjustBundles(List.of(new Bundle(3, 3), new Bundle(5, 1))))
                 .usingElementComparator(BUNDLES_COMPARATOR)
                 .containsExactly(new Bundle(3, 2), new Bundle(4, 2));
     }

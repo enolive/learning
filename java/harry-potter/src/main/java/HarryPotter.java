@@ -10,19 +10,12 @@ import java.math.BigDecimal;
 import static io.vavr.API.*;
 
 class HarryPotter {
-    static BigDecimal getGroupPrice(int numberOfBooks) {
-        return Function1.of(HarryPotter::groupPrice)
-                        .andThen(BigDecimal::valueOf)
-                        .apply(numberOfBooks);
-    }
-
-    private static double groupPrice(int books) {
-        return Match(books).of(
-                Case($(1), 8.0),
-                Case($(2), 15.2),
-                Case($(3), 21.6),
-                Case($(4), 25.6),
-                Case($(5), 30.0));
+    static BigDecimal getPrice(List<Book> books) {
+        return Function1.of(HarryPotter::getBookSets)
+                        .andThen(HarryPotter::getBundles)
+                        .andThen(HarryPotter::adjustBundles)
+                        .andThen(HarryPotter::getPriceForBundles)
+                        .apply(books);
     }
 
     static List<BookSet> getBookSets(List<Book> books) {
@@ -43,28 +36,7 @@ class HarryPotter {
         return Stream.unfoldLeft(Tuple.of(bookSets, 0), HarryPotter::tryCalculateBundleSize);
     }
 
-    private static Option<Tuple2<? extends Tuple2<List<BookSet>, Integer>, ? extends Integer>> tryCalculateBundleSize(
-            Tuple2<List<BookSet>, Integer> remaining) {
-        final var remainingSets = remaining._1;
-        final var usedBooks = remaining._2;
-        return tryCalculateBundleSize(remainingSets, usedBooks);
-    }
-
-    private static Option<Tuple2<? extends Tuple2<List<BookSet>, Integer>, ? extends Integer>> tryCalculateBundleSize(
-            List<BookSet> remainingSets, Integer usedBooks) {
-        return remainingSets.isEmpty()
-                ? Option.none()
-                : Option.of(calculateBundleSize(remainingSets, usedBooks));
-    }
-
-    private static Tuple2<Tuple2<List<BookSet>, Integer>, Integer> calculateBundleSize(List<BookSet> remainingSets, Integer usedBooks) {
-        final var booksInCurrentSet = remainingSets.head().getCount();
-        final var sizeOfCurrentBundle = booksInCurrentSet - usedBooks;
-        final var nextSeed = Tuple.of(remainingSets.tail(), booksInCurrentSet);
-        return Tuple.of(nextSeed, sizeOfCurrentBundle);
-    }
-
-    static List<Bundle> adjust(List<Bundle> bundles) {
+    static List<Bundle> adjustBundles(List<Bundle> bundles) {
         final var bundlesWith3Books = bundlesWithNumberOfBooksOf(bundles, 3);
         final var bundlesWith5Books = bundlesWithNumberOfBooksOf(bundles, 5);
         final var commonSize = Math.min(bundlesWith3Books, bundlesWith5Books);
@@ -91,16 +63,49 @@ class HarryPotter {
                       .filter(Bundle::nonEmpty);
     }
 
-    static BigDecimal getPrice(List<Book> books) {
-        final var bookSets = getBookSets(books);
-        final var bundles = getBundles(bookSets);
-        final var adjusted = adjust(bundles);
+    private static BigDecimal getPriceForBundles(List<Bundle> adjusted) {
         return adjusted.map(HarryPotter::getBundlePrice)
                        .foldLeft(BigDecimal.ZERO, BigDecimal::add);
     }
 
+    private static double groupPrice(int books) {
+        return Match(books).of(
+                Case($(1), 8.0),
+                Case($(2), 15.2),
+                Case($(3), 21.6),
+                Case($(4), 25.6),
+                Case($(5), 30.0));
+    }
+
+    private static Option<Tuple2<? extends Tuple2<List<BookSet>, Integer>, ? extends Integer>> tryCalculateBundleSize(
+            Tuple2<List<BookSet>, Integer> remaining) {
+        final var remainingSets = remaining._1;
+        final var usedBooks = remaining._2;
+        return tryCalculateBundleSize(remainingSets, usedBooks);
+    }
+
+    private static Option<Tuple2<? extends Tuple2<List<BookSet>, Integer>, ? extends Integer>> tryCalculateBundleSize(
+            List<BookSet> remainingSets, Integer usedBooks) {
+        return remainingSets.isEmpty()
+                ? Option.none()
+                : Option.of(calculateBundleSize(remainingSets, usedBooks));
+    }
+
+    private static Tuple2<Tuple2<List<BookSet>, Integer>, Integer> calculateBundleSize(List<BookSet> remainingSets, Integer usedBooks) {
+        final var booksInCurrentSet = remainingSets.head().getCount();
+        final var sizeOfCurrentBundle = booksInCurrentSet - usedBooks;
+        final var nextSeed = Tuple.of(remainingSets.tail(), booksInCurrentSet);
+        return Tuple.of(nextSeed, sizeOfCurrentBundle);
+    }
+
     private static BigDecimal getBundlePrice(Bundle bundle) {
         return getGroupPrice(bundle.getNumberOfDistinctBooks()).multiply(BigDecimal.valueOf(bundle.getCount()));
+    }
+
+    static BigDecimal getGroupPrice(int numberOfBooks) {
+        return Function1.of(HarryPotter::groupPrice)
+                        .andThen(BigDecimal::valueOf)
+                        .apply(numberOfBooks);
     }
 
     private static BookSet bookSetFromGrouping(Tuple2<Integer, List<Book>> tuple) {
