@@ -21,21 +21,20 @@ class HarryPotterTest {
         assertThat(HarryPotter.getGroupPrice(numberOfBooks)).isEqualByComparingTo(expected);
     }
 
-    @Disabled
     @Test
     void getBookSets() {
-        assertThat(HarryPotter.getBookSets(List.of(
+        final var books = List.of(
                 new Book(1),
                 new Book(1),
                 new Book(1),
                 new Book(2),
                 new Book(2),
-                new Book(3))))
-                .containsExactly(
-                        new BookSet(1, 3),
-                        new BookSet(2, 2),
-                        new BookSet(3, 1)
-                );
+                new Book(3));
+        assertThat(HarryPotter.getBookSets(books)).containsExactly(
+                new BookSet(1, 3),
+                new BookSet(2, 2),
+                new BookSet(3, 1)
+        );
     }
 
     @Disabled
@@ -69,6 +68,10 @@ class HarryPotterTest {
         assertThat(HarryPotter.getPrice(books(1, 2, 3, 4, 5))).isEqualByComparingTo("30.00");
     }
 
+    private List<Book> books(int... volumes) {
+        return List.ofAll(volumes).map(Book::new);
+    }
+
     @Disabled
     @Test
     void multipleDiscount() {
@@ -86,9 +89,5 @@ class HarryPotterTest {
                 3, 3, 3, 3,
                 4, 4, 4,
                 5, 5, 5))).isEqualByComparingTo("111.20");
-    }
-
-    private List<Book> books(int... volumes) {
-        return List.ofAll(volumes).map(Book::new);
     }
 }
