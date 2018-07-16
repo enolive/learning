@@ -10,6 +10,9 @@ import java.util.Comparator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class HarryPotterTest {
+    private static final Comparator<Bundle> BUNDLES_COMPARATOR = Comparator.comparing(Bundle::getNumberOfDistinctBooks)
+                                                                           .thenComparing(Bundle::getCount);
+
     @ParameterizedTest
     @CsvSource(value = {
             "1, 8.0",
@@ -51,25 +54,29 @@ class HarryPotterTest {
                 new BookSet(3, 2),
                 new BookSet(4, 2)
         );
-        final var bundlesComparator = Comparator.comparing(Bundle::getNumberOfDistinctBooks)
-                                                .thenComparing(Bundle::getCount);
         assertThat(HarryPotter.getBundles(bookSets))
                 .as("book sets should be placed into bundles of distinct books")
-                .usingElementComparator(bundlesComparator)
+                .usingElementComparator(BUNDLES_COMPARATOR)
                 .containsExactly(
                         new Bundle(2, 1),
                         new Bundle(4, 1)
                 );
     }
 
-    @Disabled
     @Test
     void adjust() {
-        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 1)))).containsExactly(new Bundle(3, 1));
-        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 1), new Bundle(5, 1)))).containsExactly(new Bundle(4, 2));
-        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 2), new Bundle(5, 2)))).containsExactly(new Bundle(4, 4));
-        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 3), new Bundle(5, 1)))).containsExactly(
-                new Bundle(3, 2), new Bundle(4, 2));
+        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 1))))
+                .usingElementComparator(BUNDLES_COMPARATOR)
+                .containsExactly(new Bundle(3, 1));
+        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 1), new Bundle(5, 1))))
+                .usingElementComparator(BUNDLES_COMPARATOR)
+                .containsExactly(new Bundle(4, 2));
+        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 2), new Bundle(5, 2))))
+                .usingElementComparator(BUNDLES_COMPARATOR)
+                .containsExactly(new Bundle(4, 4));
+        assertThat(HarryPotter.adjust(List.of(new Bundle(3, 3), new Bundle(5, 1))))
+                .usingElementComparator(BUNDLES_COMPARATOR)
+                .containsExactly(new Bundle(3, 2), new Bundle(4, 2));
     }
 
     @Disabled

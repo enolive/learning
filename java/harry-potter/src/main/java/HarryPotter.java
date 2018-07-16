@@ -65,7 +65,30 @@ class HarryPotter {
     }
 
     static List<Bundle> adjust(List<Bundle> bundles) {
-        return null;
+        final var bundlesWith3Books = bundlesWithNumberOfBooksOf(bundles, 3);
+        final var bundlesWith5Books = bundlesWithNumberOfBooksOf(bundles, 5);
+        final var commonSize = Math.min(bundlesWith3Books, bundlesWith5Books);
+        return commonSize == 0
+                ? bundles
+                : replaceBundlesWith3And5By4(bundles, bundlesWith3Books, bundlesWith5Books, commonSize);
+    }
+
+    private static int bundlesWithNumberOfBooksOf(List<Bundle> bundles, int count) {
+        return bundles.filter(bundle -> bundle.hasNumberOfDistinctBooks(count))
+                      .map(Bundle::getCount)
+                      .singleOption()
+                      .getOrElse(0);
+    }
+
+    private static List<Bundle> replaceBundlesWith3And5By4(List<Bundle> bundles, int bundlesWith3Books, int bundlesWith5Books, int commonSize) {
+        final var newSize3 = bundlesWith3Books - commonSize;
+        final var newSize5 = bundlesWith5Books - commonSize;
+        return bundles.removeAll(bundle -> bundle.hasNumberOfDistinctBooks(3))
+                      .removeAll(bundle -> bundle.hasNumberOfDistinctBooks(5))
+                      .append(new Bundle(3, newSize3))
+                      .append(new Bundle(4, commonSize * 2))
+                      .append(new Bundle(5, newSize5))
+                      .filter(Bundle::nonEmpty);
     }
 
     static BigDecimal getPrice(List<Book> books) {

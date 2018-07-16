@@ -7,12 +7,16 @@ class Bundle {
         this.count = count;
     }
 
-    boolean nonEmpty() {
-        return count != 0;
+    boolean hasNumberOfDistinctBooks(int i) {
+        return getNumberOfDistinctBooks() == i;
     }
 
     int getNumberOfDistinctBooks() {
         return numberOfDistinctBooks;
+    }
+
+    boolean nonEmpty() {
+        return count != 0;
     }
 
     int getCount() {
