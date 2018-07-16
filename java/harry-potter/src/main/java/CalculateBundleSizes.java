@@ -4,25 +4,27 @@ import io.vavr.collection.Stream;
 class CalculateBundleSizes {
     private final List<BookSet> bookSets;
     private final int alreadyUsed;
-    private final Stream<Integer> calculatedSizes;
 
     CalculateBundleSizes(List<BookSet> bookSets) {
-        this(bookSets, 0, Stream.empty());
+        this(bookSets, 0);
     }
 
-    private CalculateBundleSizes(List<BookSet> bookSets, int alreadyUsed, Stream<Integer> calculatedSizes) {
+    private CalculateBundleSizes(List<BookSet> bookSets, int alreadyUsed) {
         this.bookSets = bookSets;
         this.alreadyUsed = alreadyUsed;
-        this.calculatedSizes = calculatedSizes;
     }
 
     Stream<Integer> invoke() {
+        return invoke(Stream.empty());
+    }
+
+    private Stream<Integer> invoke(Stream<Integer> calculatedSizes) {
         if (bookSets.isEmpty()) {
             return calculatedSizes;
         }
         final var numberOfCurrentBooks = bookSets.head().getCount();
         final var sizeOfCurrentBundle = numberOfCurrentBooks - alreadyUsed;
         final var remainingSets = bookSets.tail();
-        return new CalculateBundleSizes(remainingSets, numberOfCurrentBooks, calculatedSizes.prepend(sizeOfCurrentBundle)).invoke();
+        return new CalculateBundleSizes(remainingSets, numberOfCurrentBooks).invoke(calculatedSizes.prepend(sizeOfCurrentBundle));
     }
 }
