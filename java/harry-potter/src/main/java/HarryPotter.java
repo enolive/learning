@@ -1,3 +1,4 @@
+import io.vavr.Function1;
 import io.vavr.collection.List;
 
 import java.math.BigDecimal;
@@ -6,13 +7,18 @@ import static io.vavr.API.*;
 
 class HarryPotter {
     static BigDecimal getGroupPrice(int numberOfBooks) {
-        return Match(numberOfBooks).of(
-                Case($(1), BigDecimal.valueOf(8.0)),
-                Case($(2), BigDecimal.valueOf(15.2)),
-                Case($(3), BigDecimal.valueOf(21.6)),
-                Case($(4), BigDecimal.valueOf(25.6)),
-                Case($(5), BigDecimal.valueOf(30.0))
-        );
+        return Function1.of(HarryPotter::groupPrice)
+                        .andThen(BigDecimal::valueOf)
+                        .apply(numberOfBooks);
+    }
+
+    private static double groupPrice(int books) {
+        return Match(books).of(
+                Case($(1), 8.0),
+                Case($(2), 15.2),
+                Case($(3), 21.6),
+                Case($(4), 25.6),
+                Case($(5), 30.0));
     }
 
     static List<BookSet> getBookSets(List<Book> books) {
