@@ -1,5 +1,8 @@
+import io.vavr.Tuple;
+import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import io.vavr.collection.Stream;
+import io.vavr.control.Option;
 
 class CalculateBundleSizes {
     private final List<BookSet> bookSets;
@@ -15,16 +18,21 @@ class CalculateBundleSizes {
     }
 
     Stream<Integer> invoke() {
-        return invoke(Stream.empty());
+        return Stream.unfoldLeft(this, this::tryCalculateNext);
     }
 
-    private Stream<Integer> invoke(Stream<Integer> calculatedSizes) {
-        if (bookSets.isEmpty()) {
-            return calculatedSizes;
-        }
-        final var numberOfCurrentBooks = bookSets.head().getCount();
-        final var sizeOfCurrentBundle = numberOfCurrentBooks - alreadyUsed;
-        final var remainingSets = bookSets.tail();
-        return new CalculateBundleSizes(remainingSets, numberOfCurrentBooks).invoke(calculatedSizes.prepend(sizeOfCurrentBundle));
+    private Option<Tuple2<? extends CalculateBundleSizes, ? extends Integer>> tryCalculateNext(CalculateBundleSizes seed) {
+        return seed.bookSets.isEmpty()
+                ? Option.none()
+                : Option.of(calculateNext(seed));
     }
+
+    private Tuple2<CalculateBundleSizes, Integer> calculateNext(CalculateBundleSizes seed) {
+        final var numberOfCurrentBooks = seed.bookSets.head().getCount();
+        final var sizeOfCurrentBundle = numberOfCurrentBooks - seed.alreadyUsed;
+        final var remainingSets = seed.bookSets.tail();
+        final var newSeed = new CalculateBundleSizes(remainingSets, numberOfCurrentBooks);
+        return Tuple.of(newSeed, sizeOfCurrentBundle);
+    }
+
 }

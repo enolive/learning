@@ -31,8 +31,7 @@ class HarryPotter {
     }
 
     private static Stream<Integer> getBundleSizes(List<BookSet> bookSets) {
-        final var seed = new CalculateBundleSizes(bookSets);
-        return seed.invoke();
+        return new CalculateBundleSizes(bookSets).invoke();
     }
 
     static List<Bundle> adjustBundles(List<Bundle> bundles) {
