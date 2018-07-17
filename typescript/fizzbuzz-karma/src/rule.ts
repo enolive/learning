@@ -1,4 +1,4 @@
-class Rule {
+export class Rule {
     get result(): string {
         return this._result;
     }

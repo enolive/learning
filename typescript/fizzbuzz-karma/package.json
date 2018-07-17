@@ -8,23 +8,15 @@
   "devDependencies": {
     "@types/jasmine": "^2.5.47",
     "jasmine-core": "^2.6.2",
-    "karma": "^2.0.4",
+    "karma": "^1.7.0",
     "karma-chrome-launcher": "^2.1.1",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.4",
-    "karma-remap-coverage": "^0.1.5",
-    "karma-remap-istanbul": "^0.6.0",
-    "karma-sourcemap-loader": "^0.3.7",
     "karma-typescript": "^3.0.2",
     "typescript": "^2.3.4"
   },
   "dependencies": {
     "@types/lodash": "^4.14.64",
     "lodash": "^4.17.4"
-  },
-  "scripts": {
-    "clean": "rm -rf ./lib ./coverage",
-    "build": "tsc",
-    "test": "karma start --single-run"
   }
 }
