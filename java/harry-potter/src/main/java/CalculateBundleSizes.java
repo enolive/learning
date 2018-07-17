@@ -18,16 +18,12 @@ class CalculateBundleSizes {
     }
 
     Stream<Integer> invoke() {
-        return Stream.unfoldLeft(this, this::tryCalculateNext);
+        return Stream.unfoldLeft(this, seed -> Option.of(seed)
+                                                     .filter(s -> s.bookSets.nonEmpty())
+                                                     .map(this::calculateNext));
     }
 
-    private Option<Tuple2<? extends CalculateBundleSizes, ? extends Integer>> tryCalculateNext(CalculateBundleSizes seed) {
-        return seed.bookSets.isEmpty()
-                ? Option.none()
-                : Option.of(calculateNext(seed));
-    }
-
-    private Tuple2<CalculateBundleSizes, Integer> calculateNext(CalculateBundleSizes seed) {
+    private Tuple2<? extends CalculateBundleSizes, ? extends Integer> calculateNext(CalculateBundleSizes seed) {
         final var numberOfCurrentBooks = seed.bookSets.head().getCount();
         final var sizeOfCurrentBundle = numberOfCurrentBooks - seed.alreadyUsed;
         final var remainingSets = seed.bookSets.tail();
