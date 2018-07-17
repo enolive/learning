@@ -2,6 +2,7 @@ import io.vavr.Function1;
 import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import io.vavr.collection.Stream;
+import io.vavr.control.Option;
 
 import java.math.BigDecimal;
 
@@ -37,10 +38,10 @@ class HarryPotter {
     static List<Bundle> adjustBundles(List<Bundle> bundles) {
         final var bundlesWith3Books = bundlesWithNumberOfBooksOf(bundles, 3);
         final var bundlesWith5Books = bundlesWithNumberOfBooksOf(bundles, 5);
-        final var commonSize = Math.min(bundlesWith3Books, bundlesWith5Books);
-        return commonSize == 0
-                ? bundles
-                : replaceBundlesWith3And5By4(bundles, bundlesWith3Books, bundlesWith5Books, commonSize);
+        return Option.of(Math.min(bundlesWith3Books, bundlesWith5Books))
+                     .filter(commonSize -> commonSize != 0)
+                     .map(commonSize -> replaceBundlesWith3And5By4(bundles, bundlesWith3Books, bundlesWith5Books, commonSize))
+                     .getOrElse(bundles);
     }
 
     private static int bundlesWithNumberOfBooksOf(List<Bundle> bundles, int count) {
