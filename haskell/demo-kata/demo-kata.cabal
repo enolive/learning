@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5ba214d56e899c4d8b77a884b0cb15f466e3c274b5e381476e72f4edc053b0cf
+-- hash: 7772fc7203cf7f0b94fe9280c439328ded6fac2e143ceea9269b47ce3a4e99f2
 
 name:           demo-kata
 version:        0.1.0.0
@@ -29,6 +29,7 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , containers
   exposed-modules:
       HelloWorld
   other-modules:
@@ -43,6 +44,7 @@ test-suite demo-kata-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , containers
     , demo-kata
     , hspec
   other-modules:
