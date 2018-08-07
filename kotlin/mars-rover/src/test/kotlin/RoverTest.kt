@@ -11,8 +11,8 @@ class RoverTest {
         @CsvSource(value = [
             "NORTH, 1, 0",
             "SOUTH, 1, 2",
-            "EAST, 0, 1",
-            "WEST, 2, 1"
+            "EAST, 2, 1",
+            "WEST, 0, 1"
         ])
         internal fun `it should move forward`(initialBearing: Bearing, expectedX: Int, expectedY: Int) {
             assertThat(Rover(Position(1, 1), initialBearing).move(Command.FORWARD))
@@ -23,8 +23,8 @@ class RoverTest {
         @CsvSource(value = [
             "NORTH, 1, 2",
             "SOUTH, 1, 0",
-            "EAST, 2, 1",
-            "WEST, 0, 1"
+            "EAST, 0, 1",
+            "WEST, 2, 1"
         ])
         internal fun `it should move backwards`(initialBearing: Bearing, expectedX: Int, expectedY: Int) {
             assertThat(Rover(Position(1, 1), initialBearing).move(Command.BACKWARD))
@@ -57,6 +57,12 @@ class RoverTest {
             assertThat(Rover(Position(1, 1), initial).move(Command.TURN_RIGHT))
                     .isEqualTo(Rover(Position(1, 1), expected))
         }
+    }
+
+    @Test
+    internal fun `it should move multiple times`() {
+        assertThat(Rover(Position(1, 1), Bearing.NORTH).move("fffblffrffb"))
+                .isEqualTo(Rover(Position(-1, -2), Bearing.NORTH))
     }
 }
 
