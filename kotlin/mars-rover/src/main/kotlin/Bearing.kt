@@ -4,7 +4,13 @@ enum class Bearing {
     SOUTH,
     WEST;
 
-    fun next(step: Int): Bearing {
+    fun change(command: Command) = when (command) {
+        Command.TURN_LEFT -> next(-1)
+        Command.TURN_RIGHT -> next(1)
+        else -> this
+    }
+
+    private fun next(step: Int): Bearing {
         val values = enumValues<Bearing>()
         val modulo = step.modulo(values.size)
         return values[modulo]
