@@ -1,10 +1,15 @@
 data class Rover(val position: Position, val bearing: Bearing) {
-    fun move(command: Command) = Rover(changePosition(), bearing)
+    fun move(command: Command) = Rover(changePosition(command), bearing)
 
-    fun changePosition() = when (bearing) {
-        Bearing.NORTH -> position.deltaY(-1)
-        Bearing.SOUTH -> position.deltaY(1)
-        Bearing.EAST -> position.deltaX(-1)
-        Bearing.WEST -> position.deltaX(1)
+    fun changePosition(command: Command) = when(command) {
+        Command.FORWARD -> changePositionBy(1)
+        Command.BACKWARD -> changePositionBy(-1)
+    }
+
+    fun changePositionBy(step: Int) = when (bearing) {
+        Bearing.NORTH -> position.deltaY(-step)
+        Bearing.SOUTH -> position.deltaY(step)
+        Bearing.EAST -> position.deltaX(-step)
+        Bearing.WEST -> position.deltaX(step)
     }
 }
