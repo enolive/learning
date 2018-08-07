@@ -63,13 +63,25 @@ class RoverTest {
     inner class `Changing bearing` {
         @ParameterizedTest
         @CsvSource(value = [
+            "NORTH, WEST",
+            "WEST, SOUTH",
+            "SOUTH, EAST",
+            "EAST, NORTH"
+        ])
+        internal fun `it should turn left`(initial: Bearing, expected: Bearing) {
+            assertThat(Rover(Position(1, 1), initial).move(Command.TURN_LEFT))
+                    .isEqualTo(Rover(Position(1, 1), expected))
+        }
+
+        @ParameterizedTest
+        @CsvSource(value = [
             "NORTH, EAST",
             "EAST, SOUTH",
             "SOUTH, WEST",
             "WEST, NORTH"
         ])
-        internal fun `it should turn left`(initial: Bearing, expected: Bearing) {
-            assertThat(Rover(Position(1, 1), initial).move(Command.TURN_LEFT))
+        internal fun `it should turn right`(initial: Bearing, expected: Bearing) {
+            assertThat(Rover(Position(1, 1), initial).move(Command.TURN_RIGHT))
                     .isEqualTo(Rover(Position(1, 1), expected))
         }
     }

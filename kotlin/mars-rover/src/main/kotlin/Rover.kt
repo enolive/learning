@@ -2,7 +2,8 @@ data class Rover(val position: Position, val bearing: Bearing) {
     fun move(command: Command) = Rover(changePosition(command), changeBearing(command))
 
     private fun changeBearing(command: Command) = when(command) {
-        Command.TURN_LEFT -> bearing.next(1)
+        Command.TURN_LEFT -> bearing.next(-1)
+        Command.TURN_RIGHT -> bearing.next(1)
         else -> bearing
     }
 
