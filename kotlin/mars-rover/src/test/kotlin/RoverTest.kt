@@ -13,5 +13,11 @@ class RoverTest {
         assertThat(Rover(Position(1, 1), Bearing.SOUTH).move(Command.FORWARD))
                 .isEqualTo(Rover(Position(1, 2), Bearing.SOUTH))
     }
+
+    @Test
+    internal fun `it should move to the east`() {
+        assertThat(Rover(Position(1, 1), Bearing.EAST).move(Command.FORWARD))
+                .isEqualTo(Rover(Position(0, 1), Bearing.EAST))
+    }
 }
 

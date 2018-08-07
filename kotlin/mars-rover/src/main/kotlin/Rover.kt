@@ -4,5 +4,6 @@ data class Rover(val position: Position, val bearing: Bearing) {
     fun changePosition() = when (bearing) {
         Bearing.NORTH -> position.deltaY(-1)
         Bearing.SOUTH -> position.deltaY(1)
+        Bearing.EAST -> position.deltaX(-1)
     }
 }
