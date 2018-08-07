@@ -1,4 +1,5 @@
 enum class Command {
     FORWARD,
-    BACKWARD
+    BACKWARD,
+    TURN_LEFT
 }

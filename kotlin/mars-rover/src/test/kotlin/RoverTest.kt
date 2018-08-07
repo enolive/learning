@@ -1,6 +1,8 @@
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class RoverTest {
     @Nested
@@ -54,6 +56,21 @@ class RoverTest {
         internal fun `it should move to the west`() {
             assertThat(Rover(Position(1, 1), Bearing.EAST).move(Command.BACKWARD))
                     .isEqualTo(Rover(Position(2, 1), Bearing.EAST))
+        }
+    }
+
+    @Nested
+    inner class `Changing bearing` {
+        @ParameterizedTest
+        @CsvSource(value = [
+            "NORTH, EAST",
+            "EAST, SOUTH",
+            "SOUTH, WEST",
+            "WEST, NORTH"
+        ])
+        internal fun `it should turn left`(initial: Bearing, expected: Bearing) {
+            assertThat(Rover(Position(1, 1), initial).move(Command.TURN_LEFT))
+                    .isEqualTo(Rover(Position(1, 1), expected))
         }
     }
 }

@@ -1,6 +1,12 @@
 enum class Bearing {
     NORTH,
-    SOUTH,
     EAST,
-    WEST
+    SOUTH,
+    WEST;
+
+    fun next(step: Int): Bearing {
+        val values = enumValues<Bearing>()
+        val nextValue = (ordinal + step) % values.size
+        return values[nextValue]
+    }
 }
