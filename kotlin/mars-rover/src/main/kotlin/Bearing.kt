@@ -1,3 +1,4 @@
 enum class Bearing {
-    NORTH
+    NORTH,
+    SOUTH
 }
