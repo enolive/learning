@@ -1,3 +1,6 @@
+import arrow.syntax.function.andThen
+import arrow.syntax.function.pipe
+
 data class Rover(val position: Position, val bearing: Bearing) {
     fun move(commands: String) = commands.map(this::translate).fold(this, Rover::move)
 
@@ -10,6 +13,8 @@ data class Rover(val position: Position, val bearing: Bearing) {
 
     private fun forward() = Rover(position.advance(bearing), bearing)
 
+    // HINT: why implementing backward if we can just use a chaining
+    // of turning and forward to do the same?
     private fun backward() = turnLeft().turnLeft().forward().turnRight().turnRight()
 
     private fun turnLeft() = Rover(position, bearing.prev())
