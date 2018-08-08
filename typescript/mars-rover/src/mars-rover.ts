@@ -17,6 +17,11 @@ export interface IPosition {
     readonly y: number;
 }
 
+interface IBearingTransform {
+    start: Bearing;
+    end: Bearing;
+}
+
 export class MarsRover {
     private static moving: Array<{ command: Command, move: (rover: MarsRover) => MarsRover }> = [
         {command: Command.FORWARD, move: MarsRover.advance()},
@@ -30,20 +35,6 @@ export class MarsRover {
         {bearing: Bearing.SOUTH, advance: MarsRover.deltaY(1)},
         {bearing: Bearing.EAST, advance: MarsRover.deltaX(1)},
         {bearing: Bearing.WEST, advance: MarsRover.deltaX(-1)},
-    ];
-
-    private static turningRight: Array<{ start: Bearing, end: Bearing }> = [
-        {start: Bearing.NORTH, end: Bearing.EAST},
-        {start: Bearing.EAST, end: Bearing.SOUTH},
-        {start: Bearing.SOUTH, end: Bearing.WEST},
-        {start: Bearing.WEST, end: Bearing.NORTH},
-    ];
-
-    private static turningLeft: Array<{ start: Bearing; end: Bearing }> = [
-        {start: Bearing.NORTH, end: Bearing.WEST},
-        {start: Bearing.WEST, end: Bearing.SOUTH},
-        {start: Bearing.SOUTH, end: Bearing.EAST},
-        {start: Bearing.EAST, end: Bearing.NORTH},
     ];
 
     constructor(readonly position: IPosition, readonly bearing: Bearing) {
@@ -64,11 +55,11 @@ export class MarsRover {
 
     private static retreat() {
         return (rover: MarsRover) => [
-            this.turnLeft(),
-            this.turnLeft(),
-            this.advance(),
-            this.turnRight(),
-            this.turnRight(),
+            MarsRover.turnLeft(),
+            MarsRover.turnLeft(),
+            MarsRover.advance(),
+            MarsRover.turnRight(),
+            MarsRover.turnRight(),
         ].reduce((acc, move) => move(acc), rover);
     }
 
@@ -81,19 +72,35 @@ export class MarsRover {
     }
 
     private static turnRight() {
-        return ({position, bearing}: MarsRover) =>
-            new MarsRover(position, MarsRover.changeBearing(bearing, MarsRover.turningRight));
+        return MarsRover.turnRover([
+            {start: Bearing.NORTH, end: Bearing.EAST},
+            {start: Bearing.EAST, end: Bearing.SOUTH},
+            {start: Bearing.SOUTH, end: Bearing.WEST},
+            {start: Bearing.WEST, end: Bearing.NORTH},
+        ]);
     }
 
     private static turnLeft() {
-        return ({position, bearing}: MarsRover) =>
-            new MarsRover(position, MarsRover.changeBearing(bearing, MarsRover.turningLeft));
+        return this.turnRover([
+            {start: Bearing.NORTH, end: Bearing.WEST},
+            {start: Bearing.WEST, end: Bearing.SOUTH},
+            {start: Bearing.SOUTH, end: Bearing.EAST},
+            {start: Bearing.EAST, end: Bearing.NORTH},
+        ]);
     }
 
-    private static changeBearing(bearing: Bearing, rules: Array<{ start: Bearing; end: Bearing }>) {
-        return MarsRover.headOf(rules
-            .filter(rule => rule.start === bearing)
-            .map(rule => rule.end));
+    private static turnRover(transforms: IBearingTransform[]): (rover: MarsRover) => MarsRover {
+        return ({position, bearing}: MarsRover) => {
+            return new MarsRover(position, MarsRover.changeBearing(bearing)(transforms));
+        };
+    }
+
+    private static changeBearing(bearing: Bearing) {
+        return (rules: IBearingTransform[]) => {
+            return MarsRover.headOf(rules
+                .filter(rule => rule.start === bearing)
+                .map(rule => rule.end));
+        };
     }
 
     private static headOf(list) {
