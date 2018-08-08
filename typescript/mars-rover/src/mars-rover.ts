@@ -6,6 +6,7 @@ export enum Bearing {
 }
 
 export enum Command {
+    TURN_LEFT,
     TURN_RIGHT,
     FORWARD,
 }

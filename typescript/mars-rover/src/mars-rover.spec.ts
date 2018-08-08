@@ -35,5 +35,17 @@ describe('Mars Rover', () => {
                     .to.deep.equal(defaultRoverBearing(expectedBearing));
             }),
         );
+
+        [
+            {bearing: Bearing.NORTH, expectedBearing: Bearing.WEST},
+            {bearing: Bearing.WEST, expectedBearing: Bearing.SOUTH},
+            {bearing: Bearing.SOUTH, expectedBearing: Bearing.EAST},
+            {bearing: Bearing.EAST, expectedBearing: Bearing.NORTH},
+        ].forEach(({bearing, expectedBearing}) =>
+            it(`should turn to the left from ${bearing} to ${expectedBearing}`, () => {
+                expect(defaultRoverBearing(bearing).move(Command.TURN_LEFT))
+                    .to.deep.equal(defaultRoverBearing(expectedBearing));
+            }),
+        );
     });
 });
