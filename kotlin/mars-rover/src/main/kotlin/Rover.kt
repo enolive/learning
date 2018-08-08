@@ -1,6 +1,3 @@
-import arrow.syntax.function.andThen
-import arrow.syntax.function.pipe
-
 data class Rover(val position: Position, val bearing: Bearing) {
     fun move(commands: String) = commands.map(this::translate).fold(this, Rover::move)
 
