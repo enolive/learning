@@ -1,5 +1,4 @@
 import arrow.core.andThen
-import arrow.core.compose
 
 
 enum class Bearing {
@@ -14,10 +13,11 @@ enum class Bearing {
 
     private fun next(step: Int) = ::nextIndex.andThen(bearingValues::get)(step)
 
-    private fun nextIndex(step: Int): Int {
-        val nextValue = (ordinal + step) % bearingValues.size
-        return if (nextValue < 0) bearingValues.size + nextValue else nextValue
-    }
+    private fun nextIndex(step: Int) = step.modulo(bearingValues.size)
+
+    private fun Int.modulo(divisor: Int) = (ordinal + this).rem(divisor).toMod(divisor)
+
+    private fun Int.toMod(divisor: Int) = if (this < 0) divisor + this else this
 
     companion object {
         private val bearingValues = enumValues<Bearing>()
