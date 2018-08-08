@@ -27,6 +27,8 @@ describe('Mars Rover', () => {
         [
             {bearing: Bearing.NORTH, expectedBearing: Bearing.EAST},
             {bearing: Bearing.EAST, expectedBearing: Bearing.SOUTH},
+            {bearing: Bearing.SOUTH, expectedBearing: Bearing.WEST},
+            {bearing: Bearing.WEST, expectedBearing: Bearing.NORTH},
         ].forEach(({bearing, expectedBearing}) =>
             it(`should turn to the right from ${bearing} to ${expectedBearing}`, () => {
                 expect(defaultRoverBearing(bearing).move(Command.TURN_RIGHT))

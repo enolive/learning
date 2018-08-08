@@ -31,6 +31,8 @@ export class MarsRover {
     private static turningRight: Array<{ start: Bearing, end: Bearing }> = [
         {start: Bearing.NORTH, end: Bearing.EAST},
         {start: Bearing.EAST, end: Bearing.SOUTH},
+        {start: Bearing.SOUTH, end: Bearing.WEST},
+        {start: Bearing.WEST, end: Bearing.NORTH},
     ];
 
     constructor(readonly position: IPosition, readonly bearing: Bearing) {
@@ -46,13 +48,15 @@ export class MarsRover {
 
     private static advance() {
         return ({position, bearing}: MarsRover) =>
-            new MarsRover(MarsRover.advancePosition(position, bearing), bearing);
+            new MarsRover(MarsRover.advancePosition(position)(bearing), bearing);
     }
 
-    private static advancePosition(position: IPosition, bearing: Bearing) {
-        return MarsRover.headOf(MarsRover.advancing
-            .filter(rule => rule.bearing === bearing)
-            .map(rule => rule.advance(position)));
+    private static advancePosition(position: IPosition) {
+        return (bearing: Bearing) => {
+            return MarsRover.headOf(MarsRover.advancing
+                .filter(rule => rule.bearing === bearing)
+                .map(rule => rule.advance(position)));
+        };
     }
 
     private static turnRight() {
