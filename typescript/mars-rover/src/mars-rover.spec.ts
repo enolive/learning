@@ -25,9 +25,14 @@ class MarsRover {
         {bearing: Bearing.WEST, advance: MarsRover.deltaX(-1)},
     ];
 
-    private static moving: Array<{command: Command, move: (rover: MarsRover) => MarsRover}> = [
+    private static moving: Array<{ command: Command, move: (rover: MarsRover) => MarsRover }> = [
         {command: Command.FORWARD, move: MarsRover.advance()},
         {command: Command.TURN_RIGHT, move: MarsRover.turnRight()},
+    ];
+
+    private static turningRight: Array<{ start: Bearing, end: Bearing }> = [
+        {start: Bearing.NORTH, end: Bearing.EAST},
+        {start: Bearing.EAST, end: Bearing.SOUTH},
     ];
 
     constructor(readonly position: IPosition, readonly bearing: Bearing) {
@@ -39,13 +44,6 @@ class MarsRover {
 
     private static deltaX(delta: number) {
         return ({x, y}: IPosition) => ({x: x + delta, y});
-    }
-
-    move(command: Command) {
-        const [first] = MarsRover.moving
-            .filter(rule => rule.command === command)
-            .map(rule => rule.move);
-        return first(this);
     }
 
     private static advance() {
@@ -61,7 +59,22 @@ class MarsRover {
     }
 
     private static turnRight() {
-        return ({position, bearing}: MarsRover) => new MarsRover(position, Bearing.EAST);
+        return ({position, bearing}: MarsRover) =>
+            new MarsRover(position, MarsRover.changeBearing(bearing, MarsRover.turningRight));
+    }
+
+    private static changeBearing(bearing: Bearing, rules: Array<{ start: Bearing; end: Bearing }>) {
+        const [first] = rules
+            .filter(rule => rule.start === bearing)
+            .map(rule => rule.end);
+        return first;
+    }
+
+    move(command: Command) {
+        const [first] = MarsRover.moving
+            .filter(rule => rule.command === command)
+            .map(rule => rule.move);
+        return first(this);
     }
 }
 
@@ -90,6 +103,7 @@ describe('Mars Rover', () => {
     describe('turning left/right', () => {
         [
             {bearing: Bearing.NORTH, expectedBearing: Bearing.EAST},
+            {bearing: Bearing.EAST, expectedBearing: Bearing.SOUTH},
         ].forEach(({bearing, expectedBearing}) =>
             it(`should turn to the right from ${bearing} to ${expectedBearing}`, () => {
                 expect(defaultRoverBearing(bearing).move(Command.TURN_RIGHT))
