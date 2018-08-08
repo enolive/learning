@@ -8,6 +8,7 @@ enum Bearing {
 }
 
 enum Command {
+    TURN_RIGHT,
     FORWARD,
 }
 
@@ -17,11 +18,16 @@ interface IPosition {
 }
 
 class MarsRover {
-    private static advanceRules: Array<{ bearing: Bearing; advance: (position) => IPosition }> = [
+    private static advanceRules: Array<{ bearing: Bearing; advance: (position: IPosition) => IPosition }> = [
         {bearing: Bearing.NORTH, advance: MarsRover.deltaY(-1)},
         {bearing: Bearing.SOUTH, advance: MarsRover.deltaY(1)},
         {bearing: Bearing.EAST, advance: MarsRover.deltaX(1)},
         {bearing: Bearing.WEST, advance: MarsRover.deltaX(-1)},
+    ];
+
+    private static movingRules: Array<{command: Command, move: (rover: MarsRover) => MarsRover}> = [
+        {command: Command.FORWARD, move: MarsRover.advance()},
+        {command: Command.TURN_RIGHT, move: MarsRover.turnRight()},
     ];
 
     constructor(readonly position: IPosition, readonly bearing: Bearing) {
@@ -36,14 +42,26 @@ class MarsRover {
     }
 
     move(command: Command) {
-        return new MarsRover(this.advancePosition(this.position), this.bearing);
+        const [first] = MarsRover.movingRules
+            .filter(rule => rule.command === command)
+            .map(rule => rule.move);
+        return first(this);
     }
 
-    private advancePosition(position: IPosition) {
+    private static advance() {
+        return ({position, bearing}: MarsRover) =>
+            new MarsRover(MarsRover.advancePosition(position, bearing), bearing);
+    }
+
+    private static advancePosition(position: IPosition, bearing: Bearing) {
         const [first] = MarsRover.advanceRules
-            .filter(rule => rule.bearing === this.bearing)
-            .map(rule => rule.advance(this.position));
+            .filter(rule => rule.bearing === bearing)
+            .map(rule => rule.advance(position));
         return first;
+    }
+
+    private static turnRight() {
+        return ({position, bearing}: MarsRover) => new MarsRover(position, Bearing.EAST);
     }
 }
 
@@ -65,6 +83,17 @@ describe('Mars Rover', () => {
             it(`should move forward bearing ${bearing} to ${position}`, () => {
                 expect(defaultRoverBearing(bearing).move(Command.FORWARD))
                     .to.deep.equal(new MarsRover(position, bearing));
+            }),
+        );
+    });
+
+    describe('turning left/right', () => {
+        [
+            {bearing: Bearing.NORTH, expectedBearing: Bearing.EAST},
+        ].forEach(({bearing, expectedBearing}) =>
+            it(`should turn to the right from ${bearing} to ${expectedBearing}`, () => {
+                expect(defaultRoverBearing(bearing).move(Command.TURN_RIGHT))
+                    .to.deep.equal(defaultRoverBearing(expectedBearing));
             }),
         );
     });
