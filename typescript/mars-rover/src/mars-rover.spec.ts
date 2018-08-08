@@ -21,6 +21,18 @@ describe('Mars Rover', () => {
                     .to.deep.equal(new MarsRover(position, bearing));
             }),
         );
+
+        [
+            {bearing: Bearing.NORTH, position: {x: 0, y: 1}},
+            {bearing: Bearing.SOUTH, position: {x: 0, y: -1}},
+            {bearing: Bearing.EAST, position: {x: -1, y: 0}},
+            {bearing: Bearing.WEST, position: {x: 1, y: 0}},
+        ].forEach(({bearing, position}) =>
+            it(`should move backward bearing ${bearing} to ${position}`, () => {
+                expect(defaultRoverBearing(bearing).move(Command.BACKWARD))
+                    .to.deep.equal(new MarsRover(position, bearing));
+            }),
+        );
     });
 
     describe('turning left/right', () => {

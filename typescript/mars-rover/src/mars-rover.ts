@@ -6,6 +6,7 @@ export enum Bearing {
 }
 
 export enum Command {
+    BACKWARD,
     TURN_LEFT,
     TURN_RIGHT,
     FORWARD,
@@ -19,6 +20,7 @@ export interface IPosition {
 export class MarsRover {
     private static moving: Array<{ command: Command, move: (rover: MarsRover) => MarsRover }> = [
         {command: Command.FORWARD, move: MarsRover.advance()},
+        {command: Command.BACKWARD, move: MarsRover.retreat()},
         {command: Command.TURN_RIGHT, move: MarsRover.turnRight()},
         {command: Command.TURN_LEFT, move: MarsRover.turnLeft()},
     ];
@@ -58,6 +60,16 @@ export class MarsRover {
     private static advance() {
         return ({position, bearing}: MarsRover) =>
             new MarsRover(MarsRover.advancePosition(position)(bearing), bearing);
+    }
+
+    private static retreat() {
+        return (rover: MarsRover) => [
+            this.turnLeft(),
+            this.turnLeft(),
+            this.advance(),
+            this.turnRight(),
+            this.turnRight(),
+        ].reduce((acc, move) => move(acc), rover);
     }
 
     private static advancePosition(position: IPosition) {
