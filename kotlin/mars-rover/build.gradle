@@ -21,12 +21,12 @@ test {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile 'io.vavr:vavr:0.9.2'
-    compile "io.arrow-kt:arrow-core:0.7.2"
-    compile "io.arrow-kt:arrow-syntax:0.7.2"
-
+    def arrowVersion = "0.7.2"
     def junitVersion = '5.2.+'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "io.arrow-kt:arrow-core:$arrowVersion"
+    compile "io.arrow-kt:arrow-syntax:$arrowVersion"
 
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
     testCompile "org.junit.jupiter:junit-jupiter-api:$junitVersion"
