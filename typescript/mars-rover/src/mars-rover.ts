@@ -50,10 +50,9 @@ export class MarsRover {
     }
 
     private static advancePosition(position: IPosition, bearing: Bearing) {
-        const [first] = MarsRover.advancing
+        return MarsRover.headOf(MarsRover.advancing
             .filter(rule => rule.bearing === bearing)
-            .map(rule => rule.advance(position));
-        return first;
+            .map(rule => rule.advance(position)));
     }
 
     private static turnRight() {
@@ -62,16 +61,19 @@ export class MarsRover {
     }
 
     private static changeBearing(bearing: Bearing, rules: Array<{ start: Bearing; end: Bearing }>) {
-        const [first] = rules
+        return MarsRover.headOf(rules
             .filter(rule => rule.start === bearing)
-            .map(rule => rule.end);
+            .map(rule => rule.end));
+    }
+
+    private static headOf(list) {
+        const [first] = list;
         return first;
     }
 
     move(command: Command) {
-        const [first] = MarsRover.moving
+        return MarsRover.headOf(MarsRover.moving
             .filter(rule => rule.command === command)
-            .map(rule => rule.move);
-        return first(this);
+            .map(rule => rule.move(this)));
     }
 }
