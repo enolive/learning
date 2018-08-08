@@ -18,14 +18,14 @@ interface IPosition {
 }
 
 class MarsRover {
-    private static advanceRules: Array<{ bearing: Bearing; advance: (position: IPosition) => IPosition }> = [
+    private static advancing: Array<{ bearing: Bearing; advance: (position: IPosition) => IPosition }> = [
         {bearing: Bearing.NORTH, advance: MarsRover.deltaY(-1)},
         {bearing: Bearing.SOUTH, advance: MarsRover.deltaY(1)},
         {bearing: Bearing.EAST, advance: MarsRover.deltaX(1)},
         {bearing: Bearing.WEST, advance: MarsRover.deltaX(-1)},
     ];
 
-    private static movingRules: Array<{command: Command, move: (rover: MarsRover) => MarsRover}> = [
+    private static moving: Array<{command: Command, move: (rover: MarsRover) => MarsRover}> = [
         {command: Command.FORWARD, move: MarsRover.advance()},
         {command: Command.TURN_RIGHT, move: MarsRover.turnRight()},
     ];
@@ -42,7 +42,7 @@ class MarsRover {
     }
 
     move(command: Command) {
-        const [first] = MarsRover.movingRules
+        const [first] = MarsRover.moving
             .filter(rule => rule.command === command)
             .map(rule => rule.move);
         return first(this);
@@ -54,7 +54,7 @@ class MarsRover {
     }
 
     private static advancePosition(position: IPosition, bearing: Bearing) {
-        const [first] = MarsRover.advanceRules
+        const [first] = MarsRover.advancing
             .filter(rule => rule.bearing === bearing)
             .map(rule => rule.advance(position));
         return first;
