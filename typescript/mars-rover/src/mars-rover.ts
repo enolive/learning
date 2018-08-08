@@ -23,20 +23,6 @@ interface IBearingTransform {
 }
 
 export class MarsRover {
-    private static moving: Array<{ command: Command, move: (rover: MarsRover) => MarsRover }> = [
-        {command: Command.FORWARD, move: MarsRover.advance()},
-        {command: Command.BACKWARD, move: MarsRover.retreat()},
-        {command: Command.TURN_RIGHT, move: MarsRover.turnRight()},
-        {command: Command.TURN_LEFT, move: MarsRover.turnLeft()},
-    ];
-
-    private static advancing: Array<{ bearing: Bearing; advance: (position: IPosition) => IPosition }> = [
-        {bearing: Bearing.NORTH, advance: MarsRover.deltaY(-1)},
-        {bearing: Bearing.SOUTH, advance: MarsRover.deltaY(1)},
-        {bearing: Bearing.EAST, advance: MarsRover.deltaX(1)},
-        {bearing: Bearing.WEST, advance: MarsRover.deltaX(-1)},
-    ];
-
     constructor(readonly position: IPosition, readonly bearing: Bearing) {
     }
 
@@ -64,8 +50,14 @@ export class MarsRover {
     }
 
     private static advancePosition(position: IPosition) {
+        const advancing = [
+            {bearing: Bearing.NORTH, advance: MarsRover.deltaY(-1)},
+            {bearing: Bearing.SOUTH, advance: MarsRover.deltaY(1)},
+            {bearing: Bearing.EAST, advance: MarsRover.deltaX(1)},
+            {bearing: Bearing.WEST, advance: MarsRover.deltaX(-1)},
+        ];
         return (bearing: Bearing) => {
-            return MarsRover.headOf(MarsRover.advancing
+            return MarsRover.headOf(advancing
                 .filter(rule => rule.bearing === bearing)
                 .map(rule => rule.advance(position)));
         };
@@ -109,7 +101,13 @@ export class MarsRover {
     }
 
     move(command: Command) {
-        return MarsRover.headOf(MarsRover.moving
+        const moving = [
+            {command: Command.FORWARD, move: MarsRover.advance()},
+            {command: Command.BACKWARD, move: MarsRover.retreat()},
+            {command: Command.TURN_RIGHT, move: MarsRover.turnRight()},
+            {command: Command.TURN_LEFT, move: MarsRover.turnLeft()},
+        ];
+        return MarsRover.headOf(moving
             .filter(rule => rule.command === command)
             .map(rule => rule.move(this)));
     }
