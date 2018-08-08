@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 
 enum Bearing {
+    SOUTH,
     NORTH,
 }
 
@@ -22,7 +23,12 @@ class MarsRover {
     }
 
     private advance({x, y}: IPosition) {
-        return {x, y: y - 1};
+        switch (this.bearing) {
+            case Bearing.NORTH:
+                return {x, y: y - 1};
+            case Bearing.SOUTH:
+                return {x, y: y + 1};
+        }
     }
 }
 
@@ -37,11 +43,11 @@ describe('Mars Rover', () => {
     describe('moving forward/backward', () => {
         [
             {bearing: Bearing.NORTH, position: {x: 0, y: -1}},
+            {bearing: Bearing.SOUTH, position: {x: 0, y: 1}},
         ].forEach(({bearing, position}) =>
             it(`should move forward bearing ${bearing} to ${position}`, () => {
-                const resultingRover = defaultRoverBearing(bearing).move(Command.FORWARD);
-                expect(resultingRover).to.deep
-                    .equal(new MarsRover(position, bearing));
+                expect(defaultRoverBearing(bearing).move(Command.FORWARD))
+                    .to.deep.equal(new MarsRover(position, bearing));
             }),
         );
     });
