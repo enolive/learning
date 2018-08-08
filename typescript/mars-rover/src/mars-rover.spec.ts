@@ -15,20 +15,27 @@ interface IPosition {
 }
 
 class MarsRover {
+    private static advanceRules: Array<{ bearing: Bearing; advance: (position) => IPosition }> = [
+        {bearing: Bearing.NORTH, advance: MarsRover.deltaY(-1)},
+        {bearing: Bearing.SOUTH, advance: MarsRover.deltaY(1)},
+    ];
+
     constructor(readonly position: IPosition, readonly bearing: Bearing) {
     }
 
-    move(command: Command) {
-        return new MarsRover(this.advance(this.position), this.bearing);
+    private static deltaY(delta: number) {
+        return ({x, y}: IPosition) => ({x, y: y + delta});
     }
 
-    private advance({x, y}: IPosition) {
-        switch (this.bearing) {
-            case Bearing.NORTH:
-                return {x, y: y - 1};
-            case Bearing.SOUTH:
-                return {x, y: y + 1};
-        }
+    move(command: Command) {
+        return new MarsRover(this.advancePosition(this.position), this.bearing);
+    }
+
+    private advancePosition(position: IPosition) {
+        const [first] = MarsRover.advanceRules
+            .filter(rule => rule.bearing === this.bearing)
+            .map(rule => rule.advance(this.position));
+        return first;
     }
 }
 
