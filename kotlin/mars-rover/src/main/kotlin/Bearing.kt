@@ -1,23 +1,25 @@
+import arrow.core.andThen
+import arrow.core.compose
+
+
 enum class Bearing {
     NORTH,
     EAST,
     SOUTH,
     WEST;
 
-    fun change(command: Command) = when (command) {
-        Command.TURN_LEFT -> next(-1)
-        Command.TURN_RIGHT -> next(1)
-        else -> this
+    fun next() = next(1)
+
+    fun prev() = next(-1)
+
+    private fun next(step: Int) = ::nextIndex.andThen(bearingValues::get)(step)
+
+    private fun nextIndex(step: Int): Int {
+        val nextValue = (ordinal + step) % bearingValues.size
+        return if (nextValue < 0) bearingValues.size + nextValue else nextValue
     }
 
-    private fun next(step: Int): Bearing {
-        val values = enumValues<Bearing>()
-        val modulo = step.modulo(values.size)
-        return values[modulo]
-    }
-
-    private fun Int.modulo(divisor: Int): Int {
-        val nextValue = (ordinal + this).rem(divisor)
-        return if (nextValue < 0) divisor + nextValue else nextValue
+    companion object {
+        private val bearingValues = enumValues<Bearing>()
     }
 }
