@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 
 enum Bearing {
+    EAST,
     SOUTH,
     NORTH,
 }
@@ -18,6 +19,7 @@ class MarsRover {
     private static advanceRules: Array<{ bearing: Bearing; advance: (position) => IPosition }> = [
         {bearing: Bearing.NORTH, advance: MarsRover.deltaY(-1)},
         {bearing: Bearing.SOUTH, advance: MarsRover.deltaY(1)},
+        {bearing: Bearing.EAST, advance: MarsRover.deltaX(1)},
     ];
 
     constructor(readonly position: IPosition, readonly bearing: Bearing) {
@@ -25,6 +27,10 @@ class MarsRover {
 
     private static deltaY(delta: number) {
         return ({x, y}: IPosition) => ({x, y: y + delta});
+    }
+
+    private static deltaX(delta: number) {
+        return ({x, y}: IPosition) => ({x: x + delta, y});
     }
 
     move(command: Command) {
@@ -51,6 +57,7 @@ describe('Mars Rover', () => {
         [
             {bearing: Bearing.NORTH, position: {x: 0, y: -1}},
             {bearing: Bearing.SOUTH, position: {x: 0, y: 1}},
+            {bearing: Bearing.EAST, position: {x: 1, y: 0}},
         ].forEach(({bearing, position}) =>
             it(`should move forward bearing ${bearing} to ${position}`, () => {
                 expect(defaultRoverBearing(bearing).move(Command.FORWARD))
