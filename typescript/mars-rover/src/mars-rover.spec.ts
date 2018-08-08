@@ -64,7 +64,7 @@ describe('Mars Rover', () => {
     describe('moving multiple times', () => {
         it('should move according to a string of commands', () => {
             expect(defaultRoverBearing(Bearing.NORTH).moveSeq('ffflbbrrfbblrl'))
-                .to.deep.equal(new MarsRover({x: 1, y: 1}, Bearing.EAST));
+                .to.deep.equal(new MarsRover({x: 1, y: -3}, Bearing.NORTH));
         });
     });
 });

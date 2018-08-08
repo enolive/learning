@@ -98,8 +98,23 @@ export class MarsRover {
         return first;
     }
 
+    private static translate(character: string): Command {
+        const translating = [
+            {from: 'f', to: Command.FORWARD},
+            {from: 'b', to: Command.BACKWARD},
+            {from: 'l', to: Command.TURN_LEFT},
+            {from: 'r', to: Command.TURN_RIGHT},
+        ];
+        return MarsRover.headOf(translating
+            .filter(t => t.from === character)
+            .map(t => t.to));
+    }
+
     moveSeq(commands: string): MarsRover {
-        return undefined;
+        return commands
+            .split('')
+            .map(c => MarsRover.translate(c))
+            .reduce((acc, command) => acc.move(command), this);
     }
 
     move(command: Command): MarsRover {
