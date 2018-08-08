@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 
 enum Bearing {
+    WEST,
     EAST,
     SOUTH,
     NORTH,
@@ -20,6 +21,7 @@ class MarsRover {
         {bearing: Bearing.NORTH, advance: MarsRover.deltaY(-1)},
         {bearing: Bearing.SOUTH, advance: MarsRover.deltaY(1)},
         {bearing: Bearing.EAST, advance: MarsRover.deltaX(1)},
+        {bearing: Bearing.WEST, advance: MarsRover.deltaX(-1)},
     ];
 
     constructor(readonly position: IPosition, readonly bearing: Bearing) {
@@ -58,6 +60,7 @@ describe('Mars Rover', () => {
             {bearing: Bearing.NORTH, position: {x: 0, y: -1}},
             {bearing: Bearing.SOUTH, position: {x: 0, y: 1}},
             {bearing: Bearing.EAST, position: {x: 1, y: 0}},
+            {bearing: Bearing.WEST, position: {x: -1, y: 0}},
         ].forEach(({bearing, position}) =>
             it(`should move forward bearing ${bearing} to ${position}`, () => {
                 expect(defaultRoverBearing(bearing).move(Command.FORWARD))
