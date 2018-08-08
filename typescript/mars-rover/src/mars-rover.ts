@@ -20,6 +20,7 @@ export class MarsRover {
     private static moving: Array<{ command: Command, move: (rover: MarsRover) => MarsRover }> = [
         {command: Command.FORWARD, move: MarsRover.advance()},
         {command: Command.TURN_RIGHT, move: MarsRover.turnRight()},
+        {command: Command.TURN_LEFT, move: MarsRover.turnLeft()},
     ];
 
     private static advancing: Array<{ bearing: Bearing; advance: (position: IPosition) => IPosition }> = [
@@ -34,6 +35,13 @@ export class MarsRover {
         {start: Bearing.EAST, end: Bearing.SOUTH},
         {start: Bearing.SOUTH, end: Bearing.WEST},
         {start: Bearing.WEST, end: Bearing.NORTH},
+    ];
+
+    private static turningLeft: Array<{ start: Bearing; end: Bearing }> = [
+        {start: Bearing.NORTH, end: Bearing.WEST},
+        {start: Bearing.WEST, end: Bearing.SOUTH},
+        {start: Bearing.SOUTH, end: Bearing.EAST},
+        {start: Bearing.EAST, end: Bearing.NORTH},
     ];
 
     constructor(readonly position: IPosition, readonly bearing: Bearing) {
@@ -63,6 +71,11 @@ export class MarsRover {
     private static turnRight() {
         return ({position, bearing}: MarsRover) =>
             new MarsRover(position, MarsRover.changeBearing(bearing, MarsRover.turningRight));
+    }
+
+    private static turnLeft() {
+        return ({position, bearing}: MarsRover) =>
+            new MarsRover(position, MarsRover.changeBearing(bearing, MarsRover.turningLeft));
     }
 
     private static changeBearing(bearing: Bearing, rules: Array<{ start: Bearing; end: Bearing }>) {
