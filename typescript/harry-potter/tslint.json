@@ -8,7 +8,12 @@
     "semicolon": [
       true,
       "always"
-    ]
+    ],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "arrow-parens": false
   },
   "rulesDirectory": []
 }
