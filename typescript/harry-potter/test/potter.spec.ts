@@ -20,10 +20,7 @@ function bundleGreedy(groups: number[]) {
         const [head, ...tail] = remainingGroups;
         return bundleGreedyRec(head, [head - used, ...result], tail);
     }
-    // @ts-ignore - TS is too stupid to realize that the curried version of bundleGreedyRec has one remaining param
-    return pipe(
-        curry(bundleGreedyRec)(0, []),
-        reverse)(groups);
+    return bundleGreedyRec(0, [], groups);
 }
 
 describe('Harry Potter Kata', () => {
@@ -53,7 +50,17 @@ describe('Harry Potter Kata', () => {
         );
     });
 
-    it(`should bundle book groups`, () => {
-        expect(bundleGreedy([1, 1, 2, 3, 4])).to.deep.equal([1, 0, 1, 1, 1]);
+    describe('make highest possible bundles', () => {
+        [
+            {group: [1, 1, 2, 3, 4], bundle: [1, 1, 1, 0, 1]},
+            {group: [1], bundle: [1]},
+            {group: [1, 1], bundle: [0, 1]},
+            {group: [1, 1, 3], bundle: [2, 0, 1]},
+            {group: [], bundle: []},
+        ].forEach(value =>
+            it(`should bundle book groups of ${value.group} to ${value.bundle}`, () => {
+                expect(bundleGreedy(value.group)).to.deep.equal(value.bundle);
+            }),
+        );
     });
 });
