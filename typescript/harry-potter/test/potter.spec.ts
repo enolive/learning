@@ -1,7 +1,17 @@
 import {expect} from 'chai';
+import {describe, it} from 'mocha';
+import _ = require('lodash/fp');
 
 function priceBundle(bundleSize: number) {
     return [8, 15.2, 21.6, 25.6, 30][bundleSize - 1];
+}
+
+function groupBooks(books: number[]) {
+    return _.pipe(
+        _.countBy(_.identity),
+        _.values,
+        _.sortBy(_.identity),
+    )(books);
 }
 
 describe('Harry Potter Kata', () => {
@@ -15,6 +25,18 @@ describe('Harry Potter Kata', () => {
         ].forEach(value =>
             it(`should return the price of ${value.price} for ${value.size} books`, () => {
                 expect(priceBundle(value.size)).to.equal(value.price);
+            }),
+        );
+    });
+
+    describe('group distinct books in ascending order', () => {
+        [
+            {books: [], groups: []},
+            {books: [1, 2, 3], groups: [1, 1, 1]},
+            {books: [1, 1, 2, 2, 2, 3, 4], groups: [1, 1, 2, 3]},
+        ].forEach(value =>
+            it(`should group books ${value.books} to ${value.groups}`, () => {
+                expect(groupBooks(value.books)).to.deep.equal(value.groups);
             }),
         );
     });

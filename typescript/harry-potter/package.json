@@ -5,11 +5,13 @@
   "main": "index.js",
   "dependencies": {
     "chai": "^4.1.2",
+    "lodash": "^4.17.10",
     "ts-node": "^7.0.0",
     "tslint": "^5.11.0",
     "typescript": "^3.0.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.116",
     "mocha": "^5.2.0"
   },
   "scripts": {
