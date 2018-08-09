@@ -1,17 +1,16 @@
 import {expect} from 'chai';
+import {countBy, identity, pipe, sortBy, values} from 'lodash/fp';
 import {describe, it} from 'mocha';
-import _ = require('lodash/fp');
 
 function priceBundle(bundleSize: number) {
     return [8, 15.2, 21.6, 25.6, 30][bundleSize - 1];
 }
 
 function groupBooks(books: number[]) {
-    return _.pipe(
-        _.countBy(_.identity),
-        _.values,
-        _.sortBy(_.identity),
-    )(books);
+    return pipe(
+        countBy(identity),
+        values,
+        sortBy(identity))(books);
 }
 
 describe('Harry Potter Kata', () => {
