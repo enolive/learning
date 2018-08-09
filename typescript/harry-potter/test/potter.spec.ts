@@ -1,27 +1,5 @@
 import {expect} from 'chai';
-import {countBy, curry, identity, pipe, reverse, sortBy, values} from 'lodash/fp';
-
-function priceBundle(bundleSize: number) {
-    return [8, 15.2, 21.6, 25.6, 30][bundleSize - 1];
-}
-
-function groupBooks(books: number[]) {
-    return pipe(
-        countBy(identity),
-        values,
-        sortBy(identity))(books);
-}
-
-function bundleGreedy(groups: number[]) {
-    function bundleGreedyRec(used: number, result: number[], remainingGroups: number[]) {
-        if (remainingGroups.length === 0) {
-            return result;
-        }
-        const [head, ...tail] = remainingGroups;
-        return bundleGreedyRec(head, [head - used, ...result], tail);
-    }
-    return bundleGreedyRec(0, [], groups);
-}
+import {adjust, bundleGreedy, getPriceFor, groupBooks, priceBundle} from '../src/potter';
 
 describe('Harry Potter Kata', () => {
     describe('bundle price', () => {
@@ -62,5 +40,25 @@ describe('Harry Potter Kata', () => {
                 expect(bundleGreedy(value.group)).to.deep.equal(value.bundle);
             }),
         );
+    });
+
+    describe('adjust 3 and 5 bundles to 2x4', () => {
+        [
+            {original: [], adjusted: []},
+            {original: [0, 0, 1, 0, 1], adjusted: [0, 0, 0, 2, 0]},
+            {original: [1, 1, 1, 1, 1], adjusted: [1, 1, 0, 3, 0]},
+            {original: [1], adjusted: [1]},
+            {original: [1, 2, 3], adjusted: [1, 2, 3]},
+        ].forEach(value =>
+            it(`should adjust ${value.original} to ${value.adjusted}`, () => {
+                expect(adjust(value.original)).to.deep.equal(value.adjusted);
+            }),
+        );
+    });
+
+    describe('integration test', () => {
+        it('should get a price of 51.20', () => {
+            expect(getPriceFor([1, 1, 2, 2, 3, 3, 4, 5])).to.equal(51.20);
+        });
     });
 });
