@@ -1,6 +1,5 @@
 import {expect} from 'chai';
-import {countBy, identity, pipe, sortBy, values} from 'lodash/fp';
-import {describe, it} from 'mocha';
+import {countBy, curry, identity, pipe, reverse, sortBy, values} from 'lodash/fp';
 
 function priceBundle(bundleSize: number) {
     return [8, 15.2, 21.6, 25.6, 30][bundleSize - 1];
@@ -11,6 +10,20 @@ function groupBooks(books: number[]) {
         countBy(identity),
         values,
         sortBy(identity))(books);
+}
+
+function bundleGreedy(groups: number[]) {
+    function bundleGreedyRec(used: number, result: number[], remainingGroups: number[]) {
+        if (remainingGroups.length === 0) {
+            return result;
+        }
+        const [head, ...tail] = remainingGroups;
+        return bundleGreedyRec(head, [head - used, ...result], tail);
+    }
+    // @ts-ignore - TS is too stupid to realize that the curried version of bundleGreedyRec has one remaining param
+    return pipe(
+        curry(bundleGreedyRec)(0, []),
+        reverse)(groups);
 }
 
 describe('Harry Potter Kata', () => {
@@ -38,5 +51,9 @@ describe('Harry Potter Kata', () => {
                 expect(groupBooks(value.books)).to.deep.equal(value.groups);
             }),
         );
+    });
+
+    it(`should bundle book groups`, () => {
+        expect(bundleGreedy([1, 1, 2, 3, 4])).to.deep.equal([1, 0, 1, 1, 1]);
     });
 });
