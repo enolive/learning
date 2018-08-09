@@ -5,7 +5,7 @@ function priceBundle(bundleSize: number) {
 }
 
 describe('Harry Potter Kata', () => {
-    describe('bundle price', function () {
+    describe('bundle price', () => {
         [
             {size: 1, price: 8},
             {size: 2, price: 15.2},
