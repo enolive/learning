@@ -6,6 +6,9 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="retry-task" t="IncludeRecursive">
         <e p="Program.cs" t="Include" />
+        <e p="Retry.cs" t="Include" />
+        <e p="RetryConfiguration.cs" t="Include" />
+        <e p="TimespanExtensions.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
