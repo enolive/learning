@@ -1,1 +1,0 @@
-# applicatives-validation
