@@ -3,7 +3,8 @@ module GameOfLifeSpec
   ) where
 
 import           GameOfLife
-import           Test.Hspec        (Spec, context, describe, it, shouldBe, shouldMatchList)
+import           Test.Hspec        (Spec, context, describe, it, shouldBe,
+                                    shouldMatchList)
 import           Test.Hspec.Runner (hspec)
 
 main :: IO ()
@@ -69,3 +70,27 @@ spec =
           let oneLiving = setMultipleAlive emptyBoard [(1, 1)]
           let expected = [(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1), (0, 2), (1, 2), (2, 2)]
           affectedCellsOn oneLiving `shouldMatchList` expected
+        it "should return all neighbours of 2 distinct living cells" $ do
+          let twoLiving = setMultipleAlive emptyBoard [(1, 1), (4, 4)]
+          let expected =
+                [ (0, 0)
+                , (1, 0)
+                , (2, 0)
+                , (0, 1)
+                , (1, 1)
+                , (2, 1)
+                , (0, 2)
+                , (1, 2)
+                , (2, 2)
+                , (3, 3)
+                , (4, 3)
+                , (5, 3)
+                , (3, 4)
+                , (4, 4)
+                , (5, 4)
+                , (3, 5)
+                , (4, 5)
+                , (5, 5)
+                ]
+          affectedCellsOn twoLiving `shouldMatchList` expected
+        

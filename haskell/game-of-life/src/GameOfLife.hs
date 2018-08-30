@@ -54,8 +54,6 @@ neighboursOf :: Position -> [Position]
 neighboursOf (x, y) = [(x-1, y-1), (x, y-1), (x+1, y-1), (x-1, y), (x+1, y), (x-1, y+1), (x,y+1), (x+1, y+1)]
 
 affectedCellsOn :: Board -> [Position]
-affectedCellsOn Board{..}
-  | null livingCells = []
-  | otherwise = first : neighboursOf first
+affectedCellsOn Board{..} = neighboursAndSelf =<< Set.toList livingCells
   where
-    first = (head . Set.toList) livingCells
+    neighboursAndSelf position = position : neighboursOf position
