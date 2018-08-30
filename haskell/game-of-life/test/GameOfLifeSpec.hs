@@ -126,3 +126,7 @@ spec =
         let block1x3 = setMultipleAlive emptyBoard [(1, 1), (1, 2), (1, 3)]
         let expected = setMultipleAlive emptyBoard [(0, 2), (1, 2), (2, 2)]
         nextGenerationOn block1x3 `shouldBe` expected
+      it "should flip 3x1 block" $ do
+        let block3x1 = setMultipleAlive emptyBoard [(0, 2), (1, 2), (2, 2)]
+        let expected = setMultipleAlive emptyBoard [(1, 1), (1, 2), (1, 3)]
+        nextGenerationOn block3x1 `shouldBe` expected
