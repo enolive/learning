@@ -28,6 +28,9 @@ spec =
         it "should die on less than 2 living neighbours" $ do
           nextState livingCell 0 `shouldBe` Dead
           nextState livingCell 1 `shouldBe` Dead
-        it "should survice on 2 or 3 living neighbours" $ do
+        it "should survive on 2 or 3 living neighbours" $ do
           nextState livingCell 2 `shouldBe` Living
           nextState livingCell 3 `shouldBe` Living
+        it "should die on more than 3 living neighbours" $ do
+          nextState livingCell 4 `shouldBe` Dead
+          nextState livingCell 8 `shouldBe` Dead
