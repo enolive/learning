@@ -7,7 +7,7 @@ import           GameOfLife
 import           Test.Hspec        (Spec, context, describe, it, shouldBe)
 import           Test.Hspec.Runner (hspec)
 
-data Board =
+newtype Board =
   Board (Maybe Position)
   deriving (Show)
 
