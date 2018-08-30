@@ -18,7 +18,8 @@ stateOfCellAt (Board isLiving) position
   | otherwise = Dead
 
 changeStateOfCellAt :: Board -> Position -> CellState -> Board
-changeStateOfCellAt board position newState = Board True
+changeStateOfCellAt board position Living = Board True
+changeStateOfCellAt board position Dead = Board False
 
 main :: IO ()
 main = hspec spec
@@ -48,9 +49,12 @@ spec =
           nextState deadCell 3 `shouldBe` Living
     describe "Board" $ do
       let emptyBoard = mkBoard
-      let boardWithOneLivingCell = changeStateOfCellAt emptyBoard (1, 1) Living
       context "Querying" $ do
+        let boardWithOneLivingCell = changeStateOfCellAt emptyBoard (1, 1) Living
         it "should have dead cells initially" $
           emptyBoard `stateOfCellAt` (1, 1) `shouldBe` Dead
         it "should allow cell to be set alive" $
           boardWithOneLivingCell `stateOfCellAt` (1, 1) `shouldBe` Living
+        it "should allow cell to be set to dead" $ do
+          let notAliveAnymore = changeStateOfCellAt boardWithOneLivingCell (1, 1) Dead
+          notAliveAnymore `stateOfCellAt` (1, 1) `shouldBe` Dead
