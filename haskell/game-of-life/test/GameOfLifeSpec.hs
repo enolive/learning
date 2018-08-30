@@ -2,24 +2,29 @@ module GameOfLifeSpec
   ( spec
   ) where
 
+import           Data.Maybe        (fromMaybe)
 import           GameOfLife
 import           Test.Hspec        (Spec, context, describe, it, shouldBe)
 import           Test.Hspec.Runner (hspec)
 
-data Board = Board Bool deriving (Show)
+data Board =
+  Board (Maybe Position)
+  deriving (Show)
+
 type Position = (Int, Int)
 
 mkBoard :: Board
-mkBoard = Board False
+mkBoard = Board Nothing
 
 stateOfCellAt :: Board -> Position -> CellState
-stateOfCellAt (Board isLiving) position
-  | isLiving = Living
+stateOfCellAt (Board Nothing) position = Dead
+stateOfCellAt (Board (Just livingPosition)) position
+  | livingPosition == position = Living
   | otherwise = Dead
 
 changeStateOfCellAt :: Board -> Position -> CellState -> Board
-changeStateOfCellAt board position Living = Board True
-changeStateOfCellAt board position Dead = Board False
+changeStateOfCellAt board position Living = Board $ Just position
+changeStateOfCellAt board position Dead   = Board Nothing
 
 main :: IO ()
 main = hspec spec
@@ -45,16 +50,14 @@ spec =
           nextState deadCell 1 `shouldBe` Dead
           nextState deadCell 2 `shouldBe` Dead
           nextState deadCell 4 `shouldBe` Dead
-        it "should be born on exactly 3 living neighbours" $
-          nextState deadCell 3 `shouldBe` Living
+        it "should be born on exactly 3 living neighbours" $ nextState deadCell 3 `shouldBe` Living
     describe "Board" $ do
       let emptyBoard = mkBoard
       context "Querying" $ do
         let boardWithOneLivingCell = changeStateOfCellAt emptyBoard (1, 1) Living
-        it "should have dead cells initially" $
-          emptyBoard `stateOfCellAt` (1, 1) `shouldBe` Dead
-        it "should allow cell to be set alive" $
-          boardWithOneLivingCell `stateOfCellAt` (1, 1) `shouldBe` Living
+        it "should have dead cells initially" $ emptyBoard `stateOfCellAt` (1, 1) `shouldBe` Dead
+        it "should allow cell to be set alive" $ boardWithOneLivingCell `stateOfCellAt` (1, 1) `shouldBe` Living
         it "should allow cell to be set to dead" $ do
           let notAliveAnymore = changeStateOfCellAt boardWithOneLivingCell (1, 1) Dead
           notAliveAnymore `stateOfCellAt` (1, 1) `shouldBe` Dead
+        it "should memorize position of living cell" $ boardWithOneLivingCell `stateOfCellAt` (0, 0) `shouldBe` Dead
