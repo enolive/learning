@@ -10,6 +10,7 @@ module GameOfLife
   , stateOfCellAt
   , countNeighboursOf
   , affectedCellsOn
+  , nextGenerationOn
   ) where
 
 import           Data.Set (Set)
@@ -22,7 +23,7 @@ data CellState
 
 newtype Board = Board
   { livingCells :: Set Position
-  } deriving (Show)
+  } deriving (Show, Eq)
 
 type Position = (Int, Int)
 
@@ -60,3 +61,6 @@ affectedCellsOn Board {..} = filterDuplicates allNeighboursAndSelf
     filterDuplicates = Set.toList . Set.fromList
     allNeighboursAndSelf = neighboursAndSelf =<< Set.toList livingCells
     neighboursAndSelf position = position : neighboursOf position
+
+nextGenerationOn :: Board -> Board
+nextGenerationOn board = board

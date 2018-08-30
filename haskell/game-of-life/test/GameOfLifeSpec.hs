@@ -112,4 +112,7 @@ spec =
                 , (3, 3)
                 ]
           affectedCellsOn twoLiving `shouldMatchList` expected
+      context "Next Generation" $ do
+        it "should keep empty board empty" $
+          nextGenerationOn emptyBoard `shouldBe` emptyBoard
         
