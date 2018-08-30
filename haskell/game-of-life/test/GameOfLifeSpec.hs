@@ -2,12 +2,17 @@ module GameOfLifeSpec
   ( spec
   ) where
 
-import Test.Hspec (Spec, context, describe, it, shouldBe)
-import Test.Hspec.Runner (hspec)
+import           Test.Hspec        (Spec, context, describe, it, shouldBe)
+import           Test.Hspec.Runner (hspec)
 
-data CellState = Living | Dead deriving (Show, Eq)
+data CellState
+  = Living
+  | Dead
+  deriving (Show, Eq)
 
 nextState :: CellState -> Int -> CellState
+nextState currentState 2                = Living
+nextState currentState 3                = Living
 nextState currentState livingNeighbours = Dead
 
 main :: IO ()
@@ -23,3 +28,6 @@ spec =
         it "should die on less than 2 living neighbours" $ do
           nextState livingCell 0 `shouldBe` Dead
           nextState livingCell 1 `shouldBe` Dead
+        it "should survice on 2 or 3 living neighbours" $ do
+          nextState livingCell 2 `shouldBe` Living
+          nextState livingCell 3 `shouldBe` Living
