@@ -63,10 +63,11 @@ affectedCellsOn Board {..} = filterDuplicates allNeighboursAndSelf
     neighboursAndSelf position = position : neighboursOf position
 
 nextGenerationOn :: Board -> Board
-nextGenerationOn board = Board {livingCells = Set.fromList livingCellsInNextGeneration}
+nextGenerationOn board = Board {livingCells = livingCellsInNextGeneration}
   where
-    livingCellsInNextGeneration = map fst . filter isLiving $ cellsInNextGeneration
+    livingCellsInNextGeneration = Set.fromList . map fst . filter isLiving $ allPairsInNextGeneration
     isLiving (_, state) = state == Living
-    cellsInNextGeneration = map (pairInNextGeneration . pairPositionWithState) . affectedCellsOn $ board
-    pairInNextGeneration (position, currentState) = (position, nextState currentState $ board `countNeighboursOf` position)
+    allPairsInNextGeneration = map (pairInNextGeneration . pairPositionWithState) . affectedCellsOn $ board
+    pairInNextGeneration (position, currentState) =
+      (position, nextState currentState $ board `countNeighboursOf` position)
     pairPositionWithState position = (position, board `stateOfCellAt` position)

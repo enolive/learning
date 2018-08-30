@@ -122,3 +122,7 @@ spec =
       it "should keep 2x2 square stable" $ do
         let square2x2 = setMultipleAlive emptyBoard [(0, 1), (1, 1), (0, 2), (1, 2)]
         nextGenerationOn square2x2 `shouldBe` square2x2
+      it "should flip 1x3 block" $ do
+        let block1x3 = setMultipleAlive emptyBoard [(1, 1), (1, 2), (1, 3)]
+        let expected = setMultipleAlive emptyBoard [(0, 2), (1, 2), (2, 2)]
+        nextGenerationOn block1x3 `shouldBe` expected
