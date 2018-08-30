@@ -6,6 +6,15 @@ import           GameOfLife
 import           Test.Hspec        (Spec, context, describe, it, shouldBe)
 import           Test.Hspec.Runner (hspec)
 
+data Board = Board deriving (Show)
+type Position = (Int, Int)
+
+mkBoard :: Board
+mkBoard = Board
+
+stateOfCellAt :: Board -> Position -> CellState
+stateOfCellAt board position = Dead
+
 main :: IO ()
 main = hspec spec
 
@@ -30,4 +39,10 @@ spec =
           nextState deadCell 1 `shouldBe` Dead
           nextState deadCell 2 `shouldBe` Dead
           nextState deadCell 4 `shouldBe` Dead
-        it "should be born on exactly 3 living neighbours" $ nextState deadCell 3 `shouldBe` Living
+        it "should be born on exactly 3 living neighbours" $
+          nextState deadCell 3 `shouldBe` Living
+    describe "Board" $ do
+      let emptyBoard = mkBoard
+      context "Querying" $ do
+        it "should have dead cells initially" $
+          emptyBoard `stateOfCellAt` (1, 1) `shouldBe` Dead
