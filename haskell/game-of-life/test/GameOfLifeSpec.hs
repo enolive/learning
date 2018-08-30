@@ -93,4 +93,23 @@ spec =
                 , (5, 5)
                 ]
           affectedCellsOn twoLiving `shouldMatchList` expected
+        it "should return all neighbours of 2 adjacent living cells" $ do
+          let twoLiving = setMultipleAlive emptyBoard [(1, 1), (2, 2)]
+          let expected =
+                [ (0, 0)
+                , (1, 0)
+                , (2, 0)
+                , (0, 1)
+                , (1, 1)
+                , (2, 1)
+                , (0, 2)
+                , (1, 2)
+                , (2, 2)
+                , (3, 1)
+                , (3, 2)
+                , (1, 3)
+                , (2, 3)
+                , (3, 3)
+                ]
+          affectedCellsOn twoLiving `shouldMatchList` expected
         

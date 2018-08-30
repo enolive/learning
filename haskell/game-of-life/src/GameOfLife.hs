@@ -51,9 +51,12 @@ countNeighboursOf board position = length livingNeighbours
     candidates = neighboursOf position
 
 neighboursOf :: Position -> [Position]
-neighboursOf (x, y) = [(x-1, y-1), (x, y-1), (x+1, y-1), (x-1, y), (x+1, y), (x-1, y+1), (x,y+1), (x+1, y+1)]
+neighboursOf (x, y) =
+  [(x - 1, y - 1), (x, y - 1), (x + 1, y - 1), (x - 1, y), (x + 1, y), (x - 1, y + 1), (x, y + 1), (x + 1, y + 1)]
 
 affectedCellsOn :: Board -> [Position]
-affectedCellsOn Board{..} = neighboursAndSelf =<< Set.toList livingCells
+affectedCellsOn Board {..} = filterDuplicates allNeighboursAndSelf
   where
+    filterDuplicates = Set.toList . Set.fromList
+    allNeighboursAndSelf = neighboursAndSelf =<< Set.toList livingCells
     neighboursAndSelf position = position : neighboursOf position
