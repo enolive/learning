@@ -45,3 +45,6 @@ spec =
           let boardWithTwoLivingCells = changeStateOfCellAt boardWithOneLivingCell (0, 0) Living
           boardWithTwoLivingCells `stateOfCellAt` (1, 1) `shouldBe` Living
           boardWithTwoLivingCells `stateOfCellAt` (0, 0) `shouldBe` Living
+      context "Counting Neighbours" $ do
+        it "should count on empty board" $
+          emptyBoard `countNeighboursOf` (1, 1) `shouldBe` 0

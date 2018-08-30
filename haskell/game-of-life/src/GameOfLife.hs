@@ -3,9 +3,10 @@
 module GameOfLife
     ( CellState(..)
     , nextState
-    , changeStateOfCellAt
     , mkBoard
+    , changeStateOfCellAt
     , stateOfCellAt
+    , countNeighboursOf
     ) where
 
 import Data.Set (Set)
@@ -38,3 +39,7 @@ stateOfCellAt Board{..} position
 changeStateOfCellAt :: Board -> Position -> CellState -> Board
 changeStateOfCellAt Board{..} position Living = Board {livingCells = Set.insert position livingCells}
 changeStateOfCellAt Board{..} position Dead   = Board {livingCells = Set.delete position livingCells}
+
+countNeighboursOf :: Board -> Position -> Int
+countNeighboursOf board position = 0
+
