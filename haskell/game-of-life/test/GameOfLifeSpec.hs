@@ -63,3 +63,6 @@ spec =
         it "should not count the cell itself as its neighbour" $ do
           let board = setMultipleAlive emptyBoard [(1, 1)]
           board `countNeighboursOf` (1, 1) `shouldBe` 0
+      context "Affected Cells" $ do
+        it "should return empty on empty board" $
+          affectedCellsOn emptyBoard `shouldBe` []

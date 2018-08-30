@@ -9,6 +9,7 @@ module GameOfLife
   , changeStateOfCellAt
   , stateOfCellAt
   , countNeighboursOf
+  , affectedCellsOn
   ) where
 
 import           Data.Set (Set)
@@ -48,3 +49,6 @@ countNeighboursOf board (x, y) = length livingNeighbours
     livingNeighbours = filter isLiving candidates
     isLiving position = board `stateOfCellAt` position == Living
     candidates = [(x-1, y-1), (x, y-1), (x+1, y-1), (x-1, y), (x+1, y), (x-1, y+1), (x,y+1), (x+1, y+1)]
+
+affectedCellsOn :: Board -> [Position]
+affectedCellsOn board = []
