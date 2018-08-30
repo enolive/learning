@@ -60,3 +60,6 @@ spec =
           let cells = [(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1), (0, 2), (1, 2), (2, 2)]
           let board = setMultipleAlive emptyBoard cells
           board `countNeighboursOf` (1, 1) `shouldBe` 8
+        it "should not count the cell itself as its neighbour" $ do
+          let board = setMultipleAlive emptyBoard [(1, 1)]
+          board `countNeighboursOf` (1, 1) `shouldBe` 0
