@@ -11,9 +11,9 @@ data CellState
   deriving (Show, Eq)
 
 nextState :: CellState -> Int -> CellState
-nextState currentState 2                = Living
-nextState currentState 3                = Living
-nextState currentState livingNeighbours = Dead
+nextState currentState 2 = currentState
+nextState _ 3            = Living
+nextState _ _            = Dead
 
 main :: IO ()
 main = hspec spec
@@ -34,3 +34,10 @@ spec =
         it "should die on more than 3 living neighbours" $ do
           nextState livingCell 4 `shouldBe` Dead
           nextState livingCell 8 `shouldBe` Dead
+      context "Dead Cell" $ do
+        it "should stay dead" $ do
+          nextState deadCell 1 `shouldBe` Dead
+          nextState deadCell 2 `shouldBe` Dead
+          nextState deadCell 4 `shouldBe` Dead
+        it "should be born on exactly 3 living neighbours" $
+          nextState deadCell 3 `shouldBe` Living
