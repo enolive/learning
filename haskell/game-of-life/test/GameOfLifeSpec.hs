@@ -10,8 +10,8 @@ import           Test.Hspec.Runner (hspec)
 main :: IO ()
 main = hspec spec
 
-setMultipleAlive :: Board -> [Position] -> Board
-setMultipleAlive board = foldl (changeStateOfCellAt Living) mkBoard
+setMultipleAlive :: [Position] -> Board
+setMultipleAlive = foldl (changeStateOfCellAt Living) mkBoard
 
 spec :: Spec
 spec =
@@ -52,26 +52,26 @@ spec =
       context "Counting Neighbours" $ do
         it "should count on empty board" $ emptyBoard `countNeighboursOf` (1, 1) `shouldBe` 0
         it "should count on board with living cells" $ do
-          let board = setMultipleAlive emptyBoard [(0, 0), (1, 0), (0, 1)]
+          let board = setMultipleAlive [(0, 0), (1, 0), (0, 1)]
           board `countNeighboursOf` (1, 1) `shouldBe` 3
         it "should only count adjacent cells" $ do
-          let board = setMultipleAlive emptyBoard [(3, 3)]
+          let board = setMultipleAlive [(3, 3)]
           board `countNeighboursOf` (1, 1) `shouldBe` 0
         it "should count on board with all neighbours alive" $ do
           let cells = [(0, 0), (1, 0), (2, 0), (0, 1), (2, 1), (0, 2), (1, 2), (2, 2)]
-          let board = setMultipleAlive emptyBoard cells
+          let board = setMultipleAlive cells
           board `countNeighboursOf` (1, 1) `shouldBe` 8
         it "should not count the cell itself as its neighbour" $ do
-          let board = setMultipleAlive emptyBoard [(1, 1)]
+          let board = setMultipleAlive [(1, 1)]
           board `countNeighboursOf` (1, 1) `shouldBe` 0
       context "Affected Cells" $ do
         it "should return empty on empty board" $ affectedCellsOn emptyBoard `shouldBe` []
         it "should return all neighbours of living cell" $ do
-          let oneLiving = setMultipleAlive emptyBoard [(1, 1)]
+          let oneLiving = setMultipleAlive [(1, 1)]
           let expected = [(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1), (0, 2), (1, 2), (2, 2)]
           affectedCellsOn oneLiving `shouldMatchList` expected
         it "should return all neighbours of 2 distinct living cells" $ do
-          let twoLiving = setMultipleAlive emptyBoard [(1, 1), (4, 4)]
+          let twoLiving = setMultipleAlive [(1, 1), (4, 4)]
           let expected =
                 [ (0, 0)
                 , (1, 0)
@@ -94,7 +94,7 @@ spec =
                 ]
           affectedCellsOn twoLiving `shouldMatchList` expected
         it "should return all neighbours of 2 adjacent living cells" $ do
-          let twoLiving = setMultipleAlive emptyBoard [(1, 1), (2, 2)]
+          let twoLiving = setMultipleAlive [(1, 1), (2, 2)]
           let expected =
                 [ (0, 0)
                 , (1, 0)
@@ -117,16 +117,16 @@ spec =
       it "should keep empty board empty" $
         nextGenerationOn emptyBoard `shouldBe` emptyBoard
       it "should let single cell die" $ do
-        let oneLiving = setMultipleAlive emptyBoard [(1, 1)]
+        let oneLiving = setMultipleAlive [(1, 1)]
         nextGenerationOn oneLiving `shouldBe` emptyBoard
       it "should keep 2x2 square stable" $ do
-        let square2x2 = setMultipleAlive emptyBoard [(0, 1), (1, 1), (0, 2), (1, 2)]
+        let square2x2 = setMultipleAlive [(0, 1), (1, 1), (0, 2), (1, 2)]
         nextGenerationOn square2x2 `shouldBe` square2x2
       it "should flip 1x3 block" $ do
-        let block1x3 = setMultipleAlive emptyBoard [(1, 1), (1, 2), (1, 3)]
-        let expected = setMultipleAlive emptyBoard [(0, 2), (1, 2), (2, 2)]
+        let block1x3 = setMultipleAlive [(1, 1), (1, 2), (1, 3)]
+        let expected = setMultipleAlive [(0, 2), (1, 2), (2, 2)]
         nextGenerationOn block1x3 `shouldBe` expected
       it "should flip 3x1 block" $ do
-        let block3x1 = setMultipleAlive emptyBoard [(0, 2), (1, 2), (2, 2)]
-        let expected = setMultipleAlive emptyBoard [(1, 1), (1, 2), (1, 3)]
+        let block3x1 = setMultipleAlive [(0, 2), (1, 2), (2, 2)]
+        let expected = setMultipleAlive [(1, 1), (1, 2), (1, 3)]
         nextGenerationOn block3x1 `shouldBe` expected
