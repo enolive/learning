@@ -3,7 +3,7 @@ module GameOfLifeSpec
   ) where
 
 import           GameOfLife
-import           Test.Hspec        (Spec, context, describe, it, shouldBe)
+import           Test.Hspec        (Spec, context, describe, it, shouldBe, shouldMatchList)
 import           Test.Hspec.Runner (hspec)
 
 main :: IO ()
@@ -64,5 +64,8 @@ spec =
           let board = setMultipleAlive emptyBoard [(1, 1)]
           board `countNeighboursOf` (1, 1) `shouldBe` 0
       context "Affected Cells" $ do
-        it "should return empty on empty board" $
-          affectedCellsOn emptyBoard `shouldBe` []
+        it "should return empty on empty board" $ affectedCellsOn emptyBoard `shouldBe` []
+        it "should return all neighbours of living cell" $ do
+          let oneLiving = setMultipleAlive emptyBoard [(1, 1)]
+          let expected = [(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1), (0, 2), (1, 2), (2, 2)]
+          affectedCellsOn oneLiving `shouldMatchList` expected

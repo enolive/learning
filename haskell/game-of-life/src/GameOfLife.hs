@@ -44,11 +44,18 @@ changeStateOfCellAt Living Board {..} position = Board {livingCells = Set.insert
 changeStateOfCellAt Dead Board {..} position = Board {livingCells = Set.delete position livingCells}
 
 countNeighboursOf :: Board -> Position -> Int
-countNeighboursOf board (x, y) = length livingNeighbours
+countNeighboursOf board position = length livingNeighbours
   where
     livingNeighbours = filter isLiving candidates
     isLiving position = board `stateOfCellAt` position == Living
-    candidates = [(x-1, y-1), (x, y-1), (x+1, y-1), (x-1, y), (x+1, y), (x-1, y+1), (x,y+1), (x+1, y+1)]
+    candidates = neighboursOf position
+
+neighboursOf :: Position -> [Position]
+neighboursOf (x, y) = [(x-1, y-1), (x, y-1), (x+1, y-1), (x-1, y), (x+1, y), (x-1, y+1), (x,y+1), (x+1, y+1)]
 
 affectedCellsOn :: Board -> [Position]
-affectedCellsOn board = []
+affectedCellsOn Board{..}
+  | null livingCells = []
+  | otherwise = first : neighboursOf first
+  where
+    first = (head . Set.toList) livingCells
