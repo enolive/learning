@@ -2,29 +2,9 @@ module GameOfLifeSpec
   ( spec
   ) where
 
-import           Data.Maybe        (fromMaybe)
 import           GameOfLife
 import           Test.Hspec        (Spec, context, describe, it, shouldBe)
 import           Test.Hspec.Runner (hspec)
-
-newtype Board =
-  Board (Maybe Position)
-  deriving (Show)
-
-type Position = (Int, Int)
-
-mkBoard :: Board
-mkBoard = Board Nothing
-
-stateOfCellAt :: Board -> Position -> CellState
-stateOfCellAt (Board Nothing) position = Dead
-stateOfCellAt (Board (Just livingPosition)) position
-  | livingPosition == position = Living
-  | otherwise = Dead
-
-changeStateOfCellAt :: Board -> Position -> CellState -> Board
-changeStateOfCellAt board position Living = Board $ Just position
-changeStateOfCellAt board position Dead   = Board Nothing
 
 main :: IO ()
 main = hspec spec
@@ -61,3 +41,7 @@ spec =
           let notAliveAnymore = changeStateOfCellAt boardWithOneLivingCell (1, 1) Dead
           notAliveAnymore `stateOfCellAt` (1, 1) `shouldBe` Dead
         it "should memorize position of living cell" $ boardWithOneLivingCell `stateOfCellAt` (0, 0) `shouldBe` Dead
+        it "should memorize position of many living cells" $ do
+          let boardWithTwoLivingCells = changeStateOfCellAt boardWithOneLivingCell (0, 0) Living
+          boardWithTwoLivingCells `stateOfCellAt` (1, 1) `shouldBe` Living
+          boardWithTwoLivingCells `stateOfCellAt` (0, 0) `shouldBe` Living
