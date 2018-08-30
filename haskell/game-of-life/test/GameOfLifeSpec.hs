@@ -116,4 +116,9 @@ spec =
       let emptyBoard = mkBoard
       it "should keep empty board empty" $
         nextGenerationOn emptyBoard `shouldBe` emptyBoard
-        
+      it "should let single cell die" $ do
+        let oneLiving = setMultipleAlive emptyBoard [(1, 1)]
+        nextGenerationOn oneLiving `shouldBe` emptyBoard
+      it "should keep 2x2 square stable" $ do
+        let square2x2 = setMultipleAlive emptyBoard [(0, 1), (1, 1), (0, 2), (1, 2)]
+        nextGenerationOn square2x2 `shouldBe` square2x2
