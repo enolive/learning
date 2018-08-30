@@ -1,15 +1,17 @@
 {-# LANGUAGE RecordWildCards #-}
 
 module GameOfLife
-    ( CellState(..)
-    , nextState
-    , mkBoard
-    , changeStateOfCellAt
-    , stateOfCellAt
-    , countNeighboursOf
-    ) where
+  ( CellState(..)
+  , Board
+  , Position
+  , nextState
+  , mkBoard
+  , changeStateOfCellAt
+  , stateOfCellAt
+  , countNeighboursOf
+  ) where
 
-import Data.Set (Set)
+import           Data.Set (Set)
 import qualified Data.Set as Set
 
 data CellState
@@ -32,14 +34,13 @@ mkBoard :: Board
 mkBoard = Board {livingCells = Set.empty}
 
 stateOfCellAt :: Board -> Position -> CellState
-stateOfCellAt Board{..} position
+stateOfCellAt Board {..} position
   | position `Set.member` livingCells = Living
   | otherwise = Dead
 
-changeStateOfCellAt :: Board -> Position -> CellState -> Board
-changeStateOfCellAt Board{..} position Living = Board {livingCells = Set.insert position livingCells}
-changeStateOfCellAt Board{..} position Dead   = Board {livingCells = Set.delete position livingCells}
+changeStateOfCellAt :: CellState -> Board -> Position -> Board
+changeStateOfCellAt Living Board {..} position = Board {livingCells = Set.insert position livingCells}
+changeStateOfCellAt Dead Board {..} position = Board {livingCells = Set.delete position livingCells}
 
 countNeighboursOf :: Board -> Position -> Int
-countNeighboursOf board position = 0
-
+countNeighboursOf Board {..} position = length livingCells

@@ -9,6 +9,9 @@ import           Test.Hspec.Runner (hspec)
 main :: IO ()
 main = hspec spec
 
+setMultipleAlive :: Board -> [Position] -> Board
+setMultipleAlive board = foldl (changeStateOfCellAt Living) mkBoard
+
 spec :: Spec
 spec =
   describe "Game of Life" $ do
@@ -34,17 +37,20 @@ spec =
     describe "Board" $ do
       let emptyBoard = mkBoard
       context "Querying" $ do
-        let boardWithOneLivingCell = changeStateOfCellAt emptyBoard (1, 1) Living
+        let boardWithOneLivingCell = changeStateOfCellAt Living emptyBoard (1, 1)
         it "should have dead cells initially" $ emptyBoard `stateOfCellAt` (1, 1) `shouldBe` Dead
         it "should allow cell to be set alive" $ boardWithOneLivingCell `stateOfCellAt` (1, 1) `shouldBe` Living
         it "should allow cell to be set to dead" $ do
-          let notAliveAnymore = changeStateOfCellAt boardWithOneLivingCell (1, 1) Dead
+          let notAliveAnymore = changeStateOfCellAt Dead boardWithOneLivingCell (1, 1)
           notAliveAnymore `stateOfCellAt` (1, 1) `shouldBe` Dead
         it "should memorize position of living cell" $ boardWithOneLivingCell `stateOfCellAt` (0, 0) `shouldBe` Dead
         it "should memorize position of many living cells" $ do
-          let boardWithTwoLivingCells = changeStateOfCellAt boardWithOneLivingCell (0, 0) Living
+          let boardWithTwoLivingCells = changeStateOfCellAt Living boardWithOneLivingCell (0, 0)
           boardWithTwoLivingCells `stateOfCellAt` (1, 1) `shouldBe` Living
           boardWithTwoLivingCells `stateOfCellAt` (0, 0) `shouldBe` Living
       context "Counting Neighbours" $ do
         it "should count on empty board" $
           emptyBoard `countNeighboursOf` (1, 1) `shouldBe` 0
+        it "should count on board with living cells" $ do
+          let board = setMultipleAlive emptyBoard [(0, 0), (1, 0), (0, 1)]
+          board `countNeighboursOf` (1, 1) `shouldBe` 3
