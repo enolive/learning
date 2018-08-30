@@ -49,8 +49,14 @@ spec =
           boardWithTwoLivingCells `stateOfCellAt` (1, 1) `shouldBe` Living
           boardWithTwoLivingCells `stateOfCellAt` (0, 0) `shouldBe` Living
       context "Counting Neighbours" $ do
-        it "should count on empty board" $
-          emptyBoard `countNeighboursOf` (1, 1) `shouldBe` 0
+        it "should count on empty board" $ emptyBoard `countNeighboursOf` (1, 1) `shouldBe` 0
         it "should count on board with living cells" $ do
           let board = setMultipleAlive emptyBoard [(0, 0), (1, 0), (0, 1)]
           board `countNeighboursOf` (1, 1) `shouldBe` 3
+        it "should only count adjacent cells" $ do
+          let board = setMultipleAlive emptyBoard [(3, 3)]
+          board `countNeighboursOf` (1, 1) `shouldBe` 0
+        it "should count on board with all neighbours alive" $ do
+          let cells = [(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1), (0, 2), (1, 2), (2, 2)]
+          let board = setMultipleAlive emptyBoard cells
+          board `countNeighboursOf` (1, 1) `shouldBe` 8
