@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {InputComponent} from "./InputComponent";
+import {Input} from "./Input";
 import {beerify} from "./BeerOperations";
+import {Output} from "./Output";
+import {Image} from "./Image";
 
 const originalSong = `
 Say you, say me
@@ -11,37 +12,27 @@ That's the way it should be
 Say you, say me
 Say it together
 Naturally
-
 I had a dream I had an awesome dream
 People in the park playing games in the dark
 And what they played was a masquerade
-
 And from behind of walls of doubt a voice was crying out
-
 Say you, say me
 Say it for always
 That's the way it should be
 Say you, say me
-
 Say it together
 Naturally
-
 As we go down life's lonesome highway
 Seems the hardest thing to do is to find a friend or two
-
-
 A helping hand - Some one who understands
 That when you feel you've lost your way
-You've got some one there to say "I'll show you"
-
+You've got some one there to say \\"I'll show you\\"
 Say you, say me
 Say it for always
-
 That's the way it should be
 Say you, say me
 Say it together
 Naturally
-
 So you think you know the answers - Oh no
 'Couse the whole world has got you dancing
 That's right - I'm telling you
@@ -71,15 +62,16 @@ class App extends Component {
     }
 
     render() {
+        const beer = <span role="img" aria-label="beer">🍻</span>;
         return (
             <div className="App">
                 <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">Beer you, Beer me</h1>
+                    <h1 className="App-title">{beer} Welcome to Reactbeer {beer}</h1>
                 </header>
-                <InputComponent value={this.state.sliderValue} onChange={this.handleChange}/>
-                <div>
-                    {this.state.songText}
+                <div className="container">
+                    <Input value={this.state.sliderValue} onChange={this.handleChange}/>
+                    <Output songText={this.state.songText}/>
+                    <Image/>
                 </div>
             </div>
         );

@@ -1,0 +1,12 @@
+.Input-sliderContainer {
+    padding: 20px;
+}
+
+.Input-slider {
+    background: white;
+    opacity: 0.7;
+}
+
+.Input-slider:hover {
+    opacity: 1;
+}

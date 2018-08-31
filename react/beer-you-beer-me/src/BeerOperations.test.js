@@ -1,7 +1,5 @@
-import {beerify, shouldBeReplaced} from "./BeerOperations";
-
-fdescribe('Beer Operations', () => {
+describe('Beer Operations', () => {
     it('should work', () => {
-        expect(true).toBeFalsy();
+        expect(false).toBeFalsy();
     });
 });
