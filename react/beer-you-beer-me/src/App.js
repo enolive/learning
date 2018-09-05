@@ -4,6 +4,8 @@ import {Input} from "./Input";
 import {beerify} from "./BeerOperations";
 import {Output} from "./Output";
 import {Image} from "./Image";
+import * as PropTypes from "prop-types";
+import seedrandom from "seedrandom";
 
 const originalSong = `
 Say you, say me
@@ -26,7 +28,7 @@ As we go down life's lonesome highway
 Seems the hardest thing to do is to find a friend or two
 A helping hand - Some one who understands
 That when you feel you've lost your way
-You've got some one there to say \\"I'll show you\\"
+You've got some one there to say \"I'll show you\"
 Say you, say me
 Say it for always
 That's the way it should be
@@ -51,13 +53,19 @@ Say it together... naturally
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {sliderValue: 50, songText: originalSong};
+        const initial = 50;
+        this.state = {sliderValue: initial, songText: this.beerify(initial)};
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    beerify(sliderValue) {
+        const rng = this.props.rng || seedrandom();
+        return beerify(originalSong, sliderValue, rng);
     }
 
     handleChange(event) {
         const sliderValue = event.target.value;
-        const songText = beerify(originalSong, sliderValue);
+        const songText = this.beerify(sliderValue);
         this.setState({sliderValue: sliderValue, songText: songText})
     }
 
@@ -77,5 +85,7 @@ class App extends Component {
         );
     }
 }
+
+App.propTypes = {rng: PropTypes.any};
 
 export default App;

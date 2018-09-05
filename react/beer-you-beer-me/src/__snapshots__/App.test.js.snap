@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App.js matches snapshot 1`] = `
+<div
+  className="App"
+>
+  <header
+    className="App-header"
+  >
+    <h1
+      className="App-title"
+    >
+      <span
+        aria-label="beer"
+        role="img"
+      >
+        🍻
+      </span>
+       Welcome to Reactbeer 
+      <span
+        aria-label="beer"
+        role="img"
+      >
+        🍻
+      </span>
+    </h1>
+  </header>
+  <div
+    className="container"
+  >
+    <div
+      className="Input-sliderContainer"
+    >
+      <p>
+        <input
+          className="Input-slider"
+          max={100}
+          min={0}
+          onChange={[Function]}
+          type="range"
+          value={50}
+        />
+      </p>
+      <p>
+        50
+      </p>
+    </div>
+    <div
+      className="Output-song"
+    >
+      <p>
+        
+        Say Beer, Beer Beer
+        Say Beer Beer always
+        That'Beer the Beer Beer Beer be
+        Say Beer, Beer Beer
+        Say Beer together
+        Naturally
+        Beer had a dream Beer had an awesome dream
+        People in the park Beer Beer in the Beer
+        And what they Beer Beer a Beer
+        And Beer Beer of walls of doubt a voice Beer crying out
+        Say Beer, Beer Beer
+        Say Beer Beer always
+        That'Beer the Beer Beer Beer be
+        Say Beer, Beer Beer
+        Say Beer together
+        Naturally
+        As Beer Beer down Beer'Beer Beer highway
+        Beer the Beer Beer to Beer is to find a friend Beer two
+        Beer Beer hand - Some Beer who understands
+        That Beer Beer feel Beer'Beer Beer Beer Beer
+        Beer'Beer got some Beer there to Beer "Beer'll Beer Beer"
+        Say Beer, Beer Beer
+        Say Beer Beer always
+        That'Beer the Beer Beer Beer be
+        Say Beer, Beer Beer
+        Say Beer together
+        Naturally
+        So Beer Beer Beer Beer the answers - Oh Beer
+        'Couse the whole world Beer got Beer dancing
+        That'Beer Beer - Beer'Beer Beer Beer
+        Beer'Beer time to Beer believing - Oh yes
+        Believing who Beer Beer: Beer Beer a Beer star
+        Say Beer, Beer Beer
+        Say Beer Beer always
+        That'Beer the Beer Beer Beer be
+        Say Beer, Beer Beer
+        Say Beer together
+        Naturally
+        Say Beer together... Beer
+        
+      </p>
+    </div>
+    <img
+      alt="Homer and Lionel Richie"
+      src="richie.jpg"
+    />
+  </div>
+</div>
+`;
