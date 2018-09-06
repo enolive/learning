@@ -14,4 +14,8 @@ class Rover {
     Rover forward() {
         return new Rover(position.nextForward(orientation), orientation);
     }
+
+    Rover turnRight() {
+        return new Rover(position, orientation.nextRight());
+    }
 }

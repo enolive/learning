@@ -17,10 +17,28 @@ class RoverTest {
             "14, 45, NORTH, 14, 44",
             "33, 13, NORTH, 33, 12",
             "5, 11, SOUTH, 5, 12",
+            "22, 1, EAST, 23, 1",
+            "105, 12, WEST, 104, 12",
     })
     void forward(int startX, int startY, Orientation orientation, int expectedX, int expectedY) {
-        var expected = new Rover(new Position(expectedX, expectedY), orientation);
-        var rover = new Rover(new Position(startX, startY), orientation);
+        final var expectedPosition = new Position(expectedX, expectedY);
+        final var startPosition = new Position(startX, startY);
+        final var expected = new Rover(expectedPosition, orientation);
+        final var rover = new Rover(startPosition, orientation);
         assertThat(rover.forward()).isEqualToComparingFieldByFieldRecursively(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "NORTH, EAST",
+            "EAST, SOUTH",
+            "SOUTH, WEST",
+            "WEST, NORTH",
+    })
+    void turnRight(Orientation start, Orientation end) {
+        final var position = new Position(12, 33);
+        final var rover = new Rover(position, start);
+        final var expected = new Rover(position, end);
+        assertThat(rover.turnRight()).isEqualToComparingFieldByFieldRecursively(expected);
     }
 }
