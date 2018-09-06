@@ -53,7 +53,7 @@ Say it together... naturally
 class App extends Component {
     constructor(props) {
         super(props);
-        const initial = 50;
+        const initial = 0;
         this.state = {sliderValue: initial, songText: this.beerify(initial)};
         this.handleChange = this.handleChange.bind(this);
     }

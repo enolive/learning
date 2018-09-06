@@ -38,11 +38,11 @@ exports[`App.js matches snapshot 1`] = `
           min={0}
           onChange={[Function]}
           type="range"
-          value={50}
+          value={0}
         />
       </p>
       <p>
-        50
+        0
       </p>
     </div>
     <div
@@ -50,45 +50,45 @@ exports[`App.js matches snapshot 1`] = `
     >
       <p>
         
-        Say Beer, Beer Beer
-        Say Beer Beer always
-        That'Beer the Beer Beer Beer be
-        Say Beer, Beer Beer
-        Say Beer together
+        Say you, say me
+        Say it for always
+        That's the way it should be
+        Say you, say me
+        Say it together
         Naturally
-        Beer had a dream Beer had an awesome dream
-        People in the park Beer Beer in the Beer
-        And what they Beer Beer a Beer
-        And Beer Beer of walls of doubt a voice Beer crying out
-        Say Beer, Beer Beer
-        Say Beer Beer always
-        That'Beer the Beer Beer Beer be
-        Say Beer, Beer Beer
-        Say Beer together
+        I had a dream I had an awesome dream
+        People in the park playing games in the dark
+        And what they played was a masquerade
+        And from behind of walls of doubt a voice was crying out
+        Say you, say me
+        Say it for always
+        That's the way it should be
+        Say you, say me
+        Say it together
         Naturally
-        As Beer Beer down Beer'Beer Beer highway
-        Beer the Beer Beer to Beer is to find a friend Beer two
-        Beer Beer hand - Some Beer who understands
-        That Beer Beer feel Beer'Beer Beer Beer Beer
-        Beer'Beer got some Beer there to Beer "Beer'll Beer Beer"
-        Say Beer, Beer Beer
-        Say Beer Beer always
-        That'Beer the Beer Beer Beer be
-        Say Beer, Beer Beer
-        Say Beer together
+        As we go down life's lonesome highway
+        Seems the hardest thing to do is to find a friend or two
+        A helping hand - Some one who understands
+        That when you feel you've lost your way
+        You've got some one there to say "I'll show you"
+        Say you, say me
+        Say it for always
+        That's the way it should be
+        Say you, say me
+        Say it together
         Naturally
-        So Beer Beer Beer Beer the answers - Oh Beer
-        'Couse the whole world Beer got Beer dancing
-        That'Beer Beer - Beer'Beer Beer Beer
-        Beer'Beer time to Beer believing - Oh yes
-        Believing who Beer Beer: Beer Beer a Beer star
-        Say Beer, Beer Beer
-        Say Beer Beer always
-        That'Beer the Beer Beer Beer be
-        Say Beer, Beer Beer
-        Say Beer together
+        So you think you know the answers - Oh no
+        'Couse the whole world has got you dancing
+        That's right - I'm telling you
+        It's time to start believing - Oh yes
+        Believing who you are: You are a shining star
+        Say you, say me
+        Say it for always
+        That's the way it should be
+        Say you, say m
+        Say it together
         Naturally
-        Say Beer together... Beer
+        Say it together... naturally
         
       </p>
     </div>
