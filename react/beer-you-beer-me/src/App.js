@@ -28,7 +28,7 @@ As we go down life's lonesome highway
 Seems the hardest thing to do is to find a friend or two
 A helping hand - Some one who understands
 That when you feel you've lost your way
-You've got some one there to say \"I'll show you\"
+You've got some one there to say "I'll show you"
 Say you, say me
 Say it for always
 That's the way it should be
