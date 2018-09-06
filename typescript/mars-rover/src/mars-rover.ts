@@ -15,7 +15,7 @@ export class MarsRover {
                 readonly position: IPosition = {x: 0, y: 0}) {
     }
 
-    private static nextBearing(bearing: Bearing) {
+    private static nextRightBearing(bearing: Bearing) {
         switch (bearing) {
             case Bearing.NORTH:
                 return Bearing.EAST;
@@ -28,7 +28,7 @@ export class MarsRover {
         }
     }
 
-    private static nextPosition(bearing: Bearing, position: IPosition) {
+    private static nextForwardPosition(bearing: Bearing, position: IPosition) {
         switch (bearing) {
             case Bearing.NORTH:
                 return MarsRover.deltaY(position, -1);
@@ -50,11 +50,11 @@ export class MarsRover {
     }
 
     forward() {
-        return new MarsRover(this.bearing, MarsRover.nextPosition(this.bearing, this.position));
+        return new MarsRover(this.bearing, MarsRover.nextForwardPosition(this.bearing, this.position));
     }
 
     turnRight() {
-        return new MarsRover(MarsRover.nextBearing(this.bearing), this.position);
+        return new MarsRover(MarsRover.nextRightBearing(this.bearing), this.position);
     }
 
     backward() {

@@ -12,6 +12,7 @@ describe('Mars Rover', () => {
             expect(rover).to.deep.equal({position: {x: 42, y: -23}, bearing: Bearing.SOUTH});
         });
     });
+
     describe('advancing', () => {
         [
             {start: {x: 23, y: 5}, bearing: Bearing.NORTH, expected: {x: 23, y: 4}},
