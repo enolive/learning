@@ -8,12 +8,13 @@ import java.util.function.Supplier;
 class Position {
     private final int x;
     private final int y;
-    private static final HashMap<Orientation, Function<Position, Position>> NEXT_POSITION_RULES = HashMap.ofEntries(
-            Tuple.of(Orientation.NORTH, deltaY(-1)),
-            Tuple.of(Orientation.SOUTH, deltaY(1)),
-            Tuple.of(Orientation.EAST, deltaX(1)),
-            Tuple.of(Orientation.WEST, deltaX(-1))
-    );
+    private static final HashMap<Orientation, Function<Position, Position>> NEXT_POSITION_RULES =
+            HashMap.ofEntries(
+                    Tuple.of(Orientation.NORTH, deltaY(-1)),
+                    Tuple.of(Orientation.SOUTH, deltaY(1)),
+                    Tuple.of(Orientation.EAST, deltaX(1)),
+                    Tuple.of(Orientation.WEST, deltaX(-1))
+            );
 
     Position(int x, int y) {
         this.x = x;

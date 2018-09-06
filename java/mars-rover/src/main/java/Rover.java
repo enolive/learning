@@ -18,4 +18,12 @@ class Rover {
     Rover turnRight() {
         return new Rover(position, orientation.nextRight());
     }
+
+    Rover backward() {
+        return turnRight().turnRight().forward().turnRight().turnRight();
+    }
+
+    Rover turnLeft() {
+        return turnRight().turnRight().turnRight();
+    }
 }
