@@ -12,7 +12,7 @@ class Book {
         return "Book{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                '}';
+                '}'
     }
 
     boolean equals(o) {
