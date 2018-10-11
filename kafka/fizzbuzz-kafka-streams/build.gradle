@@ -5,18 +5,31 @@ plugins {
 group 'de.welcz'
 version '1.0-SNAPSHOT'
 
+apply plugin: 'application'
+
+mainClassName = "MainKt"
+
 repositories {
     mavenCentral()
 }
 
+
 dependencies {
     def kafka_version = "2.0.0"
+    def arrow_version = "0.7.2"
 
+    // kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    // kafka
     compile "org.apache.kafka:kafka-streams:$kafka_version"
+    // for logging
     compile "org.slf4j:slf4j-simple:1.7.+"
-    compile "io.arrow-kt:arrow-core:0.7.2"
+    // for fancy FP stuff like Maybe/Either
+    compile "io.arrow-kt:arrow-core:$arrow_version"
+    // for even additional stuff like memoization/flipping/currying and other fun things to do
+    compile "io.arrow-kt:arrow-syntax:$arrow_version"
 
+    // proper testing with jupiter/assertj
     testCompile "org.assertj:assertj-core:3.+"
     testCompile "org.junit.jupiter:junit-jupiter-api:5.+"
     testCompile "org.junit.jupiter:junit-jupiter-engine:5.+"
@@ -32,4 +45,14 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    manifest {
+        attributes(
+                "Main-Class": mainClassName,
+                "Class-Path": configurations.compile.collect { it.getName() }.join(' ')
+        )
+    }
 }
