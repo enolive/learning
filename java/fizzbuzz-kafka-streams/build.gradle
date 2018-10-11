@@ -1,0 +1,35 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.2.71'
+}
+
+group 'de.welcz'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def kafka_version = "2.0.0"
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "org.apache.kafka:kafka-streams:$kafka_version"
+    compile "org.slf4j:slf4j-simple:1.7.+"
+    compile "io.arrow-kt:arrow-core:0.7.2"
+
+    testCompile "org.assertj:assertj-core:3.+"
+    testCompile "org.junit.jupiter:junit-jupiter-api:5.+"
+    testCompile "org.junit.jupiter:junit-jupiter-engine:5.+"
+    testCompile "org.junit.jupiter:junit-jupiter-params:5.+"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
