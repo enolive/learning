@@ -26,11 +26,11 @@ export function randomness(rng = seedrandom()) {
 export function replaceWithBeer(sentence, weights, frequency) {
     const replaceSingle = (acc, [word]) => R.replace(allOccurrencesOf(word), '🍺', acc);
     const allOccurrencesOf = word => new RegExp(`\\b${word}\\b`, 'g');
-    const weightDesc = ([word]) => -word.length;
+    const lengthDesc = ([word]) => -word.length;
     const underFrequency = ([_, val]) => frequency > 0 && val <= frequency;
     return R.compose(
         R.reduce(replaceSingle, sentence),
-        R.sortBy(weightDesc),
+        R.sortBy(lengthDesc),
         R.filter(underFrequency),
     )(weights);
 }
