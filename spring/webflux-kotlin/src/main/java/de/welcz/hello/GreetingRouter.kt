@@ -7,7 +7,6 @@ import org.springframework.web.reactive.function.server.router
 
 @Configuration
 open class GreetingRouter(private val handler: GreetingHandler) {
-
     @Bean
     open fun composedRoutes() = router {
         accept(MediaType.TEXT_PLAIN).nest {
