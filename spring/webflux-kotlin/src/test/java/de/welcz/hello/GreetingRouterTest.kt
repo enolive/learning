@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.reactive.server.WebTestClient
+import org.springframework.test.web.reactive.server.expectBody
 
 @AutoConfigureWebTestClient
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -24,8 +25,8 @@ class GreetingRouterTest {
                 .accept(MediaType.TEXT_PLAIN)
                 .exchange()
                 .expectStatus().isOk
-                .expectBody(String::class.java)
-                .consumeWith<Nothing> { result -> assertThat(result.responseBody).startsWith("Hello, Spring!") }
+                .expectBody<String>()
+                .consumeWith { result -> assertThat(result.responseBody).startsWith("Hello, Spring!") }
     }
 
     @Test
@@ -35,7 +36,7 @@ class GreetingRouterTest {
                 .accept(MediaType.TEXT_PLAIN)
                 .exchange()
                 .expectStatus().isOk
-                .expectBody(String::class.java)
-                .consumeWith<Nothing> { result -> assertThat(result.responseBody).startsWith("Hello, World!") }
+                .expectBody<String>()
+                .consumeWith { result -> assertThat(result.responseBody).startsWith("Hello, World!") }
     }
 }
