@@ -10,5 +10,5 @@ fun main(args: Array<String>) {
     runApplication<Application>(*args)
 
     val client = GreetingWebClient()
-    println(client.result)
+    println(client.retrieveResult())
 }
