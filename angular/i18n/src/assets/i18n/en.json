@@ -1,0 +1,12 @@
+{
+  "app": {
+    "title": "Internationalization Test",
+    "welcomeTitle": "Welcome to Hell!",
+    "languageDe": "German",
+    "languageEn": "English"
+  },
+  "welcome": {
+    "helloName": "Hello, {{name}}!",
+    "bestLang": "Guess what's the best language in the world 😉"
+  }
+}
