@@ -1,21 +1,34 @@
 import {expect} from 'chai';
-import {fromNullable} from 'fp-ts/lib/Option';
+import {fromNullable, none, some} from 'fp-ts/lib/Option';
 
 interface ILinkDescription {
     url: string;
     rel: string;
 }
 
-function mkLinkDescription(links: string): ILinkDescription {
-    const [urlPart, relPart] = links.split(';');
-    if (!urlPart || !relPart) {
-        return null;
+function mkUrlRelTuple([url, rel]) {
+    if (!url || !rel) {
+        return none;
     }
-    const urlMatch = urlPart.match(/<(.*)>/);
-    const relMatch = relPart.match(/rel=(.*)/);
-    const url = urlMatch ? urlMatch[1] : null;
-    const rel = relMatch ? relMatch[1] : null;
-    return (url && rel) ? {url, rel} : null;
+    return some({url, rel});
+}
+
+function extractParts({url, rel}) {
+    const urlMatch = url.match(/<(.*)>/);
+    const relMatch = rel.match(/rel=(.*)/);
+    if (!urlMatch || !relMatch) {
+        return none;
+    }
+    return some({url: urlMatch[1], rel: relMatch[1]});
+}
+
+function mkLinkDescription(links: string): ILinkDescription {
+    const parts = some(links)
+        .map(l => l.split(';'))
+        .chain(mkUrlRelTuple)
+        .chain(extractParts)
+        .getOrElse(null);
+    return parts;
 }
 
 function notNull(link): boolean {
