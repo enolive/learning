@@ -6,7 +6,7 @@ interface ILinkDescription {
     rel: string;
 }
 
-function parseLink(links: string): ILinkDescription {
+function mkLinkDescription(links: string): ILinkDescription {
     const [urlPart, relPart] = links.split(';');
     if (!urlPart || !relPart) {
         return null;
@@ -18,14 +18,14 @@ function parseLink(links: string): ILinkDescription {
     return (url && rel) ? {url, rel} : null;
 }
 
-function isPresent(link): boolean {
+function notNull(link): boolean {
     return link !== null;
 }
 
 function parsePagination(pagination: string): ILinkDescription[] {
     return fromNullable(pagination).map(p => p.split(',')
-                                              .map(parseLink)
-                                              .filter(isPresent))
+                                              .map(mkLinkDescription)
+                                              .filter(notNull))
                                    .getOrElse([]);
 }
 
