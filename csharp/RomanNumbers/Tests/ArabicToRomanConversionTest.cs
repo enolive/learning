@@ -14,52 +14,60 @@ namespace Tests
         {
             ArabicToRoman.Convert(input).Should().Be(expected);
         }
-        [Fact]
-        public void ConvertShouldReturnVs()
+        [Theory]
+        [InlineData(5, "V")]
+        [InlineData(7, "VII")]
+        public void ConvertShouldReturnVs(int input, string expected)
         {
-            ArabicToRoman.Convert(5).Should().Be("V");
-            ArabicToRoman.Convert(7).Should().Be("VII");
+            ArabicToRoman.Convert(input).Should().Be(expected);
         }
-        [Fact]
-        public void ConvertShouldReturnXs()
+        [Theory]
+        [InlineData(10, "X")]
+        [InlineData(12, "XII")]
+        [InlineData(16, "XVI")]
+        public void ConvertShouldReturnXs(int input, string expected)
         {
-            ArabicToRoman.Convert(10).Should().Be("X");
-            ArabicToRoman.Convert(12).Should().Be("XII");
-            ArabicToRoman.Convert(16).Should().Be("XVI");
+            ArabicToRoman.Convert(input).Should().Be(expected);
         }
-        [Fact]
-        public void ConvertShouldReturnLs()
+        [Theory]
+        [InlineData(50, "XII")]
+        [InlineData(67, "LXVII")]
+        public void ConvertShouldReturnLs(int input, string expected)
         {
             ArabicToRoman.Convert(50).Should().Be("L");
             ArabicToRoman.Convert(67).Should().Be("LXVII");
         }
-        [Fact]
-        public void ConvertShouldReturnCs()
+        [Theory]
+        [InlineData(100, "C")]
+        [InlineData(283, "CCLXXXIII")]
+        public void ConvertShouldReturnCs(int input, string expected)
         {
-            ArabicToRoman.Convert(100).Should().Be("C");
-            ArabicToRoman.Convert(283).Should().Be("CCLXXXIII");
+            ArabicToRoman.Convert(input).Should().Be(expected);
         }
-        [Fact]
-        public void ConvertShouldReturnDs()
+        [Theory]
+        [InlineData(500, "D")]
+        [InlineData(751, "DCCLI")]
+        public void ConvertShouldReturnDs(int input, string expected)
         {
-            ArabicToRoman.Convert(500).Should().Be("D");
-            ArabicToRoman.Convert(751).Should().Be("DCCLI");
+            ArabicToRoman.Convert(input).Should().Be(expected);
         }
-        [Fact]
-        public void ConvertShouldReturnMs()
+        [Theory]
+        [InlineData(1000, "M")]
+        [InlineData(1984, "MCMLXXXIV")]
+        public void ConvertShouldReturnMs(int input, string expected)
         {
-            ArabicToRoman.Convert(1000).Should().Be("M");
-            ArabicToRoman.Convert(1984).Should().Be("MCMLXXXIV");
+            ArabicToRoman.Convert(input).Should().Be(expected);
         }
-        [Fact]
-        public void ConvertShouldUseSubstractionRules()
+        [Theory]
+        [InlineData(4, "IV")]
+        [InlineData(9, "IX")]
+        [InlineData(40, "XL")]
+        [InlineData(90, "XC")]
+        [InlineData(400, "CD")]
+        [InlineData(900, "CM")]
+        public void ConvertShouldUseSubstractionRules(int input, string expected)
         {
-            ArabicToRoman.Convert(4).Should().Be("IV");
-            ArabicToRoman.Convert(9).Should().Be("IX");
-            ArabicToRoman.Convert(40).Should().Be("XL");
-            ArabicToRoman.Convert(90).Should().Be("XC");
-            ArabicToRoman.Convert(400).Should().Be("CD");
-            ArabicToRoman.Convert(900).Should().Be("CM");
+            ArabicToRoman.Convert(input).Should().Be(expected);
         }
     }
 }
