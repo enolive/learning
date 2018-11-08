@@ -6,12 +6,13 @@ namespace Tests
 {
     public class ArabicToRomanConversionTest
     {
-        [Fact]
-        public void ConvertShouldReturnIs()
+        [Theory]
+        [InlineData(1, "I")]
+        [InlineData(2, "II")]
+        [InlineData(3, "III")]
+        public void ConvertShouldReturnIs(int input, string expected)
         {
-            ArabicToRoman.Convert(1).Should().Be("I");
-            ArabicToRoman.Convert(2).Should().Be("II");
-            ArabicToRoman.Convert(3).Should().Be("III");
+            ArabicToRoman.Convert(input).Should().Be(expected);
         }
         [Fact]
         public void ConvertShouldReturnVs()
