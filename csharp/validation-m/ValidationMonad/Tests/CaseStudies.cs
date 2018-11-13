@@ -1,4 +1,5 @@
 ﻿using System;
+using static Tests.Prelude;
 
 namespace Tests
 {
@@ -10,7 +11,7 @@ namespace Tests
                 .GetOrElseThrow(err => new ArgumentException(err));
 
         private static IMaybeValid<int, string> Validate(int input) =>
-            Prelude.Success<int, string>(input)
+            Success<int, string>(input)
                 .FilterOrElse(i => i >= 0, _ => "Input must be greater or equal zero.")
                 .FilterOrElse(i => i < 1000, _ => "Input must be less than 1000.");
 
@@ -35,7 +36,7 @@ namespace Tests
         }
 
         public static int ParseOrCountWords(string input) =>
-            Prelude.Success<string, string>(input)
+            Success<string, string>(input)
                 .FlatMap(ParseIt)
                 .MapFailure(_ => input)
                 .FlatMapFailure(CountWords)
@@ -43,12 +44,12 @@ namespace Tests
 
         private static IMaybeValid<int, string> CountWords(string failingInput) =>
             failingInput == null
-                ? Prelude.Failure<int, string>("input must not be null")
-                : Prelude.Success<int, string>(failingInput.Split(' ').Length);
+                ? Failure<int, string>("input must not be null")
+                : Success<int, string>(failingInput.Split(' ').Length);
 
         private static IMaybeValid<int, string> ParseIt(string arg) =>
             int.TryParse(arg, out var test)
-                ? Prelude.Success<int, string>(test)
-                : Prelude.Failure<int, string>("input is not a valid decimal number");
+                ? Success<int, string>(test)
+                : Failure<int, string>("input is not a valid decimal number");
     }
 }
