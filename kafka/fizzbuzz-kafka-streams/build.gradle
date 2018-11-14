@@ -7,7 +7,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'application'
 
-mainClassName = "MainKt"
+mainClassName = "KafkaApp"
 
 repositories {
     mavenCentral()
@@ -34,6 +34,9 @@ dependencies {
     testCompile "org.junit.jupiter:junit-jupiter-api:5.+"
     testCompile "org.junit.jupiter:junit-jupiter-engine:5.+"
     testCompile "org.junit.jupiter:junit-jupiter-params:5.+"
+    testCompile "org.apache.kafka:kafka-streams-test-utils:$kafka_version"
+    testCompile "org.mockito:mockito-core:2.+"
+    testCompile "org.mockito:mockito-junit-jupiter:2.+"
 }
 
 test {

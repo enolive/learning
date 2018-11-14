@@ -3,15 +3,15 @@ import arrow.core.toOption
 import arrow.syntax.function.curried
 import arrow.syntax.function.reverse
 
-class FizzBuzz {
+open class FizzBuzzService {
     private val rules = listOf(
             Rule(numbersDivisibleBy(3), "Fizz"),
             Rule(numbersDivisibleBy(5), "Buzz")
     )
 
-    fun sequenceUpTo(limit: Int) = (1..limit).map(::single)
+    open fun sequenceUpTo(limit: Int) = (1..limit).map(::single)
 
-    fun single(input: Int) = tryGetResultFromRules(input)
+    open fun single(input: Int) = tryGetResultFromRules(input)
             .toOption()
             .filter { it.isNotEmpty() }
             .getOrElse { input.toString() }
