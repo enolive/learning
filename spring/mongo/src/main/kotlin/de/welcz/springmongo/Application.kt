@@ -1,7 +1,7 @@
 package de.welcz.springmongo
 
 import de.welcz.springmongo.entity.MessageDoc
-import de.welcz.springmongo.repository.MessagesRepository
+import de.welcz.springmongo.control.MessagesRepository
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication

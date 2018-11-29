@@ -1,7 +1,7 @@
 package de.welcz.springmongo
 
 import de.welcz.springmongo.entity.MessageDoc
-import de.welcz.springmongo.repository.MessagesRepository
+import de.welcz.springmongo.control.MessagesRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

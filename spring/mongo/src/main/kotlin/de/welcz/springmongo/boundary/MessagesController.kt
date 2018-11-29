@@ -1,6 +1,6 @@
 package de.welcz.springmongo.boundary
 
-import de.welcz.springmongo.repository.MessagesRepository
+import de.welcz.springmongo.control.MessagesRepository
 import de.welcz.springmongo.entity.MessageDoc
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*

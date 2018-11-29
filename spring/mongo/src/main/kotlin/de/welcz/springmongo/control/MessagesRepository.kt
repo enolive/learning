@@ -1,4 +1,4 @@
-package de.welcz.springmongo.repository
+package de.welcz.springmongo.control
 
 import de.welcz.springmongo.entity.MessageDoc
 import org.springframework.data.mongodb.repository.MongoRepository
