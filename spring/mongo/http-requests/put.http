@@ -1,0 +1,11 @@
+PUT http://localhost:8080/messages
+Content-Type: application/json
+
+{
+  "client": 123,
+  "consultant": 43222,
+  "messageId": "#ABC12345",
+  "messageText": "Hello you!"
+}
+
+###

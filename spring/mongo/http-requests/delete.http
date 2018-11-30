@@ -1,0 +1,3 @@
+DELETE http://localhost:8080/messages/client/12345/consultant/67890
+
+###

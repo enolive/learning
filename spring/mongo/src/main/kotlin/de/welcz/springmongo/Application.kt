@@ -15,11 +15,11 @@ class Application {
     @Bean
     fun run(repository: MessagesRepository) = CommandLineRunner {
         repository.save(MessageDoc("12345-67890", "#12345", "Test"))
-        repository.save(MessageDoc("2", "#34423", "Another one"))
-        repository.save(MessageDoc("3", "#88877", "Yet another one"))
+        repository.save(MessageDoc("2222-3333", "#34423", "Another one"))
+        repository.save(MessageDoc("456-789", "#88877", "Yet another one"))
         log.info("data created!")
 
-        repository.findById("1").ifPresent { found -> log.info("found $found") }
+        repository.findById("12345-67890").ifPresent { found -> log.info("found $found") }
         log.info("okay, finished!")
     }
 }

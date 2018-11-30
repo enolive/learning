@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/messages")
 class MessagesController(val repository: MessagesRepository) {
     @GetMapping("/client/{client}/consultant/{consultant}")
-    fun findMessage(@PathVariable("client") client: Long,
-                    @PathVariable("consultant") consultant: Long): MessageDto? =
+    fun findMessage(@PathVariable client: Long,
+                    @PathVariable consultant: Long): MessageDto? =
             repository
                 .findById(toId(client, consultant))
                 .map { MessageDto(client, consultant, it.messageId, it.messageText) }
@@ -24,8 +24,8 @@ class MessagesController(val repository: MessagesRepository) {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/client/{client}/consultant/{consultant}")
-    fun deleteMessage(@PathVariable("client") client: Long,
-                      @PathVariable("consultant") consultant: Long) {
+    fun deleteMessage(@PathVariable client: Long,
+                      @PathVariable consultant: Long) {
         repository.deleteById(toId(client, consultant))
     }
 
