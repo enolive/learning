@@ -2,6 +2,7 @@
   "name": "demo-kata",
   "version": "0.0.1",
   "scripts": {
+    "start": "ts-node index.ts",
     "test": "mocha --require ts-node/register --reporter nyan test/**/*.ts --watch --watch-extensions ts"
   },
   "dependencies": {
