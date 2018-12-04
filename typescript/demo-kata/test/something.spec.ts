@@ -1,7 +1,7 @@
-import {expect} from 'chai'
+import {expect} from 'chai';
 
 describe('Framework', () => {
     it('should do something', () => {
-        expect(true).to.equal(false)
-    })
-})
+        expect(true).to.equal(false);
+    });
+});
