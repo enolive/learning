@@ -1,7 +1,7 @@
 buildscript {
     ext {
         kotlinVersion = '1.3.10'
-        springBootVersion = '2.1.0.RELEASE'
+        springBootVersion = '2.0.3.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -50,7 +50,7 @@ dependencies {
     implementation('com.fasterxml.jackson.module:jackson-module-kotlin')
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+    implementation('de.flapdoodle.embed:de.flapdoodle.embed.mongo:1.50.5')
 
     kapt("org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}")
     compileOnly "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
