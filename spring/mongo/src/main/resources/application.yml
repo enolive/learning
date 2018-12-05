@@ -1,0 +1,11 @@
+spring:
+  profiles: local
+---
+spring:
+  profiles: prod
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/message-db
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration
