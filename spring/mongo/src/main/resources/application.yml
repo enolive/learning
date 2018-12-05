@@ -1,6 +1,17 @@
 spring:
-  profiles: local
+  profiles:
+    active: local
+
+custom:
+  mongo-download-path: http://my.domain.com/mongo-dist/
+
 ---
+
+spring:
+  profiles: local
+
+---
+
 spring:
   profiles: prod
   data:
