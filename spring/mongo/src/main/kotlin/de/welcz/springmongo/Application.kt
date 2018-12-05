@@ -15,8 +15,7 @@ class Application {
     private val log = LoggerFactory.getLogger(Application::class.java)
 
     @Bean
-    fun run(repository: MessagesRepository,
-            configProperties: ConfigProperties) = CommandLineRunner {
+    fun run(repository: MessagesRepository) = CommandLineRunner {
         repository.findById("12345-67890").ifPresent { found -> log.info("found $found") }
 
         repository.save(MessageDoc("12345-67890", "#12345", "Test"))

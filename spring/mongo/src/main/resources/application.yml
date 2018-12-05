@@ -2,8 +2,9 @@ spring:
   profiles:
     active: local
 
-custom:
-  mongo-download-path: http://my.domain.com/mongo-dist/
+# enable this to use a custom download path to mongo
+#custom:
+#  mongo-download-path: http://my.domain.com/mongo-dist/
 
 ---
 
