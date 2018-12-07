@@ -36,4 +36,10 @@ class FizzBuzzServiceTest {
     void buzz_numbers_divisible_by_5(int input) {
         assertThat(service.calculate(input)).isEqualTo("Buzz");
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {15, 30})
+    void fizz_buzz_numbers_divisible_by_3_and_5(int input) {
+        assertThat(service.calculate(input)).isEqualTo("Fizz-Buzz");
+    }
 }

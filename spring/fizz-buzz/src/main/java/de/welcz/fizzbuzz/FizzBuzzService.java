@@ -15,14 +15,14 @@ public class FizzBuzzService {
     );
 
     String calculate(int input) {
-        final var result = getResultFromRules(input);
-        return result.getOrElse(() -> String.valueOf(input));
+        return getResultFromRules(input).getOrElse(() -> String.valueOf(input));
     }
 
     private Option<String> getResultFromRules(int input) {
-        return rules.filter(divByRule -> divByRule.appliesTo(input))
-                    .map(DivByRule::getResult)
-                    .headOption();
+        return Option.of(rules.filter(rule -> rule.appliesTo(input))
+                              .map(DivByRule::getResult)
+                              .mkString("-"))
+                     .filter(r -> !r.isEmpty());
     }
 
     @AllArgsConstructor
