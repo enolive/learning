@@ -1,6 +1,15 @@
 module Main where
 
-import Lib
+import MarsRover
+import Control.Monad
 
 main :: IO ()
-main = someFunc
+main = do
+  putStrLn "enter commands for the rover, blank to quit"
+  loop mkRover
+
+loop initRover = displayRover initRover >> getNewRover initRover >>= loop
+
+displayRover = print
+getNewRover rover = commands rover <$>
+
