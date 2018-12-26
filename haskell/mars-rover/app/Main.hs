@@ -11,5 +11,5 @@ main = do
 loop initRover = displayRover initRover >> getNewRover initRover >>= loop
 
 displayRover = print
-getNewRover rover = commands rover <$>
+getNewRover rover = commands rover <$> getLine
 
