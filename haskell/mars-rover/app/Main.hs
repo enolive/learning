@@ -1,15 +1,18 @@
 module Main where
 
-import MarsRover
-import Control.Monad
+import           Control.Monad
+import           MarsRover
 
 main :: IO ()
-main = do
-  putStrLn "enter commands for the rover, <EOF> to quit"
-  loop mkRover
+main = displayIntro >> gameLoop mkRover
 
-loop initRover = displayRover initRover >> getNewRover initRover >>= loop
+displayIntro :: IO ()
+displayIntro = putStrLn "enter commands or exit with blank line"
 
-displayRover = print
-getNewRover rover = commands rover <$> getLine
-
+gameLoop :: Rover -> IO ()
+gameLoop initRover = do
+  print initRover
+  line <- getLine
+  doOver initRover line
+  where
+    doOver rover line = unless (null line) $ gameLoop (commands rover line)

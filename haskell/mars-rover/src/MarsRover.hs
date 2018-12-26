@@ -6,6 +6,7 @@ module MarsRover
   , position
   , facing
   , Facing(..)
+  , Rover
   ) where
 
 data Rover = Rover
