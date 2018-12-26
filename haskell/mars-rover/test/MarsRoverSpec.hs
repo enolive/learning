@@ -52,3 +52,6 @@ spec =
         commands rover "ffr" `shouldBe` rover {position = (0, 2), facing = East}
         commands rover "ffrbbb" `shouldBe` rover {position = (3, 2), facing = East}
         commands rover "ffrbbbllff" `shouldBe` rover {position = (5, 2), facing = West}
+    context "wrong commands" $
+      it "ignores anything other than fblr" $
+      commands rover "some bullshit" `shouldBe` rover {position = (0, -1), facing = South}

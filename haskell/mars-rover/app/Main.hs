@@ -5,7 +5,7 @@ import Control.Monad
 
 main :: IO ()
 main = do
-  putStrLn "enter commands for the rover, blank to quit"
+  putStrLn "enter commands for the rover, <EOF> to quit"
   loop mkRover
 
 loop initRover = displayRover initRover >> getNewRover initRover >>= loop
