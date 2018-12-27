@@ -56,10 +56,10 @@
     <orderEntry type="library" name="primitive-0.6.3.0" level="project" />
     <orderEntry type="library" name="quickcheck-io-0.2.0" level="project" />
     <orderEntry type="library" name="hspec-discover-2.5.5" level="project" />
-    <orderEntry type="library" name="HUnit-1.6.0.0" level="project" />
     <orderEntry type="library" name="extensible-exceptions-0.1.1.4" level="project" />
     <orderEntry type="library" name="strict-io-0.2.2" level="project" />
-    <orderEntry type="library" name="Cabal-2.2.0.1" level="project" />
     <orderEntry type="library" name="monad-loops-0.4.3" level="project" />
+    <orderEntry type="library" name="HUnit-1.6.0.0" level="project" />
+    <orderEntry type="library" name="Cabal-2.2.0.1" level="project" />
   </component>
 </module>

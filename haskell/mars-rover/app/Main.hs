@@ -10,6 +10,8 @@ displayIntro :: IO ()
 displayIntro = putStrLn "enter commands or exit with blank line"
 
 gameLoop :: Rover -> IO ()
-gameLoop initRover = print initRover >> getLine >>= loopOrBreakOnBlank initRover
+gameLoop initRover = displayRover initRover >> getLine >>= loopOrBreakOnBlank initRover
   where
-    loopOrBreakOnBlank rover line = unless (null line) $ gameLoop (commands rover line)
+    displayRover = print
+    loopOrBreakOnBlank rover line = unless (null line) $ gameLoop $ nextRover rover line
+    nextRover = commands

@@ -35,7 +35,6 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - mars-rover
-    - monad-loops
 
 tests:
   mars-rover-test:

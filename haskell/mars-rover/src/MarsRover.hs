@@ -34,7 +34,10 @@ command 'f' = forward
 command 'l' = turnLeft
 command 'r' = turnRight
 command 'b' = backward
-command _   = id
+command _   = doNothing
+
+doNothing :: Rover -> Rover
+doNothing = id
 
 forward :: Rover -> Rover
 forward rover@Rover {..} = rover {position = newPosition position facing}
