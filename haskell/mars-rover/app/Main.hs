@@ -4,14 +4,10 @@ import           Control.Monad
 import           MarsRover
 
 main :: IO ()
-main = displayIntro >> gameLoop mkRover
-
-displayIntro :: IO ()
-displayIntro = putStrLn "enter commands or exit with blank line"
+main = putStrLn "enter commands or exit with blank line" >> gameLoop mkRover
 
 gameLoop :: Rover -> IO ()
-gameLoop initRover = displayRover initRover >> getLine >>= loopOrBreakOnBlank initRover
+gameLoop initRover = print initRover >> getLine >>= loopOrExit initRover
   where
-    displayRover = print
-    loopOrBreakOnBlank rover line = unless (null line) $ gameLoop $ nextRover rover line
-    nextRover = commands
+    loopOrExit rover [] = putStrLn "bye!"
+    loopOrExit rover line = gameLoop $ commands rover line
