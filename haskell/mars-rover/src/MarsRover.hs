@@ -9,6 +9,9 @@ module MarsRover
   , Rover
   ) where
 
+import           Control.Monad (foldM)
+import           Data.Maybe    (fromMaybe)
+
 data Rover = Rover
   { position :: Position
   , facing   :: Facing
@@ -27,17 +30,14 @@ mkRover :: Rover
 mkRover = Rover {position = (0, 0), facing = North}
 
 commands :: Rover -> String -> Rover
-commands = foldl (flip command)
+commands rover = fromMaybe rover . foldM (flip command) rover
 
-command :: Char -> Rover -> Rover
-command 'f' = forward
-command 'l' = turnLeft
-command 'r' = turnRight
-command 'b' = backward
-command _   = doNothing
-
-doNothing :: Rover -> Rover
-doNothing = id
+command :: Char -> Rover -> Maybe Rover
+command 'f' = Just . forward
+command 'l' = Just . turnLeft
+command 'r' = Just . turnRight
+command 'b' = Just . backward
+command _   = const Nothing
 
 forward :: Rover -> Rover
 forward rover@Rover {..} = rover {position = newPosition position facing}
