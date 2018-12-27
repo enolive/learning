@@ -1,6 +1,5 @@
 module Main where
 
-import           Control.Monad
 import           MarsRover
 
 main :: IO ()
