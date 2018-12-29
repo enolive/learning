@@ -5,7 +5,7 @@ import io.vavr.control.Option;
 import org.springframework.stereotype.Service;
 
 @Service
-class FizzBuzzService {
+public class FizzBuzzService {
 
     private final List<DivByRule> rules = List.of(
             new DivByRule(3, "Fizz"),
