@@ -2,6 +2,7 @@ package de.welcz.fizzbuzz;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @AllArgsConstructor
 class DivByRule {
