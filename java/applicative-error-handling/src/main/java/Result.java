@@ -12,8 +12,8 @@ import java.util.stream.StreamSupport;
 @ToString
 @Getter
 class Result<Error, T> {
-    private T item;
     private Error error;
+    private T item;
 
     private Result(Error error, T item) {
         this.error = error;
@@ -23,6 +23,11 @@ class Result<Error, T> {
     public static <Error, T> Result<Error, T> error(Error error) {
         Objects.requireNonNull(error, "error must not be null.");
         return new Result<>(error, null);
+    }
+
+    public static <Error, T> Result<Error, T> success(T item) {
+        Objects.requireNonNull(item, "item must not be null.");
+        return new Result<>(null, item);
     }
 
     public static <Error, T> Result<List<Error>, List<T>> sequence(Iterable<Result<Error, T>> results) {
@@ -36,18 +41,6 @@ class Result<Error, T> {
         return new Result<>(allErrors, allSuccesses);
     }
 
-    private static <Error, T> Stream<Result<Error, T>> asStream(Iterable<Result<Error, T>> results) {
-        return StreamSupport.stream(results.spliterator(), false);
-    }
-
-    private boolean isSuccess() {
-        return item != null;
-    }
-
-    private boolean isError() {
-        return error != null;
-    }
-
     public static <Error, T> Result<Error, List<T>> flattenSuccess(Result<Error, List<List<T>>> result) {
         Objects.requireNonNull(result, "result must not be null.");
         List<T> flattened = Optional.ofNullable(result.getItem())
@@ -57,14 +50,21 @@ class Result<Error, T> {
         return new Result<>(error, flattened);
     }
 
+    private static <Error, T> Stream<Result<Error, T>> asStream(Iterable<Result<Error, T>> results) {
+        return StreamSupport.stream(results.spliterator(), false);
+    }
+
     private static <T> List<T> flattenList(List<List<T>> lists) {
         return lists.stream()
                     .flatMap(Collection::stream)
                     .collect(Collectors.toList());
     }
 
-    public static <Error, T> Result<Error, T> success(T item) {
-        Objects.requireNonNull(item, "item must not be null.");
-        return new Result<>(null, item);
+    private boolean isSuccess() {
+        return item != null;
+    }
+
+    private boolean isError() {
+        return error != null;
     }
 }
