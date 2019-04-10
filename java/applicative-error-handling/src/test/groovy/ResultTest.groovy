@@ -2,6 +2,8 @@ import groovy.json.JsonOutput
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import java.util.function.Supplier
+
 class ResultTest extends Specification {
     @Unroll
     def "sequence with #errors, #successes should be (#expectedErrors, #expectedItems) because #because"() {
@@ -57,6 +59,37 @@ class ResultTest extends Specification {
         flattened.error == ['OH', 'NO']
         and: 'success is still flattened'
         flattened.success == [23, 42, 11]
+    }
+
+    def "natural transformation from successful try"() {
+        given: 'function that succeeds'
+        Supplier<Integer> doSomething = { 42 }
+        when: 'function is transformed to a result'
+        def result = Result.fromTry(doSomething)
+        then: 'result should be successful'
+        result.success == 42
+    }
+
+    def "natural transformation from erroneous try"() {
+        given: 'function that fails'
+        def exception = new IllegalStateException('I AM ERROR!')
+        Supplier<Integer> doSomething = {
+            throw exception
+        }
+        when: 'function is transformed to a result'
+        def result = Result.fromTry(doSomething)
+        then: 'result should be successful'
+        result.error == exception
+    }
+
+    def "natural transformation null should fail"() {
+        given: 'no supplier'
+        Supplier supplier = null
+        when: 'function is transformed to a result'
+        Result.fromTry(supplier)
+        then: 'transformation should fail'
+        def ex = thrown(NullPointerException)
+        ex.message == 'supplier must not be null.'
     }
 
     def "flatten a null should fail"() {

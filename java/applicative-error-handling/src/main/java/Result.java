@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -48,6 +49,15 @@ class Result<Error, Success> {
                                           .orElse(null);
         Error error = result.error;
         return new Result<>(error, flattened);
+    }
+
+    public static <Success> Result<Exception, Success> fromTry(Supplier<Success> supplier) {
+        Objects.requireNonNull(supplier, "supplier must not be null.");
+        try {
+            return Result.success(supplier.get());
+        } catch (Exception e) {
+            return Result.error(e);
+        }
     }
 
     private static <Error, Success> Stream<Result<Error, Success>> asStream(Iterable<Result<Error, Success>> results) {
