@@ -4,18 +4,18 @@ import spock.lang.Unroll
 
 class ResultTest extends Specification {
     @Unroll
-    def "sequence with #errors, #items should be (#expectedErrors, #expectedItems) because #because"() {
+    def "sequence with #errors, #successes should be (#expectedErrors, #expectedItems) because #because"() {
         given: 'a sequence'
-        List<Result> givenItems = items.collect { Result.success(it) }
+        List<Result> givenItems = successes.collect { Result.success(it) }
         List<Result> givenErrors = errors.collect { Result.error(it) }
         List<Result> sequence = givenItems + givenErrors
         when: 'result sequence is generated'
         def result = Result.sequence(sequence)
-        then: 'result should contain errors and items'
+        then: 'result should contain errors and successes'
         result.error == expectedErrors
-        result.item == expectedItems
+        result.success == expectedItems
         where:
-        errors   | items                   | because              | expectedErrors | expectedItems
+        errors   | successes               | because              | expectedErrors | expectedItems
         []       | []                      | 'both are empty'     | []             | []
         []       | ['Hello']               | 'one success'        | []             | ['Hello']
         []       | ['Hello', 'World', '!'] | 'multiple successes' | []             | ['Hello', 'World', '!']
@@ -24,15 +24,15 @@ class ResultTest extends Specification {
     }
 
     @Unroll
-    def "list of success lists with #items should be flattened to #expectedItems because #because"() {
-        given: 'a result with list of items'
-        def result = Result.success(items)
+    def "list of success lists with #successes should be flattened to #expectedSuccesses because #because"() {
+        given: 'a result with list of successes'
+        def result = Result.success(successes)
         when: 'result is flattened'
         def flattened = Result.flattenSuccess(result)
-        then: 'result should flatten a list of list of items'
-        flattened.item == expectedItems
+        then: 'result should flatten a list of list of successes'
+        flattened.success == expectedSuccesses
         where:
-        items                       | because          | expectedItems
+        successes                   | because          | expectedSuccesses
         []                          | 'empty list'     | []
         [['Hello']]                 | 'single list'    | ['Hello']
         [['Hello', 'World'], ['!']] | 'multiple lists' | ['Hello', 'World', '!']
@@ -56,7 +56,7 @@ class ResultTest extends Specification {
         then: 'error should stay the same'
         flattened.error == ['OH', 'NO']
         and: 'success is still flattened'
-        flattened.item == [23, 42, 11]
+        flattened.success == [23, 42, 11]
     }
 
     def "flatten a null should fail"() {
@@ -76,11 +76,11 @@ class ResultTest extends Specification {
     }
 
     def "creating a success with null should fail"() {
-        when: 'result without an item is created'
+        when: 'result without an success is created'
         Result.success(null)
         then: 'exception is thrown'
         def ex = thrown(NullPointerException)
-        ex.message == 'item must not be null.'
+        ex.message == 'success must not be null.'
     }
 
     def "creating an error with null should fail"() {

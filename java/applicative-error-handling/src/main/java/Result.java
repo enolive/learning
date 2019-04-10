@@ -11,46 +11,46 @@ import java.util.stream.StreamSupport;
 
 @ToString
 @Getter
-class Result<Error, T> {
+class Result<Error, Success> {
     private Error error;
-    private T item;
+    private Success success;
 
-    private Result(Error error, T item) {
+    private Result(Error error, Success success) {
         this.error = error;
-        this.item = item;
+        this.success = success;
     }
 
-    public static <Error, T> Result<Error, T> error(Error error) {
+    public static <Error, Success> Result<Error, Success> error(Error error) {
         Objects.requireNonNull(error, "error must not be null.");
         return new Result<>(error, null);
     }
 
-    public static <Error, T> Result<Error, T> success(T item) {
-        Objects.requireNonNull(item, "item must not be null.");
+    public static <Error, Success> Result<Error, Success> success(Success item) {
+        Objects.requireNonNull(item, "success must not be null.");
         return new Result<>(null, item);
     }
 
-    public static <Error, T> Result<List<Error>, List<T>> sequence(Iterable<Result<Error, T>> results) {
+    public static <Error, Success> Result<List<Error>, List<Success>> sequence(Iterable<Result<Error, Success>> results) {
         Objects.requireNonNull(results, "results must not be null.");
-        List<T> allSuccesses = asStream(results).filter(Result::isSuccess)
-                                                .map(Result::getItem)
-                                                .collect(Collectors.toList());
+        List<Success> allSuccesses = asStream(results).filter(Result::isSuccess)
+                                                      .map(Result::getSuccess)
+                                                      .collect(Collectors.toList());
         List<Error> allErrors = asStream(results).filter(Result::isError)
                                                  .map(Result::getError)
                                                  .collect(Collectors.toList());
         return new Result<>(allErrors, allSuccesses);
     }
 
-    public static <Error, T> Result<Error, List<T>> flattenSuccess(Result<Error, List<List<T>>> result) {
+    public static <Error, Success> Result<Error, List<Success>> flattenSuccess(Result<Error, List<List<Success>>> result) {
         Objects.requireNonNull(result, "result must not be null.");
-        List<T> flattened = Optional.ofNullable(result.getItem())
-                                    .map(Result::flattenList)
-                                    .orElse(null);
+        List<Success> flattened = Optional.ofNullable(result.getSuccess())
+                                          .map(Result::flattenList)
+                                          .orElse(null);
         Error error = result.error;
         return new Result<>(error, flattened);
     }
 
-    private static <Error, T> Stream<Result<Error, T>> asStream(Iterable<Result<Error, T>> results) {
+    private static <Error, Success> Stream<Result<Error, Success>> asStream(Iterable<Result<Error, Success>> results) {
         return StreamSupport.stream(results.spliterator(), false);
     }
 
@@ -61,7 +61,7 @@ class Result<Error, T> {
     }
 
     private boolean isSuccess() {
-        return item != null;
+        return success != null;
     }
 
     private boolean isError() {
