@@ -90,4 +90,16 @@ class ResultTest extends Specification {
         def ex = thrown(NullPointerException)
         ex.message == 'error must not be null.'
     }
+
+    def "showing a result should look pretty"() {
+        given: 'a result'
+        def success = Result.success(42)
+        def error = Result.error('OH NO!')
+        when: 'result is shown'
+        def showSuccess = success.toString()
+        def showError = error.toString()
+        then: 'its string representation reflects its structure'
+        showSuccess == 'Result(error=null, success=42)'
+        showError == 'Result(error=OH NO!, success=null)'
+    }
 }
