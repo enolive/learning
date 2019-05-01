@@ -1,7 +1,8 @@
 module TennisScore where
 
 data GameState
-  = Running PlayerScore PlayerScore
+  = Running PlayerScore
+            PlayerScore
   | Deuce
   | Advantage WhichPlayer
   | Win WhichPlayer
@@ -20,7 +21,7 @@ data WhichPlayer
   deriving (Eq, Enum, Bounded)
 
 instance Show GameState where
-  show (Running x y)   = show x ++ " - " ++ show y
+  show (Running x y)      = show x ++ " - " ++ show y
   show (Win player)       = show player ++ " wins"
   show (Advantage player) = "Advantage for " ++ show player
   show Deuce              = "Deuce"
@@ -54,9 +55,9 @@ wonPoint (Running change keep) _ = Running (succ change) keep
 
 swapState :: GameState -> GameState
 swapState (Running score1 score2) = Running score2 score1
-swapState (Win player)               = (Win . swapPlayer) player
-swapState (Advantage player)         = (Advantage . swapPlayer) player
-swapState Deuce                      = Deuce
+swapState (Win player)            = (Win . swapPlayer) player
+swapState (Advantage player)      = (Advantage . swapPlayer) player
+swapState Deuce                   = Deuce
 
 swapPlayer :: WhichPlayer -> WhichPlayer
 swapPlayer Player1 = Player2
