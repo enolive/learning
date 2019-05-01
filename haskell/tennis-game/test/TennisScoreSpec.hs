@@ -9,9 +9,7 @@ import           Test.Hspec
 import           Test.QuickCheck
 
 instance Arbitrary GameState where
-  arbitrary = oneof [runningWith <$> arbitrary <*> arbitrary, Win <$> arbitrary, Advantage <$> arbitrary, return Deuce]
-    where
-      runningWith x y = Running (x, y)
+  arbitrary = oneof [Running <$> arbitrary <*> arbitrary, Win <$> arbitrary, Advantage <$> arbitrary, return Deuce]
 
 instance Arbitrary PlayerScore where
   arbitrary = arbitraryBoundedEnum
@@ -25,32 +23,32 @@ main = hspec spec
 spec :: Spec
 spec =
   describe "Score for the Tennis Game" $ do
-    context "construction" $ it "should produce an empty instance" $ newGame `shouldBe` Running (Love, Love)
+    context "construction" $ it "should produce an empty instance" $ newGame `shouldBe` Running Love Love
     context "swapping" $ do
       it "should be its own inversion" $ property $ shouldBe <$> swapState . swapState <*> id
-      it "should swap running score" $ property $ \x y -> swapState (Running (x, y)) `shouldBe` Running (y, x)
+      it "should swap running score" $ property $ \x y -> swapState (Running x y) `shouldBe` Running y x
       it "should swap a win" $ property $ \player -> swapState (Win player) `shouldBe` (Win . swapPlayer) player
       it "should swap an advantage" $
         property $ \player -> swapState (Advantage player) `shouldBe` (Advantage . swapPlayer) player
     context "simple ops" $ do
-      it "should score for player 1" $ newGame `wonPoint` Player1 `shouldBe` Running (Fifteen, Love)
-      it "should score for player 2" $ newGame `wonPoint` Player2 `shouldBe` Running (Love, Fifteen)
+      it "should score for player 1" $ newGame `wonPoint` Player1 `shouldBe` Running Fifteen Love
+      it "should score for player 2" $ newGame `wonPoint` Player2 `shouldBe` Running Love Fifteen
       it "should work for all possible states" $ property $ \state player -> shouldNotThrow $ state `wonPoint` player
       it "should never produce Forty, Forty" $
-        property $ \list -> newGame `wonPoints` list `shouldNotBe` Running (Forty, Forty)
+        property $ \list -> newGame `wonPoints` list `shouldNotBe` Running Forty Forty
     context "list ops" $
       it "should execute wonPoint more than once" $
-      newGame `wonPoints` [Player1, Player2, Player1, Player2] `shouldBe` Running (Thirty, Thirty)
+      newGame `wonPoints` [Player1, Player2, Player1, Player2] `shouldBe` Running Thirty Thirty
     context "running" $ do
       it "should score player twice" $ do
-        newGame `wonPoints` replicate 2 Player1 `shouldBe` Running (Thirty, Love)
-        newGame `wonPoints` replicate 2 Player2 `shouldBe` Running (Love, Thirty)
+        newGame `wonPoints` replicate 2 Player1 `shouldBe` Running Thirty Love
+        newGame `wonPoints` replicate 2 Player2 `shouldBe` Running Love Thirty
       it "should keep the score of the losing player" $ do
-        newGame `wonPoints` [Player2, Player1] `shouldBe` Running (Fifteen, Fifteen)
-        newGame `wonPoints` [Player1, Player2] `shouldBe` Running (Fifteen, Fifteen)
+        newGame `wonPoints` [Player2, Player1] `shouldBe` Running Fifteen Fifteen
+        newGame `wonPoints` [Player1, Player2] `shouldBe` Running Fifteen Fifteen
       it "should let player score three points" $ do
-        newGame `wonPoints` replicate 3 Player1 `shouldBe` Running (Forty, Love)
-        newGame `wonPoints` replicate 3 Player2 `shouldBe` Running (Love, Forty)
+        newGame `wonPoints` replicate 3 Player1 `shouldBe` Running Forty Love
+        newGame `wonPoints` replicate 3 Player2 `shouldBe` Running Love Forty
     context "winning" $ do
       it "should let player with 4 points and opponent with at most two points win" $
         property $
