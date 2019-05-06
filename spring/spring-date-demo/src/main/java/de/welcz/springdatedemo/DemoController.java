@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 
 import static java.text.MessageFormat.format;
@@ -20,13 +21,14 @@ public class DemoController {
 
     @GetMapping("/basicdate/{date}")
     public String simpleBasicDate(@PathVariable
-                             @DateTimeFormat(pattern = "yyyyMMdd") LocalDate date) {
+                                  @DateTimeFormat(pattern = "yyyyMMdd") LocalDate date) {
         return format("Hello, {0}!", date);
     }
 
+    // just a demo for micro seconds
     @GetMapping("/datetime/{dateTime}")
     public String simpleDate(@PathVariable
-                             @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS") LocalDateTime dateTime) {
+                             @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS") LocalDateTime dateTime) {
         return format("Hello, {0}!", dateTime);
     }
 
@@ -37,5 +39,16 @@ public class DemoController {
                       data.getName(),
                       data.getDateTime().toLocalDate(),
                       data.getDateTime().toLocalTime().format(shortTime));
+    }
+
+    // this works, but only with the default pattern yyyy-MM
+    @GetMapping("/yearmonth/{yearAndMonth}")
+    public String yearAndMonth(@PathVariable YearMonth yearAndMonth) {
+        return format("Hello, {0}!", yearAndMonth.atDay(1));
+    }
+
+    @GetMapping("/jsonym")
+    public String jsonWithYearMonth(@RequestBody YearMonthData data) {
+        return format("Hello, {0}!", data.getYearAndMonth().atDay(1));
     }
 }
