@@ -1,0 +1,11 @@
+GET http://localhost:8080/hello/Christoph
+
+###
+
+GET http://www.google.de/unknown
+
+###
+
+GET http://localhost:8080/actuator/health
+
+###
