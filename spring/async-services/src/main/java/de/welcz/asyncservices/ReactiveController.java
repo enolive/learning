@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @RestController
 public class ReactiveController {
@@ -20,7 +21,27 @@ public class ReactiveController {
 
   @GetMapping("/hello/{person}")
   public Mono<String> sayHelloTo(@PathVariable String person) {
+    // fire and forget with @Async
+    // - needs @EnableAsync
+    // - poor API
+    // - difficult scheduler configuration via special AsyncConfig
+    // + easy to use
     reactiveService.sayHelloToAsync(person).thenAccept(LOGGER::info);
     return Mono.just("I just said hello.");
+  }
+
+  @GetMapping("/helloR/{person}")
+  public Mono<String> sayHelloToR(@PathVariable String person) {
+    // fire and forget with reactor
+    // - a little difficult to understand publish and subscribe
+    // - works with any callables
+    // + easy to choose different schedulers by publishOn(Schedulers...)
+    // + rich API
+    // + no @EnableAsync needed
+    reactiveService.sayHelloToReactive(person)
+                   .publishOn(Schedulers.elastic())
+                   .doOnSuccess(LOGGER::info)
+                   .subscribe();
+    return Mono.just("I just said hello reactive.");
   }
 }

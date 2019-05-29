@@ -2,6 +2,10 @@ GET http://localhost:8080/hello/Christoph
 
 ###
 
+GET http://localhost:8080/helloR/Christoph
+
+###
+
 GET http://www.google.de/unknown
 
 ###
