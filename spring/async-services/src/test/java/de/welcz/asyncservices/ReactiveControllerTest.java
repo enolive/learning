@@ -7,6 +7,9 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Mono;
+import reactor.test.publisher.PublisherProbe;
+import reactor.test.StepVerifier;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -33,5 +36,20 @@ public class ReactiveControllerTest {
               .expectBody(String.class)
               .consumeWith(content -> assertThat(content.getResponseBody()).isEqualTo("I just said hello."));
     verify(reactiveService, times(1)).sayHelloToAsync("Christoph");
+  }
+
+  @Test
+  public void sayHelloRShouldWork() {
+    var probe = PublisherProbe.empty();
+    doReturn(probe.mono()).when(reactiveService).sayHelloToReactive(anyString());
+
+    testClient.get()
+              .uri("/helloR/Christoph")
+              .exchange()
+              .expectStatus().isOk()
+              .expectBody(String.class)
+              .consumeWith(content -> assertThat(content.getResponseBody()).isEqualTo("I just said hello reactive."));
+    verify(reactiveService, times(1)).sayHelloToReactive("Christoph");
+    probe.assertWasSubscribed();
   }
 }

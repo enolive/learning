@@ -25,7 +25,9 @@ public class ReactiveController {
     // - needs @EnableAsync
     // - poor API
     // - difficult scheduler configuration via special AsyncConfig
+    // + async call is transparent
     // + easy to use
+    // + no special concerns needed for testing
     reactiveService.sayHelloToAsync(person).thenAccept(LOGGER::info);
     return Mono.just("I just said hello.");
   }
@@ -35,6 +37,7 @@ public class ReactiveController {
     // fire and forget with reactor
     // - a little difficult to understand publish and subscribe
     // - works with any callables
+    // - hard to test
     // + easy to choose different schedulers by publishOn(Schedulers...)
     // + rich API
     // + no @EnableAsync needed
