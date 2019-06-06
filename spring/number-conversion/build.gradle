@@ -28,6 +28,7 @@ repositories {
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.5.+'
     compile 'io.vavr:vavr:0.+'
+    compile 'io.vavr:vavr-jackson:0.+'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     compileOnly 'org.projectlombok:lombok'

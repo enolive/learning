@@ -25,6 +25,5 @@ class NumberConverterTest extends Specification {
         null      | null
         ''        | null
         'invalid' | null
-        '1.2345'  | null
     }
 }
