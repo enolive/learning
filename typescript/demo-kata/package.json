@@ -6,16 +6,18 @@
     "test": "mocha --require ts-node/register --reporter nyan test/**/*.ts --watch --watch-extensions ts"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.15",
+    "ramda": "^0.26.1"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
-    "@types/lodash": "^4.14.118",
-    "@types/mocha": "^5.2.5",
+    "@types/lodash": "^4.14.136",
+    "@types/mocha": "^5.2.7",
+    "@types/ramda": "^0.26.18",
     "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "ts-node": "^6.2.0",
-    "tslint": "^5.11.0",
-    "typescript": "^2.9.2"
+    "mocha": "^6.2.0",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
   }
 }

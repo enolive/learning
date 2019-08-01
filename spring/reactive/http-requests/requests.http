@@ -1,0 +1,44 @@
+POST http://localhost:8080/todos
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "Just do it!",
+  "priority": "HIGH"
+}
+
+###
+
+PUT http://localhost:8080/todos
+Content-Type: application/json
+
+{
+  "id": "5d42c6cf7031f9235c45434b",
+  "title": "I've done it!",
+  "priority": "MEDIUM",
+  "done": true
+}
+
+###
+
+GET http://localhost:8080/todos
+#Accept: application/stream+json
+Accept: text/event-stream
+
+###
+
+GET http://localhost:8080/todos/generated
+
+###
+
+GET http://localhost:8080/todos/title/Just do it!
+
+###
+
+DELETE http://localhost:8080/todos/5d42c08d7031f90abf192927
+
+###
+
+DELETE http://localhost:8080/todos
+
+###
