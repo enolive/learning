@@ -23,11 +23,12 @@ Content-Type: application/json
 
 GET http://localhost:8080/todos
 #Accept: application/stream+json
-Accept: text/event-stream
+#Accept: text/event-stream
 
 ###
 
 GET http://localhost:8080/todos/generated
+Accept: text/event-stream
 
 ###
 
