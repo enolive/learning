@@ -12,7 +12,6 @@ import reactor.core.publisher.Mono;
 import reactor.core.publisher.SynchronousSink;
 
 import java.security.SecureRandom;
-import java.time.Duration;
 
 @RestController
 public class ReactiveController {
@@ -36,8 +35,7 @@ public class ReactiveController {
 
   @GetMapping("/todos")
   public Flux<TodoItem> findAll() {
-    return repository.findAll()
-                     .delayElements(Duration.ofSeconds(1));
+    return repository.findAll();
   }
 
   @DeleteMapping("/todos")
