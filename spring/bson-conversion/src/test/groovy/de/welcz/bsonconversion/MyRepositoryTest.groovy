@@ -33,7 +33,8 @@ class MyRepositoryTest extends Specification {
 
     def "saved document can be read"() {
         given: 'a document'
-        MyDocument document = new MyDocument(ZonedDateTime.now(ZoneId.from(ZoneOffset.ofHours(2))), YearMonth.now())
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.from(ZoneOffset.ofHours(2)))
+        MyDocument document = new MyDocument(now.withNano(0), YearMonth.now())
         when: 'saved document is read'
         MyDocument read = repository.save(document)
                                     .flatMap { repository.findById(it.id) }

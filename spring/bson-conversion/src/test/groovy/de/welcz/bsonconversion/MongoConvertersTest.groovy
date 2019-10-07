@@ -40,17 +40,13 @@ class MongoConvertersTest extends Specification {
         given: 'read zoned date time converter'
         MongoConverters.ReadZonedDateTimeConverter converter = new MongoConverters.ReadZonedDateTimeConverter()
         and: 'a document containing a zoned date time'
-        Document document = new Document([year   : 2019,
-                                          month  : 5,
-                                          day    : 12,
-                                          hours  : 7,
-                                          minutes: 44,
-                                          seconds: 4,
-                                          nanos  : 122,
-                                          zone   : '+02:00'])
+        Document document = new Document([
+                dateTime: new GregorianCalendar(2019, 4, 12, 7, 44, 4)
+                        .getTime(),
+                zone    : '+02:00'])
         and: 'an expected year month'
         ZonedDateTime expected = ZonedDateTime.of(LocalDate.of(2019, Month.MAY, 12),
-                                                  LocalTime.of(7, 44, 4, 122),
+                                                  LocalTime.of(7, 44, 4),
                                                   ZoneId.from(ZoneOffset.ofHours(2)))
 
         when: 'document is converted to year month'
@@ -64,17 +60,13 @@ class MongoConvertersTest extends Specification {
         given: 'write zoned date time converter'
         MongoConverters.WriteZonedDateTimeConverter converter = new MongoConverters.WriteZonedDateTimeConverter()
         and: 'an expected document'
-        Document expected = new Document([year   : 2019,
-                                          month  : 5,
-                                          day    : 12,
-                                          hours  : 7,
-                                          minutes: 44,
-                                          seconds: 4,
-                                          nanos  : 122,
-                                          zone   : '+02:00'])
+        Document expected = new Document([
+                dateTime: new GregorianCalendar(2019, 4, 12, 7, 44, 4)
+                        .getTime(),
+                zone    : '+02:00'])
         and: 'a year month'
         ZonedDateTime yearMonth = ZonedDateTime.of(LocalDate.of(2019, Month.MAY, 12),
-                                                   LocalTime.of(7, 44, 4, 122),
+                                                   LocalTime.of(7, 44, 4),
                                                    ZoneId.from(ZoneOffset.ofHours(2)))
 
         when: 'document is converted to year month'

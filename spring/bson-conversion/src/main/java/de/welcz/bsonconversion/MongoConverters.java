@@ -8,8 +8,12 @@ import org.springframework.data.convert.ReadingConverter;
 import org.springframework.data.convert.WritingConverter;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
-import java.time.*;
+import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
+import java.util.Date;
 
 @Configuration
 public class MongoConverters {
@@ -45,13 +49,7 @@ public class MongoConverters {
 
     @Override
     public Document convert(ZonedDateTime zonedDateTime) {
-      return new Document().append("year", zonedDateTime.getYear())
-                           .append("month", zonedDateTime.getMonthValue())
-                           .append("day", zonedDateTime.getDayOfMonth())
-                           .append("hours", zonedDateTime.getHour())
-                           .append("minutes", zonedDateTime.getMinute())
-                           .append("seconds", zonedDateTime.getSecond())
-                           .append("nanos", zonedDateTime.getNano())
+      return new Document().append("dateTime", Date.from(zonedDateTime.toInstant()))
                            .append("zone", zonedDateTime.getOffset().getId());
     }
   }
@@ -59,15 +57,10 @@ public class MongoConverters {
   @ReadingConverter
   static class ReadZonedDateTimeConverter implements Converter<Document, ZonedDateTime> {
     @Override
-    public ZonedDateTime convert(Document document) {
-      return ZonedDateTime.of(LocalDate.of(document.getInteger("year"),
-                                           document.getInteger("month"),
-                                           document.getInteger("day")),
-                              LocalTime.of(document.getInteger("hours"),
-                                           document.getInteger("minutes"),
-                                           document.getInteger("seconds"),
-                                           document.getInteger("nanos")),
-                              ZoneId.of(document.getString("zone")));
+    public ZonedDateTime convert(Document source) {
+      ZoneId zoneId = ZoneId.of(source.getString("zone"));
+      Date dateTime = source.get("dateTime", Date.class);
+      return dateTime.toInstant().atZone(zoneId);
     }
   }
 }
