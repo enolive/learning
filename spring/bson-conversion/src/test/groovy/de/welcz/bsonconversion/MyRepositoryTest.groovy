@@ -35,6 +35,7 @@ class MyRepositoryTest extends Specification {
         given: 'a document'
         ZonedDateTime now = ZonedDateTime.now(ZoneId.from(ZoneOffset.ofHours(2)))
         MyDocument document = new MyDocument(now.withNano(0), YearMonth.now())
+
         when: 'saved document is read'
         MyDocument read = repository.save(document)
                                     .flatMap { repository.findById(it.id) }
