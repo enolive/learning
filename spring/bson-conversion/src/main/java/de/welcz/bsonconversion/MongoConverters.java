@@ -52,7 +52,7 @@ public class MongoConverters {
                            .append("minutes", zonedDateTime.getMinute())
                            .append("seconds", zonedDateTime.getSecond())
                            .append("nanos", zonedDateTime.getNano())
-                           .append("zoneSeconds", zonedDateTime.getOffset().getTotalSeconds());
+                           .append("zone", zonedDateTime.getOffset().getId());
     }
   }
 
@@ -67,7 +67,7 @@ public class MongoConverters {
                                            document.getInteger("minutes"),
                                            document.getInteger("seconds"),
                                            document.getInteger("nanos")),
-                              ZoneId.from(ZoneOffset.ofTotalSeconds(document.getInteger("zoneSeconds"))));
+                              ZoneId.of(document.getString("zone")));
     }
   }
 }
