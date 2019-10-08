@@ -1,0 +1,77 @@
+# works
+POST http://localhost:8080/data/validated-in-controller
+Content-Type: application/json
+
+{
+  "clientId": "1234567-12345",
+  "slave": {
+    "cost": 123.50,
+    "name": "Bimbo"
+  }
+}
+
+###
+
+# will produce a bad request with many violations
+# might be the easiest way to achieve that.
+# But remember that you need to test EVERYTHING by yourself in the controller
+# (or write a Object Validation Test that uses the validator by itself and processes each validation error by hand.)
+# a annotation test by reflection is NOT sufficient
+POST http://localhost:8080/data/validated-in-controller
+Content-Type: application/json
+
+{
+}
+
+###
+
+# will work
+POST http://localhost:8080/data/validated-in-service
+Content-Type: application/json
+
+{
+  "clientId": "1234567-12345",
+  "slave": {
+    "cost": 123.50,
+    "name": "Bimbo"
+  }
+}
+
+###
+
+# will fail with a 500 status as the validation exceptions are not automatically processed!
+# you would have to define an old school controller advice and handle the bad request handling by yourself
+# totally killing the purpose of an easy to use validation api
+POST http://localhost:8080/data/validated-in-service
+Content-Type: application/json
+
+{
+}
+
+###
+
+# will work
+POST http://localhost:8080/data/validated-in-reactive-service
+Content-Type: application/json
+
+{
+  "clientId": "1234567-12345",
+  "slave": {
+    "cost": 123.50,
+    "name": "Bimbo"
+  }
+}
+
+###
+
+# will fail with a bad request
+# needs some fiddling to replace the constraint violation with a response status failure,
+# but seems to be the most idiomatic way to report multiple validation errors while staying
+# also really verbose
+POST http://localhost:8080/data/validated-in-reactive-service
+Content-Type: application/json
+
+{
+}
+
+###
