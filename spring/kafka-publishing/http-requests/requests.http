@@ -1,0 +1,16 @@
+POST http://localhost:8080/string
+Content-Type: text/plain
+
+Hello, World!!!!
+
+###
+
+POST http://localhost:8080/shit
+Content-Type: application/json
+
+{
+  "clientId": "12345-67890",
+  "date": "2019-01"
+}
+
+###
