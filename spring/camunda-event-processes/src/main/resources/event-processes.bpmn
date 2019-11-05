@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_04t4rz7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.0">
+  <bpmn:collaboration id="Hello">
+    <bpmn:participant id="HelloWorldParticipant" name="Hello World" processRef="HelloWorldProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="HelloWorldProcess" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_18qkabm</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:receiveTask id="Task_0romrcl" name="Exit" messageRef="Message_02oipsr">
+      <bpmn:incoming>SequenceFlow_18qkabm</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_01t42fr</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:endEvent id="EndEvent_1vxhfus">
+      <bpmn:incoming>SequenceFlow_01t42fr</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:subProcess id="SubProcess_1syl2xg" name="Receive Hellos" triggeredByEvent="true">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariableLocal(&#34;sub-process-local&#34;, execution.getVariable(&#34;sub-process&#34;))}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:startEvent id="StartEvent_1k2ipln" isInterrupting="false">
+        <bpmn:outgoing>SequenceFlow_1n3k84o</bpmn:outgoing>
+        <bpmn:messageEventDefinition messageRef="Message_1ggsuo6" />
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_1n3k84o" sourceRef="StartEvent_1k2ipln" targetRef="IntermediateThrowEvent_0m08p6q" />
+      <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_0m08p6q" name="Wait for Name">
+        <bpmn:incoming>SequenceFlow_1n3k84o</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_08kw71c</bpmn:outgoing>
+        <bpmn:messageEventDefinition messageRef="Message_1cjku9s" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_08kw71c" sourceRef="IntermediateThrowEvent_0m08p6q" targetRef="Task_17bwhdx" />
+      <bpmn:serviceTask id="Task_17bwhdx" name="Greet" camunda:delegateExpression="${showGreetings}">
+        <bpmn:incoming>SequenceFlow_08kw71c</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_08bl3lw</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:endEvent id="EndEvent_1ffxu7k">
+        <bpmn:incoming>SequenceFlow_08bl3lw</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_08bl3lw" sourceRef="Task_17bwhdx" targetRef="EndEvent_1ffxu7k" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="SequenceFlow_18qkabm" sourceRef="StartEvent_1" targetRef="Task_0romrcl" />
+    <bpmn:sequenceFlow id="SequenceFlow_01t42fr" sourceRef="Task_0romrcl" targetRef="EndEvent_1vxhfus" />
+  </bpmn:process>
+  <bpmn:message id="Message_02oipsr" name="ExitMessage" />
+  <bpmn:message id="Message_1cjku9s" name="NameMessage" />
+  <bpmn:message id="Message_1ggsuo6" name="ReceiveHellosMessage" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Hello">
+      <bpmndi:BPMNShape id="Participant_1ofrku2_di" bpmnElement="HelloWorldParticipant" isHorizontal="true">
+        <dc:Bounds x="156" y="81" width="1128" height="569" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="399" y="141" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_1hj2k4z_di" bpmnElement="SubProcess_1syl2xg" isExpanded="true">
+        <dc:Bounds x="437" y="398" width="436" height="194" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_0bw2djv_di" bpmnElement="StartEvent_1k2ipln">
+        <dc:Bounds x="465" y="479" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_18qkabm_di" bpmnElement="SequenceFlow_18qkabm">
+        <di:waypoint x="435" y="159" />
+        <di:waypoint x="485" y="159" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ReceiveTask_0lk5pnx_di" bpmnElement="Task_0romrcl">
+        <dc:Bounds x="485" y="119" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1vxhfus_di" bpmnElement="EndEvent_1vxhfus">
+        <dc:Bounds x="635" y="141" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_01t42fr_di" bpmnElement="SequenceFlow_01t42fr">
+        <di:waypoint x="585" y="159" />
+        <di:waypoint x="635" y="159" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1n3k84o_di" bpmnElement="SequenceFlow_1n3k84o">
+        <di:waypoint x="501" y="497" />
+        <di:waypoint x="551" y="497" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_1le1c9v_di" bpmnElement="IntermediateThrowEvent_0m08p6q">
+        <dc:Bounds x="551" y="479" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="534" y="522" width="70" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_08kw71c_di" bpmnElement="SequenceFlow_08kw71c">
+        <di:waypoint x="587" y="497" />
+        <di:waypoint x="637" y="497" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_10mmwf5_di" bpmnElement="Task_17bwhdx">
+        <dc:Bounds x="637" y="457" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1ffxu7k_di" bpmnElement="EndEvent_1ffxu7k">
+        <dc:Bounds x="787" y="479" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_08bl3lw_di" bpmnElement="SequenceFlow_08bl3lw">
+        <di:waypoint x="737" y="497" />
+        <di:waypoint x="787" y="497" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
