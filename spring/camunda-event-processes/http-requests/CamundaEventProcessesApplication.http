@@ -1,0 +1,19 @@
+# customer starts using hellos
+POST http://localhost:8080/hellos/my-hello
+
+###
+
+# greetings sub processes are started
+POST http://localhost:8080/hellos/my-hello/greetings
+
+###
+
+# name for all sub processes is received
+POST http://localhost:8080/hellos/my-hello/greetings/Christoph
+
+###
+
+# customers cancels hellos
+DELETE http://localhost:8080/hellos/my-hello
+
+###
