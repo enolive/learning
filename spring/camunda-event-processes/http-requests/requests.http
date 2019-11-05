@@ -9,7 +9,12 @@ POST http://localhost:8080/hellos/my-hello/greetings
 ###
 
 # name for all sub processes is received
-POST http://localhost:8080/hellos/my-hello/greetings/Christoph
+POST http://localhost:8080/hellos/my-hello/greetings/names/Christoph
+
+###
+
+# name for specific sub process is received
+POST http://localhost:8080/hellos/my-hello/greetings/42/names/Christoph
 
 ###
 
