@@ -6,10 +6,12 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.EventSubscription;
 import org.camunda.bpm.engine.runtime.Execution;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -67,11 +69,13 @@ public class Controller {
 
     findProcessInstanceIdBy(key).flatMap(findSubscriptionToNameMessage(subProcess))
                                 .doOnNext(sendNameMessage(name))
-                                .subscribe();
+                                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
+                                .block();
   }
 
   private Function<String, Mono<EventSubscription>> findSubscriptionToNameMessage(int subProcess) {
     return id -> Flux.fromIterable(runtimeService.createEventSubscriptionQuery()
+                                                 .processInstanceId(id)
                                                  .eventName("NameMessage")
                                                  .list())
                      .filter(hasVariableWithValue("sub-process-local", subProcess))
