@@ -1,3 +1,17 @@
-POST http://localhost:8080/rest-api/v1/chuck-norris/jokes
+# start a new process to generate a random joke
+POST http://localhost:8080/api/v1/chuck-norris/jokes
+
+> {%
+ var location = response.headers.valueOf("location");
+ var match = location.match("jokes/(.*)");
+ var processId = match[1];
+ client.log("process id was: " + processId);
+ client.global.set("processId", processId);
+ %}
+
+###
+
+# retrieve the generated joke
+GET http://localhost:8080/api/v1/chuck-norris/jokes/{{processId}}
 
 ###

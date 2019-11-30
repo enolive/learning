@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.function.Consumer;
+import static de.welcz.camundawebflux.ProcessConstants.VARIABLE_JOKE;
 
 @Service
 public class ReadJoke implements JavaDelegate {
@@ -21,15 +21,13 @@ public class ReadJoke implements JavaDelegate {
 
   @Override
   public void execute(DelegateExecution execution) {
-    retrieveJoke()
-        .doOnNext(storeInProcessVariables(execution))
-        .block();
+    // XXX: don't trigger the execution inside a reactor thread!
+    //  this will fail!
+    final var jokeText = retrieveJoke().block();
+    execution.setVariable(VARIABLE_JOKE, jokeText);
   }
 
   private Mono<String> retrieveJoke() {
-    // this works
-    // if (true) return Mono.just("test");
-    // this will produce a serializer error ENGINE-03041 :-(
     return builder.baseUrl("http://api.icndb.com/jokes/random")
                   .build()
                   .get()
@@ -40,17 +38,13 @@ public class ReadJoke implements JavaDelegate {
                   .log();
   }
 
-  private Consumer<String> storeInProcessVariables(DelegateExecution execution) {
-    return joke -> execution.setVariable("jokeText", joke);
-  }
-
   @Value
-  private static class Joke {
+  static class Joke {
     JokeValue value;
   }
 
   @Value
-  private static class JokeValue {
+  static class JokeValue {
     String joke;
   }
 }

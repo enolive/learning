@@ -1,56 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1yxqog3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1yxqog3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.0">
   <bpmn:collaboration id="Collaboration_19lm7ti">
     <bpmn:participant id="ChuckNorrisSystem" name="Handle Chuck Norris Jokes" processRef="ChuckNorrisProcess" />
   </bpmn:collaboration>
   <bpmn:process id="ChuckNorrisProcess" isExecutable="true">
-    <bpmn:startEvent id="StartEvent_1">
+    <bpmn:startEvent id="StartEvent">
       <bpmn:outgoing>SequenceFlow_10ekw9q</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:endEvent id="EndEvent_17kwm8e">
-      <bpmn:incoming>SequenceFlow_165mjom</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:serviceTask id="ReadServiceTask" name="Read Joke" camunda:delegateExpression="${readJoke}">
+    <bpmn:serviceTask id="ReadServiceTask" name="Read Joke" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${readJoke}">
       <bpmn:incoming>SequenceFlow_10ekw9q</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1m9b277</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="OutputServiceTask" name="Output Joke" camunda:delegateExpression="${outputJoke}">
+    <bpmn:sequenceFlow id="SequenceFlow_10ekw9q" sourceRef="StartEvent" targetRef="ReadServiceTask" />
+    <bpmn:sequenceFlow id="SequenceFlow_1lgr2lg" sourceRef="JokeWasReadEvent" targetRef="EndEvent" />
+    <bpmn:sequenceFlow id="SequenceFlow_1m9b277" sourceRef="ReadServiceTask" targetRef="RequestJokeReceiveTask" />
+    <bpmn:sequenceFlow id="SequenceFlow_165mjom" sourceRef="RequestJokeReceiveTask" targetRef="JokeWasReadEvent" />
+    <bpmn:receiveTask id="RequestJokeReceiveTask" name="Wait for joke request" messageRef="Message_08tx4td">
       <bpmn:incoming>SequenceFlow_1m9b277</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_165mjom</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="SequenceFlow_10ekw9q" sourceRef="StartEvent_1" targetRef="ReadServiceTask" />
-    <bpmn:sequenceFlow id="SequenceFlow_1m9b277" sourceRef="ReadServiceTask" targetRef="OutputServiceTask" />
-    <bpmn:sequenceFlow id="SequenceFlow_165mjom" sourceRef="OutputServiceTask" targetRef="EndEvent_17kwm8e" />
+    </bpmn:receiveTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0zg85ki" sourceRef="WaitForJokeRequestTimeout" targetRef="NoOneWantsTheJokeEvent" />
+    <bpmn:intermediateThrowEvent id="NoOneWantsTheJokeEvent" name="no one wants to hear my jokes :-(">
+      <bpmn:incoming>SequenceFlow_0zg85ki</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_02r0e57</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="TimeoutErrorEndEvent">
+      <bpmn:incoming>SequenceFlow_02r0e57</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_02r0e57" sourceRef="NoOneWantsTheJokeEvent" targetRef="TimeoutErrorEndEvent" />
+    <bpmn:endEvent id="EndEvent">
+      <bpmn:incoming>SequenceFlow_1lgr2lg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateThrowEvent id="JokeWasReadEvent" name="Someone likes my jokes!">
+      <bpmn:incoming>SequenceFlow_165mjom</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1lgr2lg</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:boundaryEvent id="WaitForJokeRequestTimeout" name="5 minutes have passed" attachedToRef="RequestJokeReceiveTask">
+      <bpmn:outgoing>SequenceFlow_0zg85ki</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_04umk7l">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5M</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
   </bpmn:process>
+  <bpmn:message id="Message_08tx4td" name="MessageRequestJoke" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_19lm7ti">
       <bpmndi:BPMNShape id="Participant_0ma1qzr_di" bpmnElement="ChuckNorrisSystem" isHorizontal="true">
-        <dc:Bounds x="156" y="81" width="600" height="250" />
+        <dc:Bounds x="156" y="43" width="719" height="322" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="250" y="143" width="36" height="36" />
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent">
+        <dc:Bounds x="228" y="223" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_17kwm8e_di" bpmnElement="EndEvent_17kwm8e">
-        <dc:Bounds x="636" y="143" width="36" height="36" />
+      <bpmndi:BPMNShape id="EndEvent_17kwm8e_di" bpmnElement="EndEvent">
+        <dc:Bounds x="739" y="223" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ServiceTask_1mb2hfp_di" bpmnElement="ReadServiceTask">
-        <dc:Bounds x="336" y="121" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_1e1ccd0_di" bpmnElement="OutputServiceTask">
-        <dc:Bounds x="486" y="121" width="100" height="80" />
+        <dc:Bounds x="314" y="201" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_10ekw9q_di" bpmnElement="SequenceFlow_10ekw9q">
-        <di:waypoint x="286" y="161" />
-        <di:waypoint x="336" y="161" />
+        <di:waypoint x="264" y="241" />
+        <di:waypoint x="314" y="241" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1m9b277_di" bpmnElement="SequenceFlow_1m9b277">
-        <di:waypoint x="436" y="161" />
-        <di:waypoint x="486" y="161" />
+        <di:waypoint x="414" y="241" />
+        <di:waypoint x="464" y="241" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_165mjom_di" bpmnElement="SequenceFlow_165mjom">
-        <di:waypoint x="586" y="161" />
-        <di:waypoint x="636" y="161" />
+        <di:waypoint x="564" y="241" />
+        <di:waypoint x="649" y="241" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_162urla_di" bpmnElement="JokeWasReadEvent">
+        <dc:Bounds x="649" y="223" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="631" y="266" width="73" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1lgr2lg_di" bpmnElement="SequenceFlow_1lgr2lg">
+        <di:waypoint x="685" y="241" />
+        <di:waypoint x="739" y="241" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ReceiveTask_0n7yw7k_di" bpmnElement="RequestJokeReceiveTask">
+        <dc:Bounds x="464" y="201" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_15akrps_di" bpmnElement="NoOneWantsTheJokeEvent">
+        <dc:Bounds x="649" y="103" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="627" y="146" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0zg85ki_di" bpmnElement="SequenceFlow_0zg85ki">
+        <di:waypoint x="564" y="183" />
+        <di:waypoint x="564" y="121" />
+        <di:waypoint x="649" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_08lp4nl_di" bpmnElement="TimeoutErrorEndEvent">
+        <dc:Bounds x="739" y="103" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_02r0e57_di" bpmnElement="SequenceFlow_02r0e57">
+        <di:waypoint x="685" y="121" />
+        <di:waypoint x="739" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BoundaryEvent_0e37r8o_di" bpmnElement="WaitForJokeRequestTimeout">
+        <dc:Bounds x="546" y="183" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="499" y="152" width="75" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
