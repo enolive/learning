@@ -1,7 +1,6 @@
 package de.welcz.camundawebflux
 
 import groovy.transform.CompileDynamic
-import org.camunda.bpm.engine.MismatchingMessageCorrelationException
 import org.camunda.bpm.engine.RuntimeService
 import org.camunda.bpm.engine.exception.NullValueException
 import org.camunda.bpm.engine.runtime.MessageCorrelationBuilder
