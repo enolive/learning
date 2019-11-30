@@ -14,7 +14,8 @@ inside a spring boot reactive web app.
 * The cockpit needs a servlet container. 
   So it is not included here. You can always
   make a separate app based on 
-  `camunda-spring-boot-starter-webapp`. By that way, you might more
+  `camunda-spring-boot-starter-webapp` accessing the same db. 
+  By that way, you gain more
   control who can actually enter your cockpit and
   can introduce a different scalability plan to it.
 * Accessing the process variables inside a `JavaDelegate` inside
