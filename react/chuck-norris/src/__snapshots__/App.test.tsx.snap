@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders chuck norris image giving attribution to the author 1`] = `
+<a
+  data-testid="attribution"
+  href="https://www.flickr.com/photos/enriquespics/2058486062"
+>
+  by Carlos Killpack
+</a>
+`;
