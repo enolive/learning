@@ -55,7 +55,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="container-fluid">
+      <div className="container-fluid m-1">
         <header className="row">
           <figure className="figure">
             <img className="figure-caption" src={logo} alt="Chuck Norris Logo"/>
@@ -68,8 +68,17 @@ function App() {
           </figure>
         </header>
         <main className="row">
-          {jokeData.status === 'success' && <p data-testid="joke-text">Random Wisdom: {jokeData.jokeText}.</p>}
-          {jokeData.status === 'failure' && <p data-testid="error">{jokeData.error}</p>}
+          {jokeData.status === 'success' &&
+          <p data-testid="joke-text">Random Wisdom: {jokeData.jokeText}.</p>
+          }
+          {jokeData.status === 'failure' &&
+          <p className="alert alert-danger" data-testid="error">{jokeData.error}</p>
+          }
+          {jokeData.status === 'loading' &&
+          <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
+          </div>
+          }
         </main>
         <footer className="row">
           <button className="btn btn-primary"

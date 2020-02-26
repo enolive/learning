@@ -40,22 +40,24 @@ test('fetches a random joke from the web', async () => {
 test('renders errors', async () => {
   fetchMock.mockRejectOnce(new Error('I AM ERROR'));
 
-  const {getByTestId} = render(<App/>);
+  const {getByTestId, queryByRole} = render(<App/>);
   await waitForDomChange();
 
   const error = getByTestId('error');
   expect(error).toHaveTextContent('I AM ERROR');
+  expect(queryByRole('status')).toBeNull();
 });
 
 test('renders the retrieved joke', async () => {
   fetchMock.mockResponseOnce(jokeResponse('there\'s no place like 127.0.0.1&quot;'));
-  const {getByTestId, queryByTestId} = render(<App/>);
+  const {getByTestId, queryByTestId, queryByRole} = render(<App/>);
   const jokeBefore = queryByTestId('joke-text');
   expect(jokeBefore).toBeNull();
   await waitForDomChange();
 
   const joke = getByTestId('joke-text');
   expect(joke).toHaveTextContent('Random Wisdom: there\'s no place like 127.0.0.1".');
+  expect(queryByRole('status')).toBeNull();
 });
 
 test('allows refreshing', async () => {
@@ -72,6 +74,13 @@ test('disallows refreshing while refresh is in work', async () => {
 
   const refresh = getByRole('button');
   expect(refresh).toHaveAttribute('disabled', '');
+});
+
+test('shows loading status while refresh is in work', async () => {
+  const {getByRole} = render(<App/>);
+
+  const loading = getByRole('status');
+  expect(loading).toHaveTextContent('Loading...');
 });
 
 test('refreshing gets a new joke', async () => {
