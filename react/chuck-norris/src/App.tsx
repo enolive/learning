@@ -11,7 +11,7 @@ export interface Joke {
 export const tidy = (text: string) =>
   text.replace(/&quot;/g, '"');
 
-type State =
+export type State =
   | { status: 'empty' }
   | { status: 'loading' }
   | { status: 'success', jokeText: string }
@@ -22,7 +22,7 @@ type Action =
   | { type: 'success', result: string }
   | { type: 'failure', error: string };
 
-const reducer = (state: State, action: Action): State => {
+export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'success':
       return {status: 'success', jokeText: action.result};
