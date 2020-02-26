@@ -59,7 +59,7 @@ function App() {
   return (
     <div className="App">
       <div className="container-fluid m-1">
-        <header className="row">
+        <header>
           <figure className="figure">
             <img className="figure-caption" src={logo} alt="Chuck Norris Logo"/>
             <figcaption className="figure-caption">
@@ -70,7 +70,8 @@ function App() {
             </figcaption>
           </figure>
         </header>
-        <main className="row">
+        <main>
+          <p>API URL: {process.env.REACT_APP_API_URL}</p>
           {jokeData.status === 'success' &&
           <p data-testid="joke-text">Random Wisdom: {jokeData.jokeText}.</p>
           }
@@ -83,7 +84,7 @@ function App() {
           </div>
           }
         </main>
-        <footer className="row">
+        <footer>
           <button className="btn btn-primary"
                   onClick={refreshJoke}
                   disabled={jokeData.status === 'loading'}>
