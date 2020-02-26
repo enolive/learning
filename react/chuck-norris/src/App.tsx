@@ -33,6 +33,9 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
+const ignore = () => {
+};
+
 function App() {
   const [jokeData, dispatch] = useReducer(reducer, {status: 'empty'});
   const fetchRandomJoke = async () => {
@@ -46,7 +49,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetchRandomJoke();
+    fetchRandomJoke().then(ignore);
   }, []);
 
   const refreshJoke = async () => {
