@@ -3,9 +3,9 @@
 Ahoy matey!: I wanna try out cucumber-js!
 
   Shiver me timbers: Single Number
-    Gangway! a person
-    Blimey! person gets the number <input>
-    Let go and haul person says <expected>
+    Gangway! a pirate
+    Blimey! pirate gets <input>
+    Let go and haul pirate shouts out '<expected>'!
     Dead men tell no tales:
       | input | expected  |
       | 1     | 1         |

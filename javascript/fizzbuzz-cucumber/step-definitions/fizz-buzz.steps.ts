@@ -2,13 +2,13 @@ import {Given, Then, When} from "cucumber";
 import {expect} from "chai";
 import {calculateIt} from "../fizz-buzz";
 
-Given(/^a person$/, () => {
+Given(/^a pirate$/, () => {
 });
 
-When(/^person gets the number (\d+)$/, (input: number) => {
+When(/^pirate gets (\d+)$/, (input: number) => {
   this.result = calculateIt(input);
 });
 
-Then(/^person says (.*?)$/, (expected: string) => {
+Then(/^pirate shouts out '(.*?)'!$/, (expected: string) => {
   expect(this.result).to.be.equal(expected);
 });
