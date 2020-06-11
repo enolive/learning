@@ -5,7 +5,6 @@ module Lib where
 
 import           Aws.Lambda
 import           Data.Aeson
-import qualified Data.ByteString.Lazy.Char8 as ByteString
 import           Data.HashMap.Lazy          (HashMap)
 import qualified Data.HashMap.Lazy          as HashMap
 import           GHC.Generics
@@ -23,7 +22,7 @@ data Response = Response
     deriving (Generic, ToJSON)
 
 handler :: Event -> Context -> IO (Either String Response)
-handler Event {..} context =
+handler Event {..} _ =
   pure $ Right Response {statusCode = 200, body = (greet . nameOrDefault "No Pants") pathParameters}
 
 nameOrDefault :: String -> Maybe (HashMap String String) -> String
