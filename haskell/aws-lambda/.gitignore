@@ -2,3 +2,4 @@
 aws-lambda.cabal
 build/
 *~
+.serverless/
