@@ -1,30 +1,34 @@
+{-# LANGUAGE DeriveAnyClass        #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+
 module Lib where
 
-import Aws.Lambda
-import Data.Aeson
-import GHC.Generics
+import           Aws.Lambda
+import           Data.Aeson
+import qualified Data.ByteString.Lazy.Char8 as ByteString
+import           Data.HashMap.Lazy          (HashMap)
+import qualified Data.HashMap.Lazy          as HashMap
+import           GHC.Generics
 
-data Person
-  = Person
-      { personName :: String,
-        personAge :: Int
-      }
-  deriving (Generic)
+data Event = Event
+    { resource       :: String
+    , pathParameters :: Maybe (HashMap String String)
+    }
+    deriving (Generic, FromJSON)
 
-instance FromJSON Person
+data Response = Response
+    { statusCode :: Int
+    , body       :: String
+    }
+    deriving (Generic, ToJSON)
 
-instance ToJSON Person
+handler :: Event -> Context -> IO (Either String Response)
+handler Event {..} context =
+  pure $ Right Response {statusCode = 200, body = (greet . nameOrDefault "No Pants") pathParameters}
 
-data Response = Response {greeting :: String} deriving (Generic)
+nameOrDefault :: String -> Maybe (HashMap String String) -> String
+nameOrDefault defaultName Nothing = defaultName
+nameOrDefault defaultName (Just params) = HashMap.lookupDefault defaultName "name" params
 
-instance FromJSON Response
-
-instance ToJSON Response
-
-handler :: Person -> Context -> IO (Either String Response)
-handler person@Person {..} context
-  | personAge >= 0 =  (return . Right . Response . greet) personName
-  | otherwise = return $ Left "The age must be greater or equal zero"
-    
 greet :: String -> String
-greet personName = "Hello, " <> personName <> "!"
+greet name = "Hello, " <> name <> "!"

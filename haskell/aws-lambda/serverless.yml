@@ -28,7 +28,10 @@ functions:
   hello:
     handler: src/Lib.handler
     memorySize: 128
-#    events:
-#      - http:
-#          path: yolo
-#          method: get
+    events:
+      - http:
+          path: hello
+          method: get
+      - http:
+          path: hello/{name}
+          method: get

@@ -12,6 +12,8 @@ dependencies:
   - base >= 4.7 && < 5
   - aws-lambda-haskell-runtime >= 2.0.1
   - aeson
+  - bytestring
+  - unordered-containers
 
 library:
   source-dirs: src
