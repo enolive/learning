@@ -27,6 +27,7 @@ package:
 functions:
   hello:
     handler: src/Lib.handler
+    memorySize: 128
 #    events:
 #      - http:
 #          path: yolo

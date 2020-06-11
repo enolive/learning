@@ -15,7 +15,16 @@ instance FromJSON Person
 
 instance ToJSON Person
 
-handler :: Person -> Context -> IO (Either String Person)
+data Response = Response {greeting :: String} deriving (Generic)
+
+instance FromJSON Response
+
+instance ToJSON Response
+
+handler :: Person -> Context -> IO (Either String Response)
 handler person@Person {..} context
-  | personAge >= 0 = return $ Right person
+  | personAge >= 0 =  (return . Right . Response . greet) personName
   | otherwise = return $ Left "The age must be greater or equal zero"
+    
+greet :: String -> String
+greet personName = "Hello, " <> personName <> "!"
