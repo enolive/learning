@@ -6,7 +6,7 @@
     "test": "mocha --require ts-node/register --reporter nyan test/**/*.ts --watch --watch-extensions ts"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "ramda": "^0.26.1"
   },
   "devDependencies": {
