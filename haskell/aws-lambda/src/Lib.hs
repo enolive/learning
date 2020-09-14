@@ -1,25 +1,25 @@
-{-# LANGUAGE DeriveAnyClass        #-}
+{-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 
 module Lib where
 
-import           Aws.Lambda
-import           Data.Aeson
-import           Data.HashMap.Lazy          (HashMap)
-import qualified Data.HashMap.Lazy          as HashMap
-import           GHC.Generics
+import Aws.Lambda
+import Data.Aeson
+import Data.HashMap.Lazy (HashMap)
+import qualified Data.HashMap.Lazy as HashMap
+import GHC.Generics
 
 data Event = Event
-    { resource       :: String
-    , pathParameters :: Maybe (HashMap String String)
-    }
-    deriving (Generic, FromJSON)
+  { resource :: String,
+    pathParameters :: Maybe (HashMap String String)
+  }
+  deriving (Generic, FromJSON)
 
 data Response = Response
-    { statusCode :: Int
-    , body       :: String
-    }
-    deriving (Generic, ToJSON)
+  { statusCode :: Int,
+    body :: String
+  }
+  deriving (Generic, ToJSON)
 
 handler :: Event -> Context -> IO (Either String Response)
 handler Event {..} _ =
