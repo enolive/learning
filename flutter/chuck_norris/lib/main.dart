@@ -28,23 +28,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var quote = 'Test';
+  var _jokeText = 'Loading...';
 
-  void _fetchJoke() => fetchRandomJoke().then((jokeText) => setState(() {
-        quote = jokeText;
-      }));
+  void _setFetchedJoke() => _fetchRandomJoke()
+      .then((jokeText) => setState(() => _jokeText = jokeText));
 
-  Future<String> fetchRandomJoke() => http
+  Future<String> _fetchRandomJoke() => http
       .get('https://api.chucknorris.io/jokes/random?category=dev')
       .then((response) => response.body)
-      .then(extractJoke);
+      .then(_extractJoke);
 
-  String extractJoke(String body) => jsonDecode(body)['value'];
+  String _extractJoke(String body) => jsonDecode(body)['value'];
 
   @override
   void initState() {
     super.initState();
-    _fetchJoke();
+    _setFetchedJoke();
   }
 
   @override
@@ -62,13 +61,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: Theme.of(context).textTheme.headline4,
               ),
               Text(
-                '$quote',
+                '$_jokeText',
               ),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: _fetchJoke,
+          onPressed: _setFetchedJoke,
           tooltip: 'Refresh Quote',
           child: Icon(Icons.refresh),
         ),
