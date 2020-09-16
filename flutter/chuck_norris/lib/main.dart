@@ -6,10 +6,10 @@ import 'package:http/http.dart';
 GetIt getIt = GetIt.instance;
 
 void main() {
-  getIt.registerSingleton<Client>(Client());
-  getIt.registerSingleton<ChuckNorrisApi>(ChuckNorrisApi());
+  getIt
+    ..registerSingleton<Client>(Client())
+    ..registerSingleton<ChuckNorrisApi>(ChuckNorrisApi());
   runApp(MyApp());
-  [1, 2.3].expand((element) => [element, element + 1]);
 }
 
 class MyApp extends StatelessWidget {
