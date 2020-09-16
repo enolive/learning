@@ -9,6 +9,7 @@ void main() {
   getIt.registerSingleton<Client>(Client());
   getIt.registerSingleton<ChuckNorrisApi>(ChuckNorrisApi());
   runApp(MyApp());
+  [1, 2.3].expand((element) => [element, element + 1]);
 }
 
 class MyApp extends StatelessWidget {
@@ -36,10 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
   var _jokeText = 'Loading...';
   final api = getIt.get<ChuckNorrisApi>();
 
-  void _setFetchedJoke() =>
-      api
-          .fetchRandomJoke()
-          .then((jokeText) => setState(() => _jokeText = jokeText));
+  void _setFetchedJoke() => api
+      .fetchRandomJoke()
+      .then((jokeText) => setState(() => _jokeText = jokeText));
 
   @override
   void initState() {
@@ -48,8 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
         ),
@@ -60,10 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Image.asset('assets/images/chuck-norris-logo.jpg'),
               Text(
                 'Random Wisdom',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headline4,
+                style: Theme.of(context).textTheme.headline4,
               ),
               Text(
                 '$_jokeText',
