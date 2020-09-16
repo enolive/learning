@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api.dart';
+import 'package:get_it/get_it.dart';
+import 'package:http/http.dart';
+
+GetIt getIt = GetIt.instance;
 
 void main() {
-  runApp(MyApp(api: ChuckNorrisApi()));
+  getIt.registerSingleton<Client>(Client());
+  getIt.registerSingleton<ChuckNorrisApi>(ChuckNorrisApi());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key, this.api}) : super(key: key);
-  final ChuckNorrisApi api;
-
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: 'Chuck Norris',
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.pink,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: MyHomePage(title: '👊 Chuck Norris App 👊', api: api),
+        home: MyHomePage(title: '👊 Chuck Norris App 👊'),
       );
 }
 
@@ -26,14 +29,12 @@ class MyHomePage extends StatefulWidget {
   final ChuckNorrisApi api;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState(api: this.api);
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  _MyHomePageState({this.api});
-
-  final ChuckNorrisApi api;
   var _jokeText = 'Loading...';
+  final api = getIt.get<ChuckNorrisApi>();
 
   void _setFetchedJoke() =>
       api

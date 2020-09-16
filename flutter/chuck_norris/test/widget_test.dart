@@ -9,16 +9,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api.dart';
 import 'package:flutter_app/main.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 
 void main() {
   ChuckNorrisApi api;
   MyApp sut;
+  final getIt = GetIt.instance;
+  getIt.allowReassignment = true;
 
   setUp(() {
     api = MockApi();
+    getIt.registerSingleton<ChuckNorrisApi>(api);
     when(api.fetchRandomJoke()).thenAnswer((_) async => 'random joke');
-    sut = MyApp(api: api);
+    sut = MyApp();
   });
 
   group('on init', () {
