@@ -1,0 +1,4 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://postgres:iamroot@localhost:5432/postgres
+

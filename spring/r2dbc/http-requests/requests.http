@@ -1,0 +1,16 @@
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "id": 2,
+  "description": "Team Enablement",
+  "price": 0.0
+}
+
+###
+
+GET http://localhost:8080/products
+
+###
+
+DELETE http://localhost:8080/products/1
