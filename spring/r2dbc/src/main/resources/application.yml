@@ -1,6 +1,8 @@
 spring:
   r2dbc:
-    url: r2dbc:postgresql://postgres:iamroot@localhost:5432/postgres
+    url: r2dbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: iamroot
   liquibase:
     change-log: classpath:db/changelog.xml
     # XXX: as we have no spring-data-jdbc support, we need to specify our database connection directly
