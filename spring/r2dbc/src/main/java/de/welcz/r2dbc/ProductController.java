@@ -15,10 +15,12 @@ public class ProductController {
   }
 
   @PostMapping("/products")
-  public Mono<Product> upsertProduct(@RequestBody Mono<Product> product) {
-    return product.filter(toSave -> toSave.getId() != null)
-                  .flatMap(this::updateExisting)
-                  .switchIfEmpty(createNew(product));
+  public Mono<Product> upsertProduct(@RequestBody Product product) {
+    return Mono.just(product)
+               .filter(toSave -> toSave.getId() != null)
+               .flatMap(this::updateExisting)
+               .switchIfEmpty(createNew(product))
+               .log();
   }
 
   @DeleteMapping("/products/{id}")
@@ -31,9 +33,8 @@ public class ProductController {
     return repository.findAllByOrderById();
   }
 
-  private Mono<Product> createNew(Mono<Product> product) {
-    return product.map(Product::setAsNew)
-                  .flatMap(repository::save);
+  private Mono<Product> createNew(Product product) {
+    return repository.save(product.setAsNew());
   }
 
   private Mono<Product> updateExisting(Product update) {

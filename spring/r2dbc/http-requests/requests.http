@@ -2,7 +2,7 @@ POST http://localhost:8080/products
 Content-Type: application/json
 
 {
-  "id": 2,
+  "id": 3,
   "description": "Team Enablement",
   "price": 0.0
 }
