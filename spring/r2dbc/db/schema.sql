@@ -1,7 +1,7 @@
 CREATE TABLE product
 (
-    id integer,
+    id          integer generated always as identity,
     description character varying(255),
-    price numeric,
+    price       numeric,
     PRIMARY KEY (id)
 );

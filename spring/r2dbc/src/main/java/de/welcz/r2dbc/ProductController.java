@@ -34,7 +34,7 @@ public class ProductController {
   }
 
   private Mono<Product> createNew(Product product) {
-    return repository.save(product.setAsNew());
+    return repository.save(product.newCopy());
   }
 
   private Mono<Product> updateExisting(Product update) {

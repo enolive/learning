@@ -22,8 +22,10 @@ public class Product implements Persistable<Integer> {
     return id == null;
   }
 
-  public Product setAsNew() {
-    this.id = null;
-    return this;
+  public Product newCopy() {
+    var newProduct = new Product();
+    newProduct.description = description;
+    newProduct.price = price;
+    return newProduct;
   }
 }
