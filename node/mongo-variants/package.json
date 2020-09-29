@@ -1,0 +1,24 @@
+{
+  "name": "mongo-variants",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel index.js --out-dir lib",
+    "start": "node lib/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@types/mongodb": "^3.5.27",
+    "@types/mongodb-memory-server": "^2.3.0",
+    "mongodb-memory-server": "^6.8.1"
+  },
+  "dependencies": {
+    "mongodb": "^3.6.2"
+  }
+}
