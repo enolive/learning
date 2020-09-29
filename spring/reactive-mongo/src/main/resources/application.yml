@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: default
+---
+spring:
+  profiles: cloud
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration

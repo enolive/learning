@@ -1,0 +1,12 @@
+GET http://localhost:8080/api/v1/users/
+
+###
+
+POST http://localhost:8080/api/v1/users/
+Content-Type: application/json
+
+{
+  "id": "5f73889359cd9f40db8db7cb",
+  "name": "Chris :: IO ()",
+  "age": 42
+}
