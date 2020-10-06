@@ -20,6 +20,18 @@ class ProductRepositoryTest extends Specification {
     def result = sut.findProductsByNameContaining("Test")
 
     then: "result contains the expected hit"
-    result == [product2, product3]
+    result.asJava() == [product2, product3]
+  }
+
+  def "find by id works"() {
+    given: "an existing product"
+    def product = new Product(name: "Fist of Adonis")
+    def existing = sut.save(product)
+
+    when: "product is looked up"
+    def result = sut.findById(existing.id)
+
+    then: "product is found"
+    result.defined
   }
 }
