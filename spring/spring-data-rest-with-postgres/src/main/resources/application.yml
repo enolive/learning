@@ -1,4 +1,10 @@
 spring:
+  data:
+    rest:
+      base-path: /api/v1
+---
+spring:
+  profiles: database
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
@@ -6,3 +12,4 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+
