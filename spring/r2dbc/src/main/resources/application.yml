@@ -4,7 +4,6 @@ spring:
     username: postgres
     password: iamroot
   liquibase:
-    change-log: classpath:db/changelog.xml
     # XXX: as we have no spring-data-jdbc support, we need to specify our database connection directly
     url: jdbc:postgresql://localhost:5432/postgres
     password: iamroot

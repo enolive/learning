@@ -1,15 +1,40 @@
+# create
 POST http://localhost:8080/products
 Content-Type: application/json
 
 {
+  "description": "My awesome product",
+  "price": 42.5
+}
+
+###
+
+# read
+GET http://localhost:8080/products
+
+###
+
+# update
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "id": 1,
   "description": "Changed",
   "price": 42.5
 }
 
 ###
 
-GET http://localhost:8080/products
+# delete
+DELETE http://localhost:8080/products/2
 
 ###
 
-DELETE http://localhost:8080/products/3
+# will produce a bad request
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "description": ""
+}

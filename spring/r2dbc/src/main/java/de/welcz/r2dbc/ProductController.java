@@ -1,9 +1,11 @@
 package de.welcz.r2dbc;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
 import java.util.Objects;
 
 @RestController
@@ -15,7 +17,8 @@ public class ProductController {
   }
 
   @PostMapping("/products")
-  public Mono<Product> upsertProduct(@RequestBody Product product) {
+  @Transactional
+  public Mono<Product> upsertProduct(@RequestBody @Valid Product product) {
     return Mono.just(product)
                .filter(toSave -> toSave.getId() != null)
                .flatMap(this::updateExisting)
