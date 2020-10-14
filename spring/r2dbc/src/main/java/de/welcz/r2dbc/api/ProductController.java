@@ -1,6 +1,7 @@
 package de.welcz.r2dbc.api;
 
 import de.welcz.r2dbc.persistence.ProductDao;
+import org.springframework.hateoas.server.reactive.WebFluxLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -60,11 +61,14 @@ public class ProductController {
 
   private static class Links {
     private static Mono<ProductModel> addSelfRel(ProductModel product) {
+      return linkToProduct(product).withSelfRel()
+                                   .toMono()
+                                   .map(product::add);
+    }
+
+    private static WebFluxLinkBuilder.WebFluxBuilder linkToProduct(ProductModel product) {
       var controller = ProductController.class;
-      return linkTo(methodOn(controller)
-                        .showProduct(product.getId())).withSelfRel()
-                                                      .toMono()
-                                                      .map(product::add);
+      return linkTo(methodOn(controller).showProduct(product.getId()));
     }
   }
 }
