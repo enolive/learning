@@ -1,6 +1,7 @@
 package de.welcz.r2dbc.converter;
 
 import de.welcz.r2dbc.api.ModifyProduct;
+import de.welcz.r2dbc.api.PatchProduct;
 import de.welcz.r2dbc.api.ProductModel;
 import de.welcz.r2dbc.persistence.ProductEntity;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,16 @@ public class ProductConverter {
     productEntity.setDescription(modifyProduct.getDescription());
     productEntity.setPrice(modifyProduct.getPrice());
     return productEntity;
+  }
+
+  public ProductEntity patchExistingEntity(ProductEntity existing, PatchProduct patch) {
+    var patched = existing.toBuilder();
+    if (patch.getDescription() != null) {
+      patched.description(patch.getDescription());
+    }
+    if (patch.getPrice() != null) {
+      patched.price(patch.getPrice());
+    }
+    return patched.build();
   }
 }

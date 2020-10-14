@@ -50,20 +50,20 @@ public class ProductController {
   }
 
   @PostMapping("/products")
-  public Mono<ProductModel> createProduct(@RequestBody @Valid Mono<ModifyProduct> product) {
+  public Mono<ProductModel> createProduct(@RequestBody @Valid ModifyProduct product) {
     return dao.create(product)
               .flatMap(Links::addSelfRel);
   }
 
   @PutMapping("/products/{id}")
-  public Mono<ProductModel> updateProductTotal(@PathVariable int id, @RequestBody @Valid Mono<ModifyProduct> product) {
+  public Mono<ProductModel> updateProductTotal(@PathVariable int id, @RequestBody @Valid ModifyProduct product) {
     return dao.updateTotal(id, product)
               .flatMap(Links::addSelfRel)
               .switchIfEmpty(Responses.noContent());
   }
 
   @PatchMapping("/products/{id}")
-  public Mono<ProductModel> updateProductPartial(@PathVariable int id, @RequestBody @Valid Mono<PatchProduct> product) {
+  public Mono<ProductModel> updateProductPartial(@PathVariable int id, @RequestBody @Valid PatchProduct product) {
     return dao.updatePartial(id, product)
               .flatMap(Links::addSelfRel)
               .switchIfEmpty(Responses.noContent());
@@ -76,12 +76,18 @@ public class ProductController {
   }
 
   private static class Responses {
+    private Responses() {
+    }
+
     private static Mono<? extends ProductModel> noContent() {
       return Mono.error(new ResponseStatusException(HttpStatus.NO_CONTENT));
     }
   }
 
-  private static class Links {
+  static class Links {
+    private Links() {
+    }
+
     public static Mono<Page<ProductModel>> addSelfRelToEachProduct(Page<ProductModel> page) {
       return Flux.fromIterable(page.getContent())
                  .flatMap(Links::addSelfRel)
