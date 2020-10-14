@@ -9,17 +9,21 @@ Content-Type: application/json
 
 ###
 
-# read
+# read all
 GET http://localhost:8080/products
 
 ###
 
+# read single
+GET http://localhost:8080/products/1
+
+###
+
 # update
-POST http://localhost:8080/products
+PUT http://localhost:8080/products/7
 Content-Type: application/json
 
 {
-  "id": 1,
   "description": "Changed",
   "price": 42.5
 }
