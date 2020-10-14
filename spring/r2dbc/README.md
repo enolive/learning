@@ -16,3 +16,4 @@ Just a show case how to use a relational database inside a reactive spring stack
 * No built-in Bean Validation support
     * you have to add `spring-boot-starter-validation` and annotate your Controller methods with `@Valid`
 * You need to add an `ConnectionFactoryInitializer` if you wish to work with a memory database
+  with an auto-populated schema. 
