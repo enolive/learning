@@ -7,9 +7,7 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 @SpringBootApplication
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class Application {
-
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
   }
-
 }
