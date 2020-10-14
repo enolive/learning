@@ -43,7 +43,7 @@ public class ProductController {
   }
 
   @PutMapping("/products/{id}")
-  public Mono<ProductModel> updateProduct(@RequestBody @Valid Mono<ModifyProduct> product, @PathVariable int id) {
+  public Mono<ProductModel> updateProduct(@PathVariable int id, @RequestBody @Valid Mono<ModifyProduct> product) {
     return dao.update(id, product)
               .zipWith(Links.product(id), RepresentationModel::add)
               .switchIfEmpty(Responses.noContent());

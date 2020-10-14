@@ -20,7 +20,7 @@ GET http://localhost:8080/products/1
 ###
 
 # update
-PUT http://localhost:8080/products/7
+PUT http://localhost:8080/products/1
 Content-Type: application/json
 
 {
@@ -31,7 +31,7 @@ Content-Type: application/json
 ###
 
 # delete
-DELETE http://localhost:8080/products/2
+DELETE http://localhost:8080/products/1
 
 ###
 
