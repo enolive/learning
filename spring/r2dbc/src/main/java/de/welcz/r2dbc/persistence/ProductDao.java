@@ -4,6 +4,10 @@ import de.welcz.r2dbc.api.ModifyProduct;
 import de.welcz.r2dbc.api.PatchProduct;
 import de.welcz.r2dbc.api.ProductModel;
 import de.welcz.r2dbc.converter.ProductConverter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
@@ -48,8 +52,17 @@ public class ProductDao {
   }
 
   public Flux<ProductModel> findAll() {
-    return repository.findAllByOrderById()
+    return repository.findAllByOrderById(Pageable.unpaged())
                      .map(converter::convertToDto);
+  }
+
+  public Mono<Page<ProductModel>> findAll(int page, int size) {
+    var pageable = PageRequest.of(page, size);
+    var list = repository.findAllByOrderById(pageable)
+                         .map(converter::convertToDto)
+                         .collectList();
+    var count = repository.count();
+    return list.zipWith(count, (entities, totalElements) -> new PageImpl<>(entities, pageable, totalElements));
   }
 
   public Mono<ProductModel> find(int id) {

@@ -1,6 +1,10 @@
 package de.welcz.r2dbc.api;
 
 import de.welcz.r2dbc.persistence.ProductDao;
+import org.springframework.data.domain.Page;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.reactive.WebFluxLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +13,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
+import java.util.List;
 
 import static org.springframework.hateoas.server.reactive.WebFluxLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.reactive.WebFluxLinkBuilder.methodOn;
@@ -25,6 +30,14 @@ public class ProductController {
   public Flux<ProductModel> findAllProducts() {
     return dao.findAll()
               .flatMap(Links::addSelfRel);
+  }
+
+  @GetMapping("/products/paged")
+  public Mono<PagedModel<ProductModel>> findPagedProducts(
+      @RequestParam(required = false, defaultValue = "0") int page,
+      @RequestParam(required = false, defaultValue = "20") int limit) {
+    return dao.findAll(page, limit)
+              .flatMap(Links::addPagination);
   }
 
   @GetMapping("/products/{id}")
@@ -67,6 +80,42 @@ public class ProductController {
   }
 
   private static class Links {
+    public static Mono<PagedModel<ProductModel>> addPagination(Page<ProductModel> page) {
+      return createPaginationLinks(page).map(ls -> PagedModel.of(page.getContent(),
+                                                                 metadataFrom(page),
+                                                                 ls));
+    }
+
+    private static PagedModel.PageMetadata metadataFrom(Page<ProductModel> page) {
+      return new PagedModel.PageMetadata(page.getSize(), page.getNumber(), page.getTotalElements());
+    }
+
+    private static Mono<List<Link>> createPaginationLinks(Page<ProductModel> page) {
+      var size = page.getSize();
+      var number = page.getNumber();
+      var totalPages = page.getTotalPages();
+      var firstLink = linkToPage(0, size)
+          .withRel(IanaLinkRelations.FIRST)
+          .toMono();
+      var prevLink = linkToPage(number - 1, size)
+          .withRel(IanaLinkRelations.PREV)
+          .toMono()
+          .filter(link -> number > 0);
+      var nextLink = linkToPage(number + 1, size)
+          .withRel(IanaLinkRelations.NEXT)
+          .toMono()
+          .filter(it -> number < totalPages - 1);
+      var lastLink = linkToPage(totalPages - 1, size)
+          .withRel(IanaLinkRelations.LAST)
+          .toMono();
+      return Flux.concat(firstLink, prevLink, nextLink, lastLink)
+                 .collectList();
+    }
+
+    private static WebFluxLinkBuilder.WebFluxBuilder linkToPage(int number, int size) {
+      return linkTo(methodOn(ProductController.class).findPagedProducts(number, size));
+    }
+
     private static Mono<ProductModel> addSelfRel(ProductModel product) {
       return linkToProduct(product).withSelfRel()
                                    .toMono()
