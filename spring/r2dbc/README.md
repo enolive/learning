@@ -15,4 +15,4 @@ Just a show case how to use a relational database inside a reactive spring stack
 * liquibase does not support r2dbc yet, so you additionally need to include jdbc
 * No built-in Bean Validation support
     * you have to add `spring-boot-starter-validation` and annotate your Controller methods with `@Valid`
-* You need to add an initializer if you wish to to work with a memory database
+* You need to add an `ConnectionFactoryInitializer` if you wish to work with a memory database
