@@ -1,8 +1,6 @@
 package de.welcz.r2dbc.api;
 
 import de.welcz.r2dbc.persistence.ProductDao;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -10,7 +8,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
-import java.util.function.Function;
 
 import static org.springframework.hateoas.server.reactive.WebFluxLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.reactive.WebFluxLinkBuilder.methodOn;
@@ -26,26 +23,26 @@ public class ProductController {
   @GetMapping("/products")
   public Flux<ProductModel> findAllProducts() {
     return dao.findAll()
-              .flatMap(product -> Links.product(product.getId()).map(product::add));
+              .flatMap(Links::addSelfRel);
   }
 
   @GetMapping("/products/{id}")
   public Mono<ProductModel> showProduct(@PathVariable int id) {
     return dao.find(id)
-              .zipWith(Links.product(id), RepresentationModel::add)
+              .flatMap(Links::addSelfRel)
               .switchIfEmpty(Responses.noContent());
   }
 
   @PostMapping("/products")
   public Mono<ProductModel> createProduct(@RequestBody @Valid Mono<ModifyProduct> product) {
     return dao.create(product)
-              .zipWhen(Links.product(), RepresentationModel::add);
+              .flatMap(Links::addSelfRel);
   }
 
   @PutMapping("/products/{id}")
   public Mono<ProductModel> updateProduct(@PathVariable int id, @RequestBody @Valid Mono<ModifyProduct> product) {
     return dao.update(id, product)
-              .zipWith(Links.product(id), RepresentationModel::add)
+              .flatMap(Links::addSelfRel)
               .switchIfEmpty(Responses.noContent());
   }
 
@@ -56,19 +53,18 @@ public class ProductController {
   }
 
   private static class Responses {
-    private static Mono<ProductModel> noContent() {
+    private static Mono<? extends ProductModel> noContent() {
       return Mono.error(new ResponseStatusException(HttpStatus.NO_CONTENT));
     }
   }
 
   private static class Links {
-    private static Function<ProductModel, Mono<? extends Link>> product() {
-      return product -> product(product.getId());
-    }
-
-    private static Mono<Link> product(int id) {
+    private static Mono<ProductModel> addSelfRel(ProductModel product) {
       var controller = ProductController.class;
-      return linkTo(methodOn(controller).showProduct(id)).withSelfRel().toMono();
+      return linkTo(methodOn(controller)
+                        .showProduct(product.getId())).withSelfRel()
+                                                      .toMono()
+                                                      .map(product::add);
     }
   }
 }
