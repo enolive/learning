@@ -27,7 +27,7 @@ public class ProductController {
   public Mono<ProductModel> showProduct(@PathVariable int id) {
     return dao.find(id)
               .zipWith(Links.product(id), RepresentationModel::add)
-              .switchIfEmpty(Errors.noContent());
+              .switchIfEmpty(Responses.noContent());
   }
 
   @PostMapping("/products")
@@ -40,7 +40,7 @@ public class ProductController {
   public Mono<ProductModel> updateProduct(@RequestBody @Valid Mono<ModifyProduct> product, @PathVariable int id) {
     return dao.update(id, product)
               .zipWith(Links.product(id), RepresentationModel::add)
-              .switchIfEmpty(Errors.noContent());
+              .switchIfEmpty(Responses.noContent());
   }
 
   @DeleteMapping("/products/{id}")
@@ -55,7 +55,7 @@ public class ProductController {
               .flatMap(product -> Links.product(product.getId()).map(product::add));
   }
 
-  private static class Errors {
+  private static class Responses {
     private static Mono<ProductModel> noContent() {
       return Mono.error(new ResponseStatusException(HttpStatus.NO_CONTENT));
     }
