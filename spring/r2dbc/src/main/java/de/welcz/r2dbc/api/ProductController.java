@@ -23,6 +23,12 @@ public class ProductController {
     this.dao = dao;
   }
 
+  @GetMapping("/products")
+  public Flux<ProductModel> findAllProducts() {
+    return dao.findAll()
+              .flatMap(product -> Links.product(product.getId()).map(product::add));
+  }
+
   @GetMapping("/products/{id}")
   public Mono<ProductModel> showProduct(@PathVariable int id) {
     return dao.find(id)
@@ -49,12 +55,6 @@ public class ProductController {
     return dao.delete(id);
   }
 
-  @GetMapping("/products")
-  public Flux<ProductModel> findAllProducts() {
-    return dao.findAll()
-              .flatMap(product -> Links.product(product.getId()).map(product::add));
-  }
-
   private static class Responses {
     private static Mono<ProductModel> noContent() {
       return Mono.error(new ResponseStatusException(HttpStatus.NO_CONTENT));
@@ -63,7 +63,7 @@ public class ProductController {
 
   private static class Links {
     private static Function<ProductModel, Mono<? extends Link>> product() {
-      return created -> product(created.getId());
+      return product -> product(product.getId());
     }
 
     private static Mono<Link> product(int id) {
