@@ -26,21 +26,21 @@ public class ProductController {
   @GetMapping("/products/{id}")
   public Mono<ProductModel> showProduct(@PathVariable int id) {
     return dao.find(id)
-              .zipWith(productLink(id), RepresentationModel::add)
-              .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NO_CONTENT)));
+              .zipWith(Links.product(id), RepresentationModel::add)
+              .switchIfEmpty(Errors.noContent());
   }
 
   @PostMapping("/products")
   public Mono<ProductModel> createProduct(@RequestBody @Valid Mono<ModifyProduct> product) {
     return dao.create(product)
-              .zipWhen(productLink(), RepresentationModel::add);
+              .zipWhen(Links.product(), RepresentationModel::add);
   }
 
   @PutMapping("/products/{id}")
   public Mono<ProductModel> updateProduct(@RequestBody @Valid Mono<ModifyProduct> product, @PathVariable int id) {
     return dao.update(id, product)
-              .zipWith(productLink(id), RepresentationModel::add)
-              .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NO_CONTENT)));
+              .zipWith(Links.product(id), RepresentationModel::add)
+              .switchIfEmpty(Errors.noContent());
   }
 
   @DeleteMapping("/products/{id}")
@@ -52,15 +52,23 @@ public class ProductController {
   @GetMapping("/products")
   public Flux<ProductModel> findAllProducts() {
     return dao.findAll()
-              .flatMap(product -> productLink(product.getId()).map(product::add));
+              .flatMap(product -> Links.product(product.getId()).map(product::add));
   }
 
-  private Function<ProductModel, Mono<? extends Link>> productLink() {
-    return created -> productLink(created.getId());
+  private static class Errors {
+    private static Mono<ProductModel> noContent() {
+      return Mono.error(new ResponseStatusException(HttpStatus.NO_CONTENT));
+    }
   }
 
-  private Mono<Link> productLink(int id) {
-    var controller = ProductController.class;
-    return linkTo(methodOn(controller).showProduct(id)).withSelfRel().toMono();
+  private static class Links {
+    private static Function<ProductModel, Mono<? extends Link>> product() {
+      return created -> product(created.getId());
+    }
+
+    private static Mono<Link> product(int id) {
+      var controller = ProductController.class;
+      return linkTo(methodOn(controller).showProduct(id)).withSelfRel().toMono();
+    }
   }
 }
