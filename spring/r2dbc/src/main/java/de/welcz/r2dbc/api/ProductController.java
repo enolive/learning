@@ -2,6 +2,7 @@ package de.welcz.r2dbc.api;
 
 import de.welcz.r2dbc.persistence.ProductDao;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedModel;
@@ -37,6 +38,7 @@ public class ProductController {
       @RequestParam(required = false, defaultValue = "0") int page,
       @RequestParam(required = false, defaultValue = "20") int limit) {
     return dao.findAll(page, limit)
+              .flatMap(Links::addSelfRelToEachProduct)
               .flatMap(Links::addPagination);
   }
 
@@ -80,10 +82,23 @@ public class ProductController {
   }
 
   private static class Links {
+    public static Mono<Page<ProductModel>> addSelfRelToEachProduct(Page<ProductModel> page) {
+      return Flux.fromIterable(page.getContent())
+                 .flatMap(Links::addSelfRel)
+                 .collectList()
+                 .map(products -> new PageImpl<>(products, page.getPageable(), page.getTotalElements()));
+    }
+
     public static Mono<PagedModel<ProductModel>> addPagination(Page<ProductModel> page) {
       return createPaginationLinks(page).map(ls -> PagedModel.of(page.getContent(),
                                                                  metadataFrom(page),
                                                                  ls));
+    }
+
+    public static Mono<ProductModel> addSelfRel(ProductModel product) {
+      return linkToProduct(product).withSelfRel()
+                                   .toMono()
+                                   .map(product::add);
     }
 
     private static PagedModel.PageMetadata metadataFrom(Page<ProductModel> page) {
@@ -114,13 +129,6 @@ public class ProductController {
 
     private static WebFluxLinkBuilder.WebFluxBuilder linkToPage(int number, int size) {
       return linkTo(methodOn(ProductController.class).findPagedProducts(number, size));
-    }
-
-    private static Mono<ProductModel> addSelfRel(ProductModel product) {
-      return linkToProduct(product).withSelfRel()
-                                   .toMono()
-                                   // XXX: due to the lack of monadic comprehensions, we need a mapper here
-                                   .map(product::add);
     }
 
     private static WebFluxLinkBuilder.WebFluxBuilder linkToProduct(ProductModel product) {

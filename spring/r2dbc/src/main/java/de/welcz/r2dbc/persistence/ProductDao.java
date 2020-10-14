@@ -56,6 +56,7 @@ public class ProductDao {
                      .map(converter::convertToDto);
   }
 
+  @Transactional
   public Mono<Page<ProductModel>> findAll(int page, int size) {
     var pageable = PageRequest.of(page, size);
     var list = repository.findAllByOrderById(pageable)
