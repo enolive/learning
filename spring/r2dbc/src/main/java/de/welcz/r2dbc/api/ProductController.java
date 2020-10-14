@@ -41,8 +41,15 @@ public class ProductController {
   }
 
   @PutMapping("/products/{id}")
-  public Mono<ProductModel> updateProduct(@PathVariable int id, @RequestBody @Valid Mono<ModifyProduct> product) {
-    return dao.update(id, product)
+  public Mono<ProductModel> updateProductTotal(@PathVariable int id, @RequestBody @Valid Mono<ModifyProduct> product) {
+    return dao.updateTotal(id, product)
+              .flatMap(Links::addSelfRel)
+              .switchIfEmpty(Responses.noContent());
+  }
+
+  @PatchMapping("/products/{id}")
+  public Mono<ProductModel> updateProductPartial(@PathVariable int id, @RequestBody @Valid Mono<PatchProduct> product) {
+    return dao.updatePartial(id, product)
               .flatMap(Links::addSelfRel)
               .switchIfEmpty(Responses.noContent());
   }
@@ -63,12 +70,12 @@ public class ProductController {
     private static Mono<ProductModel> addSelfRel(ProductModel product) {
       return linkToProduct(product).withSelfRel()
                                    .toMono()
+                                   // XXX: due to the lack of monadic comprehensions, we need a mapper here
                                    .map(product::add);
     }
 
     private static WebFluxLinkBuilder.WebFluxBuilder linkToProduct(ProductModel product) {
-      var controller = ProductController.class;
-      return linkTo(methodOn(controller).showProduct(product.getId()));
+      return linkTo(methodOn(ProductController.class).showProduct(product.getId()));
     }
   }
 }

@@ -1,12 +1,15 @@
 package de.welcz.r2dbc.persistence;
 
 import de.welcz.r2dbc.api.ModifyProduct;
+import de.welcz.r2dbc.api.PatchProduct;
 import de.welcz.r2dbc.api.ProductModel;
 import de.welcz.r2dbc.converter.ProductConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.function.BiFunction;
 
 @Service
 public class ProductDao {
@@ -26,10 +29,18 @@ public class ProductDao {
   }
 
   @Transactional
-  public Mono<ProductModel> update(int id, Mono<ModifyProduct> product) {
+  public Mono<ProductModel> updateTotal(int id, Mono<ModifyProduct> product) {
     return product.map(converter.convertToEntityWithId(id))
                   .flatMap(repository::save)
                   .map(converter::convertToDto);
+  }
+
+  @Transactional
+  public Mono<ProductModel> updatePartial(int id, Mono<PatchProduct> product) {
+    return repository.findById(id)
+                     .zipWith(product, patchExistingEntity())
+                     .flatMap(repository::save)
+                     .map(converter::convertToDto);
   }
 
   public Mono<Void> delete(int id) {
@@ -44,5 +55,18 @@ public class ProductDao {
   public Mono<ProductModel> find(int id) {
     return repository.findById(id)
                      .map(converter::convertToDto);
+  }
+
+  private BiFunction<ProductEntity, PatchProduct, ProductEntity> patchExistingEntity() {
+    return (existing, patch) -> {
+      var patched = existing.toBuilder();
+      if (patch.getDescription() != null) {
+        patched.description(patch.getDescription());
+      }
+      if (patch.getPrice() != null) {
+        patched.price(patch.getPrice());
+      }
+      return patched.build();
+    };
   }
 }

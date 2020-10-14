@@ -30,8 +30,18 @@ Content-Type: application/json
 
 ###
 
+# partial update
+PATCH http://localhost:8080/products/1
+Content-Type: application/json
+
+{
+  "price": 999.99
+}
+
+###
+
 # delete
-DELETE http://localhost:8080/products/1
+DELETE http://localhost:8080/products/2
 
 ###
 
