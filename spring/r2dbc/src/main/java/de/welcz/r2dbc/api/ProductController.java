@@ -96,9 +96,9 @@ public class ProductController {
     }
 
     public static Mono<PagedModel<ProductModel>> addPagination(Page<ProductModel> page) {
-      return createPaginationLinks(page).map(ls -> PagedModel.of(page.getContent(),
-                                                                 metadataFrom(page),
-                                                                 ls));
+      return createPaginationLinks(page).map(links -> PagedModel.of(page.getContent(),
+                                                                    metadataFrom(page),
+                                                                    links));
     }
 
     public static Mono<ProductModel> addSelfRel(ProductModel product) {
@@ -121,7 +121,7 @@ public class ProductController {
       var prevLink = linkToPage(number - 1, size)
           .withRel(IanaLinkRelations.PREV)
           .toMono()
-          .filter(link -> number > 0);
+          .filter(it -> number > 0);
       var nextLink = linkToPage(number + 1, size)
           .withRel(IanaLinkRelations.NEXT)
           .toMono()
