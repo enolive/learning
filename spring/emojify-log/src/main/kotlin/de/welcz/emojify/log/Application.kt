@@ -7,7 +7,7 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
-class SpringEmojifyLogApplication {
+class Application {
   companion object : KLogging()
 
   @Bean
@@ -21,5 +21,5 @@ class SpringEmojifyLogApplication {
 }
 
 fun main(args: Array<String>) {
-  runApplication<SpringEmojifyLogApplication>(*args)
+  runApplication<Application>(*args)
 }
