@@ -1,0 +1,8 @@
+POST http://localhost:8080/hellos
+Content-Type: text/plain
+
+Chris
+
+###
+
+GET http://localhost:8080/hellos?name=Chris
