@@ -2,7 +2,7 @@
 
 How to run
 
-* Run docker with in the host network mode to be able to access your real localhost.
+* Run docker in the **host network mode** to be able to access your real localhost.
 
 ```shell script
 docker run -v <PATH TO PROJECT>/mirror-proxy/nginx.conf:/etc/nginx/nginx.conf:ro --name my-nginx-proxy -d --add-host local:10.254.254.254 nginx 
