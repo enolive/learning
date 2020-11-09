@@ -6,14 +6,6 @@
         <option name="command" value="" />
         <option name="containerName" value="nginx-proxy" />
         <option name="entrypoint" value="" />
-        <option name="portBindings">
-          <list>
-            <DockerPortBindingImpl>
-              <option name="containerPort" value="80" />
-              <option name="hostPort" value="8080" />
-            </DockerPortBindingImpl>
-          </list>
-        </option>
         <option name="commandLineOptions" value="-d --network host" />
         <option name="volumeBindings">
           <list>
