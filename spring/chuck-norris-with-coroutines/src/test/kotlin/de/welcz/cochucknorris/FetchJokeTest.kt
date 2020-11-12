@@ -3,16 +3,15 @@ package de.welcz.cochucknorris
 import com.ninjasquad.springmockk.MockkBean
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.reactive.function.client.awaitBody
 import org.springframework.web.reactive.function.client.bodyToMono
 import reactor.kotlin.core.publisher.toMono
+import kotlin.time.seconds
 
 @SpringBootTest
 @ContextConfiguration(classes = [FetchJoke::class, FetchConfig::class])
@@ -38,10 +37,10 @@ class FetchJokeTest(
     config.host.shouldBe("https://api.chucknorris.io/")
   }
 
-  test("response is retrieved from web client") {
-    // NOTE: can't manage to mock awaitBody. The test will just freeze if I try 😭
+  test("response is retrieved from web client").config(timeout = 5.seconds) {
+    // NOTE: can't manage to mock awaitBody directly. The test will just freeze if I try 😭
     every { response.bodyToMono<FetchJoke.ResponseValue>() } returns
-      FetchJoke.ResponseValue("my awesome joke").toMono()
+        FetchJoke.ResponseValue("my awesome joke").toMono()
 
     val result = sut.random()
 

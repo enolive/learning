@@ -123,6 +123,7 @@
         <configuration>
           <args>
             <arg>-Xjsr305=strict</arg>
+            <arg>-Xopt-in=kotlin.time.ExperimentalTime</arg>
           </args>
           <compilerPlugins>
             <plugin>spring</plugin>
