@@ -1,4 +1,4 @@
-import 'package:flutter_app/api.dart';
+import 'package:chuck_norris/api.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_app/model.dart';
+import 'package:chuck_norris/model.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 

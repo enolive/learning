@@ -1,4 +1,4 @@
-import 'package:flutter_app/model.dart';
+import 'package:chuck_norris/model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
