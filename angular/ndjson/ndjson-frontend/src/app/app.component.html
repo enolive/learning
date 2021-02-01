@@ -1,0 +1,9 @@
+<h1>Welcome to ndjson!</h1>
+
+<p>
+  Just a quick show case to load newline delimited data in angular.
+</p>
+
+<ul>
+  <li *ngFor="let item of (items | async)">{{item.text}}</li>
+</ul>
