@@ -1,0 +1,5 @@
+= Parsing NDJSON with angular http client
+
+This show case demonstrates how to consume a stream that is newline delimited json with the default http client coming with angular.
+
+WARNING: This is not the best solution as the whole response is loaded into the memory. A better solution would be to actually use SSE.
