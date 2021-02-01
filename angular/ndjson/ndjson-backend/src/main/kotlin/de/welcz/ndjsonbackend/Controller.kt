@@ -3,11 +3,13 @@ package de.welcz.ndjsonbackend
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/v1/hellos")
 class Controller {
   @GetMapping(produces = [MediaType.APPLICATION_NDJSON_VALUE])
