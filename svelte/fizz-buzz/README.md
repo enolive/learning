@@ -12,7 +12,7 @@ I feel that Svelte might be the tool of choice for frontend work where React is 
     * no Hooks, Effects et al. required (just define some varibles in the script section)
     * everything in a single file
     * simple templating syntax
-    * HTML-ish DSL like in React
+    * No HTML-ish DSL like React's JSX
 * What I dislike
     * no first class testing support
     * default scaffolding does not include any test dependencies
