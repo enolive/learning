@@ -223,9 +223,9 @@ fun countNumberOfSteps(
   goal: LocalDate,
   step: Step,
 ): Int {
-  tailrec fun stepsRec(acc: LocalDate, steps: Int): Int = when {
-    acc >= goal -> steps
-    else        -> stepsRec(acc.plus(step.width.toLong(), step.unit), steps + 1)
+  tailrec fun stepsRec(current: LocalDate, steps: Int): Int = when {
+    current >= goal -> steps
+    else            -> stepsRec(current.plus(step.width.toLong(), step.unit), steps + 1)
   }
   return stepsRec(start, 0)
 }
