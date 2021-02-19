@@ -209,13 +209,13 @@ data class Step(val width: Int, val unit: ChronoUnit)
 
 fun ClosedRange<LocalDate>.temporalSequence(step: Step, from: LocalDate, to: LocalDate? = null): List<LocalDate> {
   val stepsUntilStart = countNumberOfSteps(from, start, step)
-  val startingPoint = from.plus(stepsUntilStart, step)
+  val startingPoint = from.times(stepsUntilStart, step)
   val endingPoint = to?.let { minOf(it, endInclusive) } ?: endInclusive
   val stepsUntilEnd = countNumberOfSteps(startingPoint, endingPoint.plusDays(1), step)
-  return (0 until stepsUntilEnd).map { startingPoint.plus(it, step) }
+  return (0 until stepsUntilEnd).map { startingPoint.times(it, step) }
 }
 
-private fun LocalDate.plus(times: Int, step: Step) =
+private fun LocalDate.times(times: Int, step: Step) =
   plus(times * step.width.toLong(), step.unit)
 
 fun countNumberOfSteps(
