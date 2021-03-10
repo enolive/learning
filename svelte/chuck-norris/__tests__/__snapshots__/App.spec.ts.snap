@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<figure>
+  <img
+    alt="Chuck Norris approves!"
+    src="chuck-norris-logo.png"
+  />
+   
+  <figcaption>
+    Chuck Norris approves!
+  </figcaption>
+</figure>
+`;

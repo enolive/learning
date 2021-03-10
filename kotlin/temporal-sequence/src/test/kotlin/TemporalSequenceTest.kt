@@ -4,6 +4,7 @@ import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.comparables.shouldBeLessThanOrEqualTo
+import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.Exhaustive
 import io.kotest.property.arbitrary.bind
@@ -197,7 +198,7 @@ class TemporalSequenceTest : DescribeSpec({
             LocalDate.parse("2021-02-28"),
             LocalDate.parse("2022-02-28"),
             LocalDate.parse("2023-02-28"),
-            LocalDate.parse("2024-02-29"),
+            LocalDate.parse("2024-02-28"),
           )
         }
       }

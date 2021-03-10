@@ -3,8 +3,13 @@ import spock.lang.Specification
 
 @CompileDynamic
 class GreeterTest extends Specification {
-    def "framework works"() {
+    def "not"() {
         expect:
         true == false
+    }
+
+    def "yeah"() {
+        expect:
+        true == true
     }
 }
