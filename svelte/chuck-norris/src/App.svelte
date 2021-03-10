@@ -3,15 +3,11 @@
     value: string;
   }
 
-  function fetchRandomJoke() {
-    fetchJoke$ = fetch('https://api.chucknorris.io/jokes/random')
-      .then(res => res.json() as JokeText)
-      .then(joke => joke.value);
-  }
+  const fetchRandomJoke = () => fetch('https://api.chucknorris.io/jokes/random')
+    .then(res => res.json() as JokeText)
+    .then(joke => joke.value);
 
-  let fetchJoke$: Promise<string>;
-
-  fetchRandomJoke();
+  let fetchJoke$ = fetchRandomJoke();
 </script>
 
 <header>
@@ -29,5 +25,5 @@
       Random Wisdom: {jokeText}
     {/await}
   </p>
-  <button on:click={fetchRandomJoke}>Refresh</button>
+  <button on:click={() => fetchJoke$ = fetchRandomJoke()}>Refresh</button>
 </main>

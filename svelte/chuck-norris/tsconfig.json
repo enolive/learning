@@ -13,6 +13,7 @@
   "compilerOptions": {
     "types": [
       "jest"
-    ]
+    ],
+    "strict": true
   }
 }
