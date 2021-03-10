@@ -1,9 +1,11 @@
 <script lang="ts">
+  import 'bootstrap/dist/css/bootstrap.min.css';
+
   interface JokeText {
     value: string
   }
 
-  const fetchRandomJoke = () => fetch('https://api.chucknorris.io/jokes/random')
+  const fetchRandomJoke = (): Promise<string> => fetch('https://api.chucknorris.io/jokes/random')
     .then(res => res.json() as JokeText)
     .then(joke => joke.value);
 
@@ -20,12 +22,14 @@
   </figure>
   <p role="status">
     {#await fetchJoke$}
-      Loading...
+      <div class="spinner-border">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     {:then jokeText}
-      Random wisdom: {jokeText}
+      <div class="alert alert-info">Random wisdom: {jokeText}</div>
     {:catch error}
-      {error}
+      <div class="alert alert-danger">{error}</div>
     {/await}
   </p>
-  <button on:click={() => fetchJoke$ = fetchRandomJoke()}>Refresh</button>
+  <button on:click={() => fetchJoke$ = fetchRandomJoke()} class="btn btn-primary">Refresh</button>
 </main>
