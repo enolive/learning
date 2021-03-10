@@ -1,6 +1,6 @@
 <script lang="ts">
   interface JokeText {
-    value: string;
+    value: string
   }
 
   const fetchRandomJoke = () => fetch('https://api.chucknorris.io/jokes/random')
@@ -22,7 +22,9 @@
     {#await fetchJoke$}
       Loading...
     {:then jokeText}
-      Random Wisdom: {jokeText}
+      Random wisdom: {jokeText}
+    {:catch error}
+      {error}
     {/await}
   </p>
   <button on:click={() => fetchJoke$ = fetchRandomJoke()}>Refresh</button>
