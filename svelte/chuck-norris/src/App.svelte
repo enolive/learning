@@ -1,6 +1,4 @@
 <script lang="ts">
-  import 'bootstrap/dist/css/bootstrap.min.css';
-
   interface JokeText {
     value: string
   }
