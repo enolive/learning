@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using FluentAssertions.Extensions;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace DateTimeIso
@@ -20,6 +21,21 @@ namespace DateTimeIso
         public void Test1(DateTime input, string expected)
         {
             input.ToString("yyyy-MM-dd").Should().Be(expected);
+        }
+
+        [Fact]
+        public void Test2()
+        {
+            var list = new List<string>
+            {
+                "First",
+                "Second",
+                "Third"
+            };
+
+            var result = JsonConvert.SerializeObject(list);
+
+            result.Should().Be(@"[""First"",""Second"",""Third""]");
         }
     }
 }
