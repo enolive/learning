@@ -11,4 +11,4 @@ Note that webflux splits the body into data buffer chunks. This will be accumula
 * infinite streams
 * really big data that will blow up the memory (be warned, that means that leaving DEBUG active makes you vulnerable to DOS attacks!)
 
-For this scenarios, it would be better to output each individual chunk. To prevent this, I built in an upper limit for collected chunks that will trigger an immediate output instead.
+For this scenarios, it would be better to output each individual chunk. To prevent any problems, I built in an upper limit for collected chunks that will trigger an immediate output instead.
