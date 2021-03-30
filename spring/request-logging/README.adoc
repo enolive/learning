@@ -1,0 +1,14 @@
+= Logging Request Body Decorator in Reactive Spring
+
+heavily inspired by https://stackoverflow.com/a/61720819/14024602[SO answer].
+
+Takes the request in debug logging and logs its body.
+
+Won't do anything if the logging level (see `application.yml`) is not at least debug for the request.
+
+Note that webflux splits the body into data buffer chunks. This will be accumulated and finally logged in this solution for easier handling of the logging output. By definition, this won't work for
+
+* infinite streams
+* really big data that will blow up the memory (be warned, that means that leaving DEBUG active makes you vulnerable to DOS attacks!)
+
+For this scenarios, it would be better to output each individual chunk. To prevent this, I built in an upper limit for collected chunks that will trigger an immediate output instead.

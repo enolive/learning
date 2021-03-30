@@ -1,0 +1,3 @@
+logging:
+  level:
+    de.welcz.requestlogging.RequestFilterConfig: debug
