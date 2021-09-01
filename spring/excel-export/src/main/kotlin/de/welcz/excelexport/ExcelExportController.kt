@@ -3,11 +3,10 @@ package de.welcz.excelexport
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.reactive.asFlow
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.core.io.buffer.DataBuffer
-import org.springframework.core.io.buffer.DataBufferUtils
 import org.springframework.http.ContentDisposition
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -18,7 +17,7 @@ import java.io.PipedInputStream
 import java.io.PipedOutputStream
 
 @RestController
-class ExcelExportController() {
+class ExcelExportController {
   @GetMapping("export")
   fun export(response: ServerHttpResponse): ResponseEntity<Flow<DataBuffer>> {
     val workBook = createExcelDocument()
@@ -26,14 +25,11 @@ class ExcelExportController() {
     val output = PipedOutputStream()
     val input = PipedInputStream(output)
 
-    // warning: closing the work book
-    // or joining the thread will result in strange behaviour as the workbook
-    // in the main execution
-    // will be effectively streamed
+    // WARN: closing the work book or joining the thread will result in strange behaviour
+    // the work book is meant to be streamed and thus cannot be prematurely closed!
 
-    // warning: you will get a deadlock if trying to write to the output stream in the main thread!
+    // WARN: you will get a deadlock if trying to write to the output stream in the main thread!
 
-    // note: the scope is done in an IO context, so the operations are safe here
     @Suppress("BlockingMethodInNonBlockingContext")
     scope.launch {
       workBook.use {
@@ -43,8 +39,16 @@ class ExcelExportController() {
       }
     }
 
-    val buffers = DataBufferUtils.readInputStream({ input }, response.bufferFactory(), 1024)
-    return buffers.asFlow().asFileAttachment()
+    // NOTE: using Kotlin flow generator instead of the awkward DataBufferUtils
+    return input
+      .buffered()
+      .iterator()
+      .asSequence()
+      // 256 KiB might be a better chunk size!
+      .chunked(1024)
+      .map { response.bufferFactory().wrap(it.toByteArray()) }
+      .asFlow()
+      .asFileAttachment()
   }
 }
 
