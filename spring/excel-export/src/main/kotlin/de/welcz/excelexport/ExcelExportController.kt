@@ -7,12 +7,14 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.launch
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.core.io.buffer.DataBuffer
+import org.springframework.core.io.buffer.DataBufferFactory
 import org.springframework.http.ContentDisposition
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.http.server.reactive.ServerHttpResponse
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
+import java.io.InputStream
 import java.io.PipedInputStream
 import java.io.PipedOutputStream
 
@@ -39,20 +41,23 @@ class ExcelExportController {
       }
     }
 
-    // NOTE: using Kotlin flow generator instead of the awkward DataBufferUtils
-    return input
-      .buffered()
-      .iterator()
-      .asSequence()
-      // 256 KiB might be a better chunk size!
-      .chunked(1024)
-      .map { response.bufferFactory().wrap(it.toByteArray()) }
-      .asFlow()
-      .asFileAttachment()
+    // 256 KiB might be a better chunk size!
+    return input.toDataBufferFlow(response.bufferFactory(), 1024).asFileAttachment()
   }
+
+  // NOTE: using Kotlin flow generator instead of the awkward DataBufferUtils
+  private fun InputStream.toDataBufferFlow(
+    dataBufferFactory: DataBufferFactory,
+    maxBufferSize: Int
+  ) = buffered()
+    .iterator()
+    .asSequence()
+    .chunked(maxBufferSize)
+    .map { dataBufferFactory.wrap(it.toByteArray()) }
+    .asFlow()
 }
 
-private fun <T> T.asFileAttachment(): ResponseEntity<T> = ResponseEntity
+private fun Flow<DataBuffer>.asFileAttachment(): ResponseEntity<Flow<DataBuffer>> = ResponseEntity
   .ok()
   .headers {
     it.contentType = MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")

@@ -1,6 +1,8 @@
 package de.welcz.excelexport
 
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import org.apache.poi.xssf.extractor.XSSFExcelExtractor
@@ -15,7 +17,7 @@ class ExcelExportControllerTest(private val webTestClient: WebTestClient) : Desc
 
       response.expectStatus().isOk
       response.expectBody().consumeWith {
-        it.responseBody.shouldNotBeNull()
+        it.responseBody.shouldNotBeNull().toList().shouldNotBeEmpty()
       }
     }
 
