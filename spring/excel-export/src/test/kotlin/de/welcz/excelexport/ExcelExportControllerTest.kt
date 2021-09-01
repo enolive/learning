@@ -14,12 +14,14 @@ class ExcelExportControllerTest(private val webTestClient: WebTestClient) : Desc
   describe("Excel export") {
     it("streams the generated excel file") {
       val expectedSize = 3324
+      val expectedContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      val expectedContentDisposition = ContentDisposition.parse("""attachment; filename="Export.xlsx"""")
 
       val response = webTestClient.get().uri("/export").exchange()
 
       response.expectStatus().isOk
-      response.expectHeader().contentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-      response.expectHeader().contentDisposition(ContentDisposition.parse("""attachment; filename="Export.xlsx""""))
+      response.expectHeader().contentType(expectedContentType)
+      response.expectHeader().contentDisposition(expectedContentDisposition)
       response.expectBody().consumeWith {
         it.responseBody.shouldNotBeNull().toList().shouldHaveSize(expectedSize)
       }
