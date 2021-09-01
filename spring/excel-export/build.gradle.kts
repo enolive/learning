@@ -12,6 +12,7 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 val poi_version: String by project
+val kotest_version: String by project
 
 repositories {
   mavenCentral()
@@ -29,6 +30,9 @@ dependencies {
   developmentOnly("org.springframework.boot:spring-boot-devtools")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
+  testImplementation("io.kotest:kotest-runner-junit5:$kotest_version")
+  testImplementation("io.kotest:kotest-assertions-core:$kotest_version")
+  testImplementation("io.kotest.extensions:kotest-extensions-spring:1.0.0")
 }
 
 tasks.withType<KotlinCompile> {

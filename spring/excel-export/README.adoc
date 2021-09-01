@@ -1,0 +1,12 @@
+= Excel Export with Kotlin Coroutines
+
+This show case illustrates how to use WebFlux with Kotlin to stream a generated Excel spreadsheet without loading the whole file into the memory.
+
+== Details
+
+It basically uses https://poi.apache.org/[Apache POI] for generating the document.
+The Controller writes the file into an OutputStream that is asynchronously piped into a flow of data buffers that are served. It also uses a response entity to add some header information about the content type and its disposition as an attachment.
+
+== How to run
+
+Start the application and navigate to http://localhost:8080/export. You should get an Excel file with two rows and and two cells.

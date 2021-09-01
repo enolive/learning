@@ -5,7 +5,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.reactive.asFlow
-import kotlinx.coroutines.withContext
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.core.io.buffer.DataBuffer
 import org.springframework.core.io.buffer.DataBufferUtils
@@ -22,19 +21,26 @@ import java.io.PipedOutputStream
 class ExcelExportController() {
   @GetMapping("export")
   fun export(response: ServerHttpResponse): ResponseEntity<Flow<DataBuffer>> {
-    // warning: closing the work book or joining the thread will result in strange behaviour as the workbook will be effectively streamed
     val workBook = createExcelDocument()
     val scope = CoroutineScope(Dispatchers.IO)
     val output = PipedOutputStream()
     val input = PipedInputStream(output)
 
+    // warning: closing the work book
+    // or joining the thread will result in strange behaviour as the workbook
+    // in the main execution
+    // will be effectively streamed
+
     // warning: you will get a deadlock if trying to write to the output stream in the main thread!
+
     // note: the scope is done in an IO context, so the operations are safe here
     @Suppress("BlockingMethodInNonBlockingContext")
     scope.launch {
-      workBook.write(output)
-      output.close()
-      workBook.close()
+      workBook.use {
+        output.use {
+          workBook.write(output)
+        }
+      }
     }
 
     val buffers = DataBufferUtils.readInputStream({ input }, response.bufferFactory(), 1024)
@@ -50,7 +56,7 @@ private fun <T> T.asFileAttachment(): ResponseEntity<T> = ResponseEntity
   }
   .body(this)
 
-private fun createExcelDocument(): XSSFWorkbook {
+fun createExcelDocument(): XSSFWorkbook {
   val workbook = XSSFWorkbook()
   val sheet = workbook.createSheet()
   val row1 = sheet.createRow(0)
