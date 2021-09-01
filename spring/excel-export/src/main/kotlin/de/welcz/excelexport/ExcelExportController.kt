@@ -28,7 +28,7 @@ class ExcelExportController {
       .asFileAttachment()
 
   private fun XSSFWorkbook.writeToPipeInput(): PipedInputStream {
-    // as our consumer is outside the current function, we need to construct an unbound CoroutineScope
+    // as our consumer is outside the current function & class (Netty), we need to construct an unbound CoroutineScope
     val scope = CoroutineScope(Dispatchers.IO)
     val output = PipedOutputStream()
     val input = PipedInputStream(output)
