@@ -2,7 +2,6 @@ package de.welcz.excelexport
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import org.apache.poi.xssf.extractor.XSSFExcelExtractor
@@ -13,11 +12,13 @@ import org.springframework.test.web.reactive.server.WebTestClient
 class ExcelExportControllerTest(private val webTestClient: WebTestClient) : DescribeSpec({
   describe("Excel export") {
     it("streams the generated excel file") {
+      val expectedSize = 3324
+
       val response = webTestClient.get().uri("/export").exchange()
 
       response.expectStatus().isOk
       response.expectBody().consumeWith {
-        it.responseBody.shouldNotBeNull().toList().shouldNotBeEmpty()
+        it.responseBody.shouldNotBeNull().toList().shouldHaveSize(expectedSize)
       }
     }
 
@@ -28,7 +29,7 @@ class ExcelExportControllerTest(private val webTestClient: WebTestClient) : Desc
       Cell 1 1	Cell 1 2
       Cell 2 1	Cell 2 2
       """.trimIndent()
-      val extractor =  XSSFExcelExtractor(workbook)
+      val extractor = XSSFExcelExtractor(workbook)
 
       extractor.text.trim() shouldBe expected
     }

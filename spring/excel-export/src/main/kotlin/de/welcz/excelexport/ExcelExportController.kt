@@ -14,39 +14,40 @@ import org.springframework.http.ResponseEntity
 import org.springframework.http.server.reactive.ServerHttpResponse
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
-import java.io.InputStream
 import java.io.PipedInputStream
 import java.io.PipedOutputStream
 
 @RestController
 class ExcelExportController {
   @GetMapping("export")
-  fun export(response: ServerHttpResponse): ResponseEntity<Flow<DataBuffer>> {
-    val workBook = createExcelDocument()
+  fun export(response: ServerHttpResponse) =
+    createExcelDocument()
+      .writeToPipeInput()
+      // 256 KiB might be a better chunk size!
+      .toDataBufferFlow(response.bufferFactory(), 1024)
+      .asFileAttachment()
+
+  private fun XSSFWorkbook.writeToPipeInput(): PipedInputStream {
+    // as our consumer is outside the current function, we need to construct an unbound CoroutineScope
     val scope = CoroutineScope(Dispatchers.IO)
     val output = PipedOutputStream()
     val input = PipedInputStream(output)
 
-    // WARN: closing the work book or joining the thread will result in strange behaviour
-    // the work book is meant to be streamed and thus cannot be prematurely closed!
-
-    // WARN: you will get a deadlock if trying to write to the output stream in the main thread!
-
+    // write to the pipe outside the main thread or else we get a deadlock
     @Suppress("BlockingMethodInNonBlockingContext")
     scope.launch {
-      workBook.use {
+      use {
+        // the output needs to be closed after writing or else our input stream will never end
         output.use {
-          workBook.write(output)
+          write(output)
         }
       }
     }
-
-    // 256 KiB might be a better chunk size!
-    return input.toDataBufferFlow(response.bufferFactory(), 1024).asFileAttachment()
+    return input
   }
 
-  // NOTE: using Kotlin flow generator instead of the awkward DataBufferUtils
-  private fun InputStream.toDataBufferFlow(
+  // using Kotlin flow generator instead of the awkward DataBufferUtils
+  private fun PipedInputStream.toDataBufferFlow(
     dataBufferFactory: DataBufferFactory,
     maxBufferSize: Int
   ) = buffered()
@@ -55,15 +56,15 @@ class ExcelExportController {
     .chunked(maxBufferSize)
     .map { dataBufferFactory.wrap(it.toByteArray()) }
     .asFlow()
-}
 
-private fun Flow<DataBuffer>.asFileAttachment(): ResponseEntity<Flow<DataBuffer>> = ResponseEntity
-  .ok()
-  .headers {
-    it.contentType = MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    it.contentDisposition = ContentDisposition.attachment().filename("Export.xlsx").build()
-  }
-  .body(this)
+  private fun Flow<DataBuffer>.asFileAttachment(): ResponseEntity<Flow<DataBuffer>> = ResponseEntity
+    .ok()
+    .headers {
+      it.contentType = MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+      it.contentDisposition = ContentDisposition.attachment().filename("Export.xlsx").build()
+    }
+    .body(this)
+}
 
 fun createExcelDocument(): XSSFWorkbook {
   val workbook = XSSFWorkbook()
