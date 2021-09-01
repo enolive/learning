@@ -6,6 +6,7 @@ import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import org.apache.poi.xssf.extractor.XSSFExcelExtractor
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
+import org.springframework.http.ContentDisposition
 import org.springframework.test.web.reactive.server.WebTestClient
 
 @WebFluxTest
@@ -17,6 +18,8 @@ class ExcelExportControllerTest(private val webTestClient: WebTestClient) : Desc
       val response = webTestClient.get().uri("/export").exchange()
 
       response.expectStatus().isOk
+      response.expectHeader().contentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+      response.expectHeader().contentDisposition(ContentDisposition.parse("""attachment; filename="Export.xlsx""""))
       response.expectBody().consumeWith {
         it.responseBody.shouldNotBeNull().toList().shouldHaveSize(expectedSize)
       }
