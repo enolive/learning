@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    function:
+      definition: uppercase;reverse;uppercase-consume
+    stream:
+      bindings:
+        uppercase-consume-in-0:
+          destination: uppercase-out-0
