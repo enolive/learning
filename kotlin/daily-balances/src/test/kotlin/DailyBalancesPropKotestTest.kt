@@ -1,4 +1,5 @@
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.collections.shouldBeStrictlyIncreasingWith
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
@@ -6,14 +7,11 @@ import io.kotest.property.Arb
 import io.kotest.property.PropTestConfig
 import io.kotest.property.arbitrary.*
 import io.kotest.property.checkAll
+import java.time.LocalDate
 
 class DailyBalancesPropKotestTest : DescribeSpec({
   describe("properties") {
-    val arbBalance = arbitrary {
-      val date = Arb.localDate().bind()
-      val amount = Arb.bigDecimal().bind()
-      Balance(date, amount)
-    }
+    val arbBalance = Arb.bind(Arb.localDate(), Arb.bigDecimal()) { d, a -> Balance(d, a) }
     fun arbUniqueList(minLength: Int = 0) = Arb.list(arbBalance, minLength..100).map { it.distinctBy { it.date } }
 
     it("contains all original elements") {

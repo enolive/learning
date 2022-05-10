@@ -30,7 +30,7 @@ class DailyBalancesPropJqwikTest {
   }
 
   @Property
-  fun `returns the whole range`(@ForAll("uniqueBalances1") @NotEmpty list: List<Balance>) {
+  fun `returns the whole range`(@ForAll("uniqueBalances") @NotEmpty list: List<Balance>) {
     val result = list.expandToDaily()
 
     result.map { it.date } shouldBe wholeDateRange(result.minOf { it.date }, result.maxOf { it.date })
