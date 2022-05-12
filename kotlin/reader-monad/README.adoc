@@ -1,0 +1,14 @@
+= Reader Monad in Kotlin
+
+Implementation that proves that functions in Kotlin can indeed implement the monad interface! This is also called the reader monad. I have yet to find a practical use for this. But it is a nice challenge to implement it!
+
+[source,haskell]
+----
+instance Monad ((->) r)
+----
+
+Further resources:
+
+- Basic explanation what https://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html[Functors, Applicatives, Monads are in pictures]
+- my original repo with sick tricks in haskell: https://github.com/enolive/crimes-against-humanity[Crimes against humanity]
+- great article https://eli.thegreenplace.net/2018/haskell-functions-as-functors-applicatives-and-monads/[functions are indeed functors, applicatives and monads]
