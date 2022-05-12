@@ -14,7 +14,7 @@ class ReaderTest {
   val mult2AndThenInc = mult2.map(inc)
 
   @Property
-  fun `map is the same as a pipe composition`(@ForAll n: Int) {
+  fun `f map g is the pipe composition, that is the same as x to g(f(x))`(@ForAll n: Int) {
     mult2AndThenInc(n) shouldBe inc(mult2(n))
   }
 
@@ -26,7 +26,7 @@ class ReaderTest {
   val containsBothValidAndInvalidCommands2 = any(isValidCommand).zip(any(isInvalidCommand), Boolean::and)
 
   @Property
-  fun `f map(g) ap(h) is the same as g(f)(h)`(@ForAll("validAndInvalidCommands") xs: String) {
+  fun `f map(g) ap(h) is the same as x to g(f(x))(h(x)) as f ap g is basically x to g(x)(f(x))`(@ForAll("validAndInvalidCommands") xs: String) {
     containsBothValidAndInvalidCommands1(xs) shouldBe (xs.any(isValidCommand) && xs.any(isInvalidCommand))
   }
 
@@ -36,6 +36,7 @@ class ReaderTest {
     containsBothValidAndInvalidCommands1(xs) shouldBe containsBothValidAndInvalidCommands2(xs)
   }
 
+  @Suppress("unused")
   @Provide
   fun validAndInvalidCommands(): Arbitrary<String> {
     return String.any().withChars("flbrax_ghjkld")
@@ -44,24 +45,22 @@ class ReaderTest {
   val isUnique = List<Any>::distinct.flatMap(List<Any>::equals.curried())
 
   @Property
-  fun `f flatMap(g) is the same as x to g(f(x), x)`(@ForAll @NotEmpty xs: List<Any>): Boolean {
-    // activate this and wonder how cool jqwik is!
-    // Statistics.collect(xs.count { it == xs.first() })
+  fun `f flatMap(g) is the same as x to g(f(x), x)`(@ForAll @NotEmpty xs: List<Any>) {
     // Statistics.collect(isUnique(xs))
-    return isUnique(xs) == (xs.distinct() == xs)
+    isUnique(xs) shouldBe (xs.distinct() == xs)
   }
 
   val isUniqueMapAp = List<Any>::distinct.map(List<Any>::equals.curried()).ap(::identity)
 
   @Property
-  fun `flat mapping and map ap produce the same results`(@ForAll @NotEmpty xs: List<Any>) {
+  fun `flat mapping f and map f ap identity produce the same results`(@ForAll @NotEmpty xs: List<Any>) {
     isUnique(xs) shouldBe isUniqueMapAp(xs)
   }
 
   val isUniqueZip = List<Any>::distinct.zip(::identity, List<Any>::equals)
 
   @Property
-  fun `flat mapping and zip produce the same results`(@ForAll @NotEmpty xs: List<Any>) {
+  fun `flat mapping f and f zip with identity produce the same results`(@ForAll @NotEmpty xs: List<Any>) {
     isUnique(xs) shouldBe isUniqueZip(xs)
   }
 
