@@ -6,7 +6,6 @@ import net.jqwik.api.constraints.LowerChars
 import net.jqwik.api.constraints.NotEmpty
 import net.jqwik.api.constraints.UpperChars
 import net.jqwik.kotlin.api.any
-import org.junit.jupiter.api.Test
 
 class ReaderTest {
   val inc = { n: Int -> n + 1 }
@@ -26,7 +25,7 @@ class ReaderTest {
   val containsBothValidAndInvalidCommands2 = any(isValidCommand).zip(any(isInvalidCommand), Boolean::and)
 
   @Property
-  fun `f map(g) ap(h) is the same as x to g(f(x))(h(x)) as f ap g is basically x to g(x)(f(x))`(@ForAll("validAndInvalidCommands") xs: String) {
+  fun `f map(g) ap(h) is the same as x to g(f(x), h(x)) as f ap g is basically x to g(x, f(x))`(@ForAll("validAndInvalidCommands") xs: String) {
     containsBothValidAndInvalidCommands1(xs) shouldBe (xs.any(isValidCommand) && xs.any(isInvalidCommand))
   }
 
@@ -75,7 +74,7 @@ class ReaderTest {
     isPalindrome(xs) shouldBe comparison
   }
 
-  @Test
+  @Example
   fun `is palindrome works for examples`() {
     isPalindrome("Anna").shouldBeTrue()
     isPalindrome("Hello").shouldBeFalse()

@@ -3,11 +3,12 @@ import kotlin.reflect.KFunction2
 typealias Reader<R, A> = (R) -> A
 
 // monad
-fun <R, A> unit(a: A): (R) -> A = { _: R -> a }
+fun <R, A> unit(a: A): Reader<R, A> = { _: R -> a }
 fun <R, A, B> Reader<R, A>.flatMap(f: (A) -> Reader<R, B>): Reader<R, B> = { r ->
   f(this(r))(r)
 }
 // as a monad is automatically also a functor and applicative, these functions are derived from flatMap
+
 // functor -- flipped version compared to haskell (<&> instead of <$>), to be more in line with kotlin's stdlib
 // m.map(f) === m.flatMap { x -> unit(f(x)) }
 fun <R, A, B> Reader<R, A>.map(f: (A) -> B): Reader<R, B> = this.flatMap { a ->
@@ -22,6 +23,8 @@ fun <R, A, B> Reader<R, (A) -> B>.ap(f: Reader<R, A>): Reader<R, B> = this.flatM
 }
 // applicative -- the Kotlin way (like the different .zip functions).
 // See how similar the implementation is to the standard applicative!
+// note: this is basically Haskell's liftA2 :: (a -> b -> c) -> f a -> f b -> f c
+// the only difference is that the lifted function comes last (and is uncurried)
 fun <R, A, B, C> Reader<R, A>.zip(other: Reader<R, B>, f: (A, B) -> C): Reader<R, C> = this.flatMap { x1 ->
   other.flatMap { x2 ->
     unit(f(x1, x2))

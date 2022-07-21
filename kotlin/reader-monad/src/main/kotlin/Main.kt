@@ -25,15 +25,15 @@ fun main() {
 
   println("\nMonad\n")
 
-  val f1 = List<Any>::distinct.flatMap(List<Any>::equals.curried())
+  val f1 = List<*>::distinct.flatMap(List<*>::equals.curried())
 
   explain("""f1(listOf(1, 2, 3))""", f1(listOf(1, 2, 3)))
   explain("""f1(listOf(1, 1, 2, 3, 3))""", f1(listOf(1, 1, 2, 3, 3)))
 
   println("\nApplicative variants\n")
 
-  val f2 = List<Any>::distinct.map(List<Any>::equals.curried()).ap(::identity)
-  val f3 = List<Any>::distinct.zip(::identity, List<Any>::equals)
+  val f2 = List<*>::distinct.map(List<*>::equals.curried()).ap(::identity)
+  val f3 = List<*>::distinct.zip(::identity, List<*>::equals)
 
   explain("""f2(listOf(1, 2, 3))""", f2(listOf(1, 2, 3)))
   explain("""f2(listOf(1, 1, 2, 3, 3))""", f2(listOf(1, 1, 2, 3, 3)))
@@ -42,7 +42,7 @@ fun main() {
 
   println("\nAnother fun example\n")
 
-  val eqStr = { xs: String -> { ys: String -> xs == ys }}
+  val eqStr = { xs: String -> { ys: String -> xs == ys } }
   val toLower = { xs: String -> xs.lowercase() }
   val isPalindrome = toLower.map(String::reversed.flatMap(eqStr))
   explain("""isPalindrome("Anna")""", isPalindrome("Anna"))
@@ -52,3 +52,13 @@ fun main() {
 fun explain(function: String, output: Any) {
   println("$function = $output")
 }
+
+fun <T> List<T>.tails() = indices.map { subList(it, size) }
+fun <T> List<T>.uniquePairs() =
+  tails().flatMap {
+    val x = it.first()
+    val ys = it.drop(1)
+    ys.map { y -> x to y }
+  }
+
+fun List<Int>.solve() = uniquePairs().filter { (x, y) -> x + y == 5 }

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppComponent works 1`] = `
+ChartValuesDump {
+  "data": Object {
+    "datasets": Array [
+      Object {
+        "data": Array [
+          100,
+          50,
+          25,
+          -14,
+          80,
+        ],
+        "fill": true,
+        "label": "My Data",
+      },
+    ],
+    "labels": Array [
+      "First",
+      "Second",
+      "Third",
+      "Fifth",
+      "Sixth",
+    ],
+  },
+  "options": Object {},
+  "type": "line",
+}
+`;
