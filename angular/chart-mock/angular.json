@@ -87,6 +87,7 @@
           "builder": "@angular-builders/jest:run",
           "options": {
           }
+        }
       }
     }
   }
