@@ -1,0 +1,3 @@
+= Tailwind CSS without any Framework
+
+Basic setup with Tailwind without the usage of any Framework. Heavily inspired by https://gist.github.com/xpharsh/929e39f23b2d005c966aa795b6013b02
