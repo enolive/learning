@@ -1,0 +1,5 @@
+.idea/
+.stack-work/
+out/
+tdd-setup.cabal
+*~

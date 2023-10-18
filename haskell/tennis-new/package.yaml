@@ -1,0 +1,47 @@
+name:                tdd-setup
+version:             0.1.0.0
+github:              "githubuser/tdd-setup"
+license:             MIT
+author:              "Author name here"
+maintainer:          "example@example.com"
+copyright:           "2022 Author name here"
+# synopsis: A new project for TDD with Haskell.
+# description: tdd-setup see README.md for further details.
+# category: Other
+
+extra-source-files:
+- README.md
+- package.yaml
+- LICENSE.md
+
+ghc-options: -Wall
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+executables:
+  tdd-setup-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - tdd-setup
+
+tests:
+  tdd-setup-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - tdd-setup
+    - hspec
+    - QuickCheck
