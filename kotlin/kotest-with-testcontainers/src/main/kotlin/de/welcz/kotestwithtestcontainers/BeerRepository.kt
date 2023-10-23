@@ -1,23 +1,21 @@
 package de.welcz.kotestwithtestcontainers
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
-import org.hibernate.annotations.UuidGenerator
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.annotation.Id
+import org.springframework.data.r2dbc.repository.Modifying
+import org.springframework.data.r2dbc.repository.Query
+import org.springframework.data.relational.core.mapping.Column
+import org.springframework.data.relational.core.mapping.Table
+import org.springframework.data.repository.kotlin.CoroutineCrudRepository
 import java.math.BigDecimal
 import java.util.*
 
-interface BeerRepository : CrudRepository<Beer, UUID>
+interface BeerRepository : CoroutineCrudRepository<Beer, UUID>
 
-@Entity
 @Table(name = "beers")
 data class Beer(
   @Id
-  @UuidGenerator
-  @Column(name = "beer_id")
-  val id: UUID? = null,
+  @Column("beer_id")
+  val id: UUID?,
   val brand: String,
   val name: String,
   val strength: BigDecimal,
