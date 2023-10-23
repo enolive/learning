@@ -1,8 +1,6 @@
 package de.welcz.kotestwithtestcontainers
 
 import org.springframework.data.annotation.Id
-import org.springframework.data.r2dbc.repository.Modifying
-import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import org.springframework.data.repository.kotlin.CoroutineCrudRepository
