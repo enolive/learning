@@ -1,0 +1,23 @@
+### read user from router
+GET http://localhost:8080/router/users
+
+### echo given user from router
+POST http://localhost:8080/router/users
+Content-Type: application/json
+
+{
+  "firstName": "Tyler",
+  "lastName": "Durden"
+}
+
+### read user from controller
+GET http://localhost:8080/controller/users
+
+### echo given user from controller
+POST http://localhost:8080/controller/users
+Content-Type: application/json
+
+{
+  "firstName": "Tyler",
+  "lastName": "Durden"
+}
