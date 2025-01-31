@@ -8,10 +8,7 @@ import {GreetingsService} from './greetings.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  constructor() {
-    const greetingsService = inject(GreetingsService);
-    this.greetings = greetingsService.getGreetings('World')
-  }
+  #greetingService = inject(GreetingsService);
 
-  greetings : string
+  greetings = this.#greetingService.getGreetings('World')
 }
